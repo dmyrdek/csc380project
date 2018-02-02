@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class Controller {
     public void createGameButtonPress(ActionEvent event) throws IOException {
-        System.out.println("Pressed create game");
         Parent homePageParent = FXMLLoader.load(getClass().getResource("CreateLobby.fxml"));
         Scene createLobbyScene = new Scene(homePageParent);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -20,8 +19,12 @@ public class Controller {
 
     }
 
-    public void joinGameButtonPress(ActionEvent press) {
-
+    public void joinGameButtonPress(ActionEvent event) throws IOException{
+        Parent homePageParent = FXMLLoader.load(getClass().getResource("JoinGame.fxml"));
+        Scene createLobbyScene = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(createLobbyScene);
+        appStage.show();
     }
 
 
