@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Controller {
+
     public void createGameButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getResource("CreateLobby.fxml"));
         Scene createLobbyScene = new Scene(homePageParent);
