@@ -14,8 +14,18 @@ import javafx.scene.layout.StackPane;
 public class Main extends Application {
 
     public static void main(String[] args) {
+
+
+        QuestionPack qp= new QuestionPack();
+        qp.getQuestionPack("questions.txt");
+	qp.getQuestionPack("questions2.txt"):
+        for (int i = 0; i<qp.questionPack.size(); i++) {
+            System.out.println(qp.questionPack.get(i));
+        }
+
+        Client c = new Client();
         launch(args);
-        
+
     }
 
 
