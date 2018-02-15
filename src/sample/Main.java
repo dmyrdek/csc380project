@@ -18,9 +18,9 @@ public class Main extends Application {
 
         QuestionPack qp= new QuestionPack();
         qp.getQuestionPack("questions.txt");
-	qp.getQuestionPack("questions2.txt"):
-        for (int i = 0; i<qp.questionPack.size(); i++) {
-            System.out.println(qp.questionPack.get(i));
+	    qp.getQuestionPack("questions2.txt");
+        for (int i = 0; i < qp.currentQuestions().size(); i++) {
+            System.out.println(qp.currentQuestions().get(i));
         }
 
         Client c = new Client();

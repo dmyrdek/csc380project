@@ -28,6 +28,11 @@ public class QuestionPack {
             System.out.println("The file " + q.getPath() + " was not found.");
         }
     }
+
+    public ArrayList<String> currentQuestions(){
+        return qArrayList;
+    }
+
 }
 
 
