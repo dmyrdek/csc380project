@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@../../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
          <effect>
@@ -71,7 +71,7 @@
          </children>
       </Pane>
       <Pane layoutX="448.0" layoutY="58.0" mouseTransparent="true" prefHeight="444.0" prefWidth="5.0" style="-fx-background-color: #282d3f;" />
-      <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="110.0" layoutY="140.0" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@../../main.css" unFocusColor="WHITE">
+      <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="110.0" layoutY="140.0" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
          <font>
             <Font name="SofiaProLight" size="14.0" />
          </font>
@@ -93,7 +93,7 @@
             <Font name="SofiaProLight" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox focusColor="#0ac7ca" labelFloat="true" layoutX="111.0" layoutY="256.0" prefHeight="27.0" prefWidth="230.0" promptText="Number of rounds" stylesheets="@../../main.css" unFocusColor="WHITE" />
+      <JFXComboBox focusColor="#0ac7ca" labelFloat="true" layoutX="111.0" layoutY="256.0" prefHeight="27.0" prefWidth="230.0" promptText="Number of rounds" stylesheets="@main.css" unFocusColor="WHITE" />
       <JFXComboBox focusColor="#0ac7ca" labelFloat="true" layoutX="110.0" layoutY="313.0" prefHeight="27.0" prefWidth="230.0" promptText="Answers Per Question" unFocusColor="WHITE" />
       <Label layoutX="638.0" layoutY="94.0" text="Optional" textFill="WHITE">
          <font>

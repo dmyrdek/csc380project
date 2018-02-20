@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
+import java.lang.reflect.InvocationTargetException;
+
 
 public class Main extends Application {
 
@@ -41,7 +43,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("CSC380 Project");
         primaryStage.setScene(new Scene(root, 900, 500));
-        Button buttons = new Button();
+        //Button buttons = new Button();
         //buttons.setStyle("-fx-font: 22 Helvetica Neue");
         primaryStage.show();
     }
