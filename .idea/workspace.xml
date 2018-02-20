@@ -2,23 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87d33faf-e34b-41c5-92fe-75ae42bef41d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_8_0_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_8_9.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_9_0_2.xml" afterPath="" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_9_0_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_commons_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_controls_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_emojione_3_1_1_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_fontawesome_4_7_0_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_icons525_4_2_0_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_materialdesignfont_2_0_26_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_materialicons_2_2_0_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_materialstackicons_2_1_5_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_octicons_4_3_0_9_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_weathericons_2_0_10_9_1_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_8_0_2.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/de_jensd_fontawesomefx_8_9.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/JavaFxApplication.iml" afterPath="$PROJECT_DIR$/JavaFxApplication.iml" />
-      <change beforePath="$PROJECT_DIR$/main.css" afterPath="$PROJECT_DIR$/src/sample/main.css" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Client.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Client.class" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Controller.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Controller.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/CreateLobby.fxml" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/CreateLobby.fxml" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Main.class" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/QuestionPack.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/QuestionPack.class" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Server.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/Server.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/sample.fxml" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/sample.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/sample/CreateLobby.fxml" afterPath="$PROJECT_DIR$/src/sample/CreateLobby.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +37,20 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="49" column="1" lean-forward="true" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+            <state relative-caret-position="401">
+              <caret line="49" column="1" lean-forward="false" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/MultiServerThread.java" />
         <option value="$PROJECT_DIR$/src/sample/GreetingClient.java" />
         <option value="$PROJECT_DIR$/src/sample/GreetingServer.java" />
@@ -130,6 +145,7 @@
         <option value="$PROJECT_DIR$/.idea/libraries/com_jfoenix_jfoenix_9_0_2.xml" />
         <option value="$PROJECT_DIR$/src/sample/sample.fxml" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
       </list>
     </option>
   </component>
@@ -401,12 +417,20 @@
       <workItem from="1518984798361" duration="52000" />
       <workItem from="1519013445659" duration="2237000" />
       <workItem from="1519150662721" duration="1680000" />
-      <workItem from="1519152376930" duration="528000" />
+      <workItem from="1519152376930" duration="1649000" />
     </task>
+    <task id="LOCAL-00001" summary="Fixed GUI's, inorder to use fontawesomefx you must run on Java 8">
+      <created>1519152978226</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1519152978226</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20084000" />
+    <option name="totallyTimeSpent" value="21205000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="839" extended-state="6" />
@@ -449,6 +473,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed GUI's, inorder to use fontawesomefx you must run on Java 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed GUI's, inorder to use fontawesomefx you must run on Java 8" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -791,14 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="14" column="87" lean-forward="false" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/QuestionPack.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -909,10 +929,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="49" column="1" lean-forward="true" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+        <state relative-caret-position="401">
+          <caret line="49" column="1" lean-forward="false" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -984,7 +1014,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>com.jfoenix:jfoenix:8.0.2</last-edited>
+          <last-edited>com.jfoenix:jfoenix:9.0.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
