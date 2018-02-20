@@ -1,4 +1,5 @@
 package sample;
+
 import java.net.*;
 import java.io.*;
 
@@ -7,7 +8,7 @@ public class Server extends Thread {
 
     public Server(int port) throws IOException {
         serverSocket = new ServerSocket(port);
-        serverSocket.setSoTimeout(10000);
+
     }
 
     public void run() {
@@ -17,13 +18,12 @@ public class Server extends Thread {
                         serverSocket.getLocalPort() + "...");
                 Socket server = serverSocket.accept();
 
-                System.out.println("Just connected to " + server.getRemoteSocketAddress());
-                DataInputStream in = new DataInputStream(server.getInputStream());
-
-                System.out.println(in.readUTF());
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
                 out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
                         + "\nGoodbye!");
+
+                System.out.println("Client connected: " + server.getInetAddress());
+                DataInputStream in = new DataInputStream(server.getInputStream());
                 server.close();
 
             } catch (SocketTimeoutException s) {
@@ -40,7 +40,7 @@ public class Server extends Thread {
 
         //for command line running, do
         //int port = Integer.parseInt(args[0]);
-        int port = 4381;
+        int port = 4122 ;
         try {
             Thread t = new Server(port);
             t.start();
