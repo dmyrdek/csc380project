@@ -35,6 +35,7 @@ public class Player {
         return this.answers;
     }
 
+
     public void increaseVotesReceived(){
         this.numVotesReceived++;
     }
