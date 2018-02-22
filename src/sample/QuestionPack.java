@@ -29,6 +29,14 @@ public class QuestionPack {
         }
     }
 
+    public QuestionPack addAllQuestions(){
+        QuestionPack qp= new QuestionPack();
+        qp.getQuestionPack("questions.txt");
+        qp.getQuestionPack("questions2.txt");
+        return qp;
+
+    }
+
     public ArrayList<String> currentQuestions(){
         return qArrayList;
     }
