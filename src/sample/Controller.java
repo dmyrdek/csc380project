@@ -30,6 +30,14 @@ public class Controller {
         appStage.show();
     }
 
+    public void backButtonPress(ActionEvent event) throws IOException {
+        Parent homePageParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Scene homePage = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(homePage);
+        appStage.show();
+    }
+
 
 
 }

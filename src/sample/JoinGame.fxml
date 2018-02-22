@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
          <effect>
@@ -29,7 +29,7 @@
       </Pane>
       <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
          <children>
-            <JFXButton fx:id="create_game_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+            <JFXButton onAction="#backButtonPress" fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
