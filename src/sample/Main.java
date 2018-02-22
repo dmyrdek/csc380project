@@ -56,10 +56,10 @@ public class Main extends Application {
         ////-------------end test----------------------------
 
 
-        /*
+
         Client c = new Client();
         launch(args);
-        */
+
 
 
     }

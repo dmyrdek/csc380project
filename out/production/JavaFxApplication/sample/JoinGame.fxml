@@ -1,17 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="425.0" layoutY="200.0" mnemonicParsing="false" text="Join Game" />
-      <TextField layoutX="244.0" layoutY="119.0" />
-      <Label layoutX="138.0" layoutY="119.0" prefHeight="27.0" prefWidth="106.0" text="Username:" />
-      <Label layoutX="138.0" layoutY="200.0" prefHeight="27.0" prefWidth="106.0" text="Lobby Code: " />
-      <TextField layoutX="244.0" layoutY="200.0" />
-      <Button layoutX="8.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+      <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="38.48" radius="16.619999999999997" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="37.27" radius="16.317500000000003" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="41.49" radius="23.47" width="54.39" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <JFXButton fx:id="create_game_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
+               </effect>
+               <font>
+                  <Font name="SofiaProLight" size="13.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="create_game_button2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Join Game" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" />
+               </graphic>
+            </JFXButton>
+            <Label layoutX="405.0" layoutY="26.0" text="Join Game" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="160.0" prefHeight="50.0" prefWidth="300.0" promptText="Room Code" stylesheets="@main.css" unFocusColor="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </JFXTextField>
+      <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
+         </effect>
+      </Pane>
+      <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Username" unFocusColor="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
    </children>
-</AnchorPane>
+</Pane>
