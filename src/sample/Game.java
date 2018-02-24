@@ -56,15 +56,7 @@ public class Game {
 
         if (roundNum <= this.numRounds && 0<roundNum) {
             String [] roundQuestions = new String [this.inGamePlayers.size()];
-
-            for (int i = 0; i< this.inGamePlayers.size(); i++){
-                int selection = i+ ((roundNum-1)*this.inGamePlayers.size());
-                roundQuestions[i] = this.gameQuestions.questions[selection];
-            }
-
-            //System.arraycopy(this.gameQuestions.questions,roundNum*this.inGamePlayers.size(), roundQuestions, 0, roundQuestions.length );
-
-
+            System.arraycopy(this.gameQuestions.questions, (roundNum-1)*this.inGamePlayers.size(), roundQuestions, 0, this.inGamePlayers.size());
             return roundQuestions;
         } else {
             System.out.println("tried to get questions for a round that does not exist in this game");
