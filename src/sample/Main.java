@@ -32,17 +32,24 @@ public class Main extends Application {
         number of questions for that game (based on rounds and players) and assures that the
         questions are random everytime the game is run.
         */
-        Game testGame = new Game(2, qp);
+        Game testGame = new Game(4, qp);
         testGame.addPlayerToGame("doug");
         testGame.addPlayerToGame("cedric");
         testGame.addPlayerToGame("bryan");
         testGame.addPlayerToGame("dylan");
         testGame.gameQuestions = testGame.setGameQuestions();
 
-        System.out.println();
+        //print all questions to be used for this instance of the game
+        System.out.println("\n \nList of all the questions to be used for this game \n ");
         for (String s : testGame.gameQuestions.questions) {
             System.out.println(s);
         }
+
+        //gets the correct questions to be used for a specific round of play unless round specified is outside of acceptable bounds
+        System.out.println("\n \nlist of questions for specified round \n");
+        testGame.displayQuestionsForRound(testGame.getQuestionsForRound(2));
+
+
 
 
 
@@ -60,11 +67,11 @@ public class Main extends Application {
         ////-------------end test----------------------------
 
 
-
+/*
         Client c = new Client();
         launch(args);
 
-
+*/
 
     }
 

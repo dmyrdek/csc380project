@@ -1,5 +1,4 @@
 package sample;
-
 import java.util.ArrayList;
 
 public class InGameQuestions {
@@ -8,7 +7,5 @@ public class InGameQuestions {
 public InGameQuestions(int numQuestions){
     questions = new String [numQuestions];
 }
-
-
 
 }
