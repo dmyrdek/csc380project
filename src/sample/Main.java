@@ -36,7 +36,7 @@ public class Main extends Application {
         testGame.addPlayerToGame("doug");
         testGame.addPlayerToGame("cedric");
         testGame.addPlayerToGame("bryan");
-        testGame.addPlayerToGame("dylan");
+        //testGame.addPlayerToGame("dylan");
         testGame.gameQuestions = testGame.setGameQuestions();
 
         //print all questions to be used for this instance of the game
@@ -47,7 +47,7 @@ public class Main extends Application {
 
         //gets the correct questions to be used for a specific round of play unless round specified is outside of acceptable bounds
         System.out.println("\n \nlist of questions for specified round \n");
-        testGame.displayQuestionsForRound(testGame.getQuestionsForRound(2));
+        testGame.displayQuestionsForRound(testGame.getQuestionsForRound(3));
 
 
 
