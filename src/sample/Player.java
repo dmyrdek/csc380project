@@ -45,8 +45,8 @@ public class Player {
         //need to implement when possible
     }
 
-    public ArrayList<Answer> addAnswer(Answer a){
-        answers.add(a);
+    public ArrayList<Answer> addAnswer(String a){
+        answers.add(new Answer(a, this));
         return answers;
     }
 
