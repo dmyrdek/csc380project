@@ -11,7 +11,7 @@ public class Client {
         // String serverName = args[0];
         // int port = Integer.parseInt(args[1]);
 
-        String serverName = "localhost";
+        String serverName = "";
         int port = 4122;
 
         try {

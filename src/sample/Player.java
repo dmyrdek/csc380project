@@ -9,6 +9,7 @@ public class Player {
     private int playerNumber;
     private ArrayList<Answer> answers;
     boolean isHost;
+    public ArrayList<Player> otherPlayers;
 
     public Player(String n){
         name =n;
@@ -16,6 +17,7 @@ public class Player {
         playerNumber=0;
         answers = new ArrayList<>();
         isHost = false;
+        otherPlayers = new ArrayList<>();
     }
 
 
