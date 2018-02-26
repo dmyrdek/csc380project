@@ -7,7 +7,7 @@ public class GameClient {
 
     public static void main(String[] args) throws Exception
     {
-        Socket sock = new Socket("127.0.0.1", 3000);
+        Socket sock = new Socket("tcp://0.tcp.ngrok.io", 13343);
         // reading from keyboard (keyRead object)
         BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
         // sending to client (pwrite object)

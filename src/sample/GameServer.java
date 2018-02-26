@@ -8,7 +8,7 @@ public class GameServer {
     public static void main(String[] args) throws Exception
     {
         ServerSocket sersock = new ServerSocket(4122);
-        System.out.println("Server  ready for chatting");
+        System.out.println("Server ready for chatting");
         Socket sock = sersock.accept( );
         // reading from keyboard (keyRead object)
         BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
@@ -27,6 +27,10 @@ public class GameServer {
             {
                 System.out.println(receiveMessage);
             }
+            //
+            pwrite.flush();
+            //
+
             sendMessage = keyRead.readLine();
             pwrite.println(sendMessage);
             pwrite.flush();
