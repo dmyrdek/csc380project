@@ -18,7 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Main extends Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
 
         QuestionPack qp= (new QuestionPack().addAllQuestions());
@@ -66,8 +66,14 @@ public class Main extends Application {
         ////-------------end test----------------------------
 
 
-
-
+        String command = "";
+        System.out.println("type 1 for server, 2 for client");
+        if (command.equals("1")) {
+            GameServer.createServer();
+        } else if (command.equals("2")){
+            GameClient.connectClient();
+        }
+        
         launch(args);
 
 

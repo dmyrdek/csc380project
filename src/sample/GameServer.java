@@ -5,7 +5,7 @@ import java.net.*;
 
 public class GameServer {
 
-    public static void main(String[] args) throws Exception
+    public static void createServer() throws Exception
     {
         ServerSocket sersock = new ServerSocket(4122);
         System.out.println("Server ready for chatting");

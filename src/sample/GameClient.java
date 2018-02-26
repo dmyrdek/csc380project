@@ -5,8 +5,7 @@ import java.net.*;
 
 public class GameClient {
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void connectClient() throws Exception {
         Socket sock = new Socket("tcp://0.tcp.ngrok.io", 13343);
         // reading from keyboard (keyRead object)
         BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
