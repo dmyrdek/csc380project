@@ -15,11 +15,14 @@ import javafx.scene.layout.StackPane;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Scanner;
+
 
 public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
 
+        Scanner kb = new Scanner(System.in);
 
         QuestionPack qp= (new QuestionPack().addAllQuestions());
         for (int i = 0; i < qp.currentQuestions().size(); i++) {
@@ -68,13 +71,14 @@ public class Main extends Application {
 
         String command = "";
         System.out.println("type 1 for server, 2 for client");
+        command = kb.nextLine();
         if (command.equals("1")) {
             GameServer.createServer();
         } else if (command.equals("2")){
             GameClient.connectClient();
         }
-        
-        launch(args);
+
+        //launch(args);
 
 
 
