@@ -11,8 +11,8 @@ public class Client {
         // String serverName = args[0];
         // int port = Integer.parseInt(args[1]);
 
-        String serverName = "localhost";
-        int port = 4122;
+        String serverName = "tcp://0.tcp.ngrok.io";
+        int port = 13343;
 
         try {
             System.out.println("Connecting to " + serverName + " on port " + port);
