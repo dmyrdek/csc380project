@@ -77,6 +77,7 @@ public class Main extends Application {
         } else if (command.equals("2")){
             System.out.println("Enter Port Number: ");
             int port = Integer.parseInt(kb.nextLine());
+            System.out.println(port);
             GameClient.connectClient(port);
         }
 

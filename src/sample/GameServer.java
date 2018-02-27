@@ -34,6 +34,7 @@ public class GameServer {
             sendMessage = keyRead.readLine();
             pwrite.println(sendMessage);
             pwrite.flush();
+
         }
     }
 
