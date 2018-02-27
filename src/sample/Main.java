@@ -75,7 +75,9 @@ public class Main extends Application {
         if (command.equals("1")) {
             GameServer.createServer();
         } else if (command.equals("2")){
-            GameClient.connectClient();
+            System.out.println("Enter Port Number: ");
+            int port = Integer.parseInt(kb.nextLine());
+            GameClient.connectClient(port);
         }
 
         //launch(args);
