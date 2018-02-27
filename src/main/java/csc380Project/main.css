@@ -1,0 +1,17 @@
+.text-field
+{
+    -fx-prompt-text-fill: lightgray;
+    -fx-text-fill: lightgray;
+}
+
+.combo-box
+{
+    -fx-prompt-text-fill: lightgray;
+    -fx-text-fill: lightgray;
+}
+
+.jfx-combo-box .cell:selected
+{
+    -fx-background-color: Black;
+    -fx-text-fill: WHITE;
+}
