@@ -7,7 +7,7 @@ public class ServerThread extends Thread {
     Socket threadSock;
 
     public ServerThread(Socket clientSock){
-        threadSock =clientSock;
+        threadSock = clientSock;
     }
 
     public void run(){

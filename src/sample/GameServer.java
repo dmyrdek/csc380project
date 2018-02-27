@@ -27,13 +27,17 @@ public class GameServer {
             {
                 System.out.println(receiveMessage);
             }
-            //
+
             pwrite.flush();
-            //
 
             sendMessage = keyRead.readLine();
             pwrite.println(sendMessage);
             pwrite.flush();
+
+            //create thread
+            new ServerThread(sock).start();
+            //waits for new connection
+            sock = sersock.accept();
 
         }
     }
