@@ -70,17 +70,20 @@ public class Main extends Application {
         ////-------------end test----------------------------
 
 
+
         String command = "";
         System.out.println("type 1 for server, 2 for client");
         command = kb.nextLine();
         if (command.equals("1")) {
             GameServer.createServer();
         } else if (command.equals("2")){
-            GameClient.connectClient();
+            System.out.println("Enter ngrok port number: ");
+            int port = Integer.parseInt(kb.nextLine());
+            GameClient.connectClient(port);
         }
 
-        //launch(args);
 
+        //launch(args);
 
 
     }
