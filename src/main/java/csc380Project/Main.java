@@ -1,20 +1,13 @@
 package csc380Project;
 
 
-        import javafx.application.Application;
+import javafx.application.Application;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.stage.Stage;
         import javafx.scene.layout.BorderPane;
         import javafx.geometry.Insets;
-        import javafx.scene.control.TextField;
-        import javafx.event.ActionEvent;
-        import javafx.event.EventHandler;
-        import javafx.scene.control.Button;
-        import javafx.scene.layout.StackPane;
-
-        import java.lang.reflect.InvocationTargetException;
 
         import java.util.Scanner;
 
@@ -22,6 +15,7 @@ package csc380Project;
 public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
+        launch(args);
 
         Scanner kb = new Scanner(System.in);
 
@@ -90,8 +84,6 @@ public class Main extends Application {
         }
 
 
-        //launch(args);
-
 
     }
 
@@ -102,7 +94,7 @@ public class Main extends Application {
         Scene scene = new Scene(bp);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
         primaryStage.setTitle("CSC380 Project");
         primaryStage.setScene(new Scene(root, 900, 500));
         //Button buttons = new Button();
