@@ -7,7 +7,7 @@ public class GameServer {
 
     public static void createServer() throws Exception
     {
-        ServerSocket sersock = new ServerSocket(4122);
+        ServerSocket sersock = new ServerSocket(8398);
         System.out.println("Server ready for chatting");
         Socket sock = sersock.accept( );
         // reading from keyboard (keyRead object)

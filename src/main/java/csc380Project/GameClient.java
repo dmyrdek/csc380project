@@ -6,7 +6,7 @@ import java.net.*;
 public class GameClient {
 
     public static void connectClient() throws Exception {
-        Socket sock = new Socket("localhost", 4122);
+        Socket sock = new Socket("localhost", 8398);
         // reading from keyboard (keyRead object)
         BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
         // sending to client (pwrite object)
