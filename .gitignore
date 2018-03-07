@@ -2,7 +2,7 @@
 *.DS_Store
 *.iml
 target/
-.classpath
-.project
-.settings/
-.vscode/
+*.classpath
+*.project
+*.settings/
+*.vscode/
