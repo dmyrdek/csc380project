@@ -24,6 +24,7 @@ public class Main extends Application {
             System.out.println(qp.currentQuestions().get(i));
         }
 
+        
 
         /*
         this block of code below creates a new game, add 4 players, loads the appropriate

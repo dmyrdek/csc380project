@@ -40,5 +40,17 @@
             <artifactId>fontawesomefx</artifactId>
             <version>8.9</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.0-M1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
