@@ -1,24 +1,30 @@
 package csc380Project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class GameTest {
 
-    QuestionPack q = new QuestionPack();
-    Game testGame = new Game(1, q);
-    Player testPlayer = new Player("testPlayer");
-    int numRounds = 3;
+    QuestionPack q;
+    Game testGame;
+    Player testPlayer ;
+    int rounds;
 
-    @Test
-    void addPlayerToGameTest() {
-        testGame.addPlayerToGame("testPlayer");
-        assertEquals(testGame.inGamePlayers.get(0), testPlayer);
+
+    @Before
+    public void setUp(){
+        q = new QuestionPack();
+        rounds = 10;
+        testGame = new Game(rounds, q);
+        testGame.addPlayerToGame("Player One");
+        testGame.addPlayerToGame("Player Two");
     }
 
     @Test
-    void setGameQuestionsTest() {
-
+    public void addPlayerToGameTest() {
+        assertEquals(testGame.inGamePlayers.get(0).getName(), "Player One");
+        assertEquals(testGame.inGamePlayers.get(1).getName(), "Player Two");
     }
 
 
