@@ -77,9 +77,7 @@ public class Main extends Application {
                 GameServer.createServer();
                 proper = true;
             } else if (command.equals("2")) {
-                System.out.println("Enter ngrok port number: ");
-                int port = Integer.parseInt(kb.nextLine());
-                GameClient.connectClient(port);
+                GameClient.connectClient();
                 proper = true;
             }
         }
