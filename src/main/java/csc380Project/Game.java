@@ -26,6 +26,21 @@ public class Game {
         return newPlayer;
     }
 
+    public Player addPlayerToGame(Player p) {
+     inGamePlayers.add(p);
+     return p;
+    }
+
+    public void addOtherPlayersReference(){
+        for (Player p : inGamePlayers){
+            for (Player q : inGamePlayers){
+                if (p != q){
+                    p.otherPlayers.add(p);
+                }
+            }
+        }
+    }
+
 
     public InGameQuestions setGameQuestions() {
         int totalQuestions = this.numRounds * this.inGamePlayers.size();
@@ -73,7 +88,12 @@ public class Game {
     }
 
 
+        /*
 
+        send a current state of game round to everyone, and then once people vote then send
+        back to server for the server to validate the moves/votes
+
+         */
 
 
 

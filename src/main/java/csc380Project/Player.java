@@ -52,6 +52,13 @@ public class Player {
         return answers;
     }
 
+    public ArrayList<Answer> addAnswer(Answer a){
+        answers.add(a);
+        return answers;
+    }
+
+
+
     public void setHostBool(boolean b){
         this.isHost = b;
     }

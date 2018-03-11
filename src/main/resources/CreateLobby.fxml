@@ -50,7 +50,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="create_game_button2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Create Game" textFill="WHITE">
+                <JFXButton fx:id="create_game_button2" onAction="#createGameLaunchServer" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Create Game" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

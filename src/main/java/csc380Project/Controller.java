@@ -2,6 +2,7 @@ package csc380Project;
 
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -13,6 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Controller {
+
+    @FXML
+    TextField portNumber;
 
     public void createGameButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("CreateLobby.fxml"));
@@ -37,6 +41,27 @@ public class Controller {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(homePage);
         appStage.show();
+    }
+
+    public void createGameLaunchServer(ActionEvent event) {
+        try {
+
+            GameServer.createServer();
+
+
+            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
+            Scene homePage = new Scene(homePageParent);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(homePage);
+            appStage.show();
+
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

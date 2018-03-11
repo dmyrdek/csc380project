@@ -10,6 +10,9 @@ public class Answer {
         submitter = p;
     }
 
+    public String getAnswer(){
+        return this.answer;
+    }
 
 
 
