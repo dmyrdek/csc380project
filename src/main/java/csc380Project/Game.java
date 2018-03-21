@@ -9,6 +9,7 @@ public class Game {
     ArrayList<Answer> allSubmittedAnswers;
     QuestionPack qp;
     int numRounds;
+    static int maxPlayers;
 
     public Game (int rounds, QuestionPack q) {
         inGamePlayers = new ArrayList<Player>();
@@ -17,6 +18,10 @@ public class Game {
         numRounds = rounds;
         qp = q;
 
+    }
+
+    public static int getMaxPlayers(){
+        return maxPlayers;
     }
 
 
