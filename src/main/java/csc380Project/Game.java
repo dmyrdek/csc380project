@@ -99,31 +99,43 @@ public class Game {
     //the corresponding spot to where the question is in the inGameQuestions list.
     //ex, for players who have been assigned question 4, their own list of questions will have the
     //correct question in slot 4, and no other players will have a question in that spot
-    public void giveQuestionstoPlayers() {
+    public boolean giveQuestionstoPlayers() {
 
-        int numPlayers = this.inGamePlayers.size();
-        for (int playerNum = 0; playerNum < numPlayers; playerNum++) {
-            Player temp = this.inGamePlayers.get(playerNum);
+        //just a check to see if game is valid
+        if (numRounds!= 0 && this.inGamePlayers.size() != 0 &&
+                this.gameQuestions.questions.length != 0 ){
 
-            for (int roundNum = 0; roundNum < numRounds; roundNum++) {
-                //if its not the last player, assign questions normally
-                if (playerNum < numPlayers -1 ) {
 
-                    int index = (roundNum * numPlayers) + playerNum;
-                    temp.addQuestionToIndex(this.gameQuestions.questions[index], index);
-                    temp.addQuestionToIndex(this.gameQuestions.questions[index + 1], index + 1);
+            int numPlayers = this.inGamePlayers.size();
+            for (int playerNum = 0; playerNum < numPlayers; playerNum++) {
+                Player temp = this.inGamePlayers.get(playerNum);
 
-                    //if its the last player, add questions differently so that the math works out
-                } else {
-                    int q1 = (roundNum * numPlayers) + playerNum;
-                    int q2 = (roundNum * numPlayers);
+                for (int roundNum = 0; roundNum < numRounds; roundNum++) {
+                    //if its not the last player, assign questions normally
+                    if (playerNum < numPlayers -1 ) {
 
-                    temp.addQuestionToIndex(this.gameQuestions.questions[q1], q1);
-                    temp.addQuestionToIndex(this.gameQuestions.questions[q2], q2);
+                        int index = (roundNum * numPlayers) + playerNum;
+                        temp.addQuestionToIndex(this.gameQuestions.questions[index], index);
+                        temp.addQuestionToIndex(this.gameQuestions.questions[index + 1], index + 1);
 
+                        //if its the last player, add questions differently so that the math works out
+                    } else {
+                        int q1 = (roundNum * numPlayers) + playerNum;
+                        int q2 = (roundNum * numPlayers);
+
+                        temp.addQuestionToIndex(this.gameQuestions.questions[q1], q1);
+                        temp.addQuestionToIndex(this.gameQuestions.questions[q2], q2);
+
+                    }
                 }
             }
+            return true;
+        } else {
+            System.out.println("Game is not valid");
+            return false;
         }
+
+
     }
 
 

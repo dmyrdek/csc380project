@@ -61,6 +61,46 @@ public class GameTest {
 
     }
 
+    @Test
+    public void giveQuestionstoPlayersTestValid(){
+        testGame.giveQuestionstoPlayers();
+        int numPlayers = testGame.inGamePlayers.size();
+
+        //check players 1 up until the last players have the correct questions
+        for (int playerNum= 0; playerNum<numPlayers-1; playerNum++) {
+            for (int currentRound = 0; currentRound<testGame.numRounds; currentRound++){
+                int index = (currentRound * numPlayers) + playerNum;
+
+                assertEquals(testGame.inGamePlayers.get(playerNum).getQuestionAtIndex(index),
+                        testGame.gameQuestions.questions[index]);
+
+                assertEquals(testGame.inGamePlayers.get(playerNum).getQuestionAtIndex(index+1),
+                        testGame.gameQuestions.questions[index+1]);
+
+            }
+        }
+
+        //check the last players questions are correct
+        for (int currentRound=0; currentRound<testGame.numRounds; currentRound++){
+            int firstQuestionForRound = (currentRound * numPlayers);
+            int secondQuestionForRound = currentRound*numPlayers + numPlayers-1;
+
+            assertEquals(testGame.inGamePlayers.get(numPlayers-1).getQuestionAtIndex(firstQuestionForRound),
+                    testGame.gameQuestions.questions[firstQuestionForRound]);
+            assertEquals(testGame.inGamePlayers.get(numPlayers-1).getQuestionAtIndex(secondQuestionForRound),
+                    testGame.gameQuestions.questions[secondQuestionForRound]);
+        }
+
+    }
+
+    @Test
+    public void giveQuestionstoPlayersTestInvalid(){
+
+        Game badGame = new Game(-1, q);
+        assertEquals(badGame.giveQuestionstoPlayers(), false);
+
+    }
+
 
 
 

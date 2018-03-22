@@ -12,7 +12,6 @@ public class PlayerTest {
 
     @Before
     public void setUp(){
-        System.out.println("current in setUp for PlayerTest");
         testPlayer = new Player("testPlayer");
 
     }
