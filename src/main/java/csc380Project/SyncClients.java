@@ -18,7 +18,7 @@ public class SyncClients{
     public static void main(String args[]) {
 
         // The default port number.
-        int portNumber = 10694;
+        int portNumber = 4122;
         if (args.length < 1) {
           System.out.println("Usage: java MultiThreadChatServerSync <portNumber>\n"
               + "Now using port number=" + portNumber);
