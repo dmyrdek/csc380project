@@ -95,7 +95,7 @@ public class Main extends Application {
         Scene scene = new Scene(bp);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
         primaryStage.setTitle("CSC380 Project");
         primaryStage.setScene(new Scene(root, 900, 500));
         //Button buttons = new Button();
