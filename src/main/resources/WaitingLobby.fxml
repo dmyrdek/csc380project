@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.waitingLobbyController">
     <children>
         <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
             <effect>
@@ -31,7 +31,7 @@
         </Pane>
         <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
             <children>
-                <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+                <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -45,7 +45,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="create_game_button2" buttonType="RAISED" contentDisplay="RIGHT" disable="true" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Ready Up" textFill="WHITE">
+                <JFXButton fx:id="ready_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Ready Up" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
