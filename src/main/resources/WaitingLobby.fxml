@@ -31,7 +31,7 @@
         </Pane>
         <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
             <children>
-                <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+                <JFXButton fx:id="back_button" onAction="#backToCreateLobby" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

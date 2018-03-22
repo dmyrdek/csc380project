@@ -43,20 +43,20 @@ public class Controller {
         appStage.show();
     }
 
+
+
+
     public void createGameLaunchServer(ActionEvent event) {
         try {
 
-            GameServer.createServer();
-
+            //GameServer.createServer();
+            //GameServer.main();
 
             Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
             Scene homePage = new Scene(homePageParent);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(homePage);
             appStage.show();
-
-
-
 
 
         } catch (IOException e) {
