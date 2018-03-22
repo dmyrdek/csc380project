@@ -17,13 +17,20 @@ public class PlayerTest {
 
     }
 
+    @Test
+    public void addQuestionTest(){
+        testPlayer.addQuestionToIndex("test question", 42);
+        assertEquals("test question", testPlayer.getQuestionAtIndex(42));
+        assertEquals(null, testPlayer.getQuestionAtIndex(0));
+    }
+
 
     @Test
-    public void addAnswerTest() {
-        testPlayer.addAnswer("test Answer");
-        assertEquals(testPlayer.getAnswers().get(0).submitter, testPlayer);
-        assertEquals(testPlayer.getAnswers().get(0).getAnswer(), "test Answer");
+    public void addAnswerTest(){
+        testPlayer.addAnswerToIndex("test answer", 42);
+        assertEquals("test answer", testPlayer.getAnswerAtIndex(42));
     }
+
 
     @Test
     public void increaseVotesReceivedTest() {
@@ -32,7 +39,6 @@ public class PlayerTest {
         testPlayer.increaseVotesReceived();
         assertEquals(testPlayer.getNumVotesReceived(), 2);
     }
-
 
 
 

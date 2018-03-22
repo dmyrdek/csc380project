@@ -1,5 +1,6 @@
 package csc380Project;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
@@ -7,17 +8,22 @@ public class Player {
     private String name;
     private int numVotesReceived;
     private int playerNumber;
-    private ArrayList<Answer> answers;
+    private ArrayList<String> answers;
     boolean isHost;
-    public ArrayList<Player> otherPlayers;
+    public ArrayList<Player> playersInGame;
+
+    String[] questionsToAnswer;
+    String [] answersToQuestions;
 
     public Player(String n){
         name =n;
         numVotesReceived =0;
         playerNumber=0;
-        answers = new ArrayList<Answer>();
         isHost = false;
-        otherPlayers = new ArrayList<Player>();
+
+        answersToQuestions = new String [400];
+        questionsToAnswer = new String[400];
+        playersInGame = new ArrayList<Player>();
     }
 
 
@@ -33,8 +39,9 @@ public class Player {
         return playerNumber;
     }
 
-    public ArrayList<Answer> getAnswers(){
-        return this.answers;
+
+    public String[] getAnswers(){
+        return this.answersToQuestions;
     }
 
 
@@ -47,14 +54,23 @@ public class Player {
         //need to implement when possible
     }
 
-    public ArrayList<Answer> addAnswer(String a){
-        answers.add(new Answer(a, this));
-        return answers;
+
+    public String[] addAnswerToIndex(String ans, int index){
+        answersToQuestions[index] = ans;
+        return answersToQuestions;
     }
 
-    public ArrayList<Answer> addAnswer(Answer a){
-        answers.add(a);
-        return answers;
+    public String[] addQuestionToIndex(String q, int index){
+        questionsToAnswer[index] = q;
+        return questionsToAnswer;
+    }
+
+    public String getQuestionAtIndex(int index){
+        return this.questionsToAnswer[index];
+    }
+
+    public String getAnswerAtIndex(int index){
+        return this.answersToQuestions[index];
     }
 
 
