@@ -1,4 +1,4 @@
-package csc380Project;
+package csc380Project.server;
 
 import java.io.*;
 import java.net.*;

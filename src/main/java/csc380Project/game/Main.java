@@ -1,15 +1,14 @@
-package csc380Project;
+package csc380Project.game;
 
-
+import csc380Project.server.*;
 import javafx.application.Application;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.stage.Stage;
-        import javafx.scene.layout.BorderPane;
-        import javafx.geometry.Insets;
-
-        import java.util.Scanner;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import java.util.Scanner;
 
 
 public class Main extends Application {
@@ -36,11 +35,11 @@ public class Main extends Application {
         testGame.addPlayerToGame("cedric");
         testGame.addPlayerToGame("bryan");
         testGame.addPlayerToGame("dylan");
-        testGame.gameQuestions = testGame.setGameQuestions();
+        testGame.setThisGamesQuestions();
 
         //print all questions to be used for this instance of the game
         System.out.println("\n \nList of all the questions to be used for this game \n ");
-        for (String s : testGame.gameQuestions.questions) {
+        for (String s : testGame.getGameQuestions().getQuestions()) {
             System.out.println(s);
         }
 

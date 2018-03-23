@@ -1,4 +1,4 @@
-package csc380Project;
+package csc380Project.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;

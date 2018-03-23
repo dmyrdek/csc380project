@@ -1,10 +1,14 @@
-package csc380Project;
+package csc380Project.game;
 
 import java.util.ArrayList;
 
 public class InGameQuestions {
 
-    String [] questions;
+    private String[] questions;
+
+    public String[] getQuestions(){
+        return questions;
+    }
 
     public InGameQuestions(int numQuestions){
 

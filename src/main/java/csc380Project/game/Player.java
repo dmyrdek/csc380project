@@ -1,4 +1,4 @@
-package csc380Project;
+package csc380Project.game;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

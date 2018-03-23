@@ -1,5 +1,6 @@
 package csc380Project;
 
+import csc380Project.game.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class InGameQuestionsTest {
 
     @Test
     public void getIGQSize(){
-        assertEquals(iqs.questions.length, g.inGamePlayers.size() * g.numRounds);
+        assertEquals(iqs.getQuestions().length, g.getInGamePlayers().size() * g.getNumOfRounds());
     }
 
 

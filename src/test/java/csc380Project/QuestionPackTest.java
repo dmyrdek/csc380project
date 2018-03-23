@@ -1,8 +1,8 @@
 package csc380Project;
 
+import csc380Project.game.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
@@ -46,7 +46,7 @@ public class QuestionPackTest {
     @Test
     public void addAllQuestionsTest(){
         QuestionPack q = new QuestionPack().addAllQuestions();
-        assertEquals(q.qArrayList.size(), 365);
+        assertEquals(q.getQArrayList().size(), 365);
     }
 
 

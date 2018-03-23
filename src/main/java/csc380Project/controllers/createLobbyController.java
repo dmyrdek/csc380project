@@ -1,5 +1,6 @@
-package csc380Project;
+package csc380Project.controllers;
 
+import csc380Project.server.GameServer;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

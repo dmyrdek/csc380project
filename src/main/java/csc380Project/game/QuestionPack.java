@@ -1,4 +1,4 @@
-package csc380Project;
+package csc380Project.game;
 
 
 import java.io.File;
@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class QuestionPack {
 
     ArrayList<String> qArrayList;
+
+    public ArrayList<String> getQArrayList(){
+        return qArrayList;
+    }
 
 
     public QuestionPack() {

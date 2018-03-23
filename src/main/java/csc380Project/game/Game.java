@@ -1,15 +1,15 @@
-package csc380Project;
+package csc380Project.game;
 
 import java.util.ArrayList;
 
 public class Game {
 
-    ArrayList<Player> inGamePlayers;
-    InGameQuestions gameQuestions;
-    ArrayList<String> allSubmittedAnswers;
-    QuestionPack qp;
-    int numRounds;
-    static int maxPlayers;
+    private ArrayList<Player> inGamePlayers;
+    private InGameQuestions gameQuestions;
+    private ArrayList<String> allSubmittedAnswers;
+    private QuestionPack qp;
+    private int numRounds;
+    private static int maxPlayers;
 
     public Game(int rounds, QuestionPack q) {
         inGamePlayers = new ArrayList<Player>();
@@ -23,6 +23,23 @@ public class Game {
     public static int getMaxPlayers() {
         return maxPlayers;
     }
+
+    public InGameQuestions getGameQuestions(){
+        return gameQuestions;
+    }
+
+    public void setThisGamesQuestions(){
+        this.gameQuestions = setGameQuestions();
+    }
+
+    public ArrayList<Player> getInGamePlayers(){
+        return inGamePlayers;
+    }
+
+    public int getNumOfRounds(){
+        return numRounds;
+    }
+
 
 
     //add a player to the game using a string (not sure if we will use this method or the other one
@@ -53,7 +70,7 @@ public class Game {
         int totalQuestions = this.numRounds * this.inGamePlayers.size();
         int r = (int) Math.floor(Math.random() * qp.qArrayList.size());
         InGameQuestions questionsForTheGame = new InGameQuestions(totalQuestions);
-        questionsForTheGame.questions[0] = qp.qArrayList.get(r);
+        questionsForTheGame.getQuestions()[0] = qp.qArrayList.get(r);
         int size = 1;
 
 
@@ -61,11 +78,11 @@ public class Game {
             int a = (int) Math.floor(Math.random() * qp.qArrayList.size());
             String question = this.qp.qArrayList.get(a);
             for (int i = 0; i < size; i++) {
-                if (questionsForTheGame.questions[i].equals(question)) {
+                if (questionsForTheGame.getQuestions()[i].equals(question)) {
                     break;
                 }
             }
-            questionsForTheGame.questions[size] = question;
+            questionsForTheGame.getQuestions()[size] = question;
             size++;
         }
 
@@ -77,7 +94,7 @@ public class Game {
 
         if (roundNum <= this.numRounds && 0 < roundNum) {
             String[] roundQuestions = new String[this.inGamePlayers.size()];
-            System.arraycopy(this.gameQuestions.questions, (roundNum - 1) * this.inGamePlayers.size(), roundQuestions, 0, this.inGamePlayers.size());
+            System.arraycopy(this.gameQuestions.getQuestions(), (roundNum - 1) * this.inGamePlayers.size(), roundQuestions, 0, this.inGamePlayers.size());
             return roundQuestions;
         } else {
             System.out.println("tried to get questions for a round that does not exist in this game");
@@ -103,7 +120,7 @@ public class Game {
 
         //just a check to see if game is valid
         if (numRounds!= 0 && this.inGamePlayers.size() != 0 &&
-                this.gameQuestions.questions.length != 0 ){
+                this.gameQuestions.getQuestions().length != 0 ){
 
 
             int numPlayers = this.inGamePlayers.size();
@@ -115,16 +132,16 @@ public class Game {
                     if (playerNum < numPlayers -1 ) {
 
                         int index = (roundNum * numPlayers) + playerNum;
-                        temp.addQuestionToIndex(this.gameQuestions.questions[index], index);
-                        temp.addQuestionToIndex(this.gameQuestions.questions[index + 1], index + 1);
+                        temp.addQuestionToIndex(this.gameQuestions.getQuestions()[index], index);
+                        temp.addQuestionToIndex(this.gameQuestions.getQuestions()[index + 1], index + 1);
 
                         //if its the last player, add questions differently so that the math works out
                     } else {
                         int q1 = (roundNum * numPlayers) + playerNum;
                         int q2 = (roundNum * numPlayers);
 
-                        temp.addQuestionToIndex(this.gameQuestions.questions[q1], q1);
-                        temp.addQuestionToIndex(this.gameQuestions.questions[q2], q2);
+                        temp.addQuestionToIndex(this.gameQuestions.getQuestions()[q1], q1);
+                        temp.addQuestionToIndex(this.gameQuestions.getQuestions()[q2], q2);
 
                     }
                 }

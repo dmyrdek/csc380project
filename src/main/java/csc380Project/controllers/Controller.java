@@ -1,4 +1,4 @@
-package csc380Project;
+package csc380Project.controllers;
 
 
 import javafx.event.ActionEvent;

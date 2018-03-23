@@ -1,6 +1,6 @@
 package csc380Project;
 
-
+import csc380Project.game.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package csc380Project;
 
+import csc380Project.game.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,20 +22,20 @@ public class GameTest {
         testGame.addPlayerToGame("Player One");
         testGame.addPlayerToGame("Player Two");
         testGame.addPlayerToGame("Player three");
-        testGame.gameQuestions = testGame.setGameQuestions();
+        testGame.setThisGamesQuestions();
     }
 
     @Test
     public void addPlayerToGameTest() {
-        assertEquals(testGame.inGamePlayers.get(0).getName(), "Player One");
-        assertEquals(testGame.inGamePlayers.get(1).getName(), "Player Two");
+        assertEquals(testGame.getInGamePlayers().get(0).getName(), "Player One");
+        assertEquals(testGame.getInGamePlayers().get(1).getName(), "Player Two");
     }
 
 
     @Test
     public void setGameQuestionsTest(){
-        testGame.gameQuestions = testGame.setGameQuestions();
-        assertEquals(testGame.gameQuestions.questions.length, rounds*testGame.inGamePlayers.size());
+        testGame.setThisGamesQuestions();
+        assertEquals(testGame.getGameQuestions().getQuestions().length, rounds*testGame.getInGamePlayers().size());
     }
 
 
@@ -44,9 +45,9 @@ public class GameTest {
 
         int roundNum = 2;
         String [] qfr = testGame.getQuestionsForRound(roundNum);
-        int location = (roundNum-1) * testGame.inGamePlayers.size();
-        for (int i = 0; i <testGame.inGamePlayers.size(); i++){
-            assertEquals(qfr[i], testGame.gameQuestions.questions[location+i]);
+        int location = (roundNum-1) * testGame.getInGamePlayers().size();
+        for (int i = 0; i <testGame.getInGamePlayers().size(); i++){
+            assertEquals(qfr[i], testGame.getGameQuestions().getQuestions()[location+i]);
         }
     }
 
@@ -64,31 +65,31 @@ public class GameTest {
     @Test
     public void giveQuestionstoPlayersTestValid(){
         testGame.giveQuestionstoPlayers();
-        int numPlayers = testGame.inGamePlayers.size();
+        int numPlayers = testGame.getInGamePlayers().size();
 
         //check players 1 up until the last players have the correct questions
         for (int playerNum= 0; playerNum<numPlayers-1; playerNum++) {
-            for (int currentRound = 0; currentRound<testGame.numRounds; currentRound++){
+            for (int currentRound = 0; currentRound<testGame.getNumOfRounds(); currentRound++){
                 int index = (currentRound * numPlayers) + playerNum;
 
-                assertEquals(testGame.inGamePlayers.get(playerNum).getQuestionAtIndex(index),
-                        testGame.gameQuestions.questions[index]);
+                assertEquals(testGame.getInGamePlayers().get(playerNum).getQuestionAtIndex(index),
+                        testGame.getGameQuestions().getQuestions()[index]);
 
-                assertEquals(testGame.inGamePlayers.get(playerNum).getQuestionAtIndex(index+1),
-                        testGame.gameQuestions.questions[index+1]);
+                assertEquals(testGame.getInGamePlayers().get(playerNum).getQuestionAtIndex(index+1),
+                        testGame.getGameQuestions().getQuestions()[index+1]);
 
             }
         }
 
         //check the last players questions are correct
-        for (int currentRound=0; currentRound<testGame.numRounds; currentRound++){
+        for (int currentRound=0; currentRound<testGame.getNumOfRounds(); currentRound++){
             int firstQuestionForRound = (currentRound * numPlayers);
             int secondQuestionForRound = currentRound*numPlayers + numPlayers-1;
 
-            assertEquals(testGame.inGamePlayers.get(numPlayers-1).getQuestionAtIndex(firstQuestionForRound),
-                    testGame.gameQuestions.questions[firstQuestionForRound]);
-            assertEquals(testGame.inGamePlayers.get(numPlayers-1).getQuestionAtIndex(secondQuestionForRound),
-                    testGame.gameQuestions.questions[secondQuestionForRound]);
+            assertEquals(testGame.getInGamePlayers().get(numPlayers-1).getQuestionAtIndex(firstQuestionForRound),
+                    testGame.getGameQuestions().getQuestions()[firstQuestionForRound]);
+            assertEquals(testGame.getInGamePlayers().get(numPlayers-1).getQuestionAtIndex(secondQuestionForRound),
+                    testGame.getGameQuestions().getQuestions()[secondQuestionForRound]);
         }
 
     }
