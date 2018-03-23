@@ -5,6 +5,9 @@ import java.io.*;
 import java.net.*;
 
 public class GameServer {
+
+    //use port 4122 with ngrok
+    
     public static void main(String [] args){
 		
 		Object[] selectioValues = { "Server","Client"};
