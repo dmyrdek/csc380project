@@ -81,6 +81,31 @@ public class Player {
 
 
 
+    //allow users to add answers at a specified index that matches the question number
+    public boolean addAnswer(String ans, String question){
+        int index = -1;
+        //look for index of matching question
+        for (int i = 0; i < this.questionsToAnswer.length; i++) {
+            if (this.questionsToAnswer[i].equals(question)){
+                index = i;
+            }
+        }
+        if (index == -1) {
+            return false;
+        }
+
+        //add answer to the same index as the question
+        this.answersToQuestions[index] = ans;
+        return true;
+
+    }
+
+
+
+
+
+
+
 
 
 }

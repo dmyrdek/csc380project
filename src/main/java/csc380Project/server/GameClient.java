@@ -134,7 +134,7 @@ public class GameClient {
 
   public static void main(String[] args) {
     String server = args[0];
-    int port = 10694;
+    int port = 15452;
     ChatAccess access = new ChatAccess();
 
     JFrame frame = new ChatFrame(access);
