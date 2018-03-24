@@ -18,7 +18,7 @@ public class GameServer {
                    String[] arguments = new String[] {};
 			new SyncClients().main(arguments);
 		}else if(selection.equals("Client")){
-			String IPServer = JOptionPane.showInputDialog("Enter the Server ip adress");
+			String IPServer = JOptionPane.showInputDialog("Enter the port number");
                         String[] arguments = new String[] {IPServer};
 			new GameClient().main(arguments);
 		}
