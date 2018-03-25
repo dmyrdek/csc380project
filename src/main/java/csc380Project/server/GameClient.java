@@ -133,8 +133,6 @@ public class GameClient {
   }
 
   public static void main(String[] args) {
-    /*String server = args[0];
-    int port = 15452; */
 
     int port = Integer.parseInt(args[0]);
     String server = "tcp://0.tcp.ngrok.io";

@@ -48,9 +48,7 @@ public class Main extends Application {
         testGame.displayQuestionsForRound(testGame.getQuestionsForRound(3));
 
         testGame.giveQuestionstoPlayers();
-        System.out.println("\n \nsuccessfully gave all players their questions for the game");
-
-
+        System.out.println("\n \nsuccessfully gave all players their questions for the game\n\n");
 
 
 
@@ -66,26 +64,6 @@ public class Main extends Application {
 
 
         ////-------------end test----------------------------
-
-
-
-        String command = "";
-        System.out.println("type 1 for server, 2 for client");
-        command = kb.nextLine();
-
-        boolean proper = false;
-
-        while(!proper) {
-            if (command.equals("1")) {
-                GameServer.createServer();
-                proper = true;
-            } else if (command.equals("2")) {
-                System.out.println("Enter ngrok port number: ");
-                int port = Integer.parseInt(kb.nextLine());
-                GameClient.connectClient(port);
-                proper = true;
-            }
-        }
 
 
 

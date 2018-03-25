@@ -33,7 +33,8 @@ public class createLobbyController{
     public void createGameLaunchServer(ActionEvent event) {
         try {
 
-            GameServer.createServer();
+            //GameServer.createServer();
+            GameServer.main(null);
 
 
             Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
