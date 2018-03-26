@@ -25,13 +25,14 @@ public class GameTest {
         testGame.setThisGamesQuestions();
     }
 
+    //tests that addPlayerToGame method adds player to the game object
     @Test
-    public void addPlayerToGameTest() {
+    public void addPlayerToGameTest(){
         assertEquals(testGame.getInGamePlayers().get(0).getName(), "Player One");
         assertEquals(testGame.getInGamePlayers().get(1).getName(), "Player Two");
     }
 
-
+    //tests that setGameQuestionsTest method adds correct number of questions
     @Test
     public void setGameQuestionsTest(){
         testGame.setThisGamesQuestions();
@@ -62,6 +63,7 @@ public class GameTest {
 
     }
 
+    //tests that giveQuestionToPlayer method gives questions properly to each player
     @Test
     public void giveQuestionstoPlayersTestValid(){
         testGame.giveQuestionstoPlayers();
@@ -94,15 +96,25 @@ public class GameTest {
 
     }
 
+    //tests that giveQuestionsToPlayer returns false with invalid num of rounds
     @Test
     public void giveQuestionstoPlayersTestInvalid(){
 
         Game badGame = new Game(-1, q);
+
         assertEquals(badGame.giveQuestionstoPlayers(), false);
 
     }
 
+    //tests that giveQuestionsToPlayer returns false with empty question pack
+    @Test
+    public void giveQuestionstoPlayersTestQPInvalid() {
+        q = new QuestionPack();
+        Game badGame = new Game(2, q);
 
+        assertEquals(badGame.giveQuestionstoPlayers(), false);
+
+    }
 
 
 

@@ -27,7 +27,7 @@ public class SyncClients{
         }
     
         /*
-         * Open a server socket on the portNumber (default 2222). Note that we can
+         * Open a server socket on the portNumber (default 4122). Note that we can
          * not choose a port less than 1023 if we are not privileged users (root).
          */
         try {

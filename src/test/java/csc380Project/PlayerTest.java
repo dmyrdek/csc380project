@@ -17,6 +17,7 @@ public class PlayerTest {
 
     }
 
+    //tests that we can add questions to correct question array indexes
     @Test
     public void addQuestionTest(){
         testPlayer.addQuestionToIndex("test question", 42);
@@ -25,7 +26,7 @@ public class PlayerTest {
         assertEquals("test question at index 3", testPlayer.getQuestionAtIndex(3));
     }
 
-
+    //tests that we can add answers to correct answer array indexes (not going to use this later)
     @Test
     public void addAnswerTest(){
         testPlayer.addAnswerToIndex("test answer", 42);
@@ -33,7 +34,7 @@ public class PlayerTest {
         assertEquals("test question at index 3", testPlayer.getQuestionAtIndex(3));
     }
 
-
+    //tests that we can increase the score of a player
     @Test
     public void increaseVotesReceivedTest() {
         testPlayer.increaseVotesReceived();
@@ -42,6 +43,7 @@ public class PlayerTest {
         assertEquals(testPlayer.getNumVotesReceived(), 2);
     }
 
+    //tests that we can add answer based on the question it's answering
     @Test
     public void addAnswerToIndex() {
         assertEquals(true, testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3"));

@@ -8,7 +8,6 @@ public class Player {
     private String name;
     private int numVotesReceived;
     private int playerNumber;
-    private ArrayList<String> answers;
     boolean isHost;
     public ArrayList<Player> playersInGame;
 
@@ -21,7 +20,7 @@ public class Player {
         playerNumber=0;
         isHost = false;
 
-        answersToQuestions = new String [400];
+        answersToQuestions = new String [400]; //max at total questions (344)
         questionsToAnswer = new String[400];
         playersInGame = new ArrayList<Player>();
     }
@@ -54,7 +53,7 @@ public class Player {
         //need to implement when possible
     }
 
-
+    //not using?
     public String[] addAnswerToIndex(String ans, int index){
         answersToQuestions[index] = ans;
         return answersToQuestions;

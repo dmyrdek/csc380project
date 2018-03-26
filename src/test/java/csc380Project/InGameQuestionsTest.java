@@ -21,7 +21,7 @@ public class InGameQuestionsTest {
         iqs = g.setGameQuestions();
     }
 
-
+    //tests that in game questions object has correct number of questions
     @Test
     public void getIGQSize(){
         assertEquals(iqs.getQuestions().length, g.getInGamePlayers().size() * g.getNumOfRounds());

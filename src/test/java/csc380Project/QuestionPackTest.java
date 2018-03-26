@@ -26,14 +26,14 @@ public class QuestionPackTest {
     }
 
 
-    //look for valid txt file
+    //tests getQuestionPack method with valid txt file
     @Test
     public void getQuestionPackTestValid(){
         assertEquals(qp.getQuestionPack("questions.txt"), true);
 
     }
 
-
+    //tests getQuestionPack method with invalid txt file
     @Test
     public void getQuestionPackTestInValid(){
 
@@ -42,7 +42,7 @@ public class QuestionPackTest {
 
     }
 
-
+    //tests addAllQuestions method adds all 344 of our questions (useless atm)
     @Test
     public void addAllQuestionsTest(){
         QuestionPack q = new QuestionPack().addAllQuestions();
