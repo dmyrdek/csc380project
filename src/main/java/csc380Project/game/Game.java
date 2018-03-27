@@ -103,14 +103,6 @@ public class Game {
 
     }
 
-    public void displayQuestionsForRound(String[] roundQuestions) {
-        if (roundQuestions != null) {
-            for (String s : roundQuestions) {
-                System.out.println(s);
-            }
-        }
-    }
-
 
     //assign the correct questions to each player for the ENTIRE GAME. Question is placed in
     //the corresponding spot to where the question is in the inGameQuestions list.
