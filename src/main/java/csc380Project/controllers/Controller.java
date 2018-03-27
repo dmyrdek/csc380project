@@ -23,6 +23,7 @@ public class Controller {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(createLobbyScene);
         appStage.show();
+        appStage.requestFocus();
 
     }
 
@@ -32,6 +33,7 @@ public class Controller {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(createLobbyScene);
         appStage.show();
+        appStage.requestFocus();
     }
 
     public void backButtonPress(ActionEvent event) throws IOException {
@@ -40,6 +42,7 @@ public class Controller {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(homePage);
         appStage.show();
+        appStage.requestFocus();
     }
 
 
@@ -56,6 +59,7 @@ public class Controller {
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(homePage);
             appStage.show();
+            appStage.requestFocus();
 
 
         } catch (IOException e) {
