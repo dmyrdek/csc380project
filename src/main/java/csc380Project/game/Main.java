@@ -12,6 +12,13 @@ import java.util.Scanner;
 
 
 public class Main extends Application {
+    public static void testDisplayQuestionsForRound(String[] roundQuestions) {
+        if (roundQuestions != null) {
+            for (String s : roundQuestions) {
+                System.out.println(s);
+            }
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         launch(args);
@@ -45,7 +52,8 @@ public class Main extends Application {
 
         //gets the correct questions to be used for a specific round of play unless round specified is outside of acceptable bounds
         System.out.println("\n \nlist of questions for specified round (3 right now) \n \n");
-        testGame.displayQuestionsForRound(testGame.getQuestionsForRound(3));
+        String[] questionsForRound = testGame.getQuestionsForRound(3);
+        testDisplayQuestionsForRound(questionsForRound);
 
         testGame.giveQuestionstoPlayers();
         System.out.println("\n \nsuccessfully gave all players their questions for the game\n\n");

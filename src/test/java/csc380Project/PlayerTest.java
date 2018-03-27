@@ -43,12 +43,51 @@ public class PlayerTest {
         assertEquals(testPlayer.getNumVotesReceived(), 2);
     }
 
+    //tests that we can get an answer at a certain index
+    @Test
+    public void getIndexOfAnswerToQuestionTest() {
+        String testAnswer = "this is the answer to question at index 3";
+        testPlayer.addAnswer(testAnswer, "test question at index 3");
+        int answerIndex = -1;
+        for(int x = 0; x < testPlayer.getAnswers().length; x ++){
+            if(testAnswer.equals(testPlayer.getAnswerAtIndex(x))){
+                answerIndex = x;
+            }
+        }
+        assertEquals(3, answerIndex);
+    }
+
     //tests that we can add answer based on the question it's answering
     @Test
-    public void addAnswerToIndex() {
-        assertEquals(true, testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3"));
-        assertEquals(false, testPlayer.addAnswer("this is the answer for a question that does not exist", "no existant question"));
+    public void addAnswerBasedOnQuestion() {
+        boolean test1 = testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3");
+        assertEquals(true, test1);
+        boolean test2 = testPlayer.addAnswer("this is the answer for a question that does not exist", "no existant question");
+        assertEquals(false, test2);
 
+    }
+
+    //tests that we answers are put into correct place
+    @Test
+    public void getAnswersAfterAddingTest() {
+        testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3");
+        String testAnswer = testPlayer.getAnswerAtIndex(3);
+        assertEquals("this is the answer to question at index 3", testAnswer);
+    }
+
+    //tests that player is not host by default
+    @Test
+    public void isPlayerNotHost() {
+        assertEquals(false, testPlayer.getHostStatus());
+    }
+
+    //tests that we can set player as host
+    @Test
+    public void setTestPlayerHost() {
+        testPlayer.setHostStatus(true);
+        assertEquals(true, testPlayer.getHostStatus());
+        testPlayer.setHostStatus(false);
+        assertEquals(false, testPlayer.getHostStatus());
     }
 
 

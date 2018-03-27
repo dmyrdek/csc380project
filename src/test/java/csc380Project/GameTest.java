@@ -23,6 +23,7 @@ public class GameTest {
         testGame.addPlayerToGame("Player Two");
         testGame.addPlayerToGame("Player three");
         testGame.setThisGamesQuestions();
+        testPlayer = new Player("Player four");
     }
 
     //tests that addPlayerToGame method adds player to the game object
@@ -30,6 +31,25 @@ public class GameTest {
     public void addPlayerToGameTest(){
         assertEquals(testGame.getInGamePlayers().get(0).getName(), "Player One");
         assertEquals(testGame.getInGamePlayers().get(1).getName(), "Player Two");
+    }
+
+    //tests that addPlayerToGame (Player Object) method adds player to the game object
+    @Test
+    public void addPlayerToGameTestPlayer(){
+        testGame.addPlayerToGame(testPlayer);
+        assertEquals(testGame.getInGamePlayers().get(3).getName(), "Player four");
+    }
+
+    //tests that addOtherPlayerToReference works as it should
+    @Test
+    public void addOtherPlayersToReferenceTest(){
+        testGame.addOtherPlayersReference();
+        String name1 = testGame.getInGamePlayers().get(0).playersInGame.get(0).getName();
+        String name2 = testGame.getInGamePlayers().get(1).playersInGame.get(0).getName();
+        String name3 = testGame.getInGamePlayers().get(0).playersInGame.get(2).getName();
+        assertEquals(name1, "Player One");
+        assertEquals(name2, "Player One");
+        assertEquals(name3, "Player three");
     }
 
     //tests that setGameQuestionsTest method adds correct number of questions
@@ -116,7 +136,22 @@ public class GameTest {
 
     }
 
+    //tests that setPlayerNumber method in Player class works properly
+    @Test
+    public void setTestPlayerNumber(){
+        testGame.addPlayerToGame(testPlayer);
+        testGame.addOtherPlayersReference();
+        testPlayer.setPlayerNumber();
+        assertEquals(3, testPlayer.getPlayerNumber());
+    }
 
+    //tests that setPlayerNumber method doesn't work if addOtherPlayersReference method not called
+    @Test
+    public void badSetTestPlayerNumber(){
+        testGame.addPlayerToGame(testPlayer);
+        testPlayer.setPlayerNumber();
+        assertEquals(-1, testPlayer.getPlayerNumber());
+    }
 
 
 }

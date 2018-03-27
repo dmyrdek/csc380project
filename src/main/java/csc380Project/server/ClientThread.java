@@ -20,6 +20,14 @@ public class ClientThread extends Thread{
     maxClientsCount = threads.length;
   }
 
+  public static void displayQuestionsForRound(String[] roundQuestions) {
+    if (roundQuestions != null) {
+      for (String s : roundQuestions) {
+        System.out.println(s);
+      }
+    }
+  }
+
   public void run() {
     int maxClientsCount = this.maxClientsCount;
     ClientThread[] threads = this.threads;

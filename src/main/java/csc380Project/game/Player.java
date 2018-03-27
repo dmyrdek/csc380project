@@ -8,16 +8,16 @@ public class Player {
     private String name;
     private int numVotesReceived;
     private int playerNumber;
-    boolean isHost;
+    private boolean isHost;
     public ArrayList<Player> playersInGame;
 
-    String[] questionsToAnswer;
-    String [] answersToQuestions;
+    private String[] questionsToAnswer;
+    private String[] answersToQuestions;
 
     public Player(String n){
         name =n;
         numVotesReceived =0;
-        playerNumber=0;
+        playerNumber=-1;
         isHost = false;
 
         answersToQuestions = new String [400]; //max at total questions (344)
@@ -38,17 +38,25 @@ public class Player {
         return playerNumber;
     }
 
-
     public String[] getAnswers(){
         return this.answersToQuestions;
     }
 
+    public String[] getQuestions() { return this.questionsToAnswer; }
+
+    public boolean getHostStatus() { return this.isHost; }
 
     public void increaseVotesReceived(){
         this.numVotesReceived++;
     }
 
+    //method works if addOtherPlayersToReference method in Game class run before this
     public void setPlayerNumber(){
+        for (int x = 0; x < playersInGame.size(); x++) {
+            if (playersInGame.get(x).getName().equals(this.getName())) {
+                playerNumber = x;
+            }
+        }
         //look to see what other players exist in the game, and get smaller possible value left
         //need to implement when possible
     }
@@ -72,12 +80,9 @@ public class Player {
         return this.answersToQuestions[index];
     }
 
-
-
-    public void setHostBool(boolean b){
+    public void setHostStatus(boolean b){
         this.isHost = b;
     }
-
 
 
     //allow users to add answers at a specified index that matches the question number
