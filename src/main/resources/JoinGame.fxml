@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -29,7 +31,7 @@
         </Pane>
         <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
             <children>
-                <JFXButton onAction="#backButtonPress" fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+                <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -54,11 +56,11 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" />
                     </graphic>
                 </JFXButton>
-                <Label layoutX="405.0" layoutY="26.0" text="Join Game" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="430.0" layoutY="14.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
         <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="160.0" prefHeight="50.0" prefWidth="300.0" promptText="Room Code" stylesheets="@main.css" unFocusColor="WHITE">
@@ -79,5 +81,10 @@
                 <Font size="16.0" />
             </font>
         </JFXTextField>
+      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.0" textFill="#ffffff62">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
     </children>
 </Pane>

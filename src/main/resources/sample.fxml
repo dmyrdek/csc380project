@@ -2,57 +2,101 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <!-- test -->
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.Controller">
-    <children>
-        <Pane prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: #282d3f;">
-            <effect>
-                <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="28.59" radius="20.245" width="54.39" />
-            </effect>
-        </Pane>
-        <Pane prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: #282d3f;" />
-        <JFXButton fx:id="Join_game_button" buttonType="RAISED" layoutX="560.0" layoutY="141.0" onAction="#joinGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: a0a2ab;" text="Join Game" textFill="WHITE">
-            <effect>
-                <DropShadow color="#141414" spread="0.05" />
-            </effect>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor></JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="59.0" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: a0a2ab;" text="Create Game" textFill="WHITE">
-            <effect>
-                <DropShadow color="#141414" spread="0.03" />
-            </effect>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor></JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="307.0" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: a0a2ab;" text="Pack Manager" textFill="WHITE">
-            <effect>
-                <DropShadow color="#141414" spread="0.03" />
-            </effect>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
-        <JFXButton fx:id="create_game_button11" buttonType="RAISED" layoutX="560.0" layoutY="224.0" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: a0a2ab;" text="Character Editor" textFill="WHITE">
-            <effect>
-                <DropShadow color="#141414" spread="0.03" />
-            </effect>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="390.0" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: a0a2ab;" text="Settings" textFill="WHITE">
-            <effect>
-                <DropShadow color="#141414" spread="0.03" />
-            </effect>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
-    </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.Controller">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <ImageView fitHeight="222.0" fitWidth="376.0" layoutX="37.0" layoutY="38.0">
+               <image>
+                  <Image url="@full_logo.png" />
+               </image>
+               <effect>
+                  <DropShadow color="#00000031" spread="0.05" />
+               </effect>
+            </ImageView>
+            <Label layoutX="28.0" layoutY="466.0" prefHeight="34.0" prefWidth="394.0" text="Created by Douglas Myrdek, Cedric Hansen, Brian Emigholz, and Dylan Richmond for a SUNY Oswego CSC380: Intro to Software Engineering Project" textAlignment="CENTER" textFill="#ffffff99" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="252.0" prefHeight="118.0" prefWidth="376.0" text="“Questionnaires” is a open source party game, with fun questions and creative answers. Created in Java™ 1.8 with JavaFX, JFoenix Material Design Library, and FontAwesomeFX Library." textAlignment="CENTER" textFill="#ffffffcb" wrapText="true" />
+            <Label layoutX="150.0" layoutY="397.0" text="For more infomation go to:" textFill="#ffffffb2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="87.0" layoutY="412.0" text="https://github.com/dmyrdek/csc380project" textFill="WHITE" />
+         </children>
+         <effect>
+            <DropShadow color="#00000066" />
+         </effect></Pane>
+      <VBox layoutX="583.0" layoutY="29.0" style="-fx-spacing: 25;">
+         <children>
+            <JFXButton fx:id="create_game_button" buttonType="RAISED" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#19b5fe" style="-fx-background-color: #67809F;" text="Create Game" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.03" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="Join_game_button" buttonType="RAISED" onAction="#joinGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#19b5fe" style="-fx-background-color: #67809F;" text="Join Game" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.05" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="create_game_button11" buttonType="RAISED" disable="true" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Character Editor" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.03" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="create_game_button1" buttonType="RAISED" disable="true" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Pack Manager" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.03" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="create_game_button12" buttonType="RAISED" disable="true" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Settings" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.03" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="quit_button" buttonType="RAISED" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Quit" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#141414" spread="0.03" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
+      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.0" textFill="#ffffff62">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
 </Pane>

@@ -5,7 +5,7 @@
 
     <groupId>csc380Project</groupId>
     <artifactId>csc380</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-PRE-ALPHA</version>
     <packaging>jar</packaging>
 
     <name>csc380</name>

@@ -91,5 +91,6 @@ public class Main extends Application {
         //Button buttons = new Button();
         //buttons.setStyle("-fx-font: 22 Helvetica Neue");
         primaryStage.show();
+        root.requestFocus();
     }
 }

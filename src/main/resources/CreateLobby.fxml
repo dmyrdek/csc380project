@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -34,6 +36,7 @@
                 <Shadow blurType="GAUSSIAN" color="#00000080" height="49.53" radius="19.3825" width="30.0" />
             </effect>
         </Pane>
+        <Pane layoutX="448.0" layoutY="58.0" mouseTransparent="true" prefHeight="444.0" prefWidth="5.0" style="-fx-background-color: #282d3f;" />
         <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
             <children>
                 <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
@@ -44,7 +47,7 @@
                         <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
                     </effect>
                     <font>
-                        <Font name="SofiaProLight" size="13.0" />
+                        <Font name="System Font" size="13.0" />
                     </font>
                     <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
@@ -58,20 +61,20 @@
                         <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
                     </effect>
                     <font>
-                        <Font name="SofiaProLight" size="13.0" />
+                        <Font name="System Font" size="13.0" />
                     </font>
                     <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
                     </graphic>
                 </JFXButton>
-                <Label layoutX="384.0" layoutY="26.0" text="Lobby Settings" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
+                <Label layoutX="404.0" layoutY="53.0" text="Lobby Settings" textFill="#ffffffd9" />
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="425.0" layoutY="5.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
-        <Pane layoutX="448.0" layoutY="58.0" mouseTransparent="true" prefHeight="444.0" prefWidth="5.0" style="-fx-background-color: #282d3f;" />
       <VBox fx:id="usernameField" layoutX="110.0" layoutY="140.0" style="-fx-spacing: 50;">
          <children>
               <JFXTextField fx:id="username" focusColor="#0ac7ca" labelFloat="true" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
@@ -112,5 +115,10 @@
                 <Font name="SofiaProLight" size="20.0" />
             </font>
         </Label>
+      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.0" textFill="#ffffff62">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
     </children>
 </Pane>
