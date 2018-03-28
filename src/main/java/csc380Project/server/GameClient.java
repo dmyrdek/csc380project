@@ -208,7 +208,7 @@ public class GameClient {
 
   // add the correct questions for the correct players
   static void addQuestions(String [] questions, Player me) {
-    //[questionsForGame|<questionIndex>|<question>|<player>|<player>|...]
+    //[<questionIndex>|<question>|<player>|<player>|...]
     for(int i=0; i<questions.length; i+=4) {
       int index = Integer.parseInt(questions[i]);
       String question = questions[i+1];
@@ -223,7 +223,7 @@ public class GameClient {
     }
   }
   static void addAnswer(String [] answers, Player me) {
-    //[answer|<question>|<answer>|<player>]
+    //[<question>|<answer>|<player>]
     String question = answers[0];//used later for displaying stuff
     String answer = answers[1];
     for(int j=0; j<me.playersInGame.size();j++){
@@ -233,7 +233,7 @@ public class GameClient {
     }
   }
   static void vote(String [] vote, Player me){
-    //[vote|<question>|<answer>|<players>]]
+    //[<question>|<answer>|<players>]
     String question = vote[0]; //used later for displaying stuff
     String answer = vote[1];
     for(int j=0; j<me.playersInGame.size();j++){
