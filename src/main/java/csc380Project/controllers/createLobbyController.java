@@ -23,7 +23,7 @@ public class createLobbyController{
     JFXComboBox numberOfRounds;
 
     public void backButtonPress(ActionEvent event) throws IOException {
-        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HomeScreen.fxml"));
         Scene homePage = new Scene(homePageParent);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(homePage);
