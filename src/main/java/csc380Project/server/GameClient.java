@@ -1,5 +1,6 @@
 package csc380Project.server;
 
+
 import java.io.*;
 import java.net.*;
 import javax.swing.*;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import csc380Project.game.*;
 
 public class GameClient {
   static class ChatAccess extends Observable {
@@ -156,7 +158,7 @@ public class GameClient {
     }
   }
 
-  static void parse(String s) {
+  static void parse(String s, Player me) {
 
       String [] input = s.split("\\|");
 
@@ -165,41 +167,45 @@ public class GameClient {
           for (int i = 0; i<input.length; i++){
               playerList[i] = input[i+1];
           }
-          addPlayers(playerList);
+          addPlayers(playerList, me);
       } else if (input[0].equals("questionsForGame")) {
           String [] questionsForGame = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
               questionsForGame[i] = input[i+1];
 
           }
-          addQuestions(questionsForGame);
+          addQuestions(questionsForGame, me);
       } else if (input[0].equals("answer")){
           String [] answer = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
               answer[i] = input[i+1];
           }
-          addAnswer(answer);
+          addAnswer(answer, me);
       } else if (input[0].equals("vote")){
           String [] vote = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
               vote[i] = input[i+1];
           }
-          vote(vote);
+          vote(vote, me);
       }
   }
 
 
 
-  static void addPlayers(String [] s) {
+  static void addPlayers(String [] s, Player me) {
+    for(int i=0; i<s.length; i++) {
+      me.playersInGame.add(new Player(s[i]));
+    }
+  }
+  static void addQuestions(String [] s, Player me) {
+    for(int i<0; i<s.length; i++) {
+      
+    }
+  }
+  static void addAnswer(String [] s, Player me) {
 
   }
-  static void addQuestions(String [] s) {
-
-  }
-  static void addAnswer(String [] s) {
-
-  }
-  static void vote(String [] s){
+  static void vote(String [] s, Player me){
 
   }
 
