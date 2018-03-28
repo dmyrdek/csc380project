@@ -15,6 +15,11 @@ public class ClientThread extends Thread{
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private int maxClientsCount;
+  private String name;
+
+  public String getUserName(){
+    return name;
+  }
 
   public ClientThread(Socket clientSocket, ClientThread[] threads) {
     this.clientSocket = clientSocket;
@@ -40,7 +45,6 @@ public class ClientThread extends Thread{
        */
       is = new DataInputStream(clientSocket.getInputStream());
       os = new PrintStream(clientSocket.getOutputStream());
-      String name;
       while (true) {
         os.println("Enter your name.");
         name = is.readLine().trim();
@@ -68,7 +72,9 @@ public class ClientThread extends Thread{
           }
         }
         for (int i = 0; i < maxClientsCount; i++) {
-          threads[i].os.println(threads[i].getName() + ", ");
+          if (threads[i] != null){
+            threads[i].os.println(threads[i].getUserName() + ", ");
+          }
         }
       }
       /* Start the conversation. */
