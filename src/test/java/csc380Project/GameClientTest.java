@@ -63,7 +63,7 @@ public class GameClientTest {
         String questions = "questionsForGame|0|testQuestion0|Cedric|Doug|1|testQuestions1|Doug|Brian|2|testQuestion2|Brian|Dylan|" +
                 "3|testQuestion3|Dylan|Cedric|4|testQuestion4|Cedric|Doug|5|testQuestion5|Doug|Brian|6|testQuestion6|Brian|Dylan|"+
                 "7|testQuestion7|Dylan|Cedric";
-        
+
         GameClient.parse(questions, testPlayer);
         assertEquals(testPlayer.playersInGame.get(0).getQuestions()[0], "testQuestion0");
         assertEquals(testPlayer.playersInGame.get(0).getQuestions()[2], null);
