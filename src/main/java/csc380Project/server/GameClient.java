@@ -155,4 +155,58 @@ public class GameClient {
       System.exit(0);
     }
   }
+
+  static void parse(String s) {
+
+      String [] input = s.split("\\|");
+
+      if (input[0].equals("players")){
+          String [] playerList = new String [input.length-1];
+          for (int i = 0; i<input.length; i++){
+              playerList[i] = input[i+1];
+          }
+          addPlayers(playerList);
+      } else if (input[0].equals("questionsForGame")) {
+          String [] questionsForGame = new String [input.length-1];
+          for (int i = 0; i<input.length; i++) {
+              questionsForGame[i] = input[i+1];
+
+          }
+          addQuestions(questionsForGame);
+      } else if (input[0].equals("answer")){
+          String [] answer = new String [input.length-1];
+          for (int i = 0; i<input.length; i++) {
+              answer[i] = input[i+1];
+          }
+          addAnswer(answer);
+      } else if (input[0].equals("vote")){
+          String [] vote = new String [input.length-1];
+          for (int i = 0; i<input.length; i++) {
+              vote[i] = input[i+1];
+          }
+          vote(vote);
+      }
+  }
+
+
+
+  static void addPlayers(String [] s) {
+
+  }
+  static void addQuestions(String [] s) {
+
+  }
+  static void addAnswer(String [] s) {
+
+  }
+  static void vote(String [] s){
+
+  }
+
+
+
+
+
+
+
 }
