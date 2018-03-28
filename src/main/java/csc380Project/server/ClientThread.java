@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import org.omg.PortableServer.THREAD_POLICY_ID;
+
 // For every client's connection we call this class
 public class ClientThread extends Thread{
   private String clientName = null;
@@ -64,6 +66,9 @@ public class ClientThread extends Thread{
             threads[i].os.println("*** A new user " + name
                 + " entered the chat room !!! ***");
           }
+        }
+        for (int i = 0; i < maxClientsCount; i++) {
+          threads[i].os.println(threads[i].getName() + ", ");
         }
       }
       /* Start the conversation. */
