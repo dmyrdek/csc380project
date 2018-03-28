@@ -36,7 +36,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="87.0" layoutY="412.0" text="https://github.com/dmyrdek/csc380project" textFill="WHITE" />
+            <Hyperlink fx:id="github_link" layoutX="87.0" layoutY="412.0" text="https://github.com/dmyrdek/csc380project" textFill="WHITE" />
          </children>
          <effect>
             <DropShadow color="#00000066" />
