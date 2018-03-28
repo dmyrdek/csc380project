@@ -74,18 +74,18 @@ public class ClientThread extends Thread{
           }
         }
       }
-      synchronized(this){
-        for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null && threads[i] == this){
-            threads[i].os.print(name + ", ");
-          }
-          if (threads[i] != null && threads[i] != this){
-            threads[i].os.print(name + ", ");
-          }
-        }
-      }
+    
       /* Start the conversation. */
       while (true) {
+        synchronized(this){
+          String names = "";
+          for (int i = 0; i < maxClientsCount; i++) {
+            if (threads[i] != null){
+              names = names + name + " ";
+            }
+            
+          }
+        }
         String line = is.readLine();
         if (line.startsWith("/quit")) {
           break;
