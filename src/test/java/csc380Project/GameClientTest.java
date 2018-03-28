@@ -45,10 +45,10 @@ public class GameClientTest {
         String playerList = "players|Cedric|Doug|Brian|Dylan";
         Player testPlayer = new Player("Cedric");
         GameClient.parse(playerList, testPlayer);
-        assertEquals(testPlayer.playersInGame.get(0).getName(), "Cedric");
-        assertEquals(testPlayer.playersInGame.get(1).getName(), "Doug");
-        assertEquals(testPlayer.playersInGame.get(2).getName(), "Brian");
-        assertEquals(testPlayer.playersInGame.get(3).getName(), "Dylan");
+        assertEquals(testPlayer.findPlayerInList("Cedric").getName(), "Cedric");
+        assertEquals(testPlayer.findPlayerInList("Doug").getName(), "Doug");
+        assertEquals(testPlayer.findPlayerInList("Brian").getName(), "Brian");
+        assertEquals(testPlayer.findPlayerInList("Dylan").getName(), "Dylan");
     }
 
     @Test
@@ -67,10 +67,11 @@ public class GameClientTest {
                 "7|testQuestion7|Dylan|Cedric";
 
         GameClient.parse(questions, testPlayer);
-        assertEquals(testPlayer.playersInGame.get(0).getQuestions()[0], "testQuestion0");
-        assertEquals(testPlayer.playersInGame.get(0).getQuestions()[2], null);
-        assertEquals(testPlayer.playersInGame.get(2).getQuestions()[3], "testQuestion3");
-        assertEquals(testPlayer.playersInGame.get(3).getQuestions()[7], "testQuestion7");
+        assertEquals(testPlayer.findPlayerInList("Doug").getQuestions()[0], "testQuestion0");
+        assertEquals(testPlayer.findPlayerInList("Doug").getQuestions()[2], null);
+        assertEquals(testPlayer.findPlayerInList("Brian").getQuestions()[3], null);
+        assertEquals(testPlayer.findPlayerInList("Doug").getQuestions()[5], "testQuestion5");
+        assertEquals(testPlayer.findPlayerInList("Dylan").getQuestions()[7], "testQuestion7");
     }
 
     @Test
@@ -107,10 +108,10 @@ public class GameClientTest {
         GameClient.parse(answer3, testPlayer);
         GameClient.parse(answer7, testPlayer);
 
-        assertEquals(testPlayer.playersInGame.get(0).getAnswerAtIndex(0), "testAnswer0Cedric");
-        assertEquals(testPlayer.playersInGame.get(1).getAnswerAtIndex(1), "testAnswer1Doug");
-        assertEquals(testPlayer.playersInGame.get(2).getAnswerAtIndex(4), null);
-        assertEquals(testPlayer.playersInGame.get(3).getAnswerAtIndex(7), "testAnswer7Dylan");
+        assertEquals(testPlayer.findPlayerInList("Cedric").getAnswerAtIndex(0), "testAnswer0Cedric");
+        assertEquals(testPlayer.findPlayerInList("Doug").getAnswerAtIndex(1), "testAnswer1Doug");
+        assertEquals(testPlayer.findPlayerInList("Brian").getAnswerAtIndex(4), null);
+        assertEquals(testPlayer.findPlayerInList("Dylan").getAnswerAtIndex(7), "testAnswer7Dylan");
     }
 
 
@@ -154,10 +155,10 @@ public class GameClientTest {
         GameClient.parse(vote3, testPlayer);
 
         assertEquals(testPlayer.getNumVotesReceived(), 1);
-        assertEquals(testPlayer.playersInGame.get(0).getNumVotesReceived(), 1);
-        assertEquals(testPlayer.playersInGame.get(3).getNumVotesReceived(), 1);
-        assertEquals(testPlayer.playersInGame.get(1).getNumVotesReceived(), 1);
-        assertEquals(testPlayer.playersInGame.get(2).getNumVotesReceived(), 0); //this player has not received any votes
+        assertEquals(testPlayer.findPlayerInList("Cedric").getNumVotesReceived(), 1);
+        assertEquals(testPlayer.findPlayerInList("Dylan").getNumVotesReceived(), 1);
+        assertEquals(testPlayer.findPlayerInList("Doug").getNumVotesReceived(), 1);
+        assertEquals(testPlayer.findPlayerInList("Brian").getNumVotesReceived(), 0); //this player has not received any votes
 
         String answer3 = "answer|testQuestion3|testAnswer3Cedric|Cedric";
         String vote4 = "vote|testQuestion3|testAnswer3Cedric|Cedric";
@@ -166,7 +167,7 @@ public class GameClientTest {
         assertEquals(testPlayer.getNumVotesReceived(), 2);
 
     }
-    
+
 
     /*
     //test with a good server and port

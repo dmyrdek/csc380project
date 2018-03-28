@@ -103,11 +103,14 @@ public class Player {
     }
 
 
-
-
-
-
-
+    public Player findPlayerInList(String playerName) {
+        for (int i = 0; i<playersInGame.size(); i++) {
+            if (playersInGame.get(i).name.equals(playerName)){
+                return playersInGame.get(i);
+            }
+        }
+        return null;
+    }
 
 
 }
