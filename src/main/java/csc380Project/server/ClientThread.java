@@ -77,7 +77,8 @@ public class ClientThread extends Thread{
                 names = names + threads[j].getUserName() + " ";
               }
             }
-            this.os.println(names);
+            threads[i].os.println(names);
+            this.os.print(names);
           }
         }
       }
