@@ -81,10 +81,10 @@ public class ClientThread extends Thread{
           String names = "";
           for (int i = 0; i < maxClientsCount; i++) {
             if (threads[i] != null){
-              names = names + name + " ";
+              names = names + threads[i].getUserName() + " ";
             }
-            
           }
+          this.os.println(names);
         }
         String line = is.readLine();
         if (line.startsWith("/quit")) {
