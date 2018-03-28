@@ -76,7 +76,10 @@ public class ClientThread extends Thread{
       }
       synchronized(this){
         for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null){
+          if (threads[i] != null && threads[i] == this){
+            threads[i].os.print(name + ", ");
+          }
+          if (threads[i] != null && threads[i] != this){
             threads[i].os.print(name + ", ");
           }
         }
