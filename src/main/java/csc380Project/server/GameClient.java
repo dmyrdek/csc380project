@@ -158,7 +158,7 @@ public class GameClient {
     }
   }
 
-  static void parse(String s, Player me) {
+  public static void parse(String s, Player me) {
 
       String [] input = s.split("\\|");
 
@@ -166,7 +166,7 @@ public class GameClient {
       // input looks like [players|<player1>|<player2> ....]
       if (input[0].equals("players")){
           String [] playerList = new String [input.length-1];
-          for (int i = 0; i<input.length; i++){
+          for (int i = 0; i<input.length-1; i++){
               playerList[i] = input[i+1];
           }
           addPlayers(playerList, me);
@@ -174,7 +174,7 @@ public class GameClient {
       //input looks like [questionsForGame|<questionIndex>|<question>|<receivingPlayer1>|<receivingPlayer2> ... (repeating)..]
       } else if (input[0].equals("questionsForGame")) {
           String [] questionsForGame = new String [input.length-1];
-          for (int i = 0; i<input.length; i++) {
+          for (int i = 0; i<input.length-1; i++) {
               questionsForGame[i] = input[i+1];
 
           }
@@ -183,7 +183,7 @@ public class GameClient {
           // [answer|<question>|<answer>|<player>]
       } else if (input[0].equals("answer")){
           String [] answer = new String [input.length-1];
-          for (int i = 0; i<input.length; i++) {
+          for (int i = 0; i<input.length-1; i++) {
               answer[i] = input[i+1];
           }
           addAnswer(answer, me);
@@ -191,7 +191,7 @@ public class GameClient {
           // [vote|<question>|<answer>|<player>]
       } else if (input[0].equals("vote")){
           String [] vote = new String [input.length-1];
-          for (int i = 0; i<input.length; i++) {
+          for (int i = 0; i<input.length-1; i++) {
               vote[i] = input[i+1];
           }
           vote(vote, me);
