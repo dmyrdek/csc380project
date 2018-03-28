@@ -208,32 +208,39 @@ public class GameClient {
 
   // add the correct questions for the correct players
   static void addQuestions(String [] questions, Player me) {
-      for(int i=0; i<questions.length; i+=4) { //[questionsForGame|<questionIndex>|<question>|<player>|<player>|...]
-          int index = Integer.parseInt(questions[i]);
-          String question = questions[i+1];
-          for(int j=0; j<me.playersInGame.size();j++){
-            if(me.playersInGame.get(j).getName().equals(questions[i+2])){
-              me.playersInGame.get(j).addQuestionToIndex(question, index);
-            }
-            else if(me.playersInGame.get(j).getName().equals(questions[i+3])){
-              me.playersInGame.get(j).addQuestionToIndex(question, index);
-            }
-          }
-      }
-  }
-  static void addAnswer(String [] answers, Player me) {
-    for(int i =0; i<answers.length; i+=3){
-      String question = answers[i];
-      String answer = answers[i+1];
+    //[questionsForGame|<questionIndex>|<question>|<player>|<player>|...]
+    for(int i=0; i<questions.length; i+=4) {
+      int index = Integer.parseInt(questions[i]);
+      String question = questions[i+1];
       for(int j=0; j<me.playersInGame.size();j++){
-        if(me.playersInGame.get(j).getName().equals(answers[i+3])){
-          me.playersInGame.get(j).addAnswer(answer, question);
+        if(me.playersInGame.get(j).getName().equals(questions[i+2])){
+          me.playersInGame.get(j).addQuestionToIndex(question, index);
+        }
+        else if(me.playersInGame.get(j).getName().equals(questions[i+3])){
+          me.playersInGame.get(j).addQuestionToIndex(question, index);
         }
       }
     }
   }
+  static void addAnswer(String [] answers, Player me) {
+    //[answer|<question>|<answer>|<player>]
+    String question = answers[0];//used later for displaying stuff
+    String answer = answers[1];
+    for(int j=0; j<me.playersInGame.size();j++){
+      if(me.playersInGame.get(j).getName().equals(answers[2])){
+        me.playersInGame.get(j).addAnswer(answer, question);
+      }
+    }
+  }
   static void vote(String [] vote, Player me){
-
+    //[vote|<question>|<answer>|<players>]]
+    String question = vote[0]; //used later for displaying stuff
+    String answer = vote[1];
+    for(int j=0; j<me.playersInGame.size();j++){
+      if(me.playersInGame.get(j).getName().equals(vote[2])){
+        me.playersInGame.get(j).increaseVotesReceived();
+      }
+    }
   }
 
 
