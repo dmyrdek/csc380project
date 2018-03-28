@@ -222,10 +222,17 @@ public class GameClient {
       }
   }
   static void addAnswer(String [] answers, Player me) {
-    for(int i =0; i<answers.length; i+=3);
-      
+    for(int i =0; i<answers.length; i+=3){
+      String question = answers[i];
+      String answer = answers[i+1];
+      for(int j=0; j<me.playersInGame.size();j++){
+        if(me.playersInGame.get(j).getName().equals(answers[i+3])){
+          me.playersInGame.get(j).addAnswer(answer, question);
+        }
+      }
+    }
   }
-  static void vote(String [] s, Player me){
+  static void vote(String [] vote, Player me){
 
   }
 
