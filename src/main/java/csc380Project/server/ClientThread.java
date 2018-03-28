@@ -74,7 +74,7 @@ public class ClientThread extends Thread{
                 + " entered the chat room !!! ***");
             for (int j = 0; i < maxClientsCount; j++) {
               if (threads[j] != null){
-                names = names + threads[i].getUserName() + " ";
+                names = names + threads[j].getUserName() + " ";
               }
             }
             this.os.println(names);
