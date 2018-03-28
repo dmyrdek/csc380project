@@ -233,7 +233,7 @@ public class GameClient {
     }
   }
   static void vote(String [] vote, Player me){
-    //[<question>|<answer>|<players>]
+    //[<question>|<answer>|<player>]
     String question = vote[0]; //used later for displaying stuff
     String answer = vote[1];
     for(int j=0; j<me.playersInGame.size();j++){
