@@ -197,13 +197,23 @@ public class GameClient {
       me.playersInGame.add(new Player(s[i]));
     }
   }
-  static void addQuestions(String [] s, Player me) {
-    for(int i<0; i<s.length; i++) {
-      
-    }
+  static void addQuestions(String [] questions, Player me) {
+      for(int i=0; i<questions.length; i+=4) { //[questionsForGame|<questionIndex>|<question>|<player>|<player>|...]
+          int index = Integer.parseInt(questions[i]);
+          String question = questions[i+1];
+          for(int j=0; j<me.playersInGame.size();j++){
+            if(me.playersInGame.get(j).getName().equals(questions[i+2])){
+              me.playersInGame.get(j).addQuestionToIndex(question, index);
+            }
+            else if(me.playersInGame.get(j).getName().equals(questions[i+3])){
+              me.playersInGame.get(j).addQuestionToIndex(question, index);
+            }
+          }
+      }
   }
-  static void addAnswer(String [] s, Player me) {
-
+  static void addAnswer(String [] answers, Player me) {
+    for(int i =0; i<answers.length; i+=3);
+      
   }
   static void vote(String [] s, Player me){
 
