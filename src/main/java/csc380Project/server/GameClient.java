@@ -162,12 +162,16 @@ public class GameClient {
 
       String [] input = s.split("\\|");
 
+
+      // input looks like [players|<player1>|<player2> ....]
       if (input[0].equals("players")){
           String [] playerList = new String [input.length-1];
           for (int i = 0; i<input.length; i++){
               playerList[i] = input[i+1];
           }
           addPlayers(playerList, me);
+
+      //input looks like [questionsForGame|<questionIndex>|<question>|<receivingPlayer1>|<receivingPlayer2> ... (repeating)..]
       } else if (input[0].equals("questionsForGame")) {
           String [] questionsForGame = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
@@ -175,12 +179,16 @@ public class GameClient {
 
           }
           addQuestions(questionsForGame, me);
+
+          // [answer|<question>|<answer>|<player>]
       } else if (input[0].equals("answer")){
           String [] answer = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
               answer[i] = input[i+1];
           }
           addAnswer(answer, me);
+
+          // [vote|<question>|<answer>|<player>]
       } else if (input[0].equals("vote")){
           String [] vote = new String [input.length-1];
           for (int i = 0; i<input.length; i++) {
@@ -191,12 +199,14 @@ public class GameClient {
   }
 
 
-
+    // add others players to "my player"'s references of other players
   static void addPlayers(String [] s, Player me) {
     for(int i=0; i<s.length; i++) {
       me.playersInGame.add(new Player(s[i]));
     }
   }
+
+  // add the correct questions for the correct players
   static void addQuestions(String [] questions, Player me) {
       for(int i=0; i<questions.length; i+=4) { //[questionsForGame|<questionIndex>|<question>|<player>|<player>|...]
           int index = Integer.parseInt(questions[i]);
