@@ -112,13 +112,16 @@ public class ClientThread extends Thread{
           }
         }
       }
-      synchronized (this) {
+
+      synchronized(this){
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null){
             threads[i].os.println(threads[i].getUserName() + ", ");
           }
         }
+      }
 
+      synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this
               && threads[i].clientName != null) {
