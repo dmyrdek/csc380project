@@ -71,11 +71,6 @@ public class ClientThread extends Thread{
                 + " entered the chat room !!! ***");
           }
         }
-        for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null){
-            threads[i].os.println(threads[i].getUserName() + ", ");
-          }
-        }
       }
       /* Start the conversation. */
       while (true) {
@@ -118,6 +113,12 @@ public class ClientThread extends Thread{
         }
       }
       synchronized (this) {
+        for (int i = 0; i < maxClientsCount; i++) {
+          if (threads[i] != null){
+            threads[i].os.println(threads[i].getUserName() + ", ");
+          }
+        }
+
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this
               && threads[i].clientName != null) {
