@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import javax.lang.model.element.Name;
+
+import org.omg.PortableServer.THREAD_POLICY_ID;
+
 // For every client's connection we call this class
 public class ClientThread extends Thread{
   private String clientName = null;
@@ -13,6 +17,12 @@ public class ClientThread extends Thread{
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private int maxClientsCount;
+  private String name;
+  private String names = "";
+
+  public String getUserName(){
+    return name;
+  }
 
   public ClientThread(Socket clientSocket, ClientThread[] threads) {
     this.clientSocket = clientSocket;
@@ -38,7 +48,6 @@ public class ClientThread extends Thread{
        */
       is = new DataInputStream(clientSocket.getInputStream());
       os = new PrintStream(clientSocket.getOutputStream());
-      String name;
       while (true) {
         os.println("Enter your name.");
         name = is.readLine().trim();
@@ -52,6 +61,8 @@ public class ClientThread extends Thread{
       /* Welcome the new the client. */
       os.println("Welcome " + name
           + " to our chat room.\nTo leave enter /quit in a new line.");
+      
+
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] == this) {
@@ -59,6 +70,12 @@ public class ClientThread extends Thread{
             break;
           }
         }
+        for (int j = 0; j < maxClientsCount; j++) {
+          if (threads[j] != null){
+            names = names + threads[j].getUserName() + " ";
+          }
+        }
+        this.os.println(names);
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this) {
             threads[i].os.println("*** A new user " + name
@@ -66,8 +83,17 @@ public class ClientThread extends Thread{
           }
         }
       }
+    
       /* Start the conversation. */
       while (true) {
+        /*&synchronized(this){
+          for (int i = 0; i < maxClientsCount; i++) {
+            if (threads[i] != null){
+              names = names + threads[i].getUserName() + " ";
+            }
+          }
+          this.os.println(names);
+        }*/
         String line = is.readLine();
         if (line.startsWith("/quit")) {
           break;
@@ -106,6 +132,7 @@ public class ClientThread extends Thread{
           }
         }
       }
+
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this
