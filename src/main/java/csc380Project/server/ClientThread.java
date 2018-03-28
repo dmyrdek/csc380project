@@ -72,6 +72,13 @@ public class ClientThread extends Thread{
           }
         }
       }
+      synchronized(this){
+        for (int i = 0; i < maxClientsCount; i++) {
+          if (threads[i] != null){
+            threads[i].os.println(threads[i].getUserName() + ", ");
+          }
+        }
+      }
       /* Start the conversation. */
       while (true) {
         String line = is.readLine();
@@ -109,14 +116,6 @@ public class ClientThread extends Thread{
                 threads[i].os.println("<" + name + "> " + line);
               }
             }
-          }
-        }
-      }
-
-      synchronized(this){
-        for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null){
-            threads[i].os.println(threads[i].getUserName() + ", ");
           }
         }
       }
