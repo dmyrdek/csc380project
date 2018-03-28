@@ -18,6 +18,7 @@ public class ClientThread extends Thread{
   private final ClientThread[] threads;
   private int maxClientsCount;
   private String name;
+  private String names = "";
 
   public String getUserName(){
     return name;
@@ -71,21 +72,26 @@ public class ClientThread extends Thread{
           if (threads[i] != null && threads[i] != this) {
             threads[i].os.println("*** A new user " + name
                 + " entered the chat room !!! ***");
+            for (int j = 0; i < maxClientsCount; i++) {
+              if (threads[j] != null){
+                names = names + threads[i].getUserName() + " ";
+              }
+            }
+            this.os.println(names);
           }
         }
       }
     
       /* Start the conversation. */
       while (true) {
-        synchronized(this){
-          String names = "";
+        /*&synchronized(this){
           for (int i = 0; i < maxClientsCount; i++) {
             if (threads[i] != null){
               names = names + threads[i].getUserName() + " ";
             }
           }
           this.os.println(names);
-        }
+        }*/
         String line = is.readLine();
         if (line.startsWith("/quit")) {
           break;
