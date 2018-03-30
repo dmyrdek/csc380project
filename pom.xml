@@ -25,7 +25,11 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
-                    <mainClass>csc380Project.Main</mainClass>
+                    <vendor>DouglasMyrdek</vendor>
+                    <mainClass>csc380Project.game.Main</mainClass>
+                    <deployDir>${project.basedir}/src/main/deploy</deployDir>
+                    <verbose>true</verbose><!-- always a good idea to have this set to true while debugging -->
+                    <appName>questionnaires</appName>
                 </configuration>
             </plugin>
 
