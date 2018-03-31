@@ -4,13 +4,14 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.lang.model.element.Name;
 
 import org.omg.PortableServer.THREAD_POLICY_ID;
 
 // For every client's connection we call this class
-public class ClientThread extends Thread{
+public class ClientThread extends Thread {
   private String clientName = null;
   private DataInputStream is = null;
   private PrintStream os = null;
@@ -18,9 +19,9 @@ public class ClientThread extends Thread{
   private final ClientThread[] threads;
   private int maxClientsCount;
   private String name;
-  private String names = "";
+  private ArrayList<String> names = new ArrayList<>();
 
-  public String getUserName(){
+  public String getUserName() {
     return name;
   }
 
@@ -49,8 +50,34 @@ public class ClientThread extends Thread{
       is = new DataInputStream(clientSocket.getInputStream());
       os = new PrintStream(clientSocket.getOutputStream());
       while (true) {
+        synchronized (this) {
+          for (int i = 0; i < maxClientsCount; i++) {
+            if (threads[i] != null && threads[i].clientName != null && !names.contains(threads[i].getUserName())) {
+              names.add(threads[i].getUserName());
+              this.os.println(names);
+            }
+          }
+        }
         os.println("Enter your name.");
         name = is.readLine().trim();
+        int end = 0;
+        while (true) {
+          if (!names.isEmpty()) {
+            for (int i = 0; i < names.size(); i++) {
+              if (!names.get(i).isEmpty() && names.get(i).equals(name)) {
+                os.println("Sorry that name already exists, please enter in a different one.");
+                end++;
+              }
+            }
+          }
+          if (end == 0) {
+            names.add(name);
+            this.os.println(names);
+            break;
+          }
+          name = is.readLine().trim();
+          end = 0;
+        }
         if (name.indexOf('@') == -1) {
           break;
         } else {
@@ -59,9 +86,7 @@ public class ClientThread extends Thread{
       }
 
       /* Welcome the new the client. */
-      os.println("Welcome " + name
-          + " to our chat room.\nTo leave enter /quit in a new line.");
-      
+      os.println("Welcome " + name + " to our chat room.\nTo leave enter /quit in a new line.");
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
@@ -70,30 +95,25 @@ public class ClientThread extends Thread{
             break;
           }
         }
-        for (int j = 0; j < maxClientsCount; j++) {
-          if (threads[j] != null){
-            names = names + threads[j].getUserName() + " ";
-          }
-        }
-        this.os.println(names);
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this) {
-            threads[i].os.println("*** A new user " + name
-                + " entered the chat room !!! ***");
+            threads[i].os.println("*** A new user " + name + " entered the chat room !!! ***");
           }
         }
       }
-    
+
+      synchronized (this) {
+        for (int i = 0; i < maxClientsCount; i++) {
+          if (threads[i] != null && threads[i].clientName != null && !names.contains(threads[i].getUserName())) {
+            names.add(threads[i].getUserName());
+          }
+        }
+        this.os.println(names.toString());
+      }
+
       /* Start the conversation. */
       while (true) {
-        /*&synchronized(this){
-          for (int i = 0; i < maxClientsCount; i++) {
-            if (threads[i] != null){
-              names = names + threads[i].getUserName() + " ";
-            }
-          }
-          this.os.println(names);
-        }*/
+        
         String line = is.readLine();
         if (line.startsWith("/quit")) {
           break;
@@ -106,8 +126,7 @@ public class ClientThread extends Thread{
             if (!words[1].isEmpty()) {
               synchronized (this) {
                 for (int i = 0; i < maxClientsCount; i++) {
-                  if (threads[i] != null && threads[i] != this
-                      && threads[i].clientName != null
+                  if (threads[i] != null && threads[i] != this && threads[i].clientName != null
                       && threads[i].clientName.equals(words[0])) {
                     threads[i].os.println("<" + name + "> " + words[1]);
                     /*
@@ -135,10 +154,8 @@ public class ClientThread extends Thread{
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null && threads[i] != this
-              && threads[i].clientName != null) {
-            threads[i].os.println("*** The user " + name
-                + " is leaving the chat room !!! ***");
+          if (threads[i] != null && threads[i] != this && threads[i].clientName != null) {
+            threads[i].os.println("*** The user " + name + " is leaving the chat room !!! ***");
           }
         }
       }
