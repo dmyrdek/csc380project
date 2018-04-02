@@ -167,10 +167,22 @@ public class GameTest {
     public void updateScoreTest(){
 
         testGame.addPlayerToGame(testPlayer);
+        Player testPlayer2 = new Player("Player2");
+        testGame.addPlayerToGame(testPlayer2);
         testGame.addOtherPlayersReference();
         testPlayer.addQuestionToIndex("test question at index 3", 3);
         testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3");
         testPlayer.updateScore("this is the answer to question at index 3");
+
+        testPlayer2.addQuestionToIndex("test question at index 2", 2);
+        testPlayer2.addAnswer("Answer2","test question at index 2");
+        testPlayer.updateScore("Answer2");
+
+        assertEquals(testPlayer.findPlayerInList("Player2").getNumVotesReceived(),1 );
+
+        testPlayer.updateScore("Answer2");
+        assertEquals(testPlayer.findPlayerInList("Player2").getNumVotesReceived(),2 );
+
 
         int newScore = testPlayer.getNumVotesReceived();
         assertEquals(1, newScore);
