@@ -29,7 +29,7 @@
                     <mainClass>csc380Project.game.Main</mainClass>
                     <deployDir>${project.basedir}/src/main/deploy</deployDir>
                     <verbose>true</verbose><!-- always a good idea to have this set to true while debugging -->
-                    <appName>questionnaires</appName>
+                    <appName>Questionnaires</appName>
                 </configuration>
             </plugin>
 

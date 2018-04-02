@@ -81,7 +81,7 @@
                 <Font size="16.0" />
             </font>
         </JFXTextField>
-      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.0" textFill="#ffffff62">
+      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.1" textFill="#ffffff62">
          <font>
             <Font size="10.0" />
          </font>

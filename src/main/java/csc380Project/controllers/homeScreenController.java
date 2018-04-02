@@ -25,6 +25,8 @@ public class homeScreenController{
     @FXML
     Hyperlink github_link;
 
+    @FXML
+    Hyperlink ngrok_link;
 
     public void createGameButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("CreateLobby.fxml"));
@@ -84,6 +86,17 @@ public class homeScreenController{
                 }
             }
         );
+
+        ngrok_link.setOnAction(t ->{
+            try {
+                Desktop.getDesktop().browse(new URI("https://ngrok.com/"));
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            } catch (URISyntaxException e2) {
+                e2.printStackTrace();
+            }
+        }
+    );
     }
 
 }

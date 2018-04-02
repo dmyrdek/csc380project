@@ -2,7 +2,7 @@
 “Questionnaires” is a java party game, with fun questions and creative answers
 created by Douglas Myrdek, Cedric Hansen, Brian Emigholz, and Dylan Richmond
 
-![alt text](https://i.imgur.com/aSSVpkL.png)
+![alt text](https://i.imgur.com/Ef0Haut.png)
 
 ---------------------------------------------------------------------------------------------------------------
 
