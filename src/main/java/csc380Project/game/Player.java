@@ -25,6 +25,7 @@ public class Player {
         playersInGame = new ArrayList<Player>();
     }
 
+    
 
     public String getName(){
         return this.name;

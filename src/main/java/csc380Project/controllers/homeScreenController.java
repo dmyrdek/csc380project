@@ -20,7 +20,7 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 
 
-public class homeScreenController{
+public class HomeScreenController{
 
     @FXML
     Hyperlink github_link;

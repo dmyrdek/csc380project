@@ -1,5 +1,6 @@
 package csc380Project.controllers;
 
+import csc380Project.server.*;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +24,7 @@ import java.io.IOException;
 
 
 
-public class waitingLobbyController{
+public class WaitingLobbyController{
 
     @FXML
     JFXButton ready_button;
@@ -34,10 +34,21 @@ public class waitingLobbyController{
     private Timeline timeline;
     private String readyStatus = "Ready Up";
     private Timer timer = new Timer();
+    private static String portNumber;
 
 
     @FXML
     public void initialize() {
+        if (JoinGameController.getPortNumber() != ""){
+            portNumber = CreateLobbyController.getPortNumber();
+        }
+        else if (CreateLobbyController.getPortNumber() != ""){
+            portNumber = CreateLobbyController.getPortNumber();
+        }
+
+        String[] arguments = new String[] {portNumber};
+        new GameClient().main(arguments);
+
         countDownTime = startTime;        
         ready_button.setText(countDownTime.toString() + " - Ready Up");
         timer.schedule(new TimerTask() {

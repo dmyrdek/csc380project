@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.JoinGameController">
     <children>
         <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
             <effect>
@@ -45,7 +45,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="create_game_button2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Join Game" textFill="WHITE">
+                <JFXButton fx:id="join_game_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" onAction="#joinGameButtonPress" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Join Game" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -63,7 +63,7 @@
             </ImageView>
             </children>
         </Pane>
-        <JFXTextField focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="160.0" prefHeight="50.0" prefWidth="300.0" promptText="Room Code" stylesheets="@main.css" unFocusColor="WHITE">
+        <JFXTextField fx:id="port_number_field" focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="160.0" onKeyReleased="#submitPortNumber" prefHeight="50.0" prefWidth="300.0" promptText="Port Number" stylesheets="@main.css" unFocusColor="WHITE">
             <font>
                 <Font size="16.0" />
             </font>

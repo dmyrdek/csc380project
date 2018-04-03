@@ -1,13 +1,12 @@
 package csc380Project.server;
 
+import csc380Project.game.Player;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
-
 import javax.lang.model.element.Name;
-
 import org.omg.PortableServer.THREAD_POLICY_ID;
 
 // For every client's connection we call this class
@@ -20,6 +19,11 @@ public class ClientThread extends Thread {
   private int maxClientsCount;
   private String name;
   private ArrayList<String> names = new ArrayList<>();
+  private int roundsNum = 15;
+  private int currentround = 0;
+  private boolean[][] myVotes = new boolean[roundsNum][2];
+  private int[][] totalVotes = new int[roundsNum][2];
+  private Player player;
 
   public String getUserName() {
     return name;
@@ -71,6 +75,7 @@ public class ClientThread extends Thread {
             }
           }
           if (end == 0) {
+            player = new Player(this.name);
             names.add(name);
             this.os.println(names);
             break;
@@ -111,9 +116,17 @@ public class ClientThread extends Thread {
         this.os.println(names.toString());
       }
 
+      synchronized (this) {
+        for (int i = 0; i < maxClientsCount; i++) {
+          if (threads[i] != null) {
+
+          }
+        }
+      }
+
       /* Start the conversation. */
       while (true) {
-        
+
         String line = is.readLine();
         if (line.startsWith("/quit")) {
           break;
