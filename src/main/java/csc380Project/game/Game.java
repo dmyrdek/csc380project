@@ -147,6 +147,7 @@ public class Game {
 
     }
 
+    //methods to send out properly formatted strings to the chat
 
         /*
 

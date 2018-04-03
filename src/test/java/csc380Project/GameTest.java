@@ -29,15 +29,19 @@ public class GameTest {
     //tests that addPlayerToGame method adds player to the game object
     @Test
     public void addPlayerToGameTest(){
+
         assertEquals(testGame.getInGamePlayers().get(0).getName(), "Player One");
         assertEquals(testGame.getInGamePlayers().get(1).getName(), "Player Two");
+
     }
 
     //tests that addPlayerToGame (Player Object) method adds player to the game object
     @Test
     public void addPlayerToGameTestPlayer(){
+
         testGame.addPlayerToGame(testPlayer);
         assertEquals(testGame.getInGamePlayers().get(3).getName(), "Player four");
+
     }
 
     //tests that addOtherPlayerToReference works as it should
@@ -129,6 +133,7 @@ public class GameTest {
     //tests that giveQuestionsToPlayer returns false with empty question pack
     @Test
     public void giveQuestionstoPlayersTestQPInvalid() {
+
         q = new QuestionPack();
         Game badGame = new Game(2, q);
 
@@ -139,18 +144,69 @@ public class GameTest {
     //tests that setPlayerNumber method in Player class works properly
     @Test
     public void setTestPlayerNumber(){
+
         testGame.addPlayerToGame(testPlayer);
         testGame.addOtherPlayersReference();
         testPlayer.setPlayerNumber();
         assertEquals(3, testPlayer.getPlayerNumber());
+
     }
 
     //tests that setPlayerNumber method doesn't work if addOtherPlayersReference method not called
     @Test
     public void badSetTestPlayerNumber(){
+
         testGame.addPlayerToGame(testPlayer);
         testPlayer.setPlayerNumber();
         assertEquals(-1, testPlayer.getPlayerNumber());
+
+    }
+
+    //tests updateScore method
+    @Test
+    public void updateScoreTest(){
+
+        testGame.addPlayerToGame(testPlayer);
+        Player testPlayer2 = new Player("Player2");
+        testGame.addPlayerToGame(testPlayer2);
+        testGame.addOtherPlayersReference();
+        testPlayer.addQuestionToIndex("test question at index 3", 3);
+        testPlayer.addAnswer("this is the answer to question at index 3", "test question at index 3");
+        testPlayer.updateScore("this is the answer to question at index 3");
+
+        testPlayer2.addQuestionToIndex("test question at index 2", 2);
+        testPlayer2.addAnswer("Answer2","test question at index 2");
+        testPlayer.updateScore("Answer2");
+
+        assertEquals(testPlayer.findPlayerInList("Player2").getNumVotesReceived(),1 );
+
+        testPlayer.updateScore("Answer2");
+        assertEquals(testPlayer.findPlayerInList("Player2").getNumVotesReceived(),2 );
+
+
+        int newScore = testPlayer.getNumVotesReceived();
+        assertEquals(1, newScore);
+
+        newScore = testGame.getInGamePlayers().get(0).playersInGame.get(3).getNumVotesReceived();
+        assertEquals(1, newScore);
+
+        boolean test = testGame.getInGamePlayers().get(1).updateScore("this is the answer to question at index 3");
+        assertEquals(true, test);
+
+    }
+
+    //tests updateScore method returns false if answer requested does not exist
+    @Test
+    public void updateScoreInvalidAnswer(){
+
+        testGame.addPlayerToGame(testPlayer);
+        testGame.addOtherPlayersReference();
+        testPlayer.addQuestionToIndex("A real question", 0);
+        testPlayer.addAnswer("A real answer", "A real question");
+
+        boolean test = testPlayer.updateScore("Not a real answer");
+        assertEquals(false, test);
+
     }
 
 

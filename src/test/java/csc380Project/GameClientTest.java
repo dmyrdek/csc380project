@@ -168,6 +168,12 @@ public class GameClientTest {
 
     }
 
+    //tests combination of parsing methods
+    @Test
+    public void totalParseTest(){
+
+    }
+
 
     /*
     //test with a good server and port

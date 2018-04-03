@@ -16,11 +16,20 @@ public class GameServer {
 		Object selection = JOptionPane.showInputDialog(null, "Login as : ", "MyChatApp", JOptionPane.QUESTION_MESSAGE, null, selectioValues, initialSection);
 		if(selection.equals("Server")){
 			String[] arguments = new String[] {};
-			new SyncClients().main(arguments);
+			SyncClients sc = new SyncClients();
+			sc.start();
+			GameClient gc = new GameClient();
+			gc.start();
+			sc.main(arguments);
+			String IPServer = JOptionPane.showInputDialog("Enter the port number");
+			String[] arg = new String[] {IPServer};
+			gc.main(arg);
 		}else if(selection.equals("Client")){
 			String IPServer = JOptionPane.showInputDialog("Enter the port number");
 			String[] arguments = new String[] {IPServer};
-			new GameClient().main(arguments);
+			GameClient gc = new GameClient();
+			gc.main(arguments);
+			//new GameClient().main(arguments);
 		}
 		
 	}

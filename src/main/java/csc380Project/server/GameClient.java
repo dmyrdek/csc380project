@@ -18,7 +18,7 @@ import java.util.Observable;
 import java.util.Observer;
 import csc380Project.game.*;
 
-public class GameClient {
+public class GameClient extends Thread {
   static class ChatAccess extends Observable {
     private Socket socket;
     private OutputStream outputStream;

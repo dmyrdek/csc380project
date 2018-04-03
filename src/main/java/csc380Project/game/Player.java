@@ -103,7 +103,6 @@ public class Player {
 
     }
 
-
     public Player findPlayerInList(String playerName) {
         for (int i = 0; i<playersInGame.size(); i++) {
             if (playersInGame.get(i).name.equals(playerName)){
@@ -111,6 +110,22 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public boolean updateScore(String answer){
+        for (Player p : playersInGame) {
+            if(p != null) {
+                for (String a : p.getAnswers()) {
+                    if (a != null) {
+                        if (a.equals(answer)) {
+                            p.increaseVotesReceived();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 
