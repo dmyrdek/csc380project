@@ -40,7 +40,7 @@ public class WaitingLobbyController{
     @FXML
     public void initialize() {
         if (JoinGameController.getPortNumber() != ""){
-            portNumber = CreateLobbyController.getPortNumber();
+            portNumber = JoinGameController.getPortNumber();
         }
         else if (CreateLobbyController.getPortNumber() != ""){
             portNumber = CreateLobbyController.getPortNumber();
