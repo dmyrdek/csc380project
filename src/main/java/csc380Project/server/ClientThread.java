@@ -1,6 +1,8 @@
 package csc380Project.server;
 
 import csc380Project.game.Player;
+import csc380Project.game.Game;
+import csc380Project.game.QuestionPack;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -20,10 +22,14 @@ public class ClientThread extends Thread {
   private String name;
   private ArrayList<String> names = new ArrayList<>();
   private int roundsNum = 15;
+  private QuestionPack qp = new QuestionPack().addAllQuestions();
   private int currentround = 0;
   private boolean[][] myVotes = new boolean[roundsNum][2];
   private int[][] totalVotes = new int[roundsNum][2];
   private Player player;
+  private int numOfPlayers = 0;
+
+  private Game myGame;
 
   public String getUserName() {
     return name;
@@ -91,7 +97,7 @@ public class ClientThread extends Thread {
       }
 
       /* Welcome the new the client. */
-      os.println("Welcome " + name + " to our chat room.\nTo leave enter /quit in a new line.");
+      os.println("Welcome " + name + " to our chat room.\nTo leave, enter /quit in a new line.");
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
@@ -124,14 +130,24 @@ public class ClientThread extends Thread {
         }
       }
 
+      String line = is.readLine();
+
       /* Start the conversation. */
       while (true) {
 
-        String line = is.readLine();
+        // Exiting chat and game
         if (line.startsWith("/quit")) {
           break;
         }
-        /* If the message is private sent it to the given client. */
+
+        // Start game with Host pressing button that says "StartGame"
+        if(player.getHostStatus()){
+          if(line.startsWith("StartGame")){
+            break;
+          }
+        }
+
+        /* If the message is private send it to the given client. */
         if (line.startsWith("@")) {
           String[] words = line.split("\\s", 2);
           if (words.length > 1 && words[1] != null) {
@@ -162,6 +178,83 @@ public class ClientThread extends Thread {
               }
             }
           }
+        }
+      }
+
+      /* Game Code */
+      while (true) {
+        if(!line.startsWith("StartGame")){
+          break;
+        }
+        //leaving game
+        if(line.startsWith("/quit")){
+          break;
+        }
+
+        //start game for each player
+        synchronized (this){
+          //assign player numbers (not sure if this will cause error)
+          for(int i = 0; i < maxClientsCount; i++){
+            if(threads[i] != null && threads[i].clientName != null){
+              threads[i].player.setPlayerNumber();
+            }
+          }
+          //create game for each player & calculate num of players
+          for(int i = 0; i < maxClientsCount; i++){
+            if(threads[i] != null && threads[i].clientName != null){
+              threads[i].myGame = new Game(roundsNum, qp);
+              numOfPlayers ++;
+            }
+          }
+          //set questions for the game
+          for(int i = 0; i < maxClientsCount; i++){
+            if(threads[i] != null && threads[i].clientName != null){
+              threads[i].myGame.setThisGamesQuestions();
+            }
+          }
+          //give questions to each player
+          for(int i = 0; i < maxClientsCount; i++){
+            if(threads[i] != null && threads[i].clientName != null){
+              threads[i].myGame.giveQuestionstoPlayers();
+            }
+          }
+        }
+
+        /* Start playing */
+        currentround ++;
+
+        //for each round (needs to be synchronized some how)
+        while(currentround <= roundsNum){
+          /* Display Questions and Accept Answers */
+          int indexAdjuster = (roundsNum - currentround) * numOfPlayers;
+          for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
+            if(player.getQuestionAtIndex(index) != null){
+              //display question
+              //take answer
+              String answer = "";
+              player.addAnswerToIndex(answer, index);
+            }
+          }
+
+          /* Display Each Answer and Vote */
+          for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
+            String[] currentQuestionAns = new String[2];
+            for(int i = 0; i < maxClientsCount; i++){
+              if (threads[i] != null && threads[i].clientName != null) {
+                if(threads[i].player.getAnswerAtIndex(index) != null) {
+                  if(currentQuestionAns[0] == null){
+                    currentQuestionAns[0] = threads[i].player.getAnswerAtIndex(index);
+                  } else{
+                    currentQuestionAns[1] = threads[i].player.getAnswerAtIndex(index);
+                  }
+                }
+              }
+            }
+            //display answers
+            //vote for answers
+          }
+
+          /* Display Leaderboard */
         }
       }
 
