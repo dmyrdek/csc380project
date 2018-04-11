@@ -115,5 +115,7 @@
                 <Font name="SofiaProLight" size="20.0" />
             </font>
         </Label>
+      <Label fx:id="username_error" layoutX="93.0" layoutY="172.0" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
+      <Label fx:id="port_error" layoutX="85.0" layoutY="251.0" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
     </children>
 </Pane>

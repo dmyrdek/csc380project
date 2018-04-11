@@ -103,6 +103,7 @@ public class WaitingLobbyController extends Thread implements Observer {
     private static String port;
     private String server;
     private ChatAccess chatAccess;
+    private static String messageHistory = "";
 
 
 
@@ -193,12 +194,17 @@ public class WaitingLobbyController extends Thread implements Observer {
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
+                //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
+                messageHistory = messageHistory + finalArg.toString() + "\n";
                 chat_area.appendText(finalArg.toString());
                 chat_area.appendText("\n");
             }
         });
     }
 
+    public static String getMessageHistory(){
+        return messageHistory;
+    }
 
 
 

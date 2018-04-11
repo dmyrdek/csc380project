@@ -1,15 +1,16 @@
 package csc380Project.server;
 
-        import csc380Project.game.Player;
-        import csc380Project.game.Game;
-        import csc380Project.game.QuestionPack;
-        import java.io.DataInputStream;
-        import java.io.IOException;
-        import java.io.PrintStream;
-        import java.net.Socket;
-        import java.util.ArrayList;
-        import javax.lang.model.element.Name;
-        import org.omg.PortableServer.THREAD_POLICY_ID;
+import csc380Project.controllers.*;
+import csc380Project.game.Player;
+import csc380Project.game.Game;
+import csc380Project.game.QuestionPack;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.ArrayList;
+import javax.lang.model.element.Name;
+import org.omg.PortableServer.THREAD_POLICY_ID;
 
 // For every client's connection we call this class
 public class ClientThread extends Thread {
@@ -19,8 +20,8 @@ public class ClientThread extends Thread {
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private int maxClientsCount;
-  private String name;
-  private ArrayList<String> names = new ArrayList<>();
+  private static String name = "";
+  //private ArrayList<String> names = new ArrayList<>();
   private int roundsNum = 15;
   private QuestionPack qp = new QuestionPack().addAllQuestions();
   private int currentround = 0;
@@ -59,7 +60,7 @@ public class ClientThread extends Thread {
        */
       is = new DataInputStream(clientSocket.getInputStream());
       os = new PrintStream(clientSocket.getOutputStream());
-      while (true) {
+      /*while (true) {
         synchronized (this) {
           for (int i = 0; i < maxClientsCount; i++) {
             if (threads[i] != null && threads[i].clientName != null && !names.contains(threads[i].getUserName())) {
@@ -95,9 +96,23 @@ public class ClientThread extends Thread {
           os.println("The name should not contain '@' character.");
         }
       }
+      */
+    synchronized (this){
+      if (name == ""){
+        if (JoinGameController.getPortNumber() != ""){
+          name = JoinGameController.getPortNumber();
+          player = new Player(this.name);
+        }
+        else if (CreateLobbyController.getUsername() != ""){
+          name = CreateLobbyController.getUsername();
+
+          player = new Player(this.name);
+        }
+      }
+    }
 
       /* Welcome the new the client. */
-      os.println("Welcome " + name + " to our chat room.\nTo leave, enter /quit in a new line.");
+      os.println("Welcome to Questionnaires " + name + "!");
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
@@ -113,6 +128,7 @@ public class ClientThread extends Thread {
         }
       }
 
+      /*
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i].clientName != null && !names.contains(threads[i].getUserName())) {
@@ -120,7 +136,7 @@ public class ClientThread extends Thread {
           }
         }
         this.os.println(names.toString());
-      }
+      }*/
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
@@ -143,11 +159,12 @@ public class ClientThread extends Thread {
         }
 
         // Start game with Host pressing button that says "StartGame"
-        if(player.getHostStatus()){
+        // ^^^ What brian??? do you know how to java?
+        /*if(player.getHostStatus()){
           if(line.startsWith("StartGame")){
             break;
           }
-        }
+        }*/
 
         /* If the message is private send it to the given client. */
         if (line.startsWith("@")) {
