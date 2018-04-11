@@ -77,7 +77,7 @@
         </Pane>
       <VBox fx:id="usernameField" layoutX="110.0" layoutY="140.0" style="-fx-spacing: 50;">
          <children>
-              <JFXTextField fx:id="username" focusColor="#0ac7ca" labelFloat="true" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
+              <JFXTextField fx:id="username_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#submitUsername" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
                   <font>
                       <Font name="SofiaProLight" size="14.0" />
                   </font>
@@ -115,10 +115,5 @@
                 <Font name="SofiaProLight" size="20.0" />
             </font>
         </Label>
-      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.1" textFill="#ffffff62">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
     </children>
 </Pane>

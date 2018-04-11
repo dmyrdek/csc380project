@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -51,15 +53,16 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
                     </graphic>
                 </JFXButton>
-                <Label layoutX="405.0" layoutY="26.0" text="Waiting Lobby" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
+            <Label layoutX="422.0" layoutY="53.0" text="Waiting Lobby" textFill="#ffffffd9" />
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="446.0" layoutY="5.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
       <TextArea fx:id="chat_area" editable="false" layoutX="588.0" layoutY="87.0" prefHeight="364.0" prefWidth="303.0" stylesheets="@main.css" wrapText="true" />
-      <JFXTextField fx:id="message_field" layoutX="588.0" layoutY="459.0" onAction="#sendMessage" prefHeight="27.0" prefWidth="303.0" />
+      <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" onAction="#sendMessage" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
       <JFXTreeTableView layoutX="14.0" layoutY="87.0" prefHeight="402.0" prefWidth="562.0" />
     </children>
 </Pane>

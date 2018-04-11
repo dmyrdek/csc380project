@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -81,10 +80,5 @@
                 <Font size="16.0" />
             </font>
         </JFXTextField>
-      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.1" textFill="#ffffff62">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
     </children>
 </Pane>
