@@ -1,4 +1,5 @@
-# csc380project
+# Questionnaires
+
 “Questionnaires” is a java party game, with fun questions and creative answers
 created by Douglas Myrdek, Cedric Hansen, Brian Emigholz, and Dylan Richmond
 
