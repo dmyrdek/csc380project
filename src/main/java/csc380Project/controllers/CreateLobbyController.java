@@ -47,10 +47,6 @@ public class CreateLobbyController {
     }
 
     public void createGameLaunchServer(ActionEvent event) throws IOException {
-        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
-        Scene homePage = new Scene(homePageParent);
-        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        appStage.setScene(homePage);
 
         //GameServer.createServer();
         //GameServer.main(null);
@@ -58,6 +54,11 @@ public class CreateLobbyController {
         //new SyncClients().main(arguments);
 
         new StartGameSever().start();
+
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
+        Scene homePage = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(homePage);
 
         Platform.runLater(
             () -> {

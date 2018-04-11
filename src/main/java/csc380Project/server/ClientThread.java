@@ -1,15 +1,15 @@
 package csc380Project.server;
 
-import csc380Project.game.Player;
-import csc380Project.game.Game;
-import csc380Project.game.QuestionPack;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.util.ArrayList;
-import javax.lang.model.element.Name;
-import org.omg.PortableServer.THREAD_POLICY_ID;
+        import csc380Project.game.Player;
+        import csc380Project.game.Game;
+        import csc380Project.game.QuestionPack;
+        import java.io.DataInputStream;
+        import java.io.IOException;
+        import java.io.PrintStream;
+        import java.net.Socket;
+        import java.util.ArrayList;
+        import javax.lang.model.element.Name;
+        import org.omg.PortableServer.THREAD_POLICY_ID;
 
 // For every client's connection we call this class
 public class ClientThread extends Thread {
@@ -64,7 +64,7 @@ public class ClientThread extends Thread {
           for (int i = 0; i < maxClientsCount; i++) {
             if (threads[i] != null && threads[i].clientName != null && !names.contains(threads[i].getUserName())) {
               names.add(threads[i].getUserName());
-              this.os.println(names);
+              //this.os.println(names);
             }
           }
         }
@@ -83,7 +83,7 @@ public class ClientThread extends Thread {
           if (end == 0) {
             player = new Player(this.name);
             names.add(name);
-            this.os.println(names);
+            //this.os.println(names);
             break;
           }
           name = is.readLine().trim();
@@ -130,10 +130,12 @@ public class ClientThread extends Thread {
         }
       }
 
-      String line = is.readLine();
+
 
       /* Start the conversation. */
       while (true) {
+
+        String line = is.readLine();
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
@@ -156,7 +158,7 @@ public class ClientThread extends Thread {
               synchronized (this) {
                 for (int i = 0; i < maxClientsCount; i++) {
                   if (threads[i] != null && threads[i] != this && threads[i].clientName != null
-                      && threads[i].clientName.equals(words[0])) {
+                          && threads[i].clientName.equals(words[0])) {
                     threads[i].os.println("<" + name + "> " + words[1]);
                     /*
                      * Echo this message to let the client know the private
@@ -181,7 +183,7 @@ public class ClientThread extends Thread {
         }
       }
 
-      /* Game Code */
+      /* Game Code -BROKEN BOIIIII
       while (true) {
         if(!line.startsWith("StartGame")){
           break;
@@ -220,12 +222,12 @@ public class ClientThread extends Thread {
           }
         }
 
-        /* Start playing */
+        // Start playing
         currentround ++;
 
         //for each round (needs to be synchronized some how)
         while(currentround <= roundsNum){
-          /* Display Questions and Accept Answers */
+          // Display Questions and Accept Answers
           int indexAdjuster = (roundsNum - currentround) * numOfPlayers;
           for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
             if(player.getQuestionAtIndex(index) != null){
@@ -236,7 +238,7 @@ public class ClientThread extends Thread {
             }
           }
 
-          /* Display Each Answer and Vote */
+          // Display Each Answer and Vote
           for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
             String[] currentQuestionAns = new String[2];
             for(int i = 0; i < maxClientsCount; i++){
@@ -254,9 +256,10 @@ public class ClientThread extends Thread {
             //vote for answers
           }
 
-          /* Display Leaderboard */
+          // Display Leaderboard
         }
       }
+      */
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
