@@ -1,4 +1,5 @@
-# csc380project
+# <div style="text-align:center"><img src ="https://github.com/dmyrdek/csc380project/blob/master/src/main/resources/full_logo.png" /></div>
+
 “Questionnaires” is a java party game, with fun questions and creative answers
 created by Douglas Myrdek, Cedric Hansen, Brian Emigholz, and Dylan Richmond
 
