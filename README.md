@@ -1,4 +1,4 @@
-# <div style="text-align:center"><img src ="https://i.imgur.com/aBDSfJa.png"/></div>
+# Questioners
 
 “Questionnaires” is a java party game, with fun questions and creative answers
 created by Douglas Myrdek, Cedric Hansen, Brian Emigholz, and Dylan Richmond
