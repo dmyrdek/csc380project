@@ -140,7 +140,7 @@ public class WaitingLobbyController extends Thread implements Observer {
         if (name.equals("")){
             if (!JoinGameController.getUsername().equals("")){
                 name = JoinGameController.getUsername();
-                chatAccess.send("[^@&!*#]" + name);
+                chatAccess.send("}" + name);
             }
             else if (!CreateLobbyController.getUsername().equals("")){
                 name = CreateLobbyController.getUsername();

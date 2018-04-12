@@ -99,7 +99,7 @@ public class ClientThread extends Thread {
       */
       if (this.name.equals("")){
         String str = is.readLine();
-        if (str.substring(0,8).equals("[^@&!*#]")){
+        if (str.startsWith("}")){
           this.name = str.substring(7);
         }
       }
@@ -185,7 +185,7 @@ public class ClientThread extends Thread {
         } else {
           /* The message is public, broadcast it to all other clients. */
           synchronized (this) {
-            if (!line.substring(0,8).equals("[^@&!*#]")) {
+            if (!line.startsWith("}")) {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null && threads[i].clientName != null) {
                   threads[i].os.println("<" + name + "> " + line);
