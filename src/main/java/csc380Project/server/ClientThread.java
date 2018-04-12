@@ -100,7 +100,7 @@ public class ClientThread extends Thread {
       if (this.name.equals("")){
         String str = is.readLine();
         if (str.startsWith("}")){
-          this.name = str.substring(7);
+          this.name = str.substring(1);
         }
       }
 
