@@ -104,12 +104,15 @@ public class WaitingLobbyController extends Thread implements Observer {
     private String server;
     private ChatAccess chatAccess;
     private static String messageHistory = "";
+    private String name = "";
 
 
 
 
     @FXML
     public void initialize() {
+
+
 
 
         if (JoinGameController.getPortNumber() != ""){
@@ -134,7 +137,16 @@ public class WaitingLobbyController extends Thread implements Observer {
         }
 
 
-
+        if (name.equals("")){
+            if (!JoinGameController.getUsername().equals("")){
+                name = JoinGameController.getUsername();
+                chatAccess.send("[^@&!*#]" + name);
+            }
+            else if (!CreateLobbyController.getUsername().equals("")){
+                name = CreateLobbyController.getUsername();
+                chatAccess.send(name);
+            }
+        }
 
 
 

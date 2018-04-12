@@ -98,14 +98,9 @@ public class ClientThread extends Thread {
       }
       */
       if (this.name.equals("")){
-        if (!JoinGameController.getUsername().equals("")){
-          this.name = JoinGameController.getUsername();
-          this.player = new Player(this.name);
-        }
-        else if (!CreateLobbyController.getUsername().equals("")){
-          this.name = CreateLobbyController.getUsername();
-
-          this.player = new Player(this.name);
+        String str = is.readLine();
+        if (str.substring(0,8).equals("[^@&!*#]")){
+          this.name = str.substring(7);
         }
       }
 
@@ -190,9 +185,11 @@ public class ClientThread extends Thread {
         } else {
           /* The message is public, broadcast it to all other clients. */
           synchronized (this) {
-            for (int i = 0; i < maxClientsCount; i++) {
-              if (threads[i] != null && threads[i].clientName != null) {
-                threads[i].os.println("<" + name + "> " + line);
+            if (!line.substring(0,8).equals("[^@&!*#]")) {
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (threads[i] != null && threads[i].clientName != null) {
+                  threads[i].os.println("<" + name + "> " + line);
+                }
               }
             }
           }
