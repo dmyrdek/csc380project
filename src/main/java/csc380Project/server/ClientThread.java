@@ -98,8 +98,8 @@ public class ClientThread extends Thread {
       }
       */
       if (this.name == ""){
-        if (JoinGameController.getPortNumber() != ""){
-          this.name = JoinGameController.getPortNumber();
+        if (JoinGameController.getUsername() != ""){
+          this.name = JoinGameController.getUsername();
           this.player = new Player(this.name);
         }
         else if (CreateLobbyController.getUsername() != ""){
