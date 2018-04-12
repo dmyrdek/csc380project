@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.JoinGameController">
@@ -63,24 +64,28 @@
             </ImageView>
             </children>
         </Pane>
-        <JFXTextField fx:id="port_number_field" focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="160.0" onKeyReleased="#submitPortNumber" prefHeight="50.0" prefWidth="300.0" promptText="Port Number" stylesheets="@main.css" unFocusColor="WHITE">
-            <font>
-                <Font size="16.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="DEFAULT" />
-            </cursor>
-        </JFXTextField>
+      <VBox layoutX="300.0" layoutY="166.0" style="-fx-spacing: 100;">
+         <children>
+              <JFXTextField fx:id="username_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#submitUsername" prefHeight="50.0" prefWidth="300.0" promptText="Username" unFocusColor="WHITE">
+                  <font>
+                      <Font size="16.0" />
+                  </font>
+              </JFXTextField>
+              <JFXTextField fx:id="port_number_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#submitPortNumber" prefHeight="50.0" prefWidth="300.0" promptText="Port Number" stylesheets="@main.css" unFocusColor="WHITE">
+                  <font>
+                      <Font size="16.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="DEFAULT" />
+                  </cursor>
+              </JFXTextField>
+         </children>
+      </VBox>
         <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
             <effect>
                 <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
             </effect>
         </Pane>
-        <JFXTextField fx:id="username_field" focusColor="#0ac7ca" labelFloat="true" layoutX="300.0" layoutY="300.0" onKeyReleased="#submitUsername" prefHeight="50.0" prefWidth="300.0" promptText="Username" unFocusColor="WHITE">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </JFXTextField>
       <Label fx:id="port_error" layoutX="311.0" layoutY="217.0" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
       <Label fx:id="username_error" layoutX="319.0" layoutY="357.0" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
     </children>
