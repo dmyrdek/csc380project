@@ -97,19 +97,18 @@ public class ClientThread extends Thread {
         }
       }
       */
-    synchronized (this){
-      if (name == ""){
+      if (this.name == ""){
         if (JoinGameController.getPortNumber() != ""){
-          name = JoinGameController.getPortNumber();
-          player = new Player(this.name);
+          this.name = JoinGameController.getPortNumber();
+          this.player = new Player(this.name);
         }
         else if (CreateLobbyController.getUsername() != ""){
-          name = CreateLobbyController.getUsername();
+          this.name = CreateLobbyController.getUsername();
 
-          player = new Player(this.name);
+          this.player = new Player(this.name);
         }
       }
-    }
+
 
       /* Welcome the new the client. */
       os.println("Welcome to Questionnaires " + name + "!");
