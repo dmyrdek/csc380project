@@ -20,7 +20,7 @@ public class ClientThread extends Thread {
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private int maxClientsCount;
-  private static String name = "";
+  private String name = "";
   //private ArrayList<String> names = new ArrayList<>();
   private int roundsNum = 15;
   private QuestionPack qp = new QuestionPack().addAllQuestions();
