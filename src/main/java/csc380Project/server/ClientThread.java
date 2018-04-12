@@ -97,12 +97,12 @@ public class ClientThread extends Thread {
         }
       }
       */
-      if (this.name == ""){
-        if (JoinGameController.getUsername() != ""){
+      if (this.name.equals("")){
+        if (!JoinGameController.getUsername().equals("")){
           this.name = JoinGameController.getUsername();
           this.player = new Player(this.name);
         }
-        else if (CreateLobbyController.getUsername() != ""){
+        else if (!CreateLobbyController.getUsername().equals("")){
           this.name = CreateLobbyController.getUsername();
 
           this.player = new Player(this.name);
