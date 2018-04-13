@@ -105,7 +105,11 @@ public class ClientThread extends Thread {
       }
       for (int i = 0; i < maxClientsCount; i++) {
         if (threads[i] != null && threads[i] != this) {
-          this.os.println("}" + threads[i].name);
+          if (i == 0){
+            this.os.println("}" + threads[i].name + " (host)");
+          }else {
+            this.os.println("}" + threads[i].name);
+          }
         }
       }
 

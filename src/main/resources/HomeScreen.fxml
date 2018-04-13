@@ -99,7 +99,7 @@
             </JFXButton>
          </children>
       </VBox>
-      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.4" textFill="#ffffff62">
+      <Label fx:id="game_version" layoutX="824.0" layoutY="485.0" text="Pre-Alpha 1.1.5" textFill="#ffffff62">
          <font>
             <Font size="10.0" />
          </font>

@@ -150,7 +150,7 @@ public class WaitingLobbyController extends Thread implements Observer {
             else if (!CreateLobbyController.getUsername().equals("")){
                 name = CreateLobbyController.getUsername();
                 chatAccess.send("}" + name);
-                names.add(name);
+                names.add(name + " (host)");
             }
         }
 
