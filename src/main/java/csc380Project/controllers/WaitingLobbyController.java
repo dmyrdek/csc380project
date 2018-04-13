@@ -2,6 +2,7 @@ package csc380Project.controllers;
 
 import csc380Project.server.*;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.animation.Timeline;
@@ -26,8 +28,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import java.io.IOException;
-
-
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.ComboBoxListCell;
 
 public class WaitingLobbyController extends Thread implements Observer {
     static class ChatAccess extends Observable {
@@ -95,6 +98,9 @@ public class WaitingLobbyController extends Thread implements Observer {
     @FXML
     Pane main_pane;
 
+    @FXML
+    ListView player_list;
+
     private static Integer startTime = 80;
     private Integer countDownTime;
     private Timeline timeline;
@@ -105,15 +111,13 @@ public class WaitingLobbyController extends Thread implements Observer {
     private ChatAccess chatAccess;
     private static String messageHistory = "";
     private String name = "";
+    public static final ObservableList names = FXCollections.observableArrayList();
 
 
 
 
     @FXML
     public void initialize() {
-
-
-
 
         if (JoinGameController.getPortNumber() != ""){
             port = JoinGameController.getPortNumber();
@@ -141,12 +145,16 @@ public class WaitingLobbyController extends Thread implements Observer {
             if (!JoinGameController.getUsername().equals("")){
                 name = JoinGameController.getUsername();
                 chatAccess.send("}" + name);
+                names.add(name);
             }
             else if (!CreateLobbyController.getUsername().equals("")){
                 name = CreateLobbyController.getUsername();
                 chatAccess.send("}" + name);
+                names.add(name);
             }
         }
+
+        player_list.setItems(names);
 
 
 
@@ -208,8 +216,12 @@ public class WaitingLobbyController extends Thread implements Observer {
             public void run() {
                 //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                 messageHistory = messageHistory + finalArg.toString() + "\n";
-                chat_area.appendText(finalArg.toString());
-                chat_area.appendText("\n");
+                if (finalArg.toString().startsWith("}")){
+                    names.add(finalArg.toString().substring(1));
+                }else{
+                    chat_area.appendText(finalArg.toString());
+                    chat_area.appendText("\n");
+                }
             }
         });
     }

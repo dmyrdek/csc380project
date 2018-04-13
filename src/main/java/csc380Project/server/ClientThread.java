@@ -103,6 +103,11 @@ public class ClientThread extends Thread {
           this.name = str.substring(1);
         }
       }
+      for (int i = 0; i < maxClientsCount; i++) {
+        if (threads[i] != null && threads[i] != this) {
+          this.os.println("}" + threads[i].name);
+        }
+      }
 
 
       /* Welcome the new the client. */
@@ -118,6 +123,7 @@ public class ClientThread extends Thread {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this) {
             threads[i].os.println("*** A new user " + name + " entered the chat room !!! ***");
+            threads[i].os.println("}" + name);
           }
         }
       }
