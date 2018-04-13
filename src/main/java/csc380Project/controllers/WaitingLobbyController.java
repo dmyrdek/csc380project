@@ -102,7 +102,7 @@ public class WaitingLobbyController extends Thread implements Observer {
     ListView player_list;
 
     private static Integer startTime = 80;
-    private Integer countDownTime;
+    //private Integer countDownTime;
     private Timeline timeline;
     private String readyStatus = "Ready Up";
     private Timer timer = new Timer();
@@ -172,22 +172,22 @@ public class WaitingLobbyController extends Thread implements Observer {
         //new GameClient().main(arguments);
 
 
-        countDownTime = startTime;
-        ready_button.setText(countDownTime.toString() + " - Ready Up");
-        timer.schedule(new TimerTask() {
+        //countDownTime = startTime;
+        //ready_button.setText(countDownTime.toString() + " - Ready Up");
+        /*timer.schedule(new TimerTask() {
             @Override
                 public void run() {
                 Platform.runLater(new Runnable() {
                    public void run() {
                         countDownTime--;
-                        ready_button.setText(countDownTime.toString() + " - Ready Up");
+                        //ready_button.setText(countDownTime.toString() + " - Ready Up");
 
                         if (countDownTime < 0)
                             timer.cancel();
                   }
                 });
             }
-            }, 1000, 1000);
+            }, 1000, 1000);*/
     }
 
 
@@ -216,9 +216,14 @@ public class WaitingLobbyController extends Thread implements Observer {
             public void run() {
                 //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                 messageHistory = messageHistory + finalArg.toString() + "\n";
+                //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
                     names.add(finalArg.toString().substring(1));
-                }else{
+                }else if(finalArg.toString().startsWith("|")){
+                    ready_button.setText(finalArg.toString().substring(1) + " - Ready Up");
+                }
+                
+                else{
                     chat_area.appendText(finalArg.toString());
                     chat_area.appendText("\n");
                 }

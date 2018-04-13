@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import javax.lang.model.element.Name;
 import org.omg.PortableServer.THREAD_POLICY_ID;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // For every client's connection we call this class
 public class ClientThread extends Thread {
@@ -29,6 +31,8 @@ public class ClientThread extends Thread {
   private int[][] totalVotes = new int[roundsNum][2];
   private Player player;
   private int numOfPlayers = 0;
+  private boolean isHost = false;
+  private int countDownTime = 120;
 
   private Game myGame;
 
@@ -101,6 +105,9 @@ public class ClientThread extends Thread {
         String str = is.readLine();
         if (str.startsWith("}")){
           this.name = str.substring(1);
+          if (this == this.threads[0]){
+            this.isHost = true;
+          }
         }
       }
       for (int i = 0; i < maxClientsCount; i++) {
@@ -113,6 +120,24 @@ public class ClientThread extends Thread {
         }
       }
 
+      synchronized (this){
+        if (this == threads[0]){
+          final Timer timer = new Timer();
+          timer.schedule(new TimerTask() {
+            @Override
+                public void run() {
+                  countDownTime--;
+                  for (int i = 0; i < maxClientsCount; i++) {
+                    if (threads[i] != null) {
+                      threads[i].os.println("|" + countDownTime);
+                    }
+                  }
+                  if (countDownTime < 0)
+                    timer.cancel();
+            }
+            }, 1000, 1000);
+        }
+      }
 
       /* Welcome the new the client. */
       os.println("Welcome to Questionnaires " + name + "!");
