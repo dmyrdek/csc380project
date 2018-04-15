@@ -201,7 +201,7 @@ public class WaitingLobbyController extends Thread implements Observer {
 
     public void sendMessage(ActionEvent event){
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0)
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|"))
             chatAccess.send(str);
         message_field.selectAll();
         message_field.requestFocus();

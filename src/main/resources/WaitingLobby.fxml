@@ -63,6 +63,9 @@
         </Pane>
       <TextArea fx:id="chat_area" editable="false" layoutX="588.0" layoutY="87.0" prefHeight="364.0" prefWidth="303.0" stylesheets="@main.css" wrapText="true" />
       <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" onAction="#sendMessage" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
-      <ListView fx:id="player_list" editable="true" layoutX="13.0" layoutY="87.0" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css" />
+      <ListView fx:id="player_list" editable="true" layoutX="13.0" layoutY="87.0" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css">
+         <effect>
+            <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
+         </effect></ListView>
     </children>
 </Pane>
