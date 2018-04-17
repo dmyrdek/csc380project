@@ -32,6 +32,7 @@ public class ClientThread extends Thread {
   private Player player;
   private int numOfPlayers = 0;
   private boolean isHost = false;
+  private boolean isReady = false;
   private int countDownTime = 120;
 
   private Game myGame;
@@ -167,10 +168,11 @@ public class ClientThread extends Thread {
         this.os.println(names.toString());
       }*/
 
-      synchronized (this) {
-        for (int i = 0; i < maxClientsCount; i++) {
-          if (threads[i] != null) {
-
+      synchronized (this){
+        String line = is.readLine();
+        if (line.startsWith("`")){
+          if(line.substring(1).equals("ready")){
+            isReady = true;
           }
         }
       }
@@ -220,7 +222,7 @@ public class ClientThread extends Thread {
         } else {
           /* The message is public, broadcast it to all other clients. */
           synchronized (this) {
-            if (!line.startsWith("}")) {
+            if (!line.startsWith("}") && !line.startsWith("}") && !line.startsWith("|") && !line.startsWith("~") && !line.startsWith("`")) {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null && threads[i].clientName != null) {
                   threads[i].os.println("<" + name + "> " + line);

@@ -204,11 +204,18 @@ public class WaitingLobbyController extends Thread implements Observer {
 
     public void sendMessage(ActionEvent event){
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|"))
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
             chatAccess.send(str);
         message_field.selectAll();
         message_field.requestFocus();
         message_field.setText("");
+    }
+
+    public void readyUp(ActionEvent event){
+        ready_button.setText("Ready!");
+        ready_button.setDisable(true);
+        readyStatus = "Ready!";
+        chatAccess.send("`ready");
     }
 
     String toCss() {
@@ -228,7 +235,7 @@ public class WaitingLobbyController extends Thread implements Observer {
                 if (finalArg.toString().startsWith("}")){
                     names.add(finalArg.toString().substring(1));
                 }else if(finalArg.toString().startsWith("|")){
-                    ready_button.setText(finalArg.toString().substring(1) + " - Ready Up");
+                    ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
                 }
                 
                 else if (finalArg.toString().startsWith("~")){

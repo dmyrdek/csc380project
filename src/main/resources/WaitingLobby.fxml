@@ -42,7 +42,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="ready_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Ready Up" textFill="WHITE">
+                <JFXButton fx:id="ready_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" onAction="#readyUp" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Ready Up" textFill="WHITE">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
