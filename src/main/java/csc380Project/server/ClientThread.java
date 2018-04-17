@@ -111,7 +111,7 @@ public class ClientThread extends Thread {
         }
       }
       for (int i = 0; i < maxClientsCount; i++) {
-        if (threads[i] != null && threads[i] != this) {
+        if (threads[i] != null) {
           if (i == 0){
             this.os.println("}" + threads[i].name + " (host)");
           }else {
@@ -140,7 +140,7 @@ public class ClientThread extends Thread {
       }
 
       /* Welcome the new the client. */
-      os.println("Welcome to Questionnaires " + name + "!");
+      os.println("~Welcome to Questionnaires " + name + "!");
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
@@ -151,7 +151,7 @@ public class ClientThread extends Thread {
         }
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] != this) {
-            threads[i].os.println("*** A new user " + name + " entered the chat room !!! ***");
+            threads[i].os.println("~A new user " + name + " has joined!");
             threads[i].os.println("}" + name);
           }
         }

@@ -3,6 +3,11 @@ package csc380Project.controllers;
 import csc380Project.server.*;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
+import javafx.scene.text.Text;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextFlow;
+import javafx.scene.paint.Color;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -90,7 +95,7 @@ public class WaitingLobbyController extends Thread implements Observer {
     JFXButton ready_button;
 
     @FXML
-    TextArea chat_area;
+    TextFlow chat_area;
 
     @FXML
     JFXTextField message_field;
@@ -145,12 +150,10 @@ public class WaitingLobbyController extends Thread implements Observer {
             if (!JoinGameController.getUsername().equals("")){
                 name = JoinGameController.getUsername();
                 chatAccess.send("}" + name);
-                names.add(name);
             }
             else if (!CreateLobbyController.getUsername().equals("")){
                 name = CreateLobbyController.getUsername();
                 chatAccess.send("}" + name);
-                names.add(name + " (host)");
             }
         }
 
@@ -208,6 +211,11 @@ public class WaitingLobbyController extends Thread implements Observer {
         message_field.setText("");
     }
 
+    String toCss() {
+        String css = "-fx-font-color: white;";
+        return css;
+    }
+
 
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
@@ -223,9 +231,16 @@ public class WaitingLobbyController extends Thread implements Observer {
                     ready_button.setText(finalArg.toString().substring(1) + " - Ready Up");
                 }
                 
-                else{
-                    chat_area.appendText(finalArg.toString());
-                    chat_area.appendText("\n");
+                else if (finalArg.toString().startsWith("~")){
+                    Text text = new Text(finalArg.toString().substring(1)+"\n");
+                    text.setFill(Color.SKYBLUE);
+                    chat_area.getChildren().add(text);
+                    //chat_area.appendText(finalArg.toString());
+                    //chat_area.appendText("\n");
+                }else{
+                    Text text = new Text(finalArg.toString()+"\n");
+                    text.setFill(Color.WHITE);
+                    chat_area.getChildren().add(text);
                 }
             }
         });
