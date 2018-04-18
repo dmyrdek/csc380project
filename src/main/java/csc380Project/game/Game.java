@@ -20,6 +20,21 @@ public class Game {
 
     }
 
+
+    /*
+    *
+    *
+    *  USE THIS CONSTRUCTOR, THE ONE ABOVE WILL NOT WORK WITH THE WAY WE ARE MAKING THE GAME
+    *
+     */
+    public Game(int rounds){
+        inGamePlayers = new ArrayList<Player>();
+        gameQuestions = null;
+        allSubmittedAnswers = new ArrayList<String>();
+        numRounds = rounds;
+        qp = new QuestionPack().addAllQuestions();
+    }
+
     public static int getMaxPlayers() {
         return maxPlayers;
     }
