@@ -41,7 +41,7 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class WaitingLobbyController extends Thread implements Observer {
+public class WaitingLobbyController implements Observer {
     
 
     @FXML

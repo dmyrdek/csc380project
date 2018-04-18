@@ -45,7 +45,7 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class QuestionPromptController extends Thread implements Observer{
+public class QuestionPromptController implements Observer{
 
     @FXML
     JFXTextArea question_prompt;
@@ -55,6 +55,9 @@ public class QuestionPromptController extends Thread implements Observer{
 
     @FXML
     JFXTextField message_field;
+
+    @FXML
+    JFXButton submit_button;
 
     private ChatAccess chatAccess;
     private static String port;
@@ -81,6 +84,8 @@ public class QuestionPromptController extends Thread implements Observer{
                     for (Text t: WaitingLobbyController.getTexts()){
                         chat_area.getChildren().add(t);
                     }
+
+                    chatAccess.send("`inQuestionPrompt");
                 }
             }
         });
@@ -104,7 +109,7 @@ public class QuestionPromptController extends Thread implements Observer{
                 if (finalArg.toString().startsWith("}")){
                     //names.add(finalArg.toString().substring(1));
                 }else if(finalArg.toString().startsWith("|")){
-                    //ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
+                    submit_button.setText(finalArg.toString().substring(1) + " - " + "Submit");
                 }else if (finalArg.toString().startsWith("~")){
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
                     text.setFill(Color.SKYBLUE);

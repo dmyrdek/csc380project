@@ -34,7 +34,9 @@ public class ClientThread extends Thread {
   private boolean isHost = false;
   private boolean isReady = false;
   private boolean inWaitingLobby = true;
+  private boolean inQuestionPrompt = false;
   private int countDownTime = 120;
+  private int inQuestionPromptTime = 60;
 
   private Game myGame;
 
@@ -128,24 +130,31 @@ public class ClientThread extends Thread {
           timer.schedule(new TimerTask() {
             @Override
                 public void run() {
+                  if (inQuestionPrompt){
+                    countDownTime = inQuestionPromptTime;
+                    inQuestionPrompt = false;
+                  }
                   countDownTime--;
                   for (int i = 0; i < maxClientsCount; i++) {
                     if (threads[i] != null) {
                       threads[i].os.println("|" + countDownTime);
                     }
                   }
-                  if (countDownTime < 1)
-                    timer.cancel();
+                  if (countDownTime < 1){
                     for (int i = 0; i < maxClientsCount; i++) {
                       if (threads[i] != null){
+                        threads[i].os.println("`ready");
                         threads[i].inWaitingLobby = false;
                         threads[i].isReady = true;
                       }
                     }
+                    //timer.cancel();
+                  }
             }
             }, 1000, 1000);
         }
       }
+
 
       /* Welcome the new the client. */
       os.println("~Welcome to Questionnaires " + name + "!");
@@ -191,8 +200,12 @@ public class ClientThread extends Thread {
                 threads[i].os.println("`ready");
               }
             }
+          }else if (line.substring(1).equals("inQuestionPrompt")){
+            inQuestionPrompt = true;
           }
         }
+
+        
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
@@ -242,6 +255,7 @@ public class ClientThread extends Thread {
           }
         }
       }
+
 
       /* Game Code -BROKEN BOIIIII
       while (true) {
