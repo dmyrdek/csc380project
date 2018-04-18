@@ -46,60 +46,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public class QuestionPromptController extends Thread implements Observer{
-    static class ChatAccess extends Observable {
-        private Socket socket;
-        private OutputStream outputStream;
-
-        @Override
-        public void notifyObservers(Object arg) {
-            super.setChanged();
-            super.notifyObservers(arg);
-        }
-
-        /** Create socket, and receiving thread */
-        public void InitSocket(String server, int port) throws IOException {
-            socket = new Socket(server, port);
-            outputStream = socket.getOutputStream();
-
-            Thread receivingThread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        String line;
-                        while ((line = reader.readLine()) != null)
-                            notifyObservers(line);
-                    } catch (IOException ex) {
-                        notifyObservers(ex);
-                    }
-                }
-            };
-            receivingThread.start();
-        }
-
-        private static final String CRLF = "\r\n"; // newline
-
-        /** Send a line of text */
-        public void send(String text) {
-            try {
-                outputStream.write((text + CRLF).getBytes());
-                outputStream.flush();
-            } catch (IOException ex) {
-                notifyObservers(ex);
-            }
-        }
-
-        /** Close the socket */
-        public void close() {
-            try {
-                socket.close();
-            } catch (IOException ex) {
-                notifyObservers(ex);
-            }
-        }
-    }
-
-
 
     @FXML
     JFXTextArea question_prompt;
@@ -120,33 +66,18 @@ public class QuestionPromptController extends Thread implements Observer{
 
     @FXML
     public void initialize() {
-        if (JoinGameController.getPortNumber() != ""){
-            port = JoinGameController.getPortNumber();
-        }
-        else if (CreateLobbyController.getPortNumber() != ""){
-            port = CreateLobbyController.getPortNumber();
-        }
 
-        String server = "tcp://0.tcp.ngrok.io";
-
-
-        chatAccess = new ChatAccess();
-        chatAccess.addObserver(this);
-
-        try {
-            chatAccess.InitSocket(server, Integer.parseInt(port));
-
-        } catch (IOException ex) {
-            System.out.println("Cannot connect to " + server + ":" + port);
-            ex.printStackTrace();
-            System.exit(0);
-        }
         question_prompt.setMouseTransparent(true);
 
+        QuestionPromptController current = this;
         isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    chatAccess = WaitingLobbyController.getChatAccess();
+                    chatAccess.deleteObservers();
+                    chatAccess.addObserver(current);
+                    
                     for (Text t: WaitingLobbyController.getTexts()){
                         chat_area.getChildren().add(t);
                     }
