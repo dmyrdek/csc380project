@@ -27,6 +27,7 @@ import javafx.stage.WindowEvent;
 import java.lang.Runnable;
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -36,6 +37,8 @@ import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class WaitingLobbyController extends Thread implements Observer {
     static class ChatAccess extends Observable {
@@ -106,6 +109,7 @@ public class WaitingLobbyController extends Thread implements Observer {
     @FXML
     ListView player_list;
 
+
     private static Integer startTime = 80;
     //private Integer countDownTime;
     private Timeline timeline;
@@ -117,12 +121,21 @@ public class WaitingLobbyController extends Thread implements Observer {
     private static String messageHistory = "";
     private String name = "";
     public static final ObservableList names = FXCollections.observableArrayList();
+    private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
+    private int readyPlayerSize = 0;
+
+    private static Stage myStage;
+
+    public static void setStage(Stage stage) {
+       myStage = stage;
+    }
+
 
 
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
 
         if (JoinGameController.getPortNumber() != ""){
             port = JoinGameController.getPortNumber();
@@ -159,7 +172,29 @@ public class WaitingLobbyController extends Thread implements Observer {
 
         player_list.setItems(names);
 
+        /*if (allPlayersReady){
+            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
+            Scene homePage = new Scene(homePageParent);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(homePage);
+            appStage.show();
+            appStage.requestFocus();
+        }
+*/
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
+        Scene homePage = new Scene(homePageParent);
+        allPlayersReady.addListener(new ChangeListener<Boolean>() {
 
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    //System.out.println("scene change");
+                    myStage.setScene(homePage);
+                    myStage.show();
+                    myStage.requestFocus();
+                }
+            }
+        });
 
         /*
         Stage primaryStage = (Stage) main_pane.getScene().getWindow();
@@ -212,15 +247,9 @@ public class WaitingLobbyController extends Thread implements Observer {
     }
 
     public void readyUp(ActionEvent event){
-        ready_button.setText("Ready!");
         ready_button.setDisable(true);
         readyStatus = "Ready!";
         chatAccess.send("`ready");
-    }
-
-    String toCss() {
-        String css = "-fx-font-color: white;";
-        return css;
     }
 
 
@@ -238,6 +267,14 @@ public class WaitingLobbyController extends Thread implements Observer {
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
                     text.setFill(Color.SKYBLUE);
                     chat_area.getChildren().add(text);
+                }else if(finalArg.toString().startsWith("`")){
+                    String str = finalArg.toString().substring(1);
+                    if (str.equals("ready")){
+                        readyPlayerSize++;
+                        if (readyPlayerSize == names.size()){
+                            allPlayersReady.set(true);
+                        }
+                    }
                 }else{
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                     messageHistory = messageHistory + finalArg.toString() + "\n";

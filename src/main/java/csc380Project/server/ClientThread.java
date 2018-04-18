@@ -33,6 +33,7 @@ public class ClientThread extends Thread {
   private int numOfPlayers = 0;
   private boolean isHost = false;
   private boolean isReady = false;
+  private boolean inWaitingLobby = true;
   private int countDownTime = 120;
 
   private Game myGame;
@@ -122,7 +123,7 @@ public class ClientThread extends Thread {
       }
 
       synchronized (this){
-        if (this == threads[0]){
+        if (this == threads[0] && inWaitingLobby){
           final Timer timer = new Timer();
           timer.schedule(new TimerTask() {
             @Override
@@ -133,8 +134,14 @@ public class ClientThread extends Thread {
                       threads[i].os.println("|" + countDownTime);
                     }
                   }
-                  if (countDownTime < 0)
+                  if (countDownTime < 1)
                     timer.cancel();
+                    for (int i = 0; i < maxClientsCount; i++) {
+                      if (threads[i] != null){
+                        threads[i].inWaitingLobby = false;
+                        threads[i].isReady = true;
+                      }
+                    }
             }
             }, 1000, 1000);
         }
@@ -168,14 +175,6 @@ public class ClientThread extends Thread {
         this.os.println(names.toString());
       }*/
 
-      synchronized (this){
-        String line = is.readLine();
-        if (line.startsWith("`")){
-          if(line.substring(1).equals("ready")){
-            isReady = true;
-          }
-        }
-      }
 
 
 
@@ -183,6 +182,17 @@ public class ClientThread extends Thread {
       while (true) {
 
         String line = is.readLine();
+
+        if (line.startsWith("`")){
+          if(line.substring(1).equals("ready")){
+            this.isReady = true;
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (threads[i] != null) {
+                threads[i].os.println("`ready");
+              }
+            }
+          }
+        }
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {

@@ -1,5 +1,6 @@
 package csc380Project.game;
 
+import csc380Project.controllers.WaitingLobbyController;
 import csc380Project.server.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -84,13 +85,16 @@ public class Main extends Application {
         Scene scene = new Scene(bp);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("HomeScreen.fxml"));
         //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
         primaryStage.setTitle("CSC380 Project");
         primaryStage.setScene(new Scene(root, 900, 500));
         //Button buttons = new Button();
         //buttons.setStyle("-fx-font: 22 Helvetica Neue");
+
         primaryStage.show();
         root.requestFocus();
+
+        WaitingLobbyController.setStage(primaryStage);
     }
 }
