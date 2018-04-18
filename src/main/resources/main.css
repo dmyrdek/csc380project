@@ -16,8 +16,24 @@
     -fx-text-fill: WHITE;
 }
 
+.jfx-text-area {
+    -fx-font-size: 2em;
+}
+
+.jfx-text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.text-area .scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
+}
+
 .text-area {
-    -fx-background-color: rgba(53,89,119,0.4);
+    -fx-background-color: transparent;
     -fx-prompt-text-fill: WHITE;
     -fx-text-fill: WHITE;
 }

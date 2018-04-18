@@ -229,22 +229,18 @@ public class WaitingLobbyController extends Thread implements Observer {
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
-                //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                messageHistory = messageHistory + finalArg.toString() + "\n";
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
                     names.add(finalArg.toString().substring(1));
                 }else if(finalArg.toString().startsWith("|")){
                     ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
-                }
-                
-                else if (finalArg.toString().startsWith("~")){
+                }else if (finalArg.toString().startsWith("~")){
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
                     text.setFill(Color.SKYBLUE);
                     chat_area.getChildren().add(text);
-                    //chat_area.appendText(finalArg.toString());
-                    //chat_area.appendText("\n");
                 }else{
+                    //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
+                    messageHistory = messageHistory + finalArg.toString() + "\n";
                     Text text = new Text(finalArg.toString()+"\n");
                     text.setFill(Color.WHITE);
                     chat_area.getChildren().add(text);
@@ -256,10 +252,4 @@ public class WaitingLobbyController extends Thread implements Observer {
     public static String getMessageHistory(){
         return messageHistory;
     }
-
-
-
-
-
-
 }

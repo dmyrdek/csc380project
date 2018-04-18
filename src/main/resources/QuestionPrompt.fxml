@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<Pane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.QuestionPromptController">
+   <children>
+      <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="37.27" radius="16.317500000000003" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="41.49" radius="23.47" width="54.39" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <JFXButton fx:id="quit_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Quit" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="submit_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Submit" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="430.0" layoutY="14.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
+      <TextFlow fx:id="chat_area" layoutX="589.0" layoutY="88.0" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="79.0" prefHeight="413.0" prefWidth="498.0" style="-fx-spacing: 30;">
+         <children>
+            <Label text="Question #" textFill="#ffffffcb">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="177.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+            <JFXTextArea focusColor="#0ac7c9" labelFloat="true" prefHeight="128.0" prefWidth="498.0" promptText="Type you're response here..." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
+         </children>
+      </VBox>
+   </children>
+</Pane>
