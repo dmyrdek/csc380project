@@ -1,6 +1,7 @@
 package csc380Project.controllers;
 
 import csc380Project.server.*;
+import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.text.Text;
@@ -117,10 +118,11 @@ public class WaitingLobbyController extends Thread implements Observer {
     private Timer timer = new Timer();
     private static String port;
     private String server;
-    private ChatAccess chatAccess;
-    private static String messageHistory = "";
+    private static ChatAccess chatAccess;
     private String name = "";
     public static final ObservableList names = FXCollections.observableArrayList();
+    private static ArrayList<Text> texts = new ArrayList<>();
+    private static String messageHistory = "";
     private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
     private int readyPlayerSize = 0;
 
@@ -131,6 +133,9 @@ public class WaitingLobbyController extends Thread implements Observer {
     }
 
 
+    public static ChatAccess getChatAccess() {
+        return chatAccess;
+    }
 
 
 
@@ -184,7 +189,6 @@ public class WaitingLobbyController extends Thread implements Observer {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
         Scene homePage = new Scene(homePageParent);
         allPlayersReady.addListener(new ChangeListener<Boolean>() {
-
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
@@ -192,6 +196,7 @@ public class WaitingLobbyController extends Thread implements Observer {
                     myStage.setScene(homePage);
                     myStage.show();
                     myStage.requestFocus();
+                    QuestionPromptController.setIsQuestionPromptLoadedToTrue();
                 }
             }
         });
@@ -266,6 +271,7 @@ public class WaitingLobbyController extends Thread implements Observer {
                 }else if (finalArg.toString().startsWith("~")){
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
                     text.setFill(Color.SKYBLUE);
+                    texts.add(text);
                     chat_area.getChildren().add(text);
                 }else if(finalArg.toString().startsWith("`")){
                     String str = finalArg.toString().substring(1);
@@ -277,16 +283,16 @@ public class WaitingLobbyController extends Thread implements Observer {
                     }
                 }else{
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                    messageHistory = messageHistory + finalArg.toString() + "\n";
                     Text text = new Text(finalArg.toString()+"\n");
                     text.setFill(Color.WHITE);
+                    texts.add(text);
                     chat_area.getChildren().add(text);
                 }
             }
         });
     }
 
-    public static String getMessageHistory(){
-        return messageHistory;
+    public static ArrayList<Text> getTexts(){
+        return texts;
     }
 }

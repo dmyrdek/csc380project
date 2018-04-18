@@ -58,7 +58,7 @@
             </ImageView>
          </children>
       </Pane>
-      <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
+      <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" onAction="#sendMessage" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
       <TextFlow fx:id="chat_area" layoutX="589.0" layoutY="88.0" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
       <VBox alignment="CENTER" layoutX="50.0" layoutY="79.0" prefHeight="413.0" prefWidth="498.0" style="-fx-spacing: 30;">
          <children>
