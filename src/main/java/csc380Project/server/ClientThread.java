@@ -125,18 +125,6 @@ public class ClientThread extends Thread {
         }
       }
 
-      synchronized (this) {
-        if (this == threads[0]){
-          for (int i = 0; i < maxClientsCount; i++){
-            if(threads[i] != null){
-              if (!this.playerList.contains(threads[i].player)){
-                this.playerList.add(threads[i].player);
-              }
-            }
-          }
-        }
-      }
-
       synchronized (this){
         if (this == threads[0] && inWaitingLobby){
           final Timer timer = new Timer();
@@ -219,6 +207,13 @@ public class ClientThread extends Thread {
         }
 
         if (this == threads[0] && inQuestionPrompt){
+            for (int i = 0; i < maxClientsCount; i++){
+              if(threads[i] != null){
+                if (!this.playerList.contains(threads[i].player)){
+                  this.playerList.add(threads[i].player);
+                }
+              }
+            }
           myGame = new Game(10, this.playerList);
           System.out.println(myGame.toString());
         }
