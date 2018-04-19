@@ -12,6 +12,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextFlow;
 import javafx.scene.paint.Color;
+import javafx.scene.input.KeyEvent;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.beans.value.ChangeListener;
@@ -59,9 +60,16 @@ public class QuestionPromptController implements Observer{
     @FXML
     JFXButton submit_button;
 
+    @FXML
+    JFXTextArea answer_prompt;
+
     private ChatAccess chatAccess;
     private static String port;
     private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
+    private String questionAnswer = "";
+    //private boolean allPlayersReady = false;
+    private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
+    private int submittedPlayerSize = 0;
 
     public static void setIsQuestionPromptLoadedToTrue(){
         isQuestionPromptLoaded.set(true);
@@ -89,6 +97,27 @@ public class QuestionPromptController implements Observer{
                 }
             }
         });
+
+        allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    
+                }
+            }
+        });
+    }
+
+    @FXML
+    public void getAnswer(KeyEvent event){
+        questionAnswer = answer_prompt.getText();
+        chatAccess.send("~" + questionAnswer);
+    }
+
+    public void submit(ActionEvent event){
+        submit_button.setDisable(true);
+        //submit_button = "Submitted!";
+        chatAccess.send("`submitted");
     }
 
     public void sendMessage(ActionEvent event){
@@ -109,6 +138,9 @@ public class QuestionPromptController implements Observer{
                 if (finalArg.toString().startsWith("}")){
                     //names.add(finalArg.toString().substring(1));
                 }else if(finalArg.toString().startsWith("|")){
+                    if (finalArg.toString().substring(1).equals("1")){
+                        allPlayersSubmitted.set(true);
+                    }
                     submit_button.setText(finalArg.toString().substring(1) + " - " + "Submit");
                 }else if (finalArg.toString().startsWith("~")){
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
@@ -116,11 +148,11 @@ public class QuestionPromptController implements Observer{
                     chat_area.getChildren().add(text);
                 }else if(finalArg.toString().startsWith("`")){
                     String str = finalArg.toString().substring(1);
-                    if (str.equals("ready")){
-                        //readyPlayerSize++;
-                        //if (readyPlayerSize == names.size()){
-                        //    allPlayersReady.set(true);
-                        //}
+                    if (str.equals("submitted")){
+                        submittedPlayerSize++;
+                        if (submittedPlayerSize == WaitingLobbyController.names.size()){
+                            allPlayersSubmitted.set(true);
+                        }
                     }
                 }else if(finalArg.toString().startsWith("{")){
                     question_prompt.selectAll();

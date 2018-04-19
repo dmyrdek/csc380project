@@ -26,13 +26,13 @@ public class ClientThread extends Thread {
   //private ArrayList<String> names = new ArrayList<>();
   private int roundsNum = 15;
   private QuestionPack qp = new QuestionPack().addAllQuestions();
-  private int currentround = 0;
   private boolean[][] myVotes = new boolean[roundsNum][2];
   private int[][] totalVotes = new int[roundsNum][2];
   private Player player;
   private int numOfPlayers = 0;
   private boolean isHost = false;
   private boolean isReady = false;
+  private boolean submittedAnswer = false;
   private boolean inWaitingLobby = true;
   private boolean inQuestionPrompt = false;
   private int countDownTime = 120;
@@ -40,6 +40,9 @@ public class ClientThread extends Thread {
   private ArrayList<Player> playerList = new ArrayList<>();
   private Game myGame;
   private boolean[][] myRounds = new boolean[roundsNum][2];
+  private String[][] answers = new String[roundsNum][2];
+  private int currentround = 0;
+  private int questionNumber = 0;
 
   public String getUserName() {
     return name;
@@ -204,6 +207,14 @@ public class ClientThread extends Thread {
             }
           }else if (line.substring(1).equals("inQuestionPrompt")){
             inQuestionPrompt = true;
+          }else if (line.substring(1).equals("submitted")){
+            this.submittedAnswer = true;
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (threads[i] != null) {
+                threads[i].os.println("`submitted");
+                threads[i].os.println(threads[i].answers[currentround][questionNumber]);
+              }
+            }
           }
         }
 
@@ -224,11 +235,26 @@ public class ClientThread extends Thread {
       if (threads[0].myRounds[1][1]){
         for (int i = 0; i < maxClientsCount; i++){
           if(threads[i] != null){
-            threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(0));
+            threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
             //threads[i].os.println("}" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
           }
         }
       }
+
+      if (line.startsWith("~")){
+        this.answers[currentround][questionNumber] = line.substring(1);
+        for (int i = 0; i < maxClientsCount; i++){
+          if (this == threads[i]){
+            threads[0].myGame.getInGamePlayers().get(i).addAnswer(
+              this.answers[currentround][questionNumber], 
+              threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber)
+              );
+          }
+        }
+      }
+  
+
+
         // Exiting chat and game
         if (line.startsWith("/quit")) {
           break;
@@ -279,6 +305,7 @@ public class ClientThread extends Thread {
       }
 
 
+      //*****Delete this hoot brian******
       /* Game Code -BROKEN BOIIIII
       while (true) {
         if(!line.startsWith("StartGame")){

@@ -40,7 +40,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="submit_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Submit" textFill="WHITE">
+            <JFXButton fx:id="submit_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="722.0" layoutY="18.0" onAction="#submit" prefHeight="40.0" prefWidth="155.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Submit" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -68,7 +68,7 @@
                </font>
             </Label>
             <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="177.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
-            <JFXTextArea focusColor="#0ac7c9" labelFloat="true" prefHeight="128.0" prefWidth="498.0" promptText="Type you're response here..." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
+            <JFXTextArea fx:id="answer_prompt" focusColor="#0ac7c9" labelFloat="true" onKeyReleased="#getAnswer" prefHeight="128.0" prefWidth="498.0" promptText="Type you're response here..." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
          </children>
       </VBox>
    </children>

@@ -193,11 +193,12 @@ public class WaitingLobbyController implements Observer {
 
     public void sendMessage(ActionEvent event){
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`")){
             chatAccess.send(str);
-        message_field.selectAll();
-        message_field.requestFocus();
-        message_field.setText("");
+            message_field.selectAll();
+            message_field.requestFocus();
+            message_field.setText("");
+        }
     }
 
     public void readyUp(ActionEvent event){
