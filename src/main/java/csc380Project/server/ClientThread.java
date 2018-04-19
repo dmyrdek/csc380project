@@ -225,6 +225,7 @@ public class ClientThread extends Thread {
         for (int i = 0; i < maxClientsCount; i++){
           if(threads[i] != null){
             threads[i].os.println(threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(0));
+            threads[i].os.println(threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
           }
         }
       }
