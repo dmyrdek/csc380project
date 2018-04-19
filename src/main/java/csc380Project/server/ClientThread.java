@@ -39,6 +39,7 @@ public class ClientThread extends Thread {
   private int inQuestionPromptTime = 60;
   private ArrayList<Player> playerList = new ArrayList<>();
   private Game myGame;
+  private boolean[][] myRounds = new boolean[roundsNum][2];
 
   public String getUserName() {
     return name;
@@ -209,6 +210,7 @@ public class ClientThread extends Thread {
         if (this == threads[0] && inQuestionPrompt){
             for (int i = 0; i < maxClientsCount; i++){
               if(threads[i] != null){
+                threads[i].myRounds[1][1] = true;
                 if (!this.playerList.contains(threads[i].player)){
                   this.playerList.add(threads[i].player);
                 }
@@ -219,7 +221,12 @@ public class ClientThread extends Thread {
             System.out.println(myGame.toString());
           }
         }
-
+        
+        for (int i = 0; i < maxClientsCount; i++){
+          if(threads[i] != null){
+            threads[i].os.println(threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(0));
+          }
+        }
         // Exiting chat and game
         if (line.startsWith("/quit")) {
           break;
