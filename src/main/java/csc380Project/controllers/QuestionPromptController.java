@@ -111,13 +111,14 @@ public class QuestionPromptController implements Observer{
     @FXML
     public void getAnswer(KeyEvent event){
         questionAnswer = answer_prompt.getText();
-        chatAccess.send("~" + questionAnswer);
+        //chatAccess.send("~" + questionAnswer);
     }
 
     public void submit(ActionEvent event){
         submit_button.setDisable(true);
         //submit_button = "Submitted!";
         chatAccess.send("`submitted");
+        chatAccess.send("~" + questionAnswer);
     }
 
     public void sendMessage(ActionEvent event){
