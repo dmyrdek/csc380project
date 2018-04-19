@@ -43,6 +43,7 @@ public class Main extends Application {
         String [] answersToq1 = g.getAllAnswersForQuestion(q1);
         int votes = g.voteForAnswer("test", q1);
         votes = g.voteForAnswer("test", q1);
+        leaders = g.getLeaderBoard();
 
 
         System.out.println();
