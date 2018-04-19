@@ -27,8 +27,8 @@ public class Game {
     *  USE THIS CONSTRUCTOR, THE ONE ABOVE WILL NOT WORK WITH THE WAY WE ARE MAKING THE GAME
     *
      */
-    public Game(int rounds){
-        inGamePlayers = new ArrayList<Player>();
+    public Game(int rounds, ArrayList<Player> players){
+        inGamePlayers = players;
         gameQuestions = this.setGameQuestions();
         allSubmittedAnswers = new ArrayList<String>();
         numRounds = rounds;
