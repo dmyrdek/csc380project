@@ -164,7 +164,7 @@ public class Game {
     }
 
     public String toString(){
-        return "total Rounds: " + numRounds + " numPlayers: " + this.inGamePlayers.size() + " question 1 for player 1" + this.inGamePlayers.get(0).getQuestionAtIndex(0);
+        return "total Rounds: " + numRounds + " numPlayers: " + this.inGamePlayers.size() + " Player 1 is: " + this.inGamePlayers.get(0).toString() +" question 1 for player 1" + this.inGamePlayers.get(0).getQuestionAtIndex(0);
     }
 
 
