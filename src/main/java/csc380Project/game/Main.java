@@ -37,6 +37,10 @@ public class Main extends Application {
         g.getInGamePlayers().get(2).increaseVotesReceived();
         g.getInGamePlayers().get(1).increaseVotesReceived();
         Player [] leaders = g.getLeaderBoard();
+        String q1 = g.getGameQuestions().getQuestions()[0];
+        g.getInGamePlayers().get(3).addAnswer("test", q1);
+        g.getInGamePlayers().get(2).addAnswer("test2", q1);
+        String [] answersToq1 = g.getAllAnswersForQuestion(q1);
 
 
         System.out.println();

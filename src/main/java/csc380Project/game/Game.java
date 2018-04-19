@@ -118,7 +118,23 @@ public class Game {
             System.out.println("tried to get questions for a round that does not exist in this game");
             return null;
         }
+    }
 
+    public String [] getAllAnswersForQuestion(String question){
+        String [] answers = new String [2];
+        int count=0;
+        int numQuestions = this.inGamePlayers.size()*this.getNumOfRounds();
+        for (Player p : inGamePlayers){
+            for (int i = 0; i< numQuestions; i++){
+                if (p.getQuestions()[i] != null){
+                    if (p.getQuestions()[i].equals(question)){
+                        answers[count] = p.getAnswerAtIndex(i);
+                        count++;
+                    }
+                }
+            }
+        }
+        return answers;
     }
 
 
