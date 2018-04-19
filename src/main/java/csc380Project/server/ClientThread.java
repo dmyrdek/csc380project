@@ -209,9 +209,7 @@ public class ClientThread extends Thread {
         if (this == threads[0] && inQuestionPrompt){
             for (int i = 0; i < maxClientsCount; i++){
               if(threads[i] != null){
-                if (!this.playerList.contains(threads[i].player)){
                   this.playerList.add(threads[i].player);
-                }
               }
             }
           myGame = new Game(10, this.playerList);
