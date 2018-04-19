@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class GameTest {
 
     QuestionPack q;
@@ -209,5 +211,17 @@ public class GameTest {
 
     }
 
+
+    @Test
+    public void MakeGame() {
+        ArrayList<Player> playerList = new ArrayList<>();
+
+        playerList.add(new Player("cedric"));
+        playerList.add(new Player("doug"));
+        playerList.add(new Player("brian"));
+        playerList.add(new Player("dylan"));
+
+        Game g = new Game(4, playerList);
+    }
 
 }
