@@ -181,8 +181,23 @@ public class Game {
             System.out.println("Game is not valid");
             return false;
         }
+    }
 
 
+    public int voteForAnswer(String answer, String question){
+        int numQuestions = this.numRounds*this.inGamePlayers.size();
+        for (Player p: inGamePlayers){
+            for (int i = 0; i<numQuestions; i++){
+                if (p.getAnswerAtIndex(i) != null){
+                    if (p.getAnswerAtIndex(i).equals(answer) || p.getQuestionAtIndex(i).equals(question)){
+                        p.increaseVotesReceived();
+                        return p.getNumVotesReceived();
+                    }
+                }
+            }
+        }
+        // no answer is found, return -1
+        return -1;
     }
 
 
@@ -194,7 +209,6 @@ public class Game {
             leaderboard[i] = players.get(i);
         }
         return leaderboard;
-
     }
 
     public String toString(){
