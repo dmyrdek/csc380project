@@ -29,7 +29,7 @@ public class Game {
      */
     public Game(int rounds){
         inGamePlayers = new ArrayList<Player>();
-        gameQuestions = null;
+        gameQuestions = this.setGameQuestions();
         allSubmittedAnswers = new ArrayList<String>();
         numRounds = rounds;
         qp = new QuestionPack().addAllQuestions();
