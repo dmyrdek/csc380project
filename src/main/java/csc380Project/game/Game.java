@@ -163,17 +163,9 @@ public class Game {
 
     }
 
-    //methods to send out properly formatted strings to the chat
-
-        /*
-
-        send a current state of game round to everyone, and then once people vote then send
-        back to server for the server to validate the moves/votes
-
-         */
-
-
-    ///all the networking stuff needs to be added
+    public String toString(){
+        return "total Rounds: " + numRounds + " numPlayers: " + this.inGamePlayers.size() + " question 1 for player 1" + this.inGamePlayers.get(0).getQuestionAtIndex(0);
+    }
 
 
 }
