@@ -221,12 +221,13 @@ public class ClientThread extends Thread {
             System.out.println(myGame.toString());
           }
         }
-        
+      if (threads[0].myRounds[1][1]){
         for (int i = 0; i < maxClientsCount; i++){
           if(threads[i] != null){
             threads[i].os.println(threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(0));
           }
         }
+      }
         // Exiting chat and game
         if (line.startsWith("/quit")) {
           break;
