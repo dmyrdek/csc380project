@@ -93,15 +93,19 @@ public class Game {
 
 
         while (size < totalQuestions) {
+            boolean match = false;
             int a = (int) Math.floor(Math.random() * qp.qArrayList.size());
             String question = this.qp.qArrayList.get(a);
             for (int i = 0; i < size; i++) {
                 if (questionsForTheGame.getQuestions()[i].equals(question)) {
+                    match = true;
                     break;
                 }
             }
-            questionsForTheGame.getQuestions()[size] = question;
-            size++;
+            if (!match){
+                questionsForTheGame.getQuestions()[size] = question;
+                size++;
+            }
         }
 
         return questionsForTheGame;
