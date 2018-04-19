@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.geometry.Insets;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -22,6 +24,18 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("cedric"));
+        players.add(new Player("doug"));
+        players.add(new Player("brian"));
+        players.add(new Player("dylan"));
+
+        Game g = new Game(4, players);
+        System.out.println();
+
+
+
         launch(args);
 
         Scanner kb = new Scanner(System.in);

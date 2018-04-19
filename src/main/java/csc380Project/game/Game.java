@@ -28,11 +28,12 @@ public class Game {
     *
      */
     public Game(int rounds, ArrayList<Player> players){
+        qp = new QuestionPack().addAllQuestions();
         inGamePlayers = players;
+        numRounds = rounds;
         gameQuestions = this.setGameQuestions();
         allSubmittedAnswers = new ArrayList<String>();
-        numRounds = rounds;
-        qp = new QuestionPack().addAllQuestions();
+        this.giveQuestionstoPlayers();
     }
 
     public static int getMaxPlayers() {
