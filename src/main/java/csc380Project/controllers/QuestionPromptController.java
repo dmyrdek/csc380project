@@ -122,7 +122,12 @@ public class QuestionPromptController implements Observer{
                         //    allPlayersReady.set(true);
                         //}
                     }
-                }else{
+                }else if(finalArg.toString().startsWith("{")){
+                    question_prompt.selectAll();
+                    question_prompt.setText(finalArg.toString().substring(1));
+                }
+                
+                else{
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                     Text text = new Text(finalArg.toString()+"\n");
                     text.setFill(Color.WHITE);
