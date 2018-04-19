@@ -1,6 +1,8 @@
 package csc380Project.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Game {
 
@@ -160,6 +162,18 @@ public class Game {
             return false;
         }
 
+
+    }
+
+
+    public Player[] getLeaderBoard (){
+        Player[] leaderboard = new Player [this.getInGamePlayers().size()];
+        ArrayList<Player> players = this.inGamePlayers;
+        Collections.sort(players);
+        for (int i = 0; i<leaderboard.length; i++) {
+            leaderboard[i] = players.get(i);
+        }
+        return leaderboard;
 
     }
 

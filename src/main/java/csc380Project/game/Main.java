@@ -33,6 +33,12 @@ public class Main extends Application {
 
         Game g = new Game(4, players);
         ArrayList<String> p1q = g.getInGamePlayers().get(0).getQuestionsToAnswerForRound(3);
+        g.getInGamePlayers().get(2).increaseVotesReceived();
+        g.getInGamePlayers().get(2).increaseVotesReceived();
+        g.getInGamePlayers().get(1).increaseVotesReceived();
+        Player [] leaders = g.getLeaderBoard();
+
+
         System.out.println();
 
 

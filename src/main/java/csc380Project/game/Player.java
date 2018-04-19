@@ -2,8 +2,9 @@ package csc380Project.game;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Player {
+public class Player implements Comparable {
 
     private String name;
     private int numVotesReceived;
@@ -25,7 +26,11 @@ public class Player {
         playersInGame = new ArrayList<Player>();
     }
 
-    
+    @Override
+    public int compareTo(Object other){
+        return ((Player) other).getNumVotesReceived()-this.numVotesReceived;
+    }
+
 
     public String getName(){
         return this.name;
@@ -130,7 +135,7 @@ public class Player {
 
 
     public String toString() {
-        return this.name;
+        return this.name + " votes received: " + this.getNumVotesReceived();
     }
 
 
