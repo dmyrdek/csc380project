@@ -32,8 +32,8 @@ public class Main extends Application {
         players.add(new Player("dylan"));
 
         Game g = new Game(4, players);
+        ArrayList<String> p1q = g.getInGamePlayers().get(0).getQuestionsToAnswerForRound(3);
         System.out.println();
-
 
 
         launch(args);

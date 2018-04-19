@@ -134,21 +134,21 @@ public class Player {
     }
 
 
-    /*public ArrayList<String> getQuestionsToAnswerForRound(int roundNum) {
+    public ArrayList<String> getQuestionsToAnswerForRound(int roundNum) {
         ArrayList<String> questionsForRound = new ArrayList<>();
-        int questionsAlreadyAnswered = (roundNum+1) *2;
+        ArrayList<String> allQuestions = new ArrayList<>();
+        int questionsAlreadyAnswered = (roundNum) *2;
 
-        int count = 0;
         for (int i = 0; i <this.questionsToAnswer.length; i++) {
             if (questionsToAnswer[i] != null) {
-                count++;
+                allQuestions.add(questionsToAnswer[i]);
             }
         }
-
-
+        questionsForRound.add(allQuestions.get(questionsAlreadyAnswered));
+        questionsForRound.add(allQuestions.get(questionsAlreadyAnswered+1));
 
         return questionsForRound;
-    }*/
+    }
 
 
 }
