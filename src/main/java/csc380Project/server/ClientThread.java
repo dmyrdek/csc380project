@@ -37,7 +37,7 @@ public class ClientThread extends Thread {
   private boolean inQuestionPrompt = false;
   private int countDownTime = 120;
   private int inQuestionPromptTime = 60;
-
+  private ArrayList<Player> playerList = new ArrayList<>();
   private Game myGame;
 
   public String getUserName() {
@@ -109,6 +109,7 @@ public class ClientThread extends Thread {
         String str = is.readLine();
         if (str.startsWith("}")){
           this.name = str.substring(1);
+          player = new Player(name);
           if (this == this.threads[0]){
             this.isHost = true;
           }
@@ -120,6 +121,18 @@ public class ClientThread extends Thread {
             this.os.println("}" + threads[i].name + " (host)");
           }else {
             this.os.println("}" + threads[i].name);
+          }
+        }
+      }
+
+      synchronized (this) {
+        if (this == threads[0]){
+          for (int i = 0; i < maxClientsCount; i++){
+            if(threads[i] != null){
+              if (!this.playerList.contains(threads[i].player)){
+                this.playerList.add(threads[i].player);
+              }
+            }
           }
         }
       }
@@ -205,7 +218,10 @@ public class ClientThread extends Thread {
           }
         }
 
-        
+        if (this == threads[0] && inQuestionPrompt){
+          myGame = new Game(10, this.playerList);
+          System.out.println(myGame.toString());
+        }
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
