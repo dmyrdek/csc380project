@@ -102,7 +102,7 @@ public class QuestionPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    
+                    chatAccess.send("`allPlayersSubmitted");
                 }
             }
         });
@@ -111,6 +111,7 @@ public class QuestionPromptController implements Observer{
     @FXML
     public void getAnswer(KeyEvent event){
         questionAnswer = answer_prompt.getText();
+        System.out.println(questionAnswer);
         //chatAccess.send("~" + questionAnswer);
     }
 

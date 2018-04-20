@@ -43,6 +43,7 @@ public class ClientThread extends Thread {
   private String[][] answers = new String[roundsNum][2];
   private int currentround = 0;
   private int questionNumber = 0;
+  private boolean allPlayersSubmitted = false;
 
   public String getUserName() {
     return name;
@@ -109,57 +110,56 @@ public class ClientThread extends Thread {
         }
       }
       */
-      if (this.name.equals("")){
+      if (this.name.equals("")) {
         String str = is.readLine();
-        if (str.startsWith("}")){
+        if (str.startsWith("}")) {
           this.name = str.substring(1);
           player = new Player(name);
-          if (this == this.threads[0]){
+          if (this == this.threads[0]) {
             this.isHost = true;
           }
         }
       }
       for (int i = 0; i < maxClientsCount; i++) {
         if (threads[i] != null) {
-          if (i == 0){
+          if (i == 0) {
             this.os.println("}" + threads[i].name + " (host)");
-          }else {
+          } else {
             this.os.println("}" + threads[i].name);
           }
         }
       }
 
-      synchronized (this){
-        if (this == threads[0] && inWaitingLobby){
+      synchronized (this) {
+        if (this == threads[0] && inWaitingLobby) {
           final Timer timer = new Timer();
           timer.schedule(new TimerTask() {
             @Override
-                public void run() {
-                  if (inQuestionPrompt){
-                    countDownTime = inQuestionPromptTime;
-                    inQuestionPrompt = false;
+            public void run() {
+              if (inQuestionPrompt) {
+                countDownTime = inQuestionPromptTime;
+                inQuestionPrompt = false;
+              }
+              countDownTime--;
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (threads[i] != null) {
+                  threads[i].os.println("|" + countDownTime);
+                }
+              }
+              if (countDownTime < 1) {
+                for (int i = 0; i < maxClientsCount; i++) {
+                  if (threads[i] != null) {
+                    threads[i].os.println("`ready");
+                    threads[i].inWaitingLobby = false;
+                    threads[i].isReady = true;
                   }
-                  countDownTime--;
-                  for (int i = 0; i < maxClientsCount; i++) {
-                    if (threads[i] != null) {
-                      threads[i].os.println("|" + countDownTime);
-                    }
-                  }
-                  if (countDownTime < 1){
-                    for (int i = 0; i < maxClientsCount; i++) {
-                      if (threads[i] != null){
-                        threads[i].os.println("`ready");
-                        threads[i].inWaitingLobby = false;
-                        threads[i].isReady = true;
-                      }
-                    }
-                    //timer.cancel();
-                  }
+                }
+                //timer.cancel();
+              }
             }
-            }, 1000, 1000);
+          }, 1000, 1000);
         }
       }
-
 
       /* Welcome the new the client. */
       os.println("~Welcome to Questionnaires " + name + "!");
@@ -189,25 +189,22 @@ public class ClientThread extends Thread {
         this.os.println(names.toString());
       }*/
 
-
-
-
       /* Start the conversation. */
       while (true) {
 
         String line = is.readLine();
 
-        if (line.startsWith("`")){
-          if(line.substring(1).equals("ready")){
+        if (line.startsWith("`")) {
+          if (line.substring(1).equals("ready")) {
             this.isReady = true;
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
                 threads[i].os.println("`ready");
               }
             }
-          }else if (line.substring(1).equals("inQuestionPrompt")){
+          } else if (line.substring(1).equals("inQuestionPrompt")) {
             inQuestionPrompt = true;
-          }else if (line.substring(1).equals("submitted")){
+          } else if (line.substring(1).equals("submitted")) {
             this.submittedAnswer = true;
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
@@ -215,45 +212,51 @@ public class ClientThread extends Thread {
                 threads[i].os.println(threads[i].answers[currentround][questionNumber]);
               }
             }
+          } else if (line.substring(1).equals("allPlayersSubmitted"){
+            allPlayersSubmitted = true;
           }
         }
 
-        if (this == threads[0] && inQuestionPrompt){
-            for (int i = 0; i < maxClientsCount; i++){
-              if(threads[i] != null){
-                threads[i].myRounds[1][1] = true;
-                if (!this.playerList.contains(threads[i].player)){
-                  this.playerList.add(threads[i].player);
-                }
+        if (this == threads[0] && inQuestionPrompt) {
+          for (int i = 0; i < maxClientsCount; i++) {
+            if (threads[i] != null) {
+              threads[i].myRounds[1][1] = true;
+              if (!this.playerList.contains(threads[i].player)) {
+                this.playerList.add(threads[i].player);
               }
             }
-          if (myGame == null){
+          }
+          if (myGame == null) {
             myGame = new Game(10, this.playerList);
             System.out.println(myGame.toString());
           }
         }
-      if (threads[0].myRounds[1][1]){
-        for (int i = 0; i < maxClientsCount; i++){
-          if(threads[i] != null){
-            threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
-            //threads[i].os.println("}" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
+        synchronized (this) {
+          if (threads[0].myRounds[1][1]) {
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (threads[i] != null) {
+                threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
+                    .getQuestionsToAnswerForRound(currentround).get(questionNumber));
+                //threads[i].os.println("}" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
+              }
+            }
           }
         }
-      }
 
-      if (line.startsWith("~")){
-        this.answers[currentround][questionNumber] = line.substring(1);
-        for (int i = 0; i < maxClientsCount; i++){
-          if (this == threads[i]){
-            threads[0].myGame.getInGamePlayers().get(i).addAnswer(
-              this.answers[currentround][questionNumber], 
-              threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber)
-              );
+        if (line.startsWith("~")) {
+          synchronized (this) {
+            this.answers[currentround][questionNumber] = line.substring(1);
+            if (allPlayersSubmitted){
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (this == threads[i]) {
+                threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
+                    threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround)
+                        .get(questionNumber));
+              }
+            }
           }
         }
-      }
-  
-
+        }
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
@@ -277,7 +280,7 @@ public class ClientThread extends Thread {
               synchronized (this) {
                 for (int i = 0; i < maxClientsCount; i++) {
                   if (threads[i] != null && threads[i] != this && threads[i].clientName != null
-                          && threads[i].clientName.equals(words[0])) {
+                      && threads[i].clientName.equals(words[0])) {
                     threads[i].os.println("<" + name + "> " + words[1]);
                     /*
                      * Echo this message to let the client know the private
@@ -293,7 +296,8 @@ public class ClientThread extends Thread {
         } else {
           /* The message is public, broadcast it to all other clients. */
           synchronized (this) {
-            if (!line.startsWith("}") && !line.startsWith("}") && !line.startsWith("|") && !line.startsWith("~") && !line.startsWith("`")) {
+            if (!line.startsWith("}") && !line.startsWith("}") && !line.startsWith("|") && !line.startsWith("~")
+                && !line.startsWith("`")) {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null && threads[i].clientName != null) {
                   threads[i].os.println("<" + name + "> " + line);
@@ -303,7 +307,6 @@ public class ClientThread extends Thread {
           }
         }
       }
-
 
       //*****Delete this hoot brian******
       /* Game Code -BROKEN BOIIIII
@@ -315,7 +318,7 @@ public class ClientThread extends Thread {
         if(line.startsWith("/quit")){
           break;
         }
-
+      
         //start game for each player
         synchronized (this){
           //assign player numbers (not sure if this will cause error)
@@ -344,10 +347,10 @@ public class ClientThread extends Thread {
             }
           }
         }
-
+      
         // Start playing
         currentround ++;
-
+      
         //for each round (needs to be synchronized some how)
         while(currentround <= roundsNum){
           // Display Questions and Accept Answers
@@ -360,7 +363,7 @@ public class ClientThread extends Thread {
               player.addAnswerToIndex(answer, index);
             }
           }
-
+      
           // Display Each Answer and Vote
           for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
             String[] currentQuestionAns = new String[2];
@@ -378,7 +381,7 @@ public class ClientThread extends Thread {
             //display answers
             //vote for answers
           }
-
+      
           // Display Leaderboard
         }
       }
