@@ -212,7 +212,7 @@ public class ClientThread extends Thread {
                 threads[i].os.println(threads[i].answers[currentround][questionNumber]);
               }
             }
-          } else if (line.substring(1).equals("allPlayersSubmitted"){
+          } else if (line.substring(1).equals("allPlayersSubmitted")){
             allPlayersSubmitted = true;
           }
         }
