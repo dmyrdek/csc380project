@@ -186,7 +186,6 @@ public class Game {
         }
     }
 
-    //
     public int voteForAnswer(String answer, String question){
         int numQuestions = this.numRounds*this.inGamePlayers.size();
         for (Player p: inGamePlayers){
@@ -199,7 +198,7 @@ public class Game {
                 }
             }
         }
-        // no answer is found, return -1
+        // no answer is found, no question found, or question and answer don't match, return -1
         return -1;
     }
 

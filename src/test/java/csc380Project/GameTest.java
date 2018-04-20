@@ -240,36 +240,76 @@ public class GameTest {
     @Test
     public void voteForAnswerTest() {
         //get question AND answers
-        String question1 = testGame2.getGameQuestions().getQuestions()[1];
+        String question2 = testGame2.getGameQuestions().getQuestions()[1];
         String p1answer = "P1 answer";
         String p2answer = "P2 answer";
-        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question1);
-        testGame2.getInGamePlayers().get(1).addAnswer(p2answer, question1);
+        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question2);
+        testGame2.getInGamePlayers().get(1).addAnswer(p2answer, question2);
 
         //vote for answers
         int p1Score;
         int p2Score;
-        p1Score = testGame2.voteForAnswer(p1answer, question1);
-        p1Score = testGame2.voteForAnswer(p1answer, question1);
-        p2Score = testGame2.voteForAnswer(p2answer, question1);
+        p1Score = testGame2.voteForAnswer(p1answer, question2);
+        p1Score = testGame2.voteForAnswer(p1answer, question2);
+        p2Score = testGame2.voteForAnswer(p2answer, question2);
 
         //check updated scores
         assertEquals(2, p1Score);
         assertEquals(1, p2Score);
     }
 
-    //tests voteForAnswer with invalid answer
+    //tests voteForAnswer with invalid answer AND answer
     @Test
     public void voteForNonExistantAnswer() {
         //get question AND answer
-        String question1 = testGame2.getGameQuestions().getQuestions()[0];
+        String question3 = testGame2.getGameQuestions().getQuestions()[2];
+        String nonquestion = "Not a real question";
         String p1answer = "P1 answer";
         String nonAnswer = "Not a real answer";
-        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question1);
+        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question3);
 
+        //vote for wrong answer
         int p1Score;
-        p1Score = testGame2.voteForAnswer(nonAnswer, question1);
+        p1Score = testGame2.voteForAnswer(nonAnswer, question3);
         assertEquals(-1, p1Score);
+
+        //vote for non existant question
+        p1Score = testGame2.voteForAnswer(p1answer, nonquestion);
+        assertEquals(-1, p1Score);
+
+        //vote for incorrect question
+        p1Score = testGame2.voteForAnswer(p1answer, question3);
+        assertEquals(-1, p1Score);
+    }
+
+    //tests getLeaderboard method
+    @Test
+    public void leaderboardTest() {
+        //get question AND answers
+        String question2 = testGame2.getGameQuestions().getQuestions()[1];
+        String p1answer = "P1 answer";
+        String p2answer = "P2 answer";
+        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question2);
+        testGame2.getInGamePlayers().get(1).addAnswer(p2answer, question2);
+
+        //vote for answers
+        testGame2.voteForAnswer(p1answer, question2);
+        testGame2.voteForAnswer(p1answer, question2);
+        testGame2.voteForAnswer(p2answer, question2);
+
+        //check leaderboard
+        Player[] leaderboard = testGame2.getLeaderBoard();
+        assertEquals(p1, leaderboard[0]);
+        assertEquals(p2, leaderboard[1]);
+        //check player 3 is tied for last with 4
+        boolean check = true;
+        if(p3 == leaderboard[2] || p3 == leaderboard[3]){
+        } else if(p4 == leaderboard[2] || p4 == leaderboard[3]){
+        } else{
+            check = false;
+        }
+        assertEquals(true, check);
+
     }
 
     //tests total functionality
