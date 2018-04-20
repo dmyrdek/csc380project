@@ -247,29 +247,21 @@ public class ClientThread extends Thread {
           synchronized (this) {
             this.answers[currentround][questionNumber] = line.substring(1);
             if (allPlayersSubmitted){
-            for (int i = 0; i < maxClientsCount; i++) {
-              if (this == threads[i]) {
-                threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
-                    threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround)
-                        .get(questionNumber));
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (this == threads[i]) {
+                  threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
+                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround)
+                              .get(questionNumber));
+                }
               }
             }
           }
-        }
         }
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
           break;
         }
-
-        // Start game with Host pressing button that says "StartGame"
-        // ^^^ What brian??? do you know how to java?
-        /*if(player.getHostStatus()){
-          if(line.startsWith("StartGame")){
-            break;
-          }
-        }*/
 
         /* If the message is private send it to the given client. */
         if (line.startsWith("@")) {
@@ -307,85 +299,6 @@ public class ClientThread extends Thread {
           }
         }
       }
-
-      //*****Delete this hoot brian******
-      /* Game Code -BROKEN BOIIIII
-      while (true) {
-        if(!line.startsWith("StartGame")){
-          break;
-        }
-        //leaving game
-        if(line.startsWith("/quit")){
-          break;
-        }
-      
-        //start game for each player
-        synchronized (this){
-          //assign player numbers (not sure if this will cause error)
-          for(int i = 0; i < maxClientsCount; i++){
-            if(threads[i] != null && threads[i].clientName != null){
-              threads[i].player.setPlayerNumber();
-            }
-          }
-          //create game for each player & calculate num of players
-          for(int i = 0; i < maxClientsCount; i++){
-            if(threads[i] != null && threads[i].clientName != null){
-              threads[i].myGame = new Game(roundsNum, qp);
-              numOfPlayers ++;
-            }
-          }
-          //set questions for the game
-          for(int i = 0; i < maxClientsCount; i++){
-            if(threads[i] != null && threads[i].clientName != null){
-              threads[i].myGame.setThisGamesQuestions();
-            }
-          }
-          //give questions to each player
-          for(int i = 0; i < maxClientsCount; i++){
-            if(threads[i] != null && threads[i].clientName != null){
-              threads[i].myGame.giveQuestionstoPlayers();
-            }
-          }
-        }
-      
-        // Start playing
-        currentround ++;
-      
-        //for each round (needs to be synchronized some how)
-        while(currentround <= roundsNum){
-          // Display Questions and Accept Answers
-          int indexAdjuster = (roundsNum - currentround) * numOfPlayers;
-          for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
-            if(player.getQuestionAtIndex(index) != null){
-              //display question
-              //take answer
-              String answer = "";
-              player.addAnswerToIndex(answer, index);
-            }
-          }
-      
-          // Display Each Answer and Vote
-          for(int index = (currentround - 1) * numOfPlayers; index < player.getQuestions().length - indexAdjuster; index ++){
-            String[] currentQuestionAns = new String[2];
-            for(int i = 0; i < maxClientsCount; i++){
-              if (threads[i] != null && threads[i].clientName != null) {
-                if(threads[i].player.getAnswerAtIndex(index) != null) {
-                  if(currentQuestionAns[0] == null){
-                    currentQuestionAns[0] = threads[i].player.getAnswerAtIndex(index);
-                  } else{
-                    currentQuestionAns[1] = threads[i].player.getAnswerAtIndex(index);
-                  }
-                }
-              }
-            }
-            //display answers
-            //vote for answers
-          }
-      
-          // Display Leaderboard
-        }
-      }
-      */
 
       synchronized (this) {
         for (int i = 0; i < maxClientsCount; i++) {
