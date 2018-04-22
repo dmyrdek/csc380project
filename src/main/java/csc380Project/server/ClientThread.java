@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import javax.lang.model.element.Name;
 import org.omg.PortableServer.THREAD_POLICY_ID;
+
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,6 +51,8 @@ public class ClientThread extends Thread {
     return name;
   }
 
+  public Game getMyGame(){return myGame;}
+
   public ClientThread(Socket clientSocket, ClientThread[] threads) {
     this.clientSocket = clientSocket;
     this.threads = threads;
@@ -61,6 +65,16 @@ public class ClientThread extends Thread {
         System.out.println(s);
       }
     }
+  }
+
+  public Player[] getLeaderBoard (){
+    Player[] leaderboard = new Player [this.threads[0].myGame.getInGamePlayers().size()];
+    ArrayList<Player> players = this.threads[0].myGame.getInGamePlayers();
+    Collections.sort(players);
+    for (int i = 0; i<leaderboard.length; i++) {
+      leaderboard[i] = players.get(i);
+    }
+    return leaderboard;
   }
 
   public void run() {
