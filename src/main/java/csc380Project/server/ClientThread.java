@@ -216,11 +216,7 @@ public class ClientThread extends Thread {
             allPlayersSubmitted = true;
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
-                for (int j = 0; j < maxClientsCount; j++) {
-                  if (threads[j] != null) {
-                    threads[i].os.println(threads[j].answers[currentround][questionNumber]);
-                  }
-                }
+                this.os.println(threads[i].answers[currentround][questionNumber]);
               }
             }
           }
