@@ -276,9 +276,9 @@ public class ClientThread extends Thread {
                 if (this == threads[i]) {
                   threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
                       threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
-                  this.allPlayersSubmitted = false;
                 }
               }
+              allPlayersSubmitted = false;
             }
           }
         }
