@@ -209,11 +209,16 @@ public class ClientThread extends Thread {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
                 threads[i].os.println("`submitted");
-                threads[i].os.println(threads[i].answers[currentround][questionNumber]);
+                //threads[i].os.println(threads[i].answers[currentround][questionNumber]);
               }
             }
           } else if (line.substring(1).equals("allPlayersSubmitted")){
             allPlayersSubmitted = true;
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (threads[i] != null) {
+                threads[i].os.println(threads[i].answers[currentround][questionNumber]);
+              }
+            }
           }
         }
 
