@@ -274,6 +274,7 @@ public class ClientThread extends Thread {
                               .get(questionNumber));
                 }
               }
+              allPlayersSubmitted = false;
             }
           }
         }
