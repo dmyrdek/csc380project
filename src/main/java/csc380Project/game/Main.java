@@ -1,5 +1,6 @@
 package csc380Project.game;
 
+import csc380Project.controllers.QuestionPromptController;
 import csc380Project.controllers.WaitingLobbyController;
 import csc380Project.server.*;
 import javafx.application.Application;

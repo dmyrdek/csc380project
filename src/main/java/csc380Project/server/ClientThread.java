@@ -228,11 +228,12 @@ public class ClientThread extends Thread {
             }
           } else if (line.substring(1).equals("allPlayersSubmitted")){
             allPlayersSubmitted = true;
-            for (int i = 0; i < maxClientsCount; i++) {
-              if (threads[i] != null) {
-                this.os.println(threads[i].answers[currentround][questionNumber]);
-              }
-            }
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (threads[i] != null) {
+                  this.os.println(threads[i].answers[currentround][questionNumber]);
+                  this.questionNumber++;
+                }
+            } 
           }
         }
 
@@ -251,7 +252,7 @@ public class ClientThread extends Thread {
           }
         }
         synchronized (this) {
-          if (threads[0].myRounds[1][1]) {
+          if (inQuestionPrompt) {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
