@@ -268,16 +268,17 @@ public class ClientThread extends Thread {
           }
         }
 
-        if (line.startsWith("~")) {
-          this.answers[currentround][questionNumber] = line.substring(1);
-          synchronized (this) {
+        synchronized (this) {
+          if (line.startsWith("~")) {
+            this.answers[currentround][questionNumber] = line.substring(1);
             if (allPlayersSubmitted){
               for (int i = 0; i < maxClientsCount; i++) {
                 if (this == threads[i]) {
-                  threads[0].myGame.getInGamePlayers().get(i).addAnswer(threads[i].answers[currentround][questionNumber],
+                  threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
                       threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
                 }
               }
+              allPlayersSubmitted = false;
             }
           }
         }
