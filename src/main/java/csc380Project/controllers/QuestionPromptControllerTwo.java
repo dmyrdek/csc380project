@@ -46,7 +46,7 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class QuestionPromptController implements Observer{
+public class QuestionPromptControllerTwo implements Observer{
 
     @FXML
     JFXTextArea question_prompt;
@@ -63,7 +63,7 @@ public class QuestionPromptController implements Observer{
     @FXML
     JFXTextArea answer_prompt;
 
-    private static ChatAccess chatAccess;
+    private ChatAccess chatAccess;
     private static String port;
     private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
@@ -81,21 +81,17 @@ public class QuestionPromptController implements Observer{
         isQuestionPromptLoaded.set(true);
     }
 
-    public static ChatAccess getChatAccess() {
-        return chatAccess;
-    }
-
     @FXML
     public void initialize() throws IOException {
 
         question_prompt.setMouseTransparent(true);
 
-        QuestionPromptController current = this;
+        QuestionPromptControllerTwo current = this;
         isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chatAccess = WaitingLobbyController.getChatAccess();
+                    chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
@@ -108,8 +104,8 @@ public class QuestionPromptController implements Observer{
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("QuestionPromptTwo.fxml"));
-        Scene homePage = new Scene(homePageParent);
+        //Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("QuestionPrompt.fxml"));
+        //Scene homePage = new Scene(homePageParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
@@ -119,10 +115,8 @@ public class QuestionPromptController implements Observer{
                     if (questionNumber == 0){
                         questionNumber = 1;
                         //myStage.getScene().setRoot(homePageParent);
-                        myStage.setScene(homePage);
-                        myStage.show();
-                        myStage.requestFocus();
-                        QuestionPromptControllerTwo.setIsQuestionPromptLoadedToTrue();
+                        //myStage.show();
+                        //myStage.requestFocus();
                     } else if (questionNumber == 1){
                         questionNumber = 0;
                     }

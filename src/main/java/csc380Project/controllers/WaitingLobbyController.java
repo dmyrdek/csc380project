@@ -90,6 +90,7 @@ public class WaitingLobbyController implements Observer {
 
     @FXML
     public void initialize() throws IOException {
+        QuestionPromptController.setStage(myStage);
 
         if (JoinGameController.getPortNumber() != ""){
             port = JoinGameController.getPortNumber();
