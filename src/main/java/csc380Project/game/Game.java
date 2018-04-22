@@ -29,6 +29,7 @@ public class Game {
     *  USE THIS CONSTRUCTOR, THE ONE ABOVE WILL NOT WORK WITH THE WAY WE ARE MAKING THE GAME
     *
      */
+
     public Game(int rounds, ArrayList<Player> players){
         qp = new QuestionPack().addAllQuestions();
         inGamePlayers = players;
@@ -57,6 +58,8 @@ public class Game {
     public int getNumOfRounds(){
         return numRounds;
     }
+
+    public ArrayList<String> getAllSubmittedAnswers() { return allSubmittedAnswers; }
 
 
 
@@ -183,24 +186,23 @@ public class Game {
         }
     }
 
-
     public int voteForAnswer(String answer, String question){
         int numQuestions = this.numRounds*this.inGamePlayers.size();
         for (Player p: inGamePlayers){
             for (int i = 0; i<numQuestions; i++){
                 if (p.getAnswerAtIndex(i) != null){
-                    if (p.getAnswerAtIndex(i).equals(answer) || p.getQuestionAtIndex(i).equals(question)){
+                    if (p.getAnswerAtIndex(i).equals(answer) && p.getQuestionAtIndex(i).equals(question)){
                         p.increaseVotesReceived();
                         return p.getNumVotesReceived();
                     }
                 }
             }
         }
-        // no answer is found, return -1
+        // no answer is found, no question found, or question and answer don't match, return -1
         return -1;
     }
 
-
+    //
     public Player[] getLeaderBoard (){
         Player[] leaderboard = new Player [this.getInGamePlayers().size()];
         ArrayList<Player> players = this.inGamePlayers;
