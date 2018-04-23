@@ -231,13 +231,13 @@ public class ClientThread extends Thread {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null) {
                   this.os.println(threads[i].answers[currentround][questionNumber]);
-                  if (this.questionNumber == 0){
-                    this.questionNumber = 1;
-                  } else if (this.questionNumber == 1){
-                    this.roundsNum++;
-                    this.questionNumber = 0;
                   }
                 }
+                if (this.questionNumber == 0){
+                  this.questionNumber = 1;
+                } else if (this.questionNumber == 1){
+                  this.roundsNum++;
+                  this.questionNumber = 0;
             } 
           }
         }
