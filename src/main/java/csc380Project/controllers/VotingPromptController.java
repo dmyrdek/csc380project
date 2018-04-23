@@ -52,6 +52,12 @@ public class VotingPromptController implements Observer{
     JFXTextArea question_prompt;
 
     @FXML
+    JFXTextArea answer_prompt_one;
+
+    @FXML
+    JFXTextArea answer_prompt_two;
+
+    @FXML
     TextFlow chat_area;
 
     @FXML
@@ -68,25 +74,31 @@ public class VotingPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        question_prompt.setMouseTransparent(true);
+
         VotingPromptController current = this;
 
         isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chatAccess = QuestionPromptController.getChatAccess();
+                    chatAccess = QuestionPromptControllerTwo.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: WaitingLobbyController.getTexts()){
+                    for (Text t: QuestionPromptControllerTwo.getTexts()){
                         chat_area.getChildren().add(t);
                     }
 
-                    chatAccess.send("`inQuestionPrompt");
+                    chatAccess.send("`inVotingPrompt");
                 }
             }
         });
 
+    }
+
+    public static void setIsVotingPromptLoadedToTrue(){
+        isVotingPromptLoaded.set(true);
     }
 
     public void sendMessage(ActionEvent event){
@@ -106,8 +118,14 @@ public class VotingPromptController implements Observer{
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
-                    //names.add(finalArg.toString().substring(1));
-                }else if(finalArg.toString().startsWith("|")){
+                    answer_prompt_one.selectAll();
+                    answer_prompt_one.setText(finalArg.toString().substring(1));
+                } else if (finalArg.toString().startsWith("%")){
+                    answer_prompt_two.selectAll();
+                    answer_prompt_two.setText(finalArg.toString().substring(1));
+                }
+                
+                else if(finalArg.toString().startsWith("|")){
                     if (finalArg.toString().substring(1).equals("1")){
                         allPlayersSubmitted.set(true);
                     }

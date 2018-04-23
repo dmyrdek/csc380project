@@ -46,6 +46,8 @@ public class ClientThread extends Thread {
   private int currentround = 0;
   private int questionNumber = 0;
   private boolean allPlayersSubmitted = false;
+  private boolean inVotingPrompt = false;
+  private int votingQuestionNumber = 0;
 
   public String getUserName() {
     return name;
@@ -153,6 +155,9 @@ public class ClientThread extends Thread {
               if (inQuestionPrompt) {
                 countDownTime = inQuestionPromptTime;
                 inQuestionPrompt = false;
+              } else if (inVotingPrompt){
+                countDownTime = inQuestionPromptTime;
+                inVotingPrompt = false;
               }
               countDownTime--;
               for (int i = 0; i < maxClientsCount; i++) {
@@ -236,16 +241,24 @@ public class ClientThread extends Thread {
                 if (this.questionNumber == 0){
                   this.questionNumber = 1;
                 } else if (this.questionNumber == 1){
-                  this.roundsNum++;
-                  this.questionNumber = 0;
+
+                  //this.roundsNum++;
+                  //this.questionNumber = 0;
             } 
+          } else if (line.substring(1).equals("inVotingPrompt")){
+            this.inVotingPrompt = true;
+            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
+            this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
+              threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]);
+            this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
+              threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1]);
           }
         }
 
         if (this == threads[0] && inQuestionPrompt) {
           for (int i = 0; i < maxClientsCount; i++) {
             if (threads[i] != null) {
-              threads[i].myRounds[1][1] = true;
+              //threads[i].myRounds[1][1] = true;
               if (!this.playerList.contains(threads[i].player)) {
                 this.playerList.add(threads[i].player);
               }
@@ -313,8 +326,8 @@ public class ClientThread extends Thread {
         } else {
           /* The message is public, broadcast it to all other clients. */
           synchronized (this) {
-            if (!line.startsWith("}") && !line.startsWith("}") && !line.startsWith("|") && !line.startsWith("~")
-                && !line.startsWith("`")) {
+            if (!line.startsWith("}") && !line.startsWith("{") && !line.startsWith("|") && !line.startsWith("~")
+                && !line.startsWith("`") && !line.startsWith("%")) {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null && threads[i].clientName != null) {
                   threads[i].os.println("<" + name + "> " + line);
