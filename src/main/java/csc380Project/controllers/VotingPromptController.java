@@ -46,7 +46,7 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class QuestionPromptControllerTwo implements Observer{
+public class VotingPromptController implements Observer{
 
     @FXML
     JFXTextArea question_prompt;
@@ -60,38 +60,17 @@ public class QuestionPromptControllerTwo implements Observer{
     @FXML
     JFXButton submit_button;
 
-    @FXML
-    JFXTextArea answer_prompt;
-
-    private static ChatAccess chatAccess;
-    private static String port;
-    private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
+    private ChatAccess chatAccess;
+    private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
-    private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
-    private static int questionNumber = 0;
-    private String questionAnswer = "";
     private int submittedPlayerSize = 0;
     private static Stage myStage;
 
-    public static void setStage(Stage stage) {
-       myStage = stage;
-    }
-
-    public static void setIsQuestionPromptLoadedToTrue(){
-        isQuestionPromptLoaded.set(true);
-    }
-
-    public static ChatAccess getChatAccess() {
-        return chatAccess;
-    }
-
     @FXML
     public void initialize() throws IOException {
+        VotingPromptController current = this;
 
-        question_prompt.setMouseTransparent(true);
-
-        QuestionPromptControllerTwo current = this;
-        isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
+        isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
@@ -108,50 +87,6 @@ public class QuestionPromptControllerTwo implements Observer{
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("VotingPrompt.fxml"));
-        Scene homePage = new Scene(homePageParent);
-
-        allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    chatAccess.send("`allPlayersSubmitted");
-                    if (questionNumber == 0){
-                        questionNumber = 1;
-                        myStage.setScene(homePage);
-                        myStage.show();
-                        myStage.requestFocus();
-                    } else if (questionNumber == 1){
-                        questionNumber = 0;
-                    }
-                }
-            }
-        });
-
-        changeScene.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    if (questionNumber == 0){
-                        questionNumber++;
-                    }
-                }
-            }
-        });
-    }
-
-    @FXML
-    public void getAnswer(KeyEvent event){
-        questionAnswer = answer_prompt.getText();
-        System.out.println(questionAnswer);
-        //chatAccess.send("~" + questionAnswer);
-    }
-
-    public void submit(ActionEvent event){
-        submit_button.setDisable(true);
-        //submit_button = "Submitted!";
-        chatAccess.send("`submitted");
-        chatAccess.send("~" + questionAnswer);
     }
 
     public void sendMessage(ActionEvent event){
@@ -162,6 +97,7 @@ public class QuestionPromptControllerTwo implements Observer{
         message_field.requestFocus();
         message_field.setText("");
     }
+
 
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
@@ -202,4 +138,6 @@ public class QuestionPromptControllerTwo implements Observer{
             }
         });
     }
+
+
 }

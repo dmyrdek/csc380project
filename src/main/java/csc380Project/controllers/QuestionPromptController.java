@@ -87,6 +87,7 @@ public class QuestionPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        QuestionPromptControllerTwo.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
 
