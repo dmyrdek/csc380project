@@ -238,6 +238,13 @@ public class ClientThread extends Thread {
                   this.os.println(threads[i].answers[currentround][questionNumber]);
                   }
                 }
+                if (this.questionNumber == 0){
+                  this.questionNumber = 1;
+                } else if (this.questionNumber == 1){
+
+                  //this.roundsNum++;
+                  //this.questionNumber = 0;
+            } 
           } else if (line.substring(1).equals("inVotingPrompt")){
             this.inVotingPrompt = true;
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
@@ -280,18 +287,16 @@ public class ClientThread extends Thread {
             if (this.allPlayersSubmitted){
               for (int i = 0; i < maxClientsCount; i++) {
                 if (this == threads[i]) {
-                  threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
-                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
+                  if (questionNumber == 1){
+                    threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][0],
+                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(0));
+                  } else {
+                    threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround-1][1],
+                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround-1).get(1));
+                  }
                 }
-              } 
+              }
               this.allPlayersSubmitted = false;
-              if (this.questionNumber == 0){
-                this.questionNumber = 1;
-              } else if (this.questionNumber == 1){
-
-                //this.roundsNum++;
-                //this.questionNumber = 0;
-            }
             }
           }
         }
