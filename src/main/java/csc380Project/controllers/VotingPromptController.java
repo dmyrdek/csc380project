@@ -118,10 +118,10 @@ public class VotingPromptController implements Observer{
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
-                    answer_prompt_one.selectAll();
+                    //answer_prompt_one.selectAll();
                     answer_prompt_one.setText(finalArg.toString().substring(1));
                 } else if (finalArg.toString().startsWith("%")){
-                    answer_prompt_two.selectAll();
+                    //answer_prompt_two.selectAll();
                     answer_prompt_two.setText(finalArg.toString().substring(1));
                 }
                 

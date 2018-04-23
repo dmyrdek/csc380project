@@ -74,13 +74,13 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="question_prompt1" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton contentDisplay="GRAPHIC_ONLY" textFill="WHITE" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="question_prompt11" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton contentDisplay="GRAPHIC_ONLY" textFill="WHITE" />
                      </children>
                   </VBox>
