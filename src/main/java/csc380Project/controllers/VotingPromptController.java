@@ -68,25 +68,31 @@ public class VotingPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        question_prompt.setMouseTransparent(true);
+
         VotingPromptController current = this;
 
         isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chatAccess = QuestionPromptController.getChatAccess();
+                    chatAccess = QuestionPromptControllerTwo.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: WaitingLobbyController.getTexts()){
+                    for (Text t: QuestionPromptControllerTwo.getTexts()){
                         chat_area.getChildren().add(t);
                     }
 
-                    chatAccess.send("`inQuestionPrompt");
+                    chatAccess.send("`inVotingPrompt");
                 }
             }
         });
 
+    }
+
+    public static void setIsVotingPromptLoadedToTrue(){
+        isVotingPromptLoaded.set(true);
     }
 
     public void sendMessage(ActionEvent event){

@@ -68,6 +68,7 @@ public class QuestionPromptController implements Observer{
     private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
+    private static ArrayList<Text> texts = new ArrayList<>();
     private static int questionNumber = 0;
     private String questionAnswer = "";
     private int submittedPlayerSize = 0;
@@ -183,6 +184,7 @@ public class QuestionPromptController implements Observer{
                 }else if (finalArg.toString().startsWith("~")){
                     Text text = new Text(finalArg.toString().substring(1)+"\n");
                     text.setFill(Color.SKYBLUE);
+                    texts.add(text);
                     chat_area.getChildren().add(text);
                 }else if(finalArg.toString().startsWith("`")){
                     String str = finalArg.toString().substring(1);
@@ -201,9 +203,14 @@ public class QuestionPromptController implements Observer{
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                     Text text = new Text(finalArg.toString()+"\n");
                     text.setFill(Color.WHITE);
+                    texts.add(text);
                     chat_area.getChildren().add(text);
                 }
             }
         });
+    }
+
+    public static ArrayList<Text> getTexts(){
+        return texts;
     }
 }

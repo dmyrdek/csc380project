@@ -46,6 +46,7 @@ public class ClientThread extends Thread {
   private int currentround = 0;
   private int questionNumber = 0;
   private boolean allPlayersSubmitted = false;
+  private boolean inVotingPrompt = false;
 
   public String getUserName() {
     return name;
@@ -236,9 +237,13 @@ public class ClientThread extends Thread {
                 if (this.questionNumber == 0){
                   this.questionNumber = 1;
                 } else if (this.questionNumber == 1){
-                  this.roundsNum++;
-                  this.questionNumber = 0;
+
+                  //this.roundsNum++;
+                  //this.questionNumber = 0;
             } 
+          } else if (line.substring(1).equals("inVotingPrompt")){
+            this.inVotingPrompt = true;
+            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
           }
         }
 
