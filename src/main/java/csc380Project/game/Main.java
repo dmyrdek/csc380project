@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.geometry.Insets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -45,6 +46,7 @@ public class Main extends Application {
         int votes = g.voteForAnswer("test", q1);
         votes = g.voteForAnswer("test", q1);
         leaders = g.getLeaderBoard();
+        ArrayList<String> leaderBoardString = g.getLeaderBoardStrings();
 
 
         System.out.println();

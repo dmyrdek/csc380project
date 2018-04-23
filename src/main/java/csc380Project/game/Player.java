@@ -10,6 +10,7 @@ public class Player implements Comparable {
     private int numVotesReceived;
     private int playerNumber;
     private boolean isHost;
+    private int roundNum;
     public ArrayList<Player> playersInGame;
 
     private String[] questionsToAnswer;
@@ -20,6 +21,7 @@ public class Player implements Comparable {
         numVotesReceived =0;
         playerNumber=-1;
         isHost = false;
+        roundNum = 0;
 
         answersToQuestions = new String [400]; //max at total questions (344)
         questionsToAnswer = new String[400];
@@ -142,7 +144,7 @@ public class Player implements Comparable {
     public ArrayList<String> getQuestionsToAnswerForRound(int roundNum) {
         ArrayList<String> questionsForRound = new ArrayList<>();
         ArrayList<String> allQuestions = new ArrayList<>();
-        int questionsAlreadyAnswered = (roundNum) *2;
+        int questionsAlreadyAnswered = roundNum * 2;
 
         for (int i = 0; i <this.questionsToAnswer.length; i++) {
             if (questionsToAnswer[i] != null) {
@@ -153,6 +155,21 @@ public class Player implements Comparable {
         questionsForRound.add(allQuestions.get(questionsAlreadyAnswered+1));
 
         return questionsForRound;
+    }
+
+    //displays strings properly formatted for displaying in leaderboard
+    public String displayForLeaderBoard(){
+
+        int size = this.name.length();
+        final int maxSize = 18;
+        String ret = this.name;
+
+        for (int i = 0; i< maxSize-size; i++){
+            ret = ret + " ";
+        }
+
+        return ret + this.getNumVotesReceived();
+
     }
 
 

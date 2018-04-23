@@ -309,10 +309,180 @@ public class GameTest {
             check = false;
         }
         assertEquals(true, check);
+    }
 
+    //tests getQuestionsToAnswerForRound method for players
+    @Test
+    public void getQuestionToAnswerForRoundTest() {
+        boolean umm = testGame2.giveQuestionstoPlayers();
+        int roundNum = 0;
+
+        boolean test1 = false;
+        boolean test2 = false;
+        boolean test3 = false;
+        boolean test4 = false;
+        boolean test5 = false;
+        boolean test6 = false;
+        boolean test7 = false;
+        boolean test8 = false;
+
+        //questions
+        ArrayList<String> questionsForP1 = new ArrayList<String>();
+        ArrayList<String> questionsForP2 = new ArrayList<String>();
+        ArrayList<String> questionsForP3 = new ArrayList<String>();
+        ArrayList<String> questionsForP4 = new ArrayList<String>();
+
+        ArrayList<String> roundQuestionsForP1 = new ArrayList<String>();
+        ArrayList<String> roundQuestionsForP2 = new ArrayList<String>();
+        ArrayList<String> roundQuestionsForP3 = new ArrayList<String>();
+        ArrayList<String> roundQuestionsForP4 = new ArrayList<String>();
+
+        String q1ForP1 = "";
+        String q2ForP1 = "";
+        String q1ForP2 = "";
+        String q2ForP2 = "";
+        String q1ForP3 = "";
+        String q2ForP3 = "";
+        String q1ForP4 = "";
+        String q2ForP4 = "";
+
+        //get the questions for all players
+        for(int x = 0; x < testGame2.getInGamePlayers().get(0).getQuestions().length; x++){
+            if(testGame2.getInGamePlayers().get(0).getQuestions()[x] != null) {
+                questionsForP1.add(testGame2.getInGamePlayers().get(0).getQuestions()[x]);
+            }
+        }
+        for(int x = 0; x < testGame2.getInGamePlayers().get(1).getQuestions().length; x++){
+            if(testGame2.getInGamePlayers().get(1).getQuestions()[x] != null) {
+                questionsForP2.add(testGame2.getInGamePlayers().get(1).getQuestions()[x]);
+            }
+        }
+        for(int x = 0; x < testGame2.getInGamePlayers().get(2).getQuestions().length; x++){
+            if(testGame2.getInGamePlayers().get(2).getQuestions()[x] != null) {
+                questionsForP3.add(testGame2.getInGamePlayers().get(2).getQuestions()[x]);
+            }        }
+        for(int x = 0; x < testGame2.getInGamePlayers().get(3).getQuestions().length; x++){
+            if(testGame2.getInGamePlayers().get(3).getQuestions()[x] != null) {
+                questionsForP4.add(testGame2.getInGamePlayers().get(3).getQuestions()[x]);
+            }
+        }
+
+        //get questions for 1st round for all players
+        q1ForP1 = questionsForP1.get(0);
+        q2ForP1 = questionsForP1.get(1);
+        q1ForP2 = questionsForP2.get(0);
+        q2ForP2 = questionsForP2.get(1);
+        q1ForP3 = questionsForP3.get(0);
+        q2ForP3 = questionsForP3.get(1);
+        q1ForP4 = questionsForP4.get(0);
+        q2ForP4 = questionsForP4.get(1);
+
+        roundQuestionsForP1 = testGame2.getInGamePlayers().get(0).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP2 = testGame2.getInGamePlayers().get(1).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP3 = testGame2.getInGamePlayers().get(2).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP4 = testGame2.getInGamePlayers().get(3).getQuestionsToAnswerForRound(roundNum);
+
+        //check questions
+        if(q1ForP1.equals(roundQuestionsForP1.get(0)) || q1ForP1.equals(roundQuestionsForP1.get(1))){
+            test1 = true;
+        }
+        if(q2ForP1.equals(roundQuestionsForP1.get(0)) || q2ForP1.equals(roundQuestionsForP1.get(1))){
+            test2 = true;
+        }
+        if(q1ForP2.equals(roundQuestionsForP2.get(0)) || q1ForP2.equals(roundQuestionsForP2.get(1))){
+            test3 = true;
+        }
+        if(q2ForP2.equals(roundQuestionsForP2.get(0)) || q2ForP2.equals(roundQuestionsForP2.get(1))){
+            test4 = true;
+        }
+        if(q1ForP3.equals(roundQuestionsForP3.get(0)) || q1ForP3.equals(roundQuestionsForP3.get(1))){
+            test5 = true;
+        }
+        if(q2ForP3.equals(roundQuestionsForP3.get(0)) || q2ForP3.equals(roundQuestionsForP3.get(1))){
+            test6 = true;
+        }
+        if(q1ForP4.equals(roundQuestionsForP4.get(0)) || q1ForP3.equals(roundQuestionsForP4.get(1))){
+            test7 = true;
+        }
+        if(q2ForP4.equals(roundQuestionsForP4.get(0)) || q2ForP3.equals(roundQuestionsForP4.get(1))){
+            test8 = true;
+        }
+
+        assertEquals(true, test1);
+        assertEquals(true, test2);
+        assertEquals(true, test3);
+        assertEquals(true, test4);
+        assertEquals(true, test5);
+        assertEquals(true, test6);
+        assertEquals(true, test7);
+        assertEquals(true, test8);
+
+        //round 2
+        roundNum++;
+
+        //reset checks
+        test1 = false;
+        test2 = false;
+        test3 = false;
+        test4 = false;
+        test5 = false;
+        test6 = false;
+        test7 = false;
+        test8 = false;
+
+        //get questions for 1st round for all players
+        q1ForP1 = questionsForP1.get(2);
+        q2ForP1 = questionsForP1.get(3);
+        q1ForP2 = questionsForP2.get(2);
+        q2ForP2 = questionsForP2.get(3);
+        q1ForP3 = questionsForP3.get(2);
+        q2ForP3 = questionsForP3.get(3);
+        q1ForP4 = questionsForP4.get(2);
+        q2ForP4 = questionsForP4.get(3);
+
+        roundQuestionsForP1 = testGame2.getInGamePlayers().get(0).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP2 = testGame2.getInGamePlayers().get(1).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP3 = testGame2.getInGamePlayers().get(2).getQuestionsToAnswerForRound(roundNum);
+        roundQuestionsForP4 = testGame2.getInGamePlayers().get(3).getQuestionsToAnswerForRound(roundNum);
+
+        //check questions
+        if(q1ForP1.equals(roundQuestionsForP1.get(0)) || q1ForP1.equals(roundQuestionsForP1.get(1))){
+            test1 = true;
+        }
+        if(q2ForP1.equals(roundQuestionsForP1.get(0)) || q2ForP1.equals(roundQuestionsForP1.get(1))){
+            test2 = true;
+        }
+        if(q1ForP2.equals(roundQuestionsForP2.get(0)) || q1ForP2.equals(roundQuestionsForP2.get(1))){
+            test3 = true;
+        }
+        if(q2ForP2.equals(roundQuestionsForP2.get(0)) || q2ForP2.equals(roundQuestionsForP2.get(1))){
+            test4 = true;
+        }
+        if(q1ForP3.equals(roundQuestionsForP3.get(0)) || q1ForP3.equals(roundQuestionsForP3.get(1))){
+            test5 = true;
+        }
+        if(q2ForP3.equals(roundQuestionsForP3.get(0)) || q2ForP3.equals(roundQuestionsForP3.get(1))){
+            test6 = true;
+        }
+        if(q1ForP4.equals(roundQuestionsForP4.get(0)) || q1ForP3.equals(roundQuestionsForP4.get(1))){
+            test7 = true;
+        }
+        if(q2ForP4.equals(roundQuestionsForP4.get(0)) || q2ForP3.equals(roundQuestionsForP4.get(1))){
+            test8 = true;
+        }
+
+        assertEquals(true, test1);
+        assertEquals(true, test2);
+        assertEquals(true, test3);
+        assertEquals(true, test4);
+        assertEquals(true, test5);
+        assertEquals(true, test6);
+        assertEquals(true, test7);
+        assertEquals(true, test8);
     }
 
     //tests total functionality
+    
 
     //what is this even testing???
     @Test

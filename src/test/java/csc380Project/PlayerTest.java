@@ -89,5 +89,4 @@ public class PlayerTest {
         testPlayer.setHostStatus(false);
         assertEquals(false, testPlayer.getHostStatus());
     }
-
 }
