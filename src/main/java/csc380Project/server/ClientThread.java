@@ -48,6 +48,7 @@ public class ClientThread extends Thread {
   private boolean allPlayersSubmitted = false;
   private boolean inVotingPrompt = false;
   private int votingQuestionNumber = 0;
+  private boolean getQuestions = false;
 
   public String getUserName() {
     return name;
@@ -223,6 +224,7 @@ public class ClientThread extends Thread {
             }
           } else if (line.substring(1).equals("inQuestionPrompt")) {
             inQuestionPrompt = true;
+            getQuestions = true;
           } else if (line.substring(1).equals("submitted")) {
             this.submittedAnswer = true;
             for (int i = 0; i < maxClientsCount; i++) {
@@ -270,7 +272,7 @@ public class ClientThread extends Thread {
           }
         }
         synchronized (this) {
-          if (inQuestionPrompt) {
+          if (getQuestions) {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
@@ -278,6 +280,7 @@ public class ClientThread extends Thread {
                 //threads[i].os.println("}" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
               }
             }
+            getQuestions = false;
           }
         }
 
