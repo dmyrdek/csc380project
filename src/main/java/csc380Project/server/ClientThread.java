@@ -68,7 +68,7 @@ public class ClientThread extends Thread {
       }
     }
   }
-
+/*
   public Player[] getLeaderBoard (){
     Player[] leaderboard = new Player [this.threads[0].myGame.getInGamePlayers().size()];
     ArrayList<Player> players = this.threads[0].myGame.getInGamePlayers();
@@ -78,7 +78,7 @@ public class ClientThread extends Thread {
     }
     return leaderboard;
   }
-
+*/
   public void run() {
     int maxClientsCount = this.maxClientsCount;
     ClientThread[] threads = this.threads;
@@ -283,15 +283,15 @@ public class ClientThread extends Thread {
                   threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
                       threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
                 }
-              }
+              } 
+              this.allPlayersSubmitted = false;
               if (this.questionNumber == 0){
                 this.questionNumber = 1;
               } else if (this.questionNumber == 1){
 
                 //this.roundsNum++;
                 //this.questionNumber = 0;
-              } 
-              this.allPlayersSubmitted = false;
+            }
             }
           }
         }
