@@ -227,17 +227,17 @@ public class ClientThread extends Thread {
               }
             }
           } else if (line.substring(1).equals("allPlayersSubmitted")){
-            allPlayersSubmitted = true;
+            this.allPlayersSubmitted = true;
               for (int i = 0; i < maxClientsCount; i++) {
                 if (threads[i] != null) {
                   this.os.println(threads[i].answers[currentround][questionNumber]);
-                  if (this.questionNumber == 0){
-                    this.questionNumber = 1;
-                  } else if (this.questionNumber == 1){
-                    this.roundsNum = 1;
-                    this.questionNumber = 0;
                   }
                 }
+                if (this.questionNumber == 0){
+                  this.questionNumber = 1;
+                } else if (this.questionNumber == 1){
+                  this.roundsNum++;
+                  this.questionNumber = 0;
             } 
           }
         }
@@ -268,18 +268,17 @@ public class ClientThread extends Thread {
           }
         }
 
-        if (line.startsWith("~")) {
-          synchronized (this) {
+        synchronized (this) {
+          if (line.startsWith("~")) {
             this.answers[currentround][questionNumber] = line.substring(1);
-            if (allPlayersSubmitted){
+            if (this.allPlayersSubmitted){
               for (int i = 0; i < maxClientsCount; i++) {
                 if (this == threads[i]) {
                   threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
-                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround)
-                              .get(questionNumber));
+                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
                 }
               }
-              allPlayersSubmitted = false;
+              this.allPlayersSubmitted = false;
             }
           }
         }
