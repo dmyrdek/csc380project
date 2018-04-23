@@ -56,7 +56,7 @@
             <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
          </effect>
       </Pane>
-      <Label contentDisplay="CENTER" layoutX="237.0" layoutY="97.0" prefHeight="73.0" prefWidth="417.0" stylesheets="@main.css" text="Welcome to Questioneers!" textAlignment="CENTER" textFill="WHITE" underline="true">
+      <Label contentDisplay="CENTER" layoutX="350.0" layoutY="83.0" prefHeight="73.0" prefWidth="178.0" stylesheets="@main.css" text="Instructions" textAlignment="CENTER" textFill="WHITE" underline="true">
          <font>
             <Font size="31.0" />
          </font>
