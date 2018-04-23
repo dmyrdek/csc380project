@@ -66,7 +66,7 @@ public class ClientThread extends Thread {
       }
     }
   }
-/*
+
   public Player[] getLeaderBoard (){
     Player[] leaderboard = new Player [this.threads[0].myGame.getInGamePlayers().size()];
     ArrayList<Player> players = this.threads[0].myGame.getInGamePlayers();
@@ -76,7 +76,7 @@ public class ClientThread extends Thread {
     }
     return leaderboard;
   }
-*/
+
   public void run() {
     int maxClientsCount = this.maxClientsCount;
     ClientThread[] threads = this.threads;

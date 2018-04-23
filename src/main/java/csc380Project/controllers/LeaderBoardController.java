@@ -18,7 +18,7 @@ import javax.swing.text.TableView;
 import java.io.IOException;
 import csc380Project.game.*;
 
-public class LeaderBoard {
+public class LeaderBoardController {
 
     @FXML
     TextFlow chat_area;

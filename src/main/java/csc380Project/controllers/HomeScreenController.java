@@ -47,6 +47,15 @@ public class HomeScreenController{
         appStage.requestFocus();
     }
 
+    public void howToPlayButtonPress(ActionEvent event) throws IOException{
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HowToPlay.fxml"));
+        Scene createLobbyScene = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(createLobbyScene);
+        appStage.show();
+        appStage.requestFocus();
+    }
+
     public void quitGameButtonPress(ActionEvent event){
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.close();
