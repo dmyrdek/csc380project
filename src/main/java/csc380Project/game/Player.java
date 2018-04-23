@@ -155,5 +155,20 @@ public class Player implements Comparable {
         return questionsForRound;
     }
 
+    //displays strings properly formatted for displaying in leaderboard
+    public String displayForLeaderBoard(){
+
+        int size = this.name.length();
+        final int maxSize = 18;
+        String ret = this.name;
+
+        for (int i = 0; i< maxSize-size; i++){
+            ret = ret + " ";
+        }
+
+        return ret + this.getNumVotesReceived();
+
+    }
+
 
 }

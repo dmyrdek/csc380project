@@ -45,6 +45,10 @@ public class Main extends Application {
         int votes = g.voteForAnswer("test", q1);
         votes = g.voteForAnswer("test", q1);
         leaders = g.getLeaderBoard();
+        System.out.println(g.getInGamePlayers().get(0).displayForLeaderBoard());
+        System.out.println(g.getInGamePlayers().get(1).displayForLeaderBoard());
+        System.out.println(g.getInGamePlayers().get(2).displayForLeaderBoard());
+        System.out.println(g.getInGamePlayers().get(3).displayForLeaderBoard());
 
 
         System.out.println();
