@@ -49,7 +49,7 @@
                   <Image url="@small_logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="HTPnextButton1" buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" onAction="#howToPlayButtonPress2" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+            <JFXButton fx:id="HTPnextButton2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -67,20 +67,14 @@
             <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
          </effect>
       </Pane>
-      <Label contentDisplay="CENTER" layoutX="345.0" layoutY="86.0" prefHeight="73.0" prefWidth="210.0" stylesheets="@main.css" text="How To Play" textAlignment="CENTER" textFill="WHITE" underline="true">
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Label>
-      <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="40.0" layoutY="196.0" prefHeight="261.0" prefWidth="460.0" stylesheets="@main.css" text="1. Once you're in a waiting lobby, hit the &#10;&quot;ready up&quot; button. Once everyone has hit&#10;their &quot;ready up button&quot;, the game will &#10;move on.&#10;&#10;Hit the &quot;Next&quot; button!" textFill="WHITE">
+      <Label contentDisplay="CENTER" layoutX="40.0" layoutY="99.0" prefHeight="358.0" prefWidth="483.0" stylesheets="@main.css" text="2. Once you see a screen similar to this one,&#10;type your response in the space provided&#10;&#10;3. Hit the submit button in the top right corner&#10;&#10;4. Once all other players hit submit, &#10;answer the next question you are given,&#10;and repeat steps 2&amp;3&#10;" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="500.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="523.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@waitingLobbyImg.png" />
-         </image>
-      </ImageView>
+            <Image url="@votingScene.png" />
+         </image></ImageView>
    </children>
 </Pane>
