@@ -135,6 +135,22 @@ public class Player implements Comparable {
         return false;
     }
 
+    public boolean updateScore(String q, String ans){
+        for (Player p : playersInGame){
+            if (p != null){
+                for (int i = 0; i<p.getAnswers().length; i++){
+                    if (p.getAnswerAtIndex(i) != null && p.getQuestionAtIndex(i) != null) {
+                        if (p.getAnswerAtIndex(i).equals(ans) && p.getQuestionAtIndex(i).equals(q)){
+                            p.increaseVotesReceived();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
     public String toString() {
         return this.name + " votes received: " + this.getNumVotesReceived();
