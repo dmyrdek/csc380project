@@ -46,8 +46,9 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.Label;
 
-public class VotingPromptController implements Observer{
+public class VotingResultsController implements Observer{
 
     @FXML
     JFXTextArea question_prompt;
@@ -68,69 +69,56 @@ public class VotingPromptController implements Observer{
     JFXButton submit_button;
 
     @FXML
-    JFXToggleButton vote_option_one;
+    Label voting_results_one;
 
     @FXML
-    JFXToggleButton vote_option_two;
+    Label voting_results_two;
 
-    private static ChatAccess chatAccess;
+
+    private ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
-    private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
+    private static BooleanProperty isVotingResultsLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 0;
     private static Stage myStage;
     private String voteOption = "";
 
-    public static ChatAccess getChatAccess() {
-        return chatAccess;
-    }
-
-    public static void setStage(Stage stage) {
-        myStage = stage;
-     }
-
     @FXML
     public void initialize() throws IOException {
         question_prompt.setMouseTransparent(true);
 
-        VotingPromptController current = this;
+        VotingResultsController current = this;
 
-        isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
+        isVotingResultsLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chatAccess = QuestionPromptControllerTwo.getChatAccess();
+                    chatAccess = VotingPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: QuestionPromptControllerTwo.getTexts()){
+                    for (Text t: VotingPromptController.getTexts()){
                         chat_area.getChildren().add(t);
                     }
 
-                    chatAccess.send("`inVotingPrompt");
+                    chatAccess.send("`inVotingResults");
                 }
             }
         });
-
-        Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("VotingResults.fxml"));
-        Scene homePage = new Scene(homePageParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    //chatAccess.send("`allPlayersSubmitted");
-                    myStage.setScene(homePage);
-                    myStage.show();
-                    myStage.requestFocus();
-                    VotingResultsController.setIsVotingResultsLoadedToTrue();
+                    
                 }
             }
         });
+
     }
 
-    public static void setIsVotingPromptLoadedToTrue(){
-        isVotingPromptLoaded.set(true);
+    public static void setIsVotingResultsLoadedToTrue(){
+        isVotingResultsLoaded.set(true);
     }
 
     public void sendMessage(ActionEvent event){
@@ -142,26 +130,9 @@ public class VotingPromptController implements Observer{
         message_field.setText("");
     }
 
-    public void voteOptionOne(ActionEvent event){
-        if (vote_option_two.isSelected()){
-            vote_option_two.setSelected(false);
-        }
-        vote_option_one.setSelected(true);
-        voteOption = "1";
-    }
-
-    public void voteOptionTwo(ActionEvent event){
-        if (vote_option_one.isSelected()){
-            vote_option_one.setSelected(false);
-        }
-        vote_option_two.setSelected(true);
-        voteOption = "2";
-    }
-
     public void submitVote(ActionEvent event){
         submit_button.setDisable(true);
         chatAccess.send("}" + voteOption);
-
     }
 
 
