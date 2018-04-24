@@ -30,7 +30,7 @@
       </Pane>
       <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
          <children>
-            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#howToPlayButtonPress2" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#howToPlayButtonPress4" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -49,7 +49,7 @@
                   <Image url="@small_logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="HTPnextButton2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" onAction="#howToPlayButtonPress5" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+            <JFXButton fx:id="HTPnextButton2" buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Return Home" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -67,15 +67,10 @@
             <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
          </effect>
       </Pane>
-      <Label contentDisplay="CENTER" layoutX="40.0" layoutY="99.0" prefHeight="358.0" prefWidth="483.0" stylesheets="@main.css" text="5. You will be shown the voting screen. &#10;Toggle the button below the answer you&#10;want to vote for, then press submit&#10;&#10;6. Wait for all players submit, repeat step 5&#10;(Note: you will get to vote for every question&#10;that was asked in that round)&#10;&#10;" textFill="WHITE">
+      <Label contentDisplay="CENTER" layoutX="40.0" layoutY="99.0" prefHeight="358.0" prefWidth="483.0" stylesheets="@main.css" text="7. Once voting has finished, a leaderboard&#10;will be displayed, and then the next round&#10;of questions and answers will begin.&#10;&#10;8. After all the rounds have been played,&#10;a player will be crowned winner!&#10;&#10;" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="523.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@VotingScene.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>
