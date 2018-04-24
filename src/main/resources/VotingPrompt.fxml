@@ -64,23 +64,23 @@
       <TextFlow fx:id="chat_area" layoutX="589.0" layoutY="88.0" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
       <VBox alignment="CENTER" layoutX="18.0" layoutY="87.0" prefHeight="400.0" prefWidth="548.0" style="-fx-spacing: 30;">
          <children>
-            <Label text="Question #" textFill="#ffffffcb">
+            <Label text="Question" textFill="#ffffffcb">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="149.0" prefWidth="548.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+            <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="149.0" prefWidth="548.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
             <HBox alignment="CENTER" style="-fx-spacing: 50;">
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton fx:id="vote_option_one" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionOne" textFill="WHITE" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text="Test test test test test test test test test test test test test test" unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton fx:id="vote_option_two" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionTwo" textFill="WHITE" />
                      </children>
                   </VBox>

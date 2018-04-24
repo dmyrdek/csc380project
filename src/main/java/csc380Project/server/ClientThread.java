@@ -260,7 +260,7 @@ public class ClientThread extends Thread {
                   this.questionNumber = 1;
                 } else if (this.questionNumber == 1){
 
-                  this.roundsNum++;
+                  this.currentround++;
                   this.questionNumber = 0;
             } 
           } else if (line.substring(1).equals("inVotingPrompt")){
@@ -278,14 +278,17 @@ public class ClientThread extends Thread {
           if (getQuestions) {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
-                if (questionNumber == 1){
+                threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
+                    .getQuestionsToAnswerForRound(currentround).get(questionNumber));
+
+                /*if (questionNumber == 1){
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
                     .getQuestionsToAnswerForRound(currentround).get(0));
                 //threads[i].os.println("}" + threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(0).get(1));
                 } else {
                   threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
                     .getQuestionsToAnswerForRound(currentround-1).get(1));
-                }
+                }*/
               }
             }
             getQuestions = false;
