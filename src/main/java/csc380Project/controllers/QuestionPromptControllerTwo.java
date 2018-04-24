@@ -88,6 +88,7 @@ public class QuestionPromptControllerTwo implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        VotingPromptController.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
 
@@ -100,7 +101,7 @@ public class QuestionPromptControllerTwo implements Observer{
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: WaitingLobbyController.getTexts()){
+                    for (Text t: QuestionPromptController.getTexts()){
                         chat_area.getChildren().add(t);
                     }
 

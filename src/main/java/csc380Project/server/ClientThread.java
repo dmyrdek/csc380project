@@ -306,6 +306,8 @@ public class ClientThread extends Thread {
 
                     threads[i].os.println("1 vote for \"" + threads[0].myGame.getAllAnswersForQuestion(
                       threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0] + "\"");
+
+                    threads[i].os.println("`submitted");
                   }
               }
             } else if (line.substring(1).equals("2")){
@@ -317,6 +319,8 @@ public class ClientThread extends Thread {
 
                   threads[i].os.println("1 vote for \"" + threads[0].myGame.getAllAnswersForQuestion(
                     threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1] + "\"");
+
+                  threads[i].os.println("`submitted");
                 }
             }
           }
