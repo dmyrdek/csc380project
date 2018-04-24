@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.HowToPlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.JoinGameController">
    <children>
       <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
          <effect>
@@ -30,7 +30,7 @@
       </Pane>
       <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
          <children>
-            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Home" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -56,43 +56,20 @@
             <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
          </effect>
       </Pane>
-      <Label contentDisplay="CENTER" layoutX="237.0" layoutY="97.0" prefHeight="73.0" prefWidth="417.0" stylesheets="@main.css" text="Welcome to Questioneers!" textAlignment="CENTER" textFill="WHITE" underline="true">
+      <Label contentDisplay="CENTER" layoutX="345.0" layoutY="86.0" prefHeight="73.0" prefWidth="210.0" stylesheets="@main.css" text="How To Play" textAlignment="CENTER" textFill="WHITE" underline="true">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <JFXButton fx:id="hostButton" buttonType="RAISED" layoutX="82.0" layoutY="252.0" onAction="#hostButtonPress" prefHeight="76.0" prefWidth="219.0" ripplerFill="#ca300a" style="-fx-background-color: #67809F;" text="Playing as HOST" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
-         </effect>
+      <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="40.0" layoutY="147.0" prefHeight="310.0" prefWidth="460.0" stylesheets="@main.css" text="1. Once you're in a waiting lobby, hit the &#10;&quot;ready up&quot; button. Once everyone has hit&#10;their &quot;ready up button&quot;, the game will &#10;move on.&#10;&#10;Hit the next button!" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="22.0" />
          </font>
-      </JFXButton>
-      <JFXButton fx:id="nonHostButton" buttonType="RAISED" layoutX="341.0" layoutY="252.0" onAction="#NonHostButtonPress" prefHeight="76.0" prefWidth="219.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Playing as NON-HOST" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
-         </effect>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="howtoPlayB" buttonType="RAISED" layoutX="595.0" layoutY="252.0" onAction="#howToPlayButtonPress1" prefHeight="76.0" prefWidth="219.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="How To Play" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
-         </effect>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
+      </Label>
+      <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="500.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@waitingLobbyImg.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
