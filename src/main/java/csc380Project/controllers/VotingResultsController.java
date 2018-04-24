@@ -69,11 +69,16 @@ public class VotingResultsController implements Observer{
     JFXButton submit_button;
 
     @FXML
-    Label voting_results_one;
+    Label voting_results_one_name;
 
     @FXML
-    Label voting_results_two;
+    Label voting_results_one_votes;
 
+    @FXML
+    Label voting_results_two_name;
+
+    @FXML
+    Label voting_results_two_votes;
 
     private ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
@@ -82,7 +87,9 @@ public class VotingResultsController implements Observer{
     private int submittedPlayerSize = 0;
     private static Stage myStage;
     private String voteOption = "";
-
+    private int answerOneCounter = 0;
+    private int answerTwoCounter = 0;
+    
     @FXML
     public void initialize() throws IOException {
         question_prompt.setMouseTransparent(true);
@@ -98,6 +105,7 @@ public class VotingResultsController implements Observer{
                     chatAccess.addObserver(current);
                     
                     for (Text t: VotingPromptController.getTexts()){
+                        texts.add(t);
                         chat_area.getChildren().add(t);
                     }
 
@@ -143,11 +151,27 @@ public class VotingResultsController implements Observer{
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
-                    answer_prompt_one.selectAll();
-                    answer_prompt_one.setText(finalArg.toString().substring(1));
+                    if (answerOneCounter == 0){
+                        answer_prompt_one.selectAll();
+                        answer_prompt_one.setText(finalArg.toString().substring(1));
+                        answerOneCounter++;
+                    } else if (answerOneCounter == 1){
+                        voting_results_one_name.setText(finalArg.toString().substring(1));
+                        answerOneCounter++;
+                    } else{
+                        voting_results_one_votes.setText(finalArg.toString().substring(1));
+                    }
                 } else if (finalArg.toString().startsWith("%")){
-                    answer_prompt_two.selectAll();
-                    answer_prompt_two.setText(finalArg.toString().substring(1));
+                    if (answerTwoCounter == 0){
+                        answer_prompt_two.selectAll();
+                        answer_prompt_two.setText(finalArg.toString().substring(1));
+                        answerTwoCounter++;
+                    } else if (answerTwoCounter == 1){
+                        voting_results_two_name.setText(finalArg.toString().substring(1));
+                        answerTwoCounter++;
+                    } else {
+                        voting_results_two_votes.setText(finalArg.toString().substring(1));
+                    }
                 }
                 
                 else if(finalArg.toString().startsWith("|")){

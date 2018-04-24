@@ -74,9 +74,14 @@
                   <VBox alignment="CENTER">
                      <children>
                         <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
-                        <Label fx:id="voting_results_one" text=" " textFill="#ffffffcb">
+                        <Label fx:id="voting_results_one_name" opacity="0.95" text=" " textFill="#ffffffcb">
                            <font>
-                              <Font size="22.0" />
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_one_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
                            </font>
                         </Label>
                      </children>
@@ -84,9 +89,14 @@
                   <VBox alignment="CENTER">
                      <children>
                         <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
-                        <Label fx:id="voting_results_two" text=" " textFill="#ffffffcb">
+                        <Label fx:id="voting_results_two_name" opacity="0.95" text=" " textFill="#ffffffcb">
                            <font>
-                              <Font size="22.0" />
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_two_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
                            </font>
                         </Label>
                      </children>
