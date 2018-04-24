@@ -227,20 +227,6 @@ public class ClientThread extends Thread {
             inQuestionPrompt = true;
             getQuestions = true;
 
-            if (this == threads[0]) {
-              for (int i = 0; i < maxClientsCount; i++) {
-                if (threads[i] != null) {
-                  //threads[i].myRounds[1][1] = true;
-                  if (!threads[0].playerList.contains(threads[i].player)) {
-                    threads[0].playerList.add(threads[i].player);
-                  }
-                }
-              }
-              if (myGame == null) {
-                myGame = new Game(10, this.playerList);
-                //System.out.println(myGame.toString());
-              }
-            }
           } else if (line.substring(1).equals("submitted")) {
             this.submittedAnswer = true;
             for (int i = 0; i < maxClientsCount; i++) {
