@@ -78,6 +78,7 @@ public class VotingPromptController implements Observer{
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 0;
     private static Stage myStage;
+    private String voteOption = "";
 
     @FXML
     public void initialize() throws IOException {
@@ -122,6 +123,7 @@ public class VotingPromptController implements Observer{
             vote_option_two.setSelected(false);
         }
         vote_option_one.setSelected(true);
+        voteOption = "1";
     }
 
     public void voteOptionTwo(ActionEvent event){
@@ -129,6 +131,12 @@ public class VotingPromptController implements Observer{
             vote_option_one.setSelected(false);
         }
         vote_option_two.setSelected(true);
+        voteOption = "2";
+    }
+
+    public void submitVote(ActionEvent event){
+        submit_button.setDisable(true);
+        chatAccess.send("}" + voteOption);
     }
 
 

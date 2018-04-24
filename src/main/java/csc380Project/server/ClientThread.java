@@ -49,6 +49,7 @@ public class ClientThread extends Thread {
   private boolean inVotingPrompt = false;
   private int votingQuestionNumber = 0;
   private boolean getQuestions = false;
+  private boolean getVotes = false;
 
   public String getUserName() {
     return name;
@@ -249,6 +250,7 @@ public class ClientThread extends Thread {
             } 
           } else if (line.substring(1).equals("inVotingPrompt")){
             this.inVotingPrompt = true;
+            this.getVotes = true;
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
               threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]);
@@ -283,6 +285,29 @@ public class ClientThread extends Thread {
             getQuestions = false;
           }
         }
+
+        synchronized (this) {
+          if (getVotes){
+            if (line.startsWith("}")){
+              if (line.substring(1).equals("1")){
+                for (int i = 0; i < maxClientsCount; i++) {
+                  if (threads[i] != null) {
+                    threads[i].os.println("1 vote for \"" + threads[0].myGame.getAllAnswersForQuestion(
+                      threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0] + "\"");
+                  }
+              }
+            } else if (line.substring(1).equals("2")){
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (threads[i] != null) {
+                  threads[i].os.println("1 vote for \"" + threads[0].myGame.getAllAnswersForQuestion(
+                    threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1] + "\"");
+                }
+            }
+          }
+        }
+      }
+    }
+
 
         synchronized (this) {
           if (line.startsWith("~")) {
