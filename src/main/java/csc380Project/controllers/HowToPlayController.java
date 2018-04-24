@@ -62,6 +62,25 @@ public class HowToPlayController {
     }
 
 
+    public void howToPlayButtonPress3(ActionEvent event) throws IOException {
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HowToPlay4.fxml"));
+        Scene homePage = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(homePage);
+        appStage.show();
+        appStage.requestFocus();
+    }
+
+    public void howToPlayButtonPress(ActionEvent event) throws IOException {
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HowToPlay.fxml"));
+        Scene homePage = new Scene(homePageParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(homePage);
+        appStage.show();
+        appStage.requestFocus();
+    }
+
+
 
 
 
