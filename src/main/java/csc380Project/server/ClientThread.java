@@ -276,6 +276,21 @@ public class ClientThread extends Thread {
 
         synchronized (this) {
           if (getQuestions) {
+            if (this == threads[0]) {
+              for (int i = 0; i < maxClientsCount; i++) {
+                if (threads[i] != null) {
+                  //threads[i].myRounds[1][1] = true;
+                  if (!threads[0].playerList.contains(threads[i].player)) {
+                    threads[0].playerList.add(threads[i].player);
+                  }
+                }
+              }
+              if (myGame == null) {
+                myGame = new Game(10, this.playerList);
+                //System.out.println(myGame.toString());
+              }
+            }
+
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null) {
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
