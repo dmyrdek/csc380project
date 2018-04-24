@@ -102,6 +102,7 @@ public class QuestionPromptControllerTwo implements Observer{
                     chatAccess.addObserver(current);
                     
                     for (Text t: QuestionPromptController.getTexts()){
+                        texts.add(t);
                         chat_area.getChildren().add(t);
                     }
 
