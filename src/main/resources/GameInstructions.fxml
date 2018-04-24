@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.JoinGameController">
+   <children>
+      <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="38.48" radius="16.619999999999997" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="37.27" radius="16.317500000000003" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="41.49" radius="23.47" width="54.39" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Home" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
+               </effect>
+               <font>
+                  <Font name="SofiaProLight" size="13.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="430.0" layoutY="14.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="nextButton1" buttonType="RAISED" contentDisplay="RIGHT" layoutX="759.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
+         </effect>
+      </Pane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="487.0" layoutY="93.0" prefHeight="73.0" prefWidth="218.0" stylesheets="@main.css" text="How To Play" textAlignment="CENTER" textFill="WHITE" underline="true">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="94.0" layoutY="178.0" prefHeight="89.0" prefWidth="269.0" stylesheets="@main.css" text="Players: 2-15&#10;Play time 5-20 minutes&#10;&#10;" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="93.0" prefHeight="73.0" prefWidth="308.0" stylesheets="@main.css" text="General Information" textAlignment="CENTER" textFill="WHITE" underline="true">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="473.0" layoutY="158.0" prefHeight="257.0" prefWidth="391.0" stylesheets="@main.css" text="1. Connect to a waiting&#10; lobby. Instructions for this can be &#10;found on the &quot;Playing as Host&quot;&#10;and &quot;Playing as NON-HOST&quot; buttons&#10;on previous page&#10;&#10;Once you are on the screen &#10;displayed, hit the next button!&#10;" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
