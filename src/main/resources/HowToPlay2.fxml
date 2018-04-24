@@ -49,6 +49,17 @@
                   <Image url="@small_logo.png" />
                </image>
             </ImageView>
+            <JFXButton fx:id="HTPnextButton1" buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
       <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
@@ -61,7 +72,7 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="40.0" layoutY="147.0" prefHeight="310.0" prefWidth="460.0" stylesheets="@main.css" text="1. Once you're in a waiting lobby, hit the &#10;&quot;ready up&quot; button. Once everyone has hit&#10;their &quot;ready up button&quot;, the game will &#10;move on.&#10;&#10;Hit the next button!" textFill="WHITE">
+      <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="40.0" layoutY="196.0" prefHeight="261.0" prefWidth="460.0" stylesheets="@main.css" text="1. Once you're in a waiting lobby, hit the &#10;&quot;ready up&quot; button. Once everyone has hit&#10;their &quot;ready up button&quot;, the game will &#10;move on.&#10;&#10;Hit the &quot;Next&quot; button!" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
