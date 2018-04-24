@@ -221,6 +221,19 @@ public class Game {
     }
 
 
+    public String whoAnsweredQuestion(String ans, String question){
+        for (Player p : inGamePlayers){
+            for (int i = 0; i<p.getQuestions().length; i++){
+                if (p.getQuestions()[i]!=null){
+                    if (p.getQuestionAtIndex(i).equals(question) && p.getAnswerAtIndex(i).equals(ans)){
+                        return p.getName();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public ArrayList<String> getLeaderBoardStrings(){
         ArrayList<String> playerLeaderBoard = new ArrayList<>();
         ArrayList<Player> players = this.inGamePlayers;
