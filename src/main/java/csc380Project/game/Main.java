@@ -110,6 +110,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        primaryStage.setOpacity(0.0);
         BorderPane bp = new BorderPane();
         bp.setPadding(new Insets(10, 50, 50, 50));
         Scene scene = new Scene(bp);
@@ -124,6 +125,7 @@ public class Main extends Application {
 
         primaryStage.show();
         root.requestFocus();
+        primaryStage.setOpacity(1.0);
 
         WaitingLobbyController.setStage(primaryStage);
     }

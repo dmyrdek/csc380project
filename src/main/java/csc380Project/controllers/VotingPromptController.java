@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import csc380Project.server.*;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.text.Text;
 import javafx.scene.text.FontWeight;
@@ -66,6 +67,12 @@ public class VotingPromptController implements Observer{
     @FXML
     JFXButton submit_button;
 
+    @FXML
+    JFXToggleButton vote_option_one;
+
+    @FXML
+    JFXToggleButton vote_option_two;
+
     private ChatAccess chatAccess;
     private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
@@ -108,6 +115,20 @@ public class VotingPromptController implements Observer{
         message_field.selectAll();
         message_field.requestFocus();
         message_field.setText("");
+    }
+
+    public void voteOptionOne(ActionEvent event){
+        if (vote_option_two.isSelected()){
+            vote_option_two.setSelected(false);
+        }
+        vote_option_one.setSelected(true);
+    }
+
+    public void voteOptionTwo(ActionEvent event){
+        if (vote_option_one.isSelected()){
+            vote_option_one.setSelected(false);
+        }
+        vote_option_two.setSelected(true);
     }
 
 
