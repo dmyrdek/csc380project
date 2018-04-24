@@ -135,7 +135,7 @@ public class Player implements Comparable {
         return false;
     }
 
-    
+
 
     public String toString() {
         return this.name + " votes received: " + this.getNumVotesReceived();
