@@ -189,6 +189,9 @@ public class ClientThread extends Thread {
         for (int i = 0; i < maxClientsCount; i++) {
           if (threads[i] != null && threads[i] == this) {
             clientName = "@" + name;
+            if (!threads[0].playerList.contains(threads[i].player)) {
+              threads[0].playerList.add(threads[i].player);
+            }
             break;
           }
         }
@@ -196,6 +199,9 @@ public class ClientThread extends Thread {
           if (threads[i] != null && threads[i] != this) {
             threads[i].os.println("~A new user " + name + " has joined!");
             threads[i].os.println("}" + name);
+            if (!threads[0].playerList.contains(threads[i].player)) {
+              threads[0].playerList.add(threads[i].player);
+            }
           }
         }
       }
@@ -228,14 +234,6 @@ public class ClientThread extends Thread {
             getQuestions = true;
 
             if (this == threads[0]) {
-              for (int i = 0; i < maxClientsCount; i++) {
-                if (threads[i] != null) {
-                  //threads[i].myRounds[1][1] = true;
-                  if (!threads[0].playerList.contains(threads[i].player)) {
-                    threads[0].playerList.add(threads[i].player);
-                  }
-                }
-              }
               if (myGame == null) {
                 myGame = new Game(10, threads[0].playerList);
                 System.out.println(myGame.toString());
