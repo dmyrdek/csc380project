@@ -278,7 +278,7 @@ public class ClientThread extends Thread {
             }
 
             for (int i = 0; i < maxClientsCount; i++) {
-              if (threads[i] != null) {
+              if (threads[i] != null && threads[0].myGame.getInGamePlayers().get(i) != null) {
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
                     .getQuestionsToAnswerForRound(currentround).get(questionNumber));
 
