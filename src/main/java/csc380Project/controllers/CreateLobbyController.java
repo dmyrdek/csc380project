@@ -109,8 +109,11 @@ public class CreateLobbyController {
 
     @FXML
     public void initialize() {
+
         maxNumberOfPlayers.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
         numberOfRounds.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15");
+        maxNumberOfPlayers.setVisibleRowCount(10);
+        numberOfRounds.setVisibleRowCount(10);
     }
 
     private class StartGameSever extends Thread{

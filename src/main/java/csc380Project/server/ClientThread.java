@@ -24,8 +24,8 @@ public class ClientThread extends Thread {
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private int maxClientsCount;
+  private int roundsNum = 4;
   private String name = "";
-  private int roundsNum = 15;
   private QuestionPack qp = new QuestionPack().addAllQuestions();
   private boolean[][] myVotes = new boolean[roundsNum][2];
   private int[][] totalVotes = new int[roundsNum][2];
@@ -51,6 +51,8 @@ public class ClientThread extends Thread {
   private boolean getVotes = false;
   private int clientVoteOne = 0;
   private int clientVoteTwo = 0;
+  private boolean inVotingResults = false;
+  private int inVotingResultsTime = 15;
 
   public String getUserName() {
     return name;
@@ -128,6 +130,9 @@ public class ClientThread extends Thread {
               } else if (inVotingPrompt) {
                 countDownTime = inQuestionPromptTime;
                 inVotingPrompt = false;
+              } else if (inVotingResults){
+                countDownTime = inVotingResultsTime;
+                inVotingResults = false;
               }
               countDownTime--;
               for (int i = 0; i < maxClientsCount; i++) {
@@ -212,7 +217,6 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
-
             this.inVotingPrompt = true;
             this.getVotes = true;
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
@@ -220,8 +224,9 @@ public class ClientThread extends Thread {
                 threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]);
             this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
                 threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1]);
-
           } else if (line.substring(1).equals("inVotingResults")) {
+            inVotingResults = true;
+
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
 
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
@@ -262,6 +267,8 @@ public class ClientThread extends Thread {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null && threads[0].myGame != null
                   && threads[0].myGame.getInGamePlayers().get(i) != null) {
+                threads[i].os.println("%" + threads[0].myGame.getNumOfRounds()*roundsNum);
+                
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
                     .getQuestionsToAnswerForRound(currentround).get(questionNumber));
               }

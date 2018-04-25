@@ -74,6 +74,8 @@ public class WaitingLobbyController implements Observer {
     private static String messageHistory = "";
     private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
     private int readyPlayerSize = 0;
+    private static int totalNumberOfRounds = 0;
+    private static int totalNumberOfQuestions = 0;
 
     private static Stage myStage;
 

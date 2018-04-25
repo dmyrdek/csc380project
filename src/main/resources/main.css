@@ -1,19 +1,21 @@
-.text-field
-{
+.text-field{
     -fx-prompt-text-fill: lightgray;
     -fx-text-fill: lightgray;
 }
 
-.combo-box
-{
+.combo-box{
     -fx-prompt-text-fill: lightgray;
     -fx-text-fill: lightgray;
 }
 
-.jfx-combo-box .cell:selected
-{
-    -fx-background-color: Black;
-    -fx-text-fill: WHITE;
+.jfx-combo-box .cell:selected{
+    -fx-background-color: #222635;
+    -fx-text-fill: white;
+}
+
+.jfx-combo-box .list-cell{
+    -fx-font: 10pt "System";
+    -fx-text-fill: white;
 }
 
 .jfx-text-area {
@@ -78,4 +80,20 @@
     -fx-background-color: #0093ff;
     -fx-background-color: #355977;
     -fx-text-fill: white;
+}
+
+.jfx-slider > .animated-thumb {
+    -fx-background-color: #1E88E5;;
+}
+
+.jfx-slider > .thumb {
+    -fx-background-color: #1E88E5;
+}
+
+.jfx-slider > .colored-track {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+}
+
+.jfx-slider > .track {
+    -fx-background-color: #282d3f;
 }

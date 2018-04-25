@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
@@ -75,28 +76,48 @@
             </ImageView>
             </children>
         </Pane>
-      <VBox fx:id="usernameField" layoutX="110.0" layoutY="140.0" style="-fx-spacing: 50;">
+      <VBox fx:id="usernameField" alignment="CENTER" layoutX="59.0" layoutY="134.0" prefHeight="328.0" prefWidth="348.0" style="-fx-spacing: 45;">
          <children>
-              <JFXTextField fx:id="username_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#submitUsername" prefHeight="28.0" prefWidth="230.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
-                  <font>
-                      <Font name="SofiaProLight" size="14.0" />
-                  </font>
-                  <cursor>
-                      <Cursor fx:constant="DEFAULT" />
-                  </cursor>
-            </JFXTextField>
-              <JFXTextField fx:id="port_number_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#submitPortNumber" prefHeight="28.0" prefWidth="230.0" promptText="Port Number" unFocusColor="WHITE">
-                  <font>
-                      <Font name="SofiaProLight" size="14.0" />
-                  </font>
-              </JFXTextField>
-              <JFXComboBox fx:id="maxNumberOfPlayers" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="230.0" promptText="Max Number Of Players" stylesheets="@main.css" unFocusColor="WHITE" visibleRowCount="20" />
-            <JFXComboBox fx:id="numberOfRounds" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="230.0" promptText="Number of rounds" stylesheets="@main.css" unFocusColor="WHITE" visibleRowCount="20" />
+            <VBox alignment="CENTER" style="-fx-spacing: 5;">
+               <children>
+                    <JFXTextField fx:id="username_field" focusColor="#0ac7ca" labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" onKeyReleased="#submitUsername" prefHeight="28.0" prefWidth="250.0" promptText="Username" stylesheets="@main.css" unFocusColor="WHITE">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="DEFAULT" />
+                        </cursor>
+                  </JFXTextField>
+                  <Label fx:id="username_error" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" style="-fx-spacing: 5;">
+               <children>
+                    <JFXTextField fx:id="port_number_field" focusColor="#0ac7ca" labelFloat="true" maxWidth="-Infinity" onKeyReleased="#submitPortNumber" prefHeight="28.0" prefWidth="250.0" promptText="Port Number" unFocusColor="WHITE">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </JFXTextField>
+                  <Label fx:id="port_error" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" style="-fx-spacing: 5;">
+               <children>
+                    <JFXComboBox fx:id="maxNumberOfPlayers" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="250.0" promptText="Max Number Of Players" stylesheets="@main.css" unFocusColor="WHITE" visibleRowCount="20" />
+                  <Label fx:id="port_error1" text="Please enter a max number of players before continuing" textFill="#ca300a" visible="false" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" style="-fx-spacing: 5;">
+               <children>
+                  <JFXComboBox fx:id="numberOfRounds" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="250.0" promptText="Number of rounds" stylesheets="@main.css" unFocusColor="WHITE" visibleRowCount="20" />
+                  <Label fx:id="port_error11" text="Please enter a number of rounds before continuing" textFill="#ca300a" visible="false" />
+               </children>
+            </VBox>
          </children>
       </VBox>
         <Label layoutX="178.0" layoutY="94.0" text="Manditory" textFill="WHITE">
             <font>
-                <Font name="SofiaProLight" size="20.0" />
+                <Font size="20.0" />
             </font>
         </Label>
         <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
@@ -104,18 +125,21 @@
                 <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
             </effect>
         </Pane>
-      <VBox layoutX="564.0" layoutY="142.0" style="-fx-spacing: 50;">
+      <VBox layoutX="554.0" layoutY="146.0" style="-fx-spacing: 50;">
          <children>
-              <JFXComboBox disable="true" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="230.0" promptText="Answers Per Question" unFocusColor="WHITE" />
-              <JFXComboBox disable="true" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="230.0" promptText="Number Of Questions Per Round" unFocusColor="WHITE" />
+              <JFXComboBox disable="true" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="250.0" promptText="Answers Per Question" unFocusColor="WHITE" />
+              <JFXComboBox disable="true" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="250.0" promptText="Number Of Questions Per Round" unFocusColor="WHITE" />
          </children>
       </VBox>
         <Label layoutX="639.0" layoutY="94.0" text="Optional" textFill="WHITE">
             <font>
-                <Font name="SofiaProLight" size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-      <Label fx:id="username_error" layoutX="93.0" layoutY="172.0" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
-      <Label fx:id="port_error" layoutX="85.0" layoutY="251.0" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
+      <JFXSlider indicatorPosition="RIGHT" layoutX="484.0" layoutY="360.0" majorTickUnit="20.0" max="20.0" min="2.0" minorTickCount="20" prefHeight="15.0" prefWidth="250.0" showTickLabels="true" stylesheets="@main.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXSlider>
     </children>
 </Pane>
