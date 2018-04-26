@@ -217,6 +217,9 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
+            if (this == threads[0]){
+              
+            }
             this.inVotingPrompt = true;
             this.getVotes = true;
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);

@@ -76,8 +76,10 @@ public class WaitingLobbyController implements Observer {
     private int readyPlayerSize = 0;
     private static int totalNumberOfRounds = 0;
     private static int totalNumberOfQuestions = 0;
-
     private static Stage myStage;
+    private static int maxPlayers;
+    private static int numRounds;
+    private boolean isHost = false;
 
     public static void setStage(Stage stage) {
        myStage = stage;
@@ -98,7 +100,10 @@ public class WaitingLobbyController implements Observer {
             port = JoinGameController.getPortNumber();
         }
         else if (CreateLobbyController.getPortNumber() != ""){
+            isHost = true;
             port = CreateLobbyController.getPortNumber();
+            maxPlayers = CreateLobbyController.getMaxPlayers();
+            numRounds = CreateLobbyController.getNumRounds();
         }
         server = "tcp://0.tcp.ngrok.io";
 
@@ -128,6 +133,11 @@ public class WaitingLobbyController implements Observer {
         }
 
         player_list.setItems(names);
+
+        if(isHost){
+            chatAccess.send("%" + maxPlayers);
+            chatAccess.send("%" + numRounds);
+        }
 
         /*if (allPlayersReady){
             Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
@@ -179,7 +189,7 @@ public class WaitingLobbyController implements Observer {
 
                         if (countDownTime < 0)
                             timer.cancel();
-                  }
+                   }
                 });
             }
             }, 1000, 1000);*/

@@ -41,6 +41,8 @@ public class CreateLobbyController {
 
     private static String portNumber = "";
     private static String username = "";
+    private static int maxPlayers = 10;
+    private static int numRounds = 10;
 
     @FXML
     public void submitPortNumber(KeyEvent event){
@@ -58,6 +60,14 @@ public class CreateLobbyController {
 
     public static String getUsername(){
         return username;
+    }
+
+    public static int getMaxPlayers(){
+        return maxPlayers;
+    }
+
+    public static int getNumRounds(){
+        return numRounds;
     }
 
     public void backButtonPress(ActionEvent event) throws IOException {
@@ -80,6 +90,9 @@ public class CreateLobbyController {
         if (!portNumber.equals("") && !username.equals("")){
             if (isInteger(portNumber)){
                 new StartGameSever().start();
+
+                maxPlayers = (int) Math.round(max_players.getValue());
+                numRounds = (int) Math.round(num_rounds.getValue());
                 
                 Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
                 Scene homePage = new Scene(homePageParent);
