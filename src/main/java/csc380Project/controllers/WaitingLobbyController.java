@@ -4,6 +4,8 @@ import csc380Project.server.*;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Font;
@@ -59,6 +61,9 @@ public class WaitingLobbyController implements Observer {
     @FXML
     ListView player_list;
 
+    @FXML
+    ScrollPane chat_scroll_pane;
+
 
     private static Integer startTime = 80;
     //private Integer countDownTime;
@@ -79,7 +84,7 @@ public class WaitingLobbyController implements Observer {
     private static Stage myStage;
     private static int maxPlayers;
     private static int numRounds;
-    private boolean isHost = false;
+    private static boolean isHost = false;
 
     public static void setStage(Stage stage) {
        myStage = stage;
@@ -90,7 +95,17 @@ public class WaitingLobbyController implements Observer {
         return chatAccess;
     }
 
+    public static int getMaxPlayers(){
+        return maxPlayers;
+    }
 
+    public static int getNumRounds(){
+        return numRounds;
+    }
+
+    public static boolean getIsHost(){
+        return isHost;
+    }
 
     @FXML
     public void initialize() throws IOException {
@@ -133,6 +148,8 @@ public class WaitingLobbyController implements Observer {
         }
 
         player_list.setItems(names);
+
+        chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         if(isHost){
             chatAccess.send("%" + maxPlayers);

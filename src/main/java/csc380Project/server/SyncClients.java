@@ -6,25 +6,24 @@ import java.net.Socket;
 import java.net.ServerSocket;
 
 public class SyncClients extends Thread{
+
+    public SyncClients(int max){
+        maxClientsCount = max;
+        threads = new ClientThread[maxClientsCount];
+    }
+
     // The server socket.
     private static ServerSocket serverSocket = null;
     // The client socket.
     private static Socket clientSocket = null;
 
-    private static final int maxClientsCount = 10;
+    private static int maxClientsCount;
 
-    private static final ClientThread[] threads = new ClientThread[maxClientsCount];
+    private static ClientThread[] threads;
 
     public static void main(String args[]) {
 
-        // The default port number.
         int portNumber = 4122;
-        if (args.length < 1) {
-          System.out.println("Usage: java MultiThreadChatServerSync <portNumber>\n"
-              + "Now using port number=" + portNumber);
-        } else {
-          portNumber = Integer.valueOf(args[0]).intValue();
-        }
     
         /*
          * Open a server socket on the portNumber (default 4122). Note that we can

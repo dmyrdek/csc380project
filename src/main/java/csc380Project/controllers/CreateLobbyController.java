@@ -90,9 +90,6 @@ public class CreateLobbyController {
         if (!portNumber.equals("") && !username.equals("")){
             if (isInteger(portNumber)){
                 new StartGameSever().start();
-
-                maxPlayers = (int) Math.round(max_players.getValue());
-                numRounds = (int) Math.round(num_rounds.getValue());
                 
                 Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
                 Scene homePage = new Scene(homePageParent);
@@ -134,8 +131,10 @@ public class CreateLobbyController {
 
     private class StartGameSever extends Thread{
         public void run(){
+            maxPlayers = (int) Math.round(max_players.getValue());
+            numRounds = (int) Math.round(num_rounds.getValue());
             String[] arguments = new String[] {};
-            new SyncClients().main(arguments);
+            new SyncClients(maxPlayers).main(arguments);
         }
     }
 

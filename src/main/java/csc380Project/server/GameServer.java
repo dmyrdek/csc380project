@@ -16,7 +16,7 @@ public class GameServer {
 		Object selection = JOptionPane.showInputDialog(null, "Login as : ", "MyChatApp", JOptionPane.QUESTION_MESSAGE, null, selectioValues, initialSection);
 		if(selection.equals("Server")){
 			String[] arguments = new String[] {};
-			SyncClients sc = new SyncClients();
+			SyncClients sc = new SyncClients(15);
 			sc.start();
 			GameClient gc = new GameClient();
 			gc.start();

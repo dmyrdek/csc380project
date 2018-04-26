@@ -73,6 +73,9 @@ public class QuestionPromptController implements Observer{
     private String questionAnswer = "";
     private int submittedPlayerSize = 0;
     private static Stage myStage;
+    private static int maxPlayers;
+    private static int numRounds;
+    private static boolean isHost = false;
 
     public static void setStage(Stage stage) {
        myStage = stage;
@@ -97,6 +100,12 @@ public class QuestionPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    isHost = WaitingLobbyController.getIsHost();
+                    if (isHost){
+                        maxPlayers = WaitingLobbyController.getMaxPlayers();
+                        numRounds = WaitingLobbyController.getNumRounds();
+                    }
+
                     chatAccess = WaitingLobbyController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);

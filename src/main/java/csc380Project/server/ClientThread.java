@@ -23,8 +23,8 @@ public class ClientThread extends Thread {
   private PrintStream os = null;
   private Socket clientSocket = null;
   private final ClientThread[] threads;
-  private int maxClientsCount;
-  private int roundsNum = 4;
+  private final int maxClientsCount;
+  private int roundsNum = 10;
   private String name = "";
   private QuestionPack qp = new QuestionPack().addAllQuestions();
   private boolean[][] myVotes = new boolean[roundsNum][2];
@@ -53,6 +53,7 @@ public class ClientThread extends Thread {
   private int clientVoteTwo = 0;
   private boolean inVotingResults = false;
   private int inVotingResultsTime = 15;
+  private int inVotingLobbyCounter = 0;
 
   public String getUserName() {
     return name;
@@ -106,6 +107,11 @@ public class ClientThread extends Thread {
           if (this == this.threads[0]) {
             this.isHost = true;
           }
+          if (str.startsWith("%")){
+            System.out.println(str.substring(1));
+            roundsNum = Integer.parseInt(str.substring(1));
+          } else{
+          }
         }
       }
       for (int i = 0; i < maxClientsCount; i++) {
@@ -130,7 +136,7 @@ public class ClientThread extends Thread {
               } else if (inVotingPrompt) {
                 countDownTime = inQuestionPromptTime;
                 inVotingPrompt = false;
-              } else if (inVotingResults){
+              } else if (inVotingResults) {
                 countDownTime = inVotingResultsTime;
                 inVotingResults = false;
               }
@@ -217,9 +223,6 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
-            if (this == threads[0]){
-              
-            }
             this.inVotingPrompt = true;
             this.getVotes = true;
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);

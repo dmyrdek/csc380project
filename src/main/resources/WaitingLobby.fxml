@@ -6,6 +6,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -66,6 +67,10 @@
          <effect>
             <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
          </effect></ListView>
-      <TextFlow fx:id="chat_area" layoutX="589.0" layoutY="88.0" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
+      <ScrollPane fx:id="chat_scroll_pane" layoutX="589.0" layoutY="88.0" stylesheets="@main.css">
+         <content>
+            <TextFlow fx:id="chat_area" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
+         </content>
+      </ScrollPane>
     </children>
 </Pane>
