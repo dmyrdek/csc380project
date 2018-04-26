@@ -2,6 +2,7 @@ package csc380Project.controllers;
 
 import csc380Project.server.*;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,12 +21,6 @@ import java.io.IOException;
 
 public class CreateLobbyController {
     @FXML
-    JFXComboBox maxNumberOfPlayers;
-
-    @FXML
-    JFXComboBox numberOfRounds;
-
-    @FXML
     JFXTextField port_number_field;
 
     @FXML
@@ -36,6 +31,12 @@ public class CreateLobbyController {
     
     @FXML
     Label username_error;
+
+    @FXML
+    JFXSlider max_players;
+
+    @FXML
+    JFXSlider num_rounds;
     
 
     private static String portNumber = "";
@@ -109,11 +110,13 @@ public class CreateLobbyController {
 
     @FXML
     public void initialize() {
+        max_players.setValue(10);
+        num_rounds.setValue(10);
 
-        maxNumberOfPlayers.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
-        numberOfRounds.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15");
-        maxNumberOfPlayers.setVisibleRowCount(10);
-        numberOfRounds.setVisibleRowCount(10);
+        //maxNumberOfPlayers.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
+        //numberOfRounds.getItems().addAll("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15");
+        //maxNumberOfPlayers.setVisibleRowCount(10);
+        //numberOfRounds.setVisibleRowCount(10);
     }
 
     private class StartGameSever extends Thread{
