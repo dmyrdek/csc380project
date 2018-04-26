@@ -101,9 +101,9 @@
                   <Label fx:id="port_error" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" style="-fx-spacing: 25;">
+            <VBox alignment="CENTER" style="-fx-spacing: 33;">
                <children>
-                  <VBox maxWidth="-Infinity" prefHeight="73.0" prefWidth="260.0">
+                  <VBox maxWidth="-Infinity" prefHeight="73.0" prefWidth="255.0">
                      <children>
                         <Label style="-fx-padding: 3;" text="Max Number of Players" textFill="LIGHTGRAY" />
                         <JFXSlider fx:id="max_players" indicatorPosition="RIGHT" majorTickUnit="20.0" max="16.0" min="2.0" minorTickCount="20" prefHeight="15.0" prefWidth="250.0" showTickLabels="true" stylesheets="@main.css">
@@ -111,10 +111,9 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXSlider>
-                        <Label fx:id="port_error1" text="Please enter a max number of players before continuing" textFill="#ca300a" visible="false" />
                      </children>
                   </VBox>
-                  <VBox maxWidth="-Infinity" prefHeight="73.0" prefWidth="260.0">
+                  <VBox maxWidth="-Infinity" prefHeight="73.0" prefWidth="255.0">
                      <children>
                         <Label style="-fx-padding: 3;" text="Number of Rounds" textFill="LIGHTGRAY" />
                         <JFXSlider fx:id="num_rounds" indicatorPosition="RIGHT" majorTickUnit="20.0" max="20.0" min="2.0" minorTickCount="20" prefHeight="15.0" prefWidth="234.0" showTickLabels="true" stylesheets="@main.css">
@@ -122,14 +121,13 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXSlider>
-                        <Label fx:id="port_error11" text="Please enter a number of rounds before continuing" textFill="#ca300a" visible="false" />
                      </children>
                   </VBox>
                </children>
             </VBox>
          </children>
       </VBox>
-        <Label layoutX="178.0" layoutY="94.0" text="Manditory" textFill="WHITE">
+        <Label layoutX="178.0" layoutY="94.0" opacity="0.8" text="Manditory" textFill="WHITE">
             <font>
                 <Font size="20.0" />
             </font>
@@ -145,7 +143,7 @@
               <JFXComboBox disable="true" focusColor="#0ac7ca" labelFloat="true" prefHeight="27.0" prefWidth="250.0" promptText="Number Of Questions Per Round" unFocusColor="WHITE" />
          </children>
       </VBox>
-        <Label layoutX="639.0" layoutY="94.0" text="Optional" textFill="WHITE">
+        <Label layoutX="639.0" layoutY="94.0" opacity="0.8" text="Optional" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
