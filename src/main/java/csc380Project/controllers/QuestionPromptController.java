@@ -1,15 +1,9 @@
 package csc380Project.controllers;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-
 import csc380Project.server.*;
-import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.text.Text;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextFlow;
 import javafx.scene.paint.Color;
 import javafx.scene.input.KeyEvent;
@@ -20,29 +14,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
 import java.lang.Runnable;
-import java.io.*;
-import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.application.Platform;
 import java.io.IOException;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
@@ -68,7 +47,6 @@ public class QuestionPromptController implements Observer{
     @FXML
     ScrollPane chat_scroll_pane;
 
-
     private static ChatAccess chatAccess;
     private static String port;
     private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
@@ -81,6 +59,9 @@ public class QuestionPromptController implements Observer{
     private static Stage myStage;
     private static int maxPlayers;
     private static int numRounds;
+    private static int numOfTotalQuestions;
+    private static int currentNumOfRounds = 0;
+    private static int currentNumOfQuestions = 0;
     private static boolean isHost = false;
 
     public static void setStage(Stage stage) {
@@ -97,6 +78,9 @@ public class QuestionPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        currentNumOfQuestions++;
+        currentNumOfRounds++;
+
         QuestionPromptControllerTwo.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
@@ -217,6 +201,9 @@ public class QuestionPromptController implements Observer{
                 }else if(finalArg.toString().startsWith("{")){
                     question_prompt.selectAll();
                     question_prompt.setText(finalArg.toString().substring(1));
+                }else if(finalArg.toString().startsWith("%")){
+                    numRounds = Integer.parseInt(finalArg.toString().substring(1));
+                    numOfTotalQuestions = numRounds * 2;
                 }
                 
                 else{
