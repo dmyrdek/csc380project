@@ -258,6 +258,10 @@ public class WaitingLobbyController implements Observer {
                     }
                 }else{
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
+                    String name;
+                    if (finalArg.toString().startsWith("<")){
+                        
+                    }
                     Text text = new Text(finalArg.toString()+"\n");
                     text.setFill(Color.WHITE);
                     texts.add(text);
