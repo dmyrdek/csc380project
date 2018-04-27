@@ -6,6 +6,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -58,8 +59,6 @@
             </ImageView>
          </children>
       </Pane>
-      <JFXTextField fx:id="message_field" focusColor="#0ac7c9" layoutX="588.0" layoutY="459.0" onAction="#sendMessage" prefHeight="27.0" prefWidth="303.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
-      <TextFlow fx:id="chat_area" layoutX="589.0" layoutY="88.0" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
       <VBox alignment="CENTER" layoutX="50.0" layoutY="79.0" prefHeight="413.0" prefWidth="498.0" style="-fx-spacing: 30;">
          <children>
             <Label text="Question" textFill="#ffffffcb">
@@ -69,6 +68,16 @@
             </Label>
             <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="177.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
             <JFXTextArea fx:id="answer_prompt" focusColor="#0ac7c9" labelFloat="true" onKeyReleased="#getAnswer" prefHeight="128.0" prefWidth="498.0" promptText="Type you're response here..." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
+         </children>
+      </VBox>
+      <VBox layoutX="579.0" layoutY="85.0" style="-fx-spacing: 8;">
+         <children>
+            <ScrollPane fx:id="chat_scroll_pane" hbarPolicy="NEVER" style="-fx-padding: 2;" stylesheets="@main.css" vbarPolicy="ALWAYS">
+               <content>
+                  <TextFlow fx:id="chat_area" prefHeight="364.0" prefWidth="303.0" style="-fx-background-color: #27374B; -fx-background-radius: 5; -fx-padding: 10; -fx-line-spacing: 5;" />
+               </content>
+            </ScrollPane>
+            <JFXTextField fx:id="message_field" focusColor="#0ac7c9" maxWidth="-Infinity" onAction="#sendMessage" prefHeight="27.0" prefWidth="300.0" promptText="Chat with your Friends here..." unFocusColor="#4059a9" />
          </children>
       </VBox>
    </children>

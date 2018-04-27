@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.control.ScrollPane;
+import com.jfoenix.controls.JFXScrollPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.FontWeight;
@@ -150,6 +151,8 @@ public class WaitingLobbyController implements Observer {
         player_list.setItems(names);
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
+        JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         if(isHost){
             chatAccess.send("%" + maxPlayers);

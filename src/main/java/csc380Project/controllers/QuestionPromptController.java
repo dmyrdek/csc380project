@@ -45,6 +45,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.ScrollPane;
+import com.jfoenix.controls.JFXScrollPane;
 
 public class QuestionPromptController implements Observer{
 
@@ -62,6 +64,10 @@ public class QuestionPromptController implements Observer{
 
     @FXML
     JFXTextArea answer_prompt;
+
+    @FXML
+    ScrollPane chat_scroll_pane;
+
 
     private static ChatAccess chatAccess;
     private static String port;
@@ -96,6 +102,10 @@ public class QuestionPromptController implements Observer{
         question_prompt.setMouseTransparent(true);
 
         QuestionPromptController current = this;
+
+        chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
+        JFXScrollPane.smoothScrolling(chat_scroll_pane);
         isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

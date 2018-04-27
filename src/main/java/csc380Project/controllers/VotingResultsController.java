@@ -47,6 +47,8 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import com.jfoenix.controls.JFXScrollPane;
 
 public class VotingResultsController implements Observer{
 
@@ -80,6 +82,10 @@ public class VotingResultsController implements Observer{
     @FXML
     Label voting_results_two_votes;
 
+    @FXML
+    ScrollPane chat_scroll_pane;
+
+
     private ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingResultsLoaded = new SimpleBooleanProperty(false);
@@ -95,6 +101,10 @@ public class VotingResultsController implements Observer{
         question_prompt.setMouseTransparent(true);
 
         VotingResultsController current = this;
+
+        chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
+        JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         isVotingResultsLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
