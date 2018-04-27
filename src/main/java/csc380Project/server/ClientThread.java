@@ -1,6 +1,5 @@
 package csc380Project.server;
 
-import csc380Project.controllers.*;
 import csc380Project.game.Player;
 import csc380Project.game.Game;
 import csc380Project.game.QuestionPack;
@@ -9,12 +8,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import javax.lang.model.element.Name;
-import org.omg.PortableServer.THREAD_POLICY_ID;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Arrays;
 
 // For every client's connection we call this class
 public class ClientThread extends Thread {
@@ -24,13 +19,13 @@ public class ClientThread extends Thread {
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private final int maxClientsCount;
-  private int roundsNum = 10;
+  private int roundsNum ;
   private String name = "";
   private QuestionPack qp = new QuestionPack().addAllQuestions();
   private boolean[][] myVotes = new boolean[roundsNum][2];
   private int[][] totalVotes = new int[roundsNum][2];
   private Player player;
-  private int numOfPlayers = 0;
+  private final int numOfPlayers = 16; //allways test for the max number of players
   private boolean isHost = false;
   private boolean isReady = false;
   private boolean submittedAnswer = false;
@@ -107,10 +102,14 @@ public class ClientThread extends Thread {
           if (this == this.threads[0]) {
             this.isHost = true;
           }
-          if (str.startsWith("%")){
-            System.out.println(str.substring(1));
-            roundsNum = Integer.parseInt(str.substring(1));
-          } else{
+          if (isHost){
+            String str2 = is.readLine();
+            if(str2.startsWith("%")){
+              System.out.println(str2.substring(1));
+              roundsNum = Integer.parseInt(str2.substring(1));
+            }
+          }else{
+            roundsNum = threads[0].roundsNum;
           }
         }
       }
@@ -199,7 +198,11 @@ public class ClientThread extends Thread {
           } else if (line.substring(1).equals("inQuestionPrompt")) {
             inQuestionPrompt = true;
             getQuestions = true;
-
+            for (int i = 0; i < maxClientsCount; i++) {
+              if (threads[i] != null) {
+                threads[i].os.println("%" + roundsNum);
+              }
+            }
           } else if (line.substring(1).equals("submitted")) {
             this.submittedAnswer = true;
             for (int i = 0; i < maxClientsCount; i++) {

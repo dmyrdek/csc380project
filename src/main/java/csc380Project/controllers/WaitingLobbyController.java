@@ -3,12 +3,9 @@ package csc380Project.controllers;
 import csc380Project.server.*;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.ScrollEvent;
+import com.jfoenix.controls.JFXScrollPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextFlow;
 import javafx.scene.paint.Color;
 import com.jfoenix.controls.JFXButton;
@@ -20,31 +17,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
 import java.lang.Runnable;
-import java.io.*;
-import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 import javafx.application.Platform;
 import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public class WaitingLobbyController implements Observer {
-    
 
     @FXML
     JFXButton ready_button;
@@ -64,9 +52,7 @@ public class WaitingLobbyController implements Observer {
     @FXML
     ScrollPane chat_scroll_pane;
 
-
     private static Integer startTime = 80;
-    //private Integer countDownTime;
     private Timeline timeline;
     private String readyStatus = "Ready Up";
     private Timer timer = new Timer();
@@ -85,11 +71,11 @@ public class WaitingLobbyController implements Observer {
     private static int maxPlayers;
     private static int numRounds;
     private static boolean isHost = false;
+    private static int numberOfLivePlayers = 1;
 
     public static void setStage(Stage stage) {
        myStage = stage;
     }
-
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -105,6 +91,13 @@ public class WaitingLobbyController implements Observer {
 
     public static boolean getIsHost(){
         return isHost;
+    }
+    
+    /**
+     * @return the numberOfLivePlayers
+     */
+    public static int getNumberOfLivePlayers() {
+        return numberOfLivePlayers;
     }
 
     @FXML
@@ -150,9 +143,10 @@ public class WaitingLobbyController implements Observer {
         player_list.setItems(names);
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
+        JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         if(isHost){
-            chatAccess.send("%" + maxPlayers);
             chatAccess.send("%" + numRounds);
         }
 
@@ -245,6 +239,7 @@ public class WaitingLobbyController implements Observer {
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
+                    numberOfLivePlayers++;
                     names.add(finalArg.toString().substring(1));
                 }else if(finalArg.toString().startsWith("|")){
                     ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);

@@ -1,19 +1,12 @@
 package csc380Project.controllers;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-
 import csc380Project.server.*;
-import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.text.Text;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextFlow;
 import javafx.scene.paint.Color;
-import javafx.scene.input.KeyEvent;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.beans.value.ChangeListener;
@@ -21,31 +14,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
 import java.lang.Runnable;
-import java.io.*;
-import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.application.Platform;
 import java.io.IOException;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.ScrollPane;
+import com.jfoenix.controls.JFXScrollPane;
 
 public class VotingPromptController implements Observer{
 
@@ -73,6 +53,10 @@ public class VotingPromptController implements Observer{
     @FXML
     JFXToggleButton vote_option_two;
 
+    @FXML
+    ScrollPane chat_scroll_pane;
+
+
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
@@ -80,6 +64,7 @@ public class VotingPromptController implements Observer{
     private int submittedPlayerSize = 0;
     private static Stage myStage;
     private String voteOption = "";
+    private static int numPlayers;
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -91,9 +76,15 @@ public class VotingPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+        numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
+
         question_prompt.setMouseTransparent(true);
 
         VotingPromptController current = this;
+
+        chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
+        JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override

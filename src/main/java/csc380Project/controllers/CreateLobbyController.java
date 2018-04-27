@@ -1,7 +1,6 @@
 package csc380Project.controllers;
 
 import csc380Project.server.*;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -11,8 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Label;
