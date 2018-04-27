@@ -56,7 +56,7 @@ public class QuestionPromptControllerTwo implements Observer{
     private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
     private static int questionNumber = 0;
     private String questionAnswer = "";
-    private int submittedPlayerSize = 0;
+    private int submittedPlayerSize = 1;
     private static Stage myStage;
 
     public static void setStage(Stage stage) {

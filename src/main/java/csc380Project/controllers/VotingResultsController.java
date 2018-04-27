@@ -71,7 +71,7 @@ public class VotingResultsController implements Observer{
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingResultsLoaded = new SimpleBooleanProperty(false);
     private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
-    private int submittedPlayerSize = 0;
+    private int submittedPlayerSize = 1;
     private static Stage myStage;
     private String voteOption = "";
     private int answerOneCounter = 0;

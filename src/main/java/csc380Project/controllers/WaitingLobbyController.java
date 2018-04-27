@@ -64,7 +64,7 @@ public class WaitingLobbyController implements Observer {
     private static ArrayList<Text> texts = new ArrayList<>();
     private static String messageHistory = "";
     private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
-    private int readyPlayerSize = 0;
+    private int readyPlayerSize = 1;
     private static int totalNumberOfRounds = 0;
     private static int totalNumberOfQuestions = 0;
     private static Stage myStage;
@@ -127,6 +127,8 @@ public class WaitingLobbyController implements Observer {
             ex.printStackTrace();
             System.exit(0);
         }
+
+        names.add(0, "Port Number: " + port);
 
 
         if (name.equals("")){

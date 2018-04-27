@@ -19,7 +19,7 @@ public class ClientThread extends Thread {
   private Socket clientSocket = null;
   private final ClientThread[] threads;
   private final int maxClientsCount;
-  private int roundsNum ;
+  private int roundsNum = 16;
   private String name = "";
   private QuestionPack qp = new QuestionPack().addAllQuestions();
   private boolean[][] myVotes = new boolean[roundsNum][2];

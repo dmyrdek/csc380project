@@ -55,7 +55,7 @@ public class QuestionPromptController implements Observer{
     private static ArrayList<Text> texts = new ArrayList<>();
     private static int questionNumber = 0;
     private String questionAnswer = "";
-    private int submittedPlayerSize = 0;
+    private int submittedPlayerSize = 1;
     private static Stage myStage;
     private static int maxPlayers;
     private static int numRounds;
