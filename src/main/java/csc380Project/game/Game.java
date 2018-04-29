@@ -1,9 +1,8 @@
 package csc380Project.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.time.format.DateTimeFormatter;
 
 public class Game {
 
@@ -162,8 +161,8 @@ public class Game {
         } else if (a == 2) {
             return name +  " didn't submit an answer this round. They might be dropping a couple of kids off at the pool...";
         } else if (a == 3) {
-            return "Looks like " + name + "'s mom was yelling at them for playing video games past their " +
-                    java.time.LocalTime.now() + " curfew. They didn't submit an answer";
+            return "Looks like " + name + "'s mom was yelling at them for playing video games past " +
+                    java.time.LocalTime.now().format(DateTimeFormatter.ofPattern("hh:00")) + " curfew. They didn't submit an answer";
         } else {
             return name + " didn't submit an answer this round. You should probably make fun of them";
         }
