@@ -25,9 +25,13 @@ import java.io.IOException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
-import com.jfoenix.controls.JFXScrollPane;
+import javafx.scene.layout.Pane;
+
 
 public class VotingPromptController implements Observer{
+
+    @FXML
+    Pane main_pane;
 
     @FXML
     JFXTextArea question_prompt;
@@ -60,11 +64,12 @@ public class VotingPromptController implements Observer{
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
-    private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
+    private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 1;
     private static Stage myStage;
     private String voteOption = "";
     private static int numPlayers;
+    public static int votingPromptCount = 0;
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -74,49 +79,64 @@ public class VotingPromptController implements Observer{
         myStage = stage;
      }
 
+
     @FXML
     public void initialize() throws IOException {
         numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
 
         question_prompt.setMouseTransparent(true);
 
+        //VotingPromptController.setStage(myStage);
+
+
         VotingPromptController current = this;
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
-        JFXScrollPane.smoothScrolling(chat_scroll_pane);
+        //JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chatAccess = QuestionPromptControllerTwo.getChatAccess();
+                    chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: QuestionPromptControllerTwo.getTexts()){
+                    for (Text t: QuestionPromptController.getTexts()){
                         texts.add(t);
                         chat_area.getChildren().add(t);
                     }
 
                     chatAccess.send("`inVotingPrompt");
                 }
+                isVotingPromptLoaded.set(false);
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("VotingResults.fxml"));
-        Scene homePage = new Scene(homePageParent);
+        Parent votingResultParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingResults.fxml"));
+        Scene votingResult = new Scene(votingResultParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    vote_option_one.setDisable(false);
+                    vote_option_two.setDisable(false);
                     //chatAccess.send("`allPlayersSubmitted");
-                    myStage.setScene(homePage);
-                    myStage.show();
-                    myStage.requestFocus();
-                    VotingResultsController.setIsVotingResultsLoadedToTrue();
+                    if (votingPromptCount <= numPlayers){
+                        System.out.println("numPlayers: " + numPlayers);
+                        votingPromptCount++;
+                        chatAccess.send("`inVotingPrompt");
+                        submit_button.setDisable(false);
+                    }else {
+                        myStage.setScene(votingResult);
+                        myStage.show();
+                        myStage.requestFocus();
+                        VotingResultsController.setIsVotingResultsLoadedToTrue();
+                    }
                 }
+                allPlayersSubmitted.set(false);
             }
         });
     }
@@ -164,11 +184,23 @@ public class VotingPromptController implements Observer{
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
                 if (finalArg.toString().startsWith("}")){
-                    answer_prompt_one.selectAll();
-                    answer_prompt_one.setText(finalArg.toString().substring(1));
+                    if (finalArg.toString().charAt(1) == '~'){
+                        answer_prompt_one.selectAll();
+                        answer_prompt_one.setText(finalArg.toString().substring(2));
+                        vote_option_one.setDisable(true);
+                    }else {
+                        answer_prompt_one.selectAll();
+                        answer_prompt_one.setText(finalArg.toString().substring(1));
+                    }
                 } else if (finalArg.toString().startsWith("%")){
-                    answer_prompt_two.selectAll();
-                    answer_prompt_two.setText(finalArg.toString().substring(1));
+                    if (finalArg.toString().charAt(1) == '~'){
+                        answer_prompt_two.selectAll();
+                        answer_prompt_two.setText(finalArg.toString().substring(2));
+                        vote_option_two.setDisable(true);
+                    }else {
+                        answer_prompt_two.selectAll();
+                        answer_prompt_two.setText(finalArg.toString().substring(1));
+                    }
                 }
                 
                 else if(finalArg.toString().startsWith("|")){
