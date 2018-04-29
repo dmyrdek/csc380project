@@ -136,7 +136,7 @@ public class Game {
             for (int i = 0; i< numQuestions; i++){
                 if (p.getQuestions()[i] != null){
                     if (p.getQuestions()[i].equals(question)){
-                        if (p.getAnswerAtIndex(i) == null) {
+                        if (p.getAnswerAtIndex(i) == null || p.getAnswerAtIndex(i).equals("")) {
                             answers[count] = funnyResponse(p.getName());
                             count++;
                         } else {
