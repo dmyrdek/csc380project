@@ -42,6 +42,8 @@ public class Main extends Application {
         String q1 = g.getGameQuestions().getQuestions()[0];
         g.getInGamePlayers().get(3).addAnswer("test", q1);
         g.getInGamePlayers().get(2).addAnswer("test2", q1);
+        g.getInGamePlayers().get(0).addAnswer("t", g.getInGamePlayers().get(0).getQuestionsToAnswerForRound(0).get(0));
+        String [] ans = g.getAllAnswersForQuestion(g.getInGamePlayers().get(0).getQuestionsToAnswerForRound(0).get(0));
         String [] answersToq1 = g.getAllAnswersForQuestion(q1);
         int votes = g.voteForAnswer("test", q1);
         votes = g.voteForAnswer("test", q1);
