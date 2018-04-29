@@ -81,7 +81,7 @@ public class QuestionPromptController implements Observer{
         currentNumOfQuestions++;
         currentNumOfRounds++;
 
-        QuestionPromptControllerTwo.setStage(myStage);
+        VotingPromptController.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
 
@@ -89,7 +89,7 @@ public class QuestionPromptController implements Observer{
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
-        JFXScrollPane.smoothScrolling(chat_scroll_pane);
+        //JFXScrollPane.smoothScrolling(chat_scroll_pane);
         isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -114,7 +114,7 @@ public class QuestionPromptController implements Observer{
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(QuestionPromptController.class.getClassLoader().getResource("QuestionPromptTwo.fxml"));
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPrompt.fxml"));
         Scene homePage = new Scene(homePageParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
@@ -124,15 +124,22 @@ public class QuestionPromptController implements Observer{
                     chatAccess.send("`allPlayersSubmitted");
                     if (questionNumber == 0){
                         questionNumber = 1;
+                        chatAccess.send("`inQuestionPrompt");
+                        submit_button.setDisable(false);
                         //myStage.getScene().setRoot(homePageParent);
+                        //myStage.setScene(homePage);
+                        //myStage.show();
+                        //myStage.requestFocus();
+                        //QuestionPromptControllerTwo.setIsQuestionPromptLoadedToTrue();
+                    } else if (questionNumber == 1){
+                        questionNumber = 0;
                         myStage.setScene(homePage);
                         myStage.show();
                         myStage.requestFocus();
-                        QuestionPromptControllerTwo.setIsQuestionPromptLoadedToTrue();
-                    } else if (questionNumber == 1){
-                        questionNumber = 0;
+                        VotingPromptController.setIsVotingPromptLoadedToTrue();
                     }
                 }
+                allPlayersSubmitted.set(false);
             }
         });
 
@@ -161,6 +168,8 @@ public class QuestionPromptController implements Observer{
         //submit_button = "Submitted!";
         chatAccess.send("`submitted");
         chatAccess.send("~" + questionAnswer);
+        answer_prompt.selectAll();
+        answer_prompt.setText("");
     }
 
     public void sendMessage(ActionEvent event){
@@ -196,6 +205,7 @@ public class QuestionPromptController implements Observer{
                         submittedPlayerSize++;
                         if (submittedPlayerSize == WaitingLobbyController.names.size()){
                             allPlayersSubmitted.set(true);
+                            submittedPlayerSize = 1;
                         }
                     }
                 }else if(finalArg.toString().startsWith("{")){

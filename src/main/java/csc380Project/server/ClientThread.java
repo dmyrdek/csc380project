@@ -41,7 +41,6 @@ public class ClientThread extends Thread {
   private int questionNumber = 0;
   private boolean allPlayersSubmitted = false;
   private boolean inVotingPrompt = false;
-  private int votingQuestionNumber = 0;
   private boolean getQuestions = false;
   private boolean getVotes = false;
   private int clientVoteOne = 0;
@@ -49,6 +48,9 @@ public class ClientThread extends Thread {
   private boolean inVotingResults = false;
   private int inVotingResultsTime = 15;
   private int inVotingLobbyCounter = 0;
+  private int votingPromptQuestionNumber = 0;
+  private int votingResultQuestionNumber = 0;
+
 
   public String getUserName() {
     return name;
@@ -221,40 +223,40 @@ public class ClientThread extends Thread {
             if (this.questionNumber == 0) {
               this.questionNumber = 1;
             } else if (this.questionNumber == 1) {
-
               this.currentround++;
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
             this.inVotingPrompt = true;
             this.getVotes = true;
-            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
+            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber]);
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]);
+                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber])[0]);
             this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1]);
+                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber])[1]);
+            votingPromptQuestionNumber++;
           } else if (line.substring(1).equals("inVotingResults")) {
             inVotingResults = true;
 
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
 
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]);
+                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0]);
 
             this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1]);
+                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1]);
 
             this.os.println("}" + "By: \""
                 + threads[0].myGame.whoAnsweredQuestion(
                     threads[0].myGame.getAllAnswersForQuestion(
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
                     threads[0].myGame.getGameQuestions().getQuestions()[0])
                 + "\"");
 
             this.os.println("%" + "By: \""
                 + threads[0].myGame.whoAnsweredQuestion(
                     threads[0].myGame.getAllAnswersForQuestion(
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
                     threads[0].myGame.getGameQuestions().getQuestions()[0])
                 + "\"");
 
@@ -296,14 +298,14 @@ public class ClientThread extends Thread {
 
                     threads[0].myGame.voteForAnswer(
                         threads[0].myGame.getAllAnswersForQuestion(
-                            threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0],
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber]);
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
 
                     threads[i].os
                         .println(
                             "1 vote for \""
                                 + threads[0].myGame.getAllAnswersForQuestion(
-                                    threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[0]
+                                    threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]
                                 + "\"");
 
                     threads[i].os.println("`submitted");
@@ -316,14 +318,14 @@ public class ClientThread extends Thread {
 
                     threads[0].myGame.voteForAnswer(
                         threads[0].myGame.getAllAnswersForQuestion(
-                            threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1],
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber]);
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
 
                     threads[i].os
                         .println(
                             "1 vote for \""
                                 + threads[0].myGame.getAllAnswersForQuestion(
-                                    threads[0].myGame.getGameQuestions().getQuestions()[votingQuestionNumber])[1]
+                                    threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]
                                 + "\"");
 
                     threads[i].os.println("`submitted");
@@ -337,17 +339,19 @@ public class ClientThread extends Thread {
         synchronized (this) {
           if (line.startsWith("~")) {
             this.answers[currentround][questionNumber] = line.substring(1);
-            if (this.allPlayersSubmitted) {
+            if (this.submittedAnswer) {
               for (int i = 0; i < maxClientsCount; i++) {
                 if (this == threads[i]) {
-                  if (questionNumber == 1) {
+                  /*if (questionNumber == 1) {
                     threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][0],
                         threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(0));
                   } else {
                     threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround - 1][1],
                         threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround - 1)
                             .get(1));
-                  }
+                  }*/
+                  threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
+                        threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
                 }
               }
               this.allPlayersSubmitted = false;

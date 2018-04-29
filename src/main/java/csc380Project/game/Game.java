@@ -156,16 +156,16 @@ public class Game {
         int a = (int) Math.floor(Math.random() * 5);
 
         if (a == 0) {
-            return "That's awkward... Looks like " + name + " doesn't know how to type on their computer";
+            return "~That's awkward... Looks like " + name + " doesn't know how to type on their computer";
         } else if (a == 1) {
-            return name + " didn't submit an answer. DEFINITELY make fun of them for being a sore loser. They didn't answer their question";
+            return "~" + name + " didn't submit an answer. DEFINITELY make fun of them for being a sore loser. They didn't answer their question";
         } else if (a == 2) {
-            return name +  " didn't submit an answer this round. They might be dropping a couple of kids off at the pool...";
+            return "~" + name +  " didn't submit an answer this round. They might be dropping a couple of kids off at the pool...";
         } else if (a == 3) {
-            return "Looks like " + name + "'s mom was yelling at them for playing video games past their " +
+            return "~Looks like " + name + "'s mom was yelling at them for playing video games past their " +
                     java.time.LocalTime.now() + " curfew. They didn't submit an answer";
         } else {
-            return name + " didn't submit an answer this round. You should probably make fun of them";
+            return "~" + name + " didn't submit an answer this round. You should probably make fun of them";
         }
 
     }

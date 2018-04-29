@@ -146,7 +146,7 @@ public class WaitingLobbyController implements Observer {
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
-        JFXScrollPane.smoothScrolling(chat_scroll_pane);
+        //JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
         if(isHost){
             chatAccess.send("%" + numRounds);
