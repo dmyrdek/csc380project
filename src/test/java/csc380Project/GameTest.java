@@ -2,6 +2,8 @@ package csc380Project;
 
 import csc380Project.game.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -495,6 +497,19 @@ public class GameTest {
         playerList.add(new Player("dylan"));
 
         Game g = new Game(4, playerList);
+        g.giveQuestionstoPlayers();
+
+    }
+
+    @Test
+    public void FunnyResponseTest() {
+        testGame.giveQuestionstoPlayers();
+        String q = testGame.getInGamePlayers().get(0).getQuestionsToAnswerForRound(0).get(0);
+        testGame.getInGamePlayers().get(0).addAnswer("test", q);
+        String [] ans = testGame.getAllAnswersForQuestion(q);
+
+        assertEquals(ans[0], "test");
+        assertNotNull(ans[0]);
     }
 
 }
