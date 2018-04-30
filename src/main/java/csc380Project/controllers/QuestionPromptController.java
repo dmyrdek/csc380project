@@ -81,7 +81,7 @@ public class QuestionPromptController implements Observer{
         currentNumOfQuestions++;
         currentNumOfRounds++;
 
-        VotingPromptController.setStage(myStage);
+        VotingPromptFromQuestionController.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
 
@@ -111,17 +111,18 @@ public class QuestionPromptController implements Observer{
 
                     chatAccess.send("`inQuestionPrompt");
                 }
-                isQuestionPromptLoaded.set(false);
+                //isQuestionPromptLoaded.set(false);
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPrompt.fxml"));
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPromptFromQuestion.fxml"));
         Scene homePage = new Scene(homePageParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    isQuestionPromptLoaded.set(false);
                     chatAccess.send("`allPlayersSubmitted");
                     if (questionNumber == 0){
                         questionNumber = 1;
@@ -137,7 +138,7 @@ public class QuestionPromptController implements Observer{
                         myStage.setScene(homePage);
                         myStage.show();
                         myStage.requestFocus();
-                        VotingPromptController.setIsVotingPromptLoadedFromQuestionPromptToTrue();
+                        VotingPromptFromQuestionController.setIsVotingPromptLoadedFromQuestionPromptToTrue();
                     }
                 }
                 allPlayersSubmitted.set(false);

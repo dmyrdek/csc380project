@@ -28,7 +28,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 
-public class VotingPromptController implements Observer{
+public class VotingPromptFromResultsController implements Observer{
 
     @FXML
     Pane main_pane;
@@ -63,7 +63,6 @@ public class VotingPromptController implements Observer{
 
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
-    private static BooleanProperty isVotingPromptLoadedFromQuestionPrompt = new SimpleBooleanProperty(false);
     private static BooleanProperty isVotingPromptLoadedFromVotingResults = new SimpleBooleanProperty(false);
     private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 1;
@@ -91,90 +90,68 @@ public class VotingPromptController implements Observer{
 
     @FXML
     public void initialize() throws IOException {
+
         numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
 
         question_prompt.setMouseTransparent(true);
 
-        VotingResultsController.setStage(myStage);
+        VotingResultsFromResultsController.setStage(myStage);
 
 
-        VotingPromptController current = this;
+        VotingPromptFromResultsController current = this;
 
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
         //JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
-        isVotingPromptLoadedFromQuestionPrompt.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    chat_area.getChildren().clear();
-                    votingPromptCount++;
-                    chatAccess = QuestionPromptController.getChatAccess();
-                    chatAccess.deleteObservers();
-                    chatAccess.addObserver(current);
-                    
-                    for (Text t: QuestionPromptController.getTexts()){
-                        texts.add(t);
-                        chat_area.getChildren().add(t);
-                    }
-
-                    chatAccess.send("`inVotingPrompt");
-                }
-                isVotingPromptLoadedFromQuestionPrompt.set(false);
-            }
-        });
-
         isVotingPromptLoadedFromVotingResults.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    chat_area.getChildren().clear();
-                    votingPromptCount++;
-                    chatAccess = VotingResultsController.getChatAccess();
+                    System.out.print("Loaded Voting Prompt");
+                    VotingPromptFromQuestionController.incrementVotingPromptCount();
+                    chatAccess = VotingResultsFromQuestionController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: VotingResultsController.getTexts()){
+                    for (Text t: VotingResultsFromQuestionController.getTexts()){
                         texts.add(t);
                         chat_area.getChildren().add(t);
                     }
 
                     chatAccess.send("`inVotingPrompt");
                 }
-                isVotingPromptLoadedFromVotingResults.set(false);
+                //isVotingPromptLoadedFromVotingResults.set(false);
             }
         });
 
-        Parent votingResultParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingResults.fxml"));
+        Parent votingResultParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingResultsFromResults.fxml"));
         Scene votingResult = new Scene(votingResultParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    isVotingPromptLoadedFromVotingResults.set(false);
                     vote_option_one.setDisable(false);
                     vote_option_two.setDisable(false);
                     //chatAccess.send("`allPlayersSubmitted");
-                    if (votingPromptCount <= numPlayers){
+                    if (VotingPromptFromQuestionController.getVotingPromptCount() <= numPlayers){
                         myStage.setScene(votingResult);
                         myStage.show();
                         myStage.requestFocus();
-                        VotingResultsController.setIsVotingResultsLoadedToTrue();
+                        VotingResultsFromResultsController.setIsVotingResultsLoadedToTrue();
                         //System.out.println("numPlayers: " + numPlayers);
                         //votingPromptCount++;
                         //chatAccess.send("`inVotingPrompt");
                         //submit_button.setDisable(false);
                     }
                 }
-                allPlayersSubmitted.set(false);
+                //allPlayersSubmitted.set(false);
             }
         });
     }
 
-    public static void setIsVotingPromptLoadedFromQuestionPromptToTrue(){
-        isVotingPromptLoadedFromQuestionPrompt.set(true);
-    }
     public static void setIsVotingPromptLoadedFromVotingPromptToTrue(){
         isVotingPromptLoadedFromVotingResults.set(true);
     }

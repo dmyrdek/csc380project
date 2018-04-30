@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -18,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.VotingPromptController">
+<Pane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.VotingResultsFromQuestionController">
    <children>
       <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
          <effect>
@@ -74,13 +73,31 @@
                   <VBox alignment="CENTER">
                      <children>
                         <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
-                        <JFXToggleButton fx:id="vote_option_one" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionOne" textFill="WHITE" />
+                        <Label fx:id="voting_results_one_name" opacity="0.95" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_one_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
                         <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
-                        <JFXToggleButton fx:id="vote_option_two" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionTwo" textFill="WHITE" />
+                        <Label fx:id="voting_results_two_name" opacity="0.95" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_two_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
