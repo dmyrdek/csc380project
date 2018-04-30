@@ -63,13 +63,22 @@ public class VotingPromptController implements Observer{
 
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
-    private static BooleanProperty isVotingPromptLoaded = new SimpleBooleanProperty(false);
+    private static BooleanProperty isVotingPromptLoadedFromQuestionPrompt = new SimpleBooleanProperty(false);
+    private static BooleanProperty isVotingPromptLoadedFromVotingResults = new SimpleBooleanProperty(false);
     private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 1;
     private static Stage myStage;
     private String voteOption = "";
     private static int numPlayers;
-    public static int votingPromptCount = 0;
+    private static int votingPromptCount = 0;
+
+    public static int getVotingPromptCount(){
+        return votingPromptCount;
+    }
+
+    public static void setVotingPromptCountToZero(){
+        votingPromptCount = 0;
+    }
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -86,7 +95,7 @@ public class VotingPromptController implements Observer{
 
         question_prompt.setMouseTransparent(true);
 
-        //VotingPromptController.setStage(myStage);
+        VotingResultsController.setStage(myStage);
 
 
         VotingPromptController current = this;
@@ -95,10 +104,12 @@ public class VotingPromptController implements Observer{
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
         //JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
-        isVotingPromptLoaded.addListener(new ChangeListener<Boolean>() {
+        isVotingPromptLoadedFromQuestionPrompt.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    chat_area.getChildren().clear();
+                    votingPromptCount++;
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
@@ -110,7 +121,28 @@ public class VotingPromptController implements Observer{
 
                     chatAccess.send("`inVotingPrompt");
                 }
-                isVotingPromptLoaded.set(false);
+                isVotingPromptLoadedFromQuestionPrompt.set(false);
+            }
+        });
+
+        isVotingPromptLoadedFromVotingResults.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    chat_area.getChildren().clear();
+                    votingPromptCount++;
+                    chatAccess = VotingResultsController.getChatAccess();
+                    chatAccess.deleteObservers();
+                    chatAccess.addObserver(current);
+                    
+                    for (Text t: VotingResultsController.getTexts()){
+                        texts.add(t);
+                        chat_area.getChildren().add(t);
+                    }
+
+                    chatAccess.send("`inVotingPrompt");
+                }
+                isVotingPromptLoadedFromVotingResults.set(false);
             }
         });
 
@@ -125,15 +157,14 @@ public class VotingPromptController implements Observer{
                     vote_option_two.setDisable(false);
                     //chatAccess.send("`allPlayersSubmitted");
                     if (votingPromptCount <= numPlayers){
-                        System.out.println("numPlayers: " + numPlayers);
-                        votingPromptCount++;
-                        chatAccess.send("`inVotingPrompt");
-                        submit_button.setDisable(false);
-                    }else {
                         myStage.setScene(votingResult);
                         myStage.show();
                         myStage.requestFocus();
                         VotingResultsController.setIsVotingResultsLoadedToTrue();
+                        //System.out.println("numPlayers: " + numPlayers);
+                        //votingPromptCount++;
+                        //chatAccess.send("`inVotingPrompt");
+                        //submit_button.setDisable(false);
                     }
                 }
                 allPlayersSubmitted.set(false);
@@ -141,8 +172,11 @@ public class VotingPromptController implements Observer{
         });
     }
 
-    public static void setIsVotingPromptLoadedToTrue(){
-        isVotingPromptLoaded.set(true);
+    public static void setIsVotingPromptLoadedFromQuestionPromptToTrue(){
+        isVotingPromptLoadedFromQuestionPrompt.set(true);
+    }
+    public static void setIsVotingPromptLoadedFromVotingPromptToTrue(){
+        isVotingPromptLoadedFromVotingResults.set(true);
     }
 
     public void sendMessage(ActionEvent event){

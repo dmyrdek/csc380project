@@ -67,18 +67,21 @@ public class VotingResultsController implements Observer{
     ScrollPane chat_scroll_pane;
 
 
-    private ChatAccess chatAccess;
+    private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingResultsLoaded = new SimpleBooleanProperty(false);
-    private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
+    private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private int submittedPlayerSize = 1;
     private static Stage myStage;
     private String voteOption = "";
     private int answerOneCounter = 0;
     private int answerTwoCounter = 0;
+    private static int numPlayers;
     
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
+        numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
+
         question_prompt.setMouseTransparent(true);
 
         VotingResultsController current = this;
@@ -91,6 +94,7 @@ public class VotingResultsController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    chat_area.getChildren().clear();
                     chatAccess = VotingPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
@@ -102,19 +106,55 @@ public class VotingResultsController implements Observer{
 
                     chatAccess.send("`inVotingResults");
                 }
+                isVotingResultsLoaded.set(false);
             }
         });
 
-        allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
+        allPlayersSubmitted.addListener(new ChangeListener<Boolean>(){
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    
+                    if (VotingPromptController.getVotingPromptCount() <= numPlayers){
+                        try{
+                            Parent votingPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPrompt.fxml"));
+                            Scene votingPrompt = new Scene(votingPromptParent);
+                            myStage.setScene(votingPrompt);
+                            myStage.show();
+                            myStage.requestFocus();
+                            VotingPromptController.setIsVotingPromptLoadedFromVotingPromptToTrue();
+                        } catch(IOException e){
+                            e.printStackTrace();
+                        }
+                        //System.out.println("numPlayers: " + numPlayers);
+                        //votingPromptCount++;
+                        //chatAccess.send("`inVotingPrompt");
+                        //submit_button.setDisable(false);
+                    }else {
+                        try{
+                            Parent questionPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
+                            Scene questionPrompt = new Scene(questionPromptParent);
+                            myStage.setScene(questionPrompt);
+                            myStage.show();
+                            myStage.requestFocus();
+                            QuestionPromptController.setIsQuestionPromptLoadedToTrue();
+                        } catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                allPlayersSubmitted.set(false);
             }
         });
 
     }
+
+    public static ChatAccess getChatAccess() {
+        return chatAccess;
+    }
+
+    public static void setStage(Stage stage) {
+        myStage = stage;
+     }
 
     public static void setIsVotingResultsLoadedToTrue(){
         isVotingResultsLoaded.set(true);

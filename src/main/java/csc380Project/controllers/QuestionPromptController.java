@@ -50,7 +50,7 @@ public class QuestionPromptController implements Observer{
     private static ChatAccess chatAccess;
     private static String port;
     private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
-    private static BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
+    private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
     private static ArrayList<Text> texts = new ArrayList<>();
     private static int questionNumber = 0;
@@ -111,6 +111,7 @@ public class QuestionPromptController implements Observer{
 
                     chatAccess.send("`inQuestionPrompt");
                 }
+                isQuestionPromptLoaded.set(false);
             }
         });
 
@@ -136,7 +137,7 @@ public class QuestionPromptController implements Observer{
                         myStage.setScene(homePage);
                         myStage.show();
                         myStage.requestFocus();
-                        VotingPromptController.setIsVotingPromptLoadedToTrue();
+                        VotingPromptController.setIsVotingPromptLoadedFromQuestionPromptToTrue();
                     }
                 }
                 allPlayersSubmitted.set(false);
