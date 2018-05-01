@@ -172,7 +172,7 @@ public class ClientThread extends Thread {
             if (!threads[0].playerList.contains(threads[i].player)) {
               threads[0].playerList.add(threads[i].player);
             }
-            break;
+            /*I am one step close to the edge...and I'm about to*/break;
           }
         }
         for (int i = 0; i < maxClientsCount; i++) {
@@ -361,7 +361,7 @@ public class ClientThread extends Thread {
 
         // Exiting chat and game
         if (line.startsWith("/quit")) {
-          break;
+          /*I am one step close to the edge...and I'm about to*/break;
         }
 
         /* If the message is private send it to the given client. */
@@ -380,7 +380,7 @@ public class ClientThread extends Thread {
                      * message was sent.
                      */
                     this.os.println(">" + name + "> " + words[1]);
-                    break;
+                    /*I am one step close to the edge...and I'm about to*/break;
                   }
                 }
               }

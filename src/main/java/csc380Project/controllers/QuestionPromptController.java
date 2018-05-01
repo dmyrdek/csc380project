@@ -81,7 +81,7 @@ public class QuestionPromptController implements Observer{
         currentNumOfQuestions++;
         currentNumOfRounds++;
 
-        VotingPromptFromQuestionController.setStage(myStage);
+        VotingPromptController.setStage(myStage);
 
         question_prompt.setMouseTransparent(true);
 
@@ -115,7 +115,7 @@ public class QuestionPromptController implements Observer{
             }
         });
 
-        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPromptFromQuestion.fxml"));
+        Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("VotingPrompt.fxml"));
         Scene homePage = new Scene(homePageParent);
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
@@ -138,7 +138,7 @@ public class QuestionPromptController implements Observer{
                         myStage.setScene(homePage);
                         myStage.show();
                         myStage.requestFocus();
-                        VotingPromptFromQuestionController.setIsVotingPromptLoadedFromQuestionPromptToTrue();
+                        VotingPromptController.setIsVotingPromptLoadedFromQuestionPromptToTrue();
                     }
                 }
                 allPlayersSubmitted.set(false);
