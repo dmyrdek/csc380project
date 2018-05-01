@@ -125,6 +125,7 @@ public class Game {
             System.out.println("tried to get questions for a round that does not exist in this game");
             return null;
         }
+
     }
 
     public String [] getAllAnswersForQuestion(String question){
@@ -225,6 +226,7 @@ public class Game {
                 }
             }
         }
+
         // no answer is found, no question found, or question and answer don't match, return -1
         return -1;
     }
@@ -249,8 +251,10 @@ public class Game {
         for (Player p : inGamePlayers){
             for (int i = 0; i<p.getQuestions().length; i++){
                 if (p.getQuestions()[i]!=null){
-                    if (p.getQuestionAtIndex(i).equals(question) && p.getAnswerAtIndex(i).equals(ans)){
-                        return p.getName();
+                    if(p.getAnswerAtIndex(i) != null) {
+                        if (p.getQuestionAtIndex(i).equals(question) && p.getAnswerAtIndex(i).equals(ans)) {
+                            return p.getName();
+                        }
                     }
                 }
             }

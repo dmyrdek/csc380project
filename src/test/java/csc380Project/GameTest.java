@@ -241,6 +241,7 @@ public class GameTest {
     //tests voteForAnswer method
     @Test
     public void voteForAnswerTest() {
+
         //get question AND answers
         String question2 = testGame2.getGameQuestions().getQuestions()[1];
         String p1answer = "P1 answer";
@@ -258,11 +259,13 @@ public class GameTest {
         //check updated scores
         assertEquals(2, p1Score);
         assertEquals(1, p2Score);
+
     }
 
     //tests voteForAnswer with invalid answer AND answer
     @Test
     public void voteForNonExistantAnswer() {
+
         //get question AND answer
         String question3 = testGame2.getGameQuestions().getQuestions()[2];
         String nonquestion = "Not a real question";
@@ -303,20 +306,28 @@ public class GameTest {
         Player[] leaderboard = testGame2.getLeaderBoard();
         assertEquals(p1, leaderboard[0]);
         assertEquals(p2, leaderboard[1]);
-        //check player 3 is tied for last with 4
-        boolean check = true;
+
+        //check player 3 is tied for last
+        boolean check = false;
         if(p3 == leaderboard[2] || p3 == leaderboard[3]){
-        } else if(p4 == leaderboard[2] || p4 == leaderboard[3]){
-        } else{
-            check = false;
+            check = true;
         }
         assertEquals(true, check);
+
+        //check player 4 is tied for last
+        check = false;
+        if(p4 == leaderboard[2] || p4 == leaderboard[3]){
+            check = true;
+        }
+        assertEquals(true, check);
+
     }
 
     //tests getQuestionsToAnswerForRound method for players
     @Test
     public void getQuestionToAnswerForRoundTest() {
-        boolean umm = testGame2.giveQuestionstoPlayers();
+
+        testGame2.giveQuestionstoPlayers();
         int roundNum = 0;
 
         boolean test1 = false;
@@ -481,6 +492,106 @@ public class GameTest {
         assertEquals(true, test6);
         assertEquals(true, test7);
         assertEquals(true, test8);
+
+    }
+
+    //tests whoAnsweredQuestion method
+    @Test
+    public void whoAnsweredQuestionTest() {
+
+        //testing question 2 (for players 1 and 2)
+        String questionTest = testGame2.getGameQuestions().getQuestions()[1];
+
+        //add answers to test question
+        String p1answer = "P1 answer";
+        String p2answer = "P2 answer";
+        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, questionTest);
+        testGame2.getInGamePlayers().get(1).addAnswer(p2answer, questionTest);
+
+        //find out who answered the question
+        //test p1
+        String p1NameTest = testGame2.whoAnsweredQuestion(p1answer, questionTest);
+        String p1NameActual = testGame2.getInGamePlayers().get(0).getName();
+        assertEquals(p1NameActual, p1NameTest);
+
+        //test p2
+        String p2NameTest = testGame2.whoAnsweredQuestion(p2answer, questionTest);
+        String p2NameActual = testGame2.getInGamePlayers().get(1).getName();
+
+    }
+
+    //tests whoAnsweredQuestion method with invalid input
+    @Test
+    public void whoAnsweredQuestionInvalidTest(){
+
+        //testing question 2
+        String questionTest = testGame2.getGameQuestions().getQuestions()[1];
+
+        //invalid answer
+        String nonAnswer = "not a real answer";
+
+        //test invalid answer
+        String test = testGame2.whoAnsweredQuestion(nonAnswer, questionTest);
+        assertEquals(null, test);
+
+        //invalid question
+        String nonQuestion = "not a real questsion";
+
+        //test invalid question
+        test = testGame2.whoAnsweredQuestion(nonAnswer, nonQuestion);
+        assertEquals(null, test);
+
+    }
+
+    //tests getLeaderboardStrings method
+    @Test
+    public void getLeaderBoardStringsTest() {
+
+        //get question2 for players 1 and 2
+        String question2 = testGame2.getGameQuestions().getQuestions()[1];
+
+        //submit answers for players 1 and 2
+        String p1answer = "player 1 answer";
+        String p2answer = "player 2 answer";
+        testGame2.getInGamePlayers().get(0).addAnswer(p1answer, question2);
+        testGame2.getInGamePlayers().get(1).addAnswer(p2answer, question2);
+
+        //vote twice for player 1
+        testGame2.voteForAnswer(p1answer, question2);
+        testGame2.voteForAnswer(p1answer, question2);
+
+        //vote once for player 2
+        testGame2.voteForAnswer(p2answer, question2);
+
+        //output for players
+        String p1output = "Player 1          2";
+        String p2output = "Player 2          1";
+        String p3output = "Player 3          0";
+        String p4output = "Player 4          0";
+
+        //get leaderboard arraylist of Strings
+        ArrayList<String> leaderboard = testGame2.getLeaderBoardStrings();
+
+        //check 1st place
+        assertEquals(p1output, leaderboard.get(0));
+
+        //check 2nd place
+        assertEquals(p2output, leaderboard.get(1));
+
+        //check that player 3 has the correct output in either 3rd or 4th place
+        boolean test = false;
+        if(leaderboard.get(2).equals(p3output) || leaderboard.get(3).equals(p3output)){
+            test = true;
+        }
+        assertEquals(true, test);
+
+        //check that player 4 has the correct output in either 3rd or 4th place
+        test = false;
+        if(leaderboard.get(2).equals(p4output) || leaderboard.get(3).equals(p4output)){
+            test = true;
+        }
+        assertEquals(true, test);
+
     }
 
     //tests total functionality
@@ -489,6 +600,7 @@ public class GameTest {
     //what is this even testing???
     @Test
     public void MakeGame() {
+
         ArrayList<Player> playerList = new ArrayList<>();
 
         playerList.add(new Player("cedric"));
@@ -503,6 +615,7 @@ public class GameTest {
 
     @Test
     public void FunnyResponseTest() {
+
         testGame.giveQuestionstoPlayers();
         String q = testGame.getInGamePlayers().get(0).getQuestionsToAnswerForRound(0).get(0);
         testGame.getInGamePlayers().get(0).addAnswer("test", q);
@@ -510,6 +623,7 @@ public class GameTest {
 
         assertEquals(ans[0], "test");
         assertNotNull(ans[0]);
+
     }
 
 }

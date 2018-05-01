@@ -89,4 +89,18 @@ public class PlayerTest {
         testPlayer.setHostStatus(false);
         assertEquals(false, testPlayer.getHostStatus());
     }
+
+    //tests displayForLeaderBoard method
+    @Test
+    public void displayForLeaderBoardTest() {
+        //expected output for testplayer with 0 votes
+        String output = "testPlayer        0";
+
+        //actual output from method
+        String test = testPlayer.displayForLeaderBoard();
+
+        //testing that they are equal
+        assertEquals(output, test);
+    }
+
 }
