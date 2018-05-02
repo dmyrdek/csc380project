@@ -228,8 +228,11 @@ public class VotingPromptController implements Observer{
 
     public void submitVote(ActionEvent event){
         submit_button.setDisable(true);
-        chatAccess.send("}" + voteOption);
-
+        if (inVotingPrompt){
+            chatAccess.send("}" + voteOption);
+        } else{
+            chatAccess.send("`submitted");
+        }
     }
 
 

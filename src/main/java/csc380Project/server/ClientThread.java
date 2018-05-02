@@ -46,7 +46,7 @@ public class ClientThread extends Thread {
   private int clientVoteOne = 0;
   private int clientVoteTwo = 0;
   private boolean inVotingResults = false;
-  private int inVotingResultsTime = 15;
+  private int inVotingResultsTime = 10;
   private int inVotingLobbyCounter = 0;
   private int votingPromptQuestionNumber = 0;
   private int votingResultQuestionNumber = 0;
@@ -263,6 +263,8 @@ public class ClientThread extends Thread {
             this.os.println("}Total votes: " + clientVoteOne);
 
             this.os.println("%Total votes: " + clientVoteTwo);
+
+            votingResultQuestionNumber++;
           }
         }
 
