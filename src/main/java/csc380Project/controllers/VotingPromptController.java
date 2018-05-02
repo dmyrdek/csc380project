@@ -171,6 +171,8 @@ public class VotingPromptController implements Observer{
                         }else{
                             submittedPlayerSize = 1;
                             inVotingPrompt = true;
+                            answerOneCounter = 0;
+                            answerTwoCounter = 0;
                             submit_button.setDisable(false);
                             vote_option_one.setSelected(false);
                             vote_option_two.setSelected(false);

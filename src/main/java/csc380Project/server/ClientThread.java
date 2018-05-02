@@ -238,7 +238,7 @@ public class ClientThread extends Thread {
           } else if (line.substring(1).equals("inVotingResults")) {
             inVotingResults = true;
 
-            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[0]);
+            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]);
 
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
                 threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0]);
