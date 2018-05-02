@@ -183,6 +183,7 @@ public class VotingPromptController implements Observer{
                         }
                     }else{
                             try {
+                                inVotingPrompt = true;
                                 Parent questionPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
                                 Scene questionPrompt = new Scene(questionPromptParent);
                                 myStage.setScene(questionPrompt);
