@@ -21,7 +21,6 @@ import java.lang.Runnable;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.application.Platform;
-import java.io.IOException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
@@ -97,14 +96,10 @@ public class VotingPromptController implements Observer{
     private static Stage myStage;
     private String voteOption = "";
     private static int numPlayers;
-    private static int votingPromptCount = 0;
+    private int votingPromptCount = 0;
     private boolean inVotingPrompt = true;
     private int answerOneCounter = 0;
     private int answerTwoCounter = 0;
-
-    public static void setVotingPromptCountToZero(){
-        votingPromptCount = 0;
-    }
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -136,14 +131,15 @@ public class VotingPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    votingPromptCount++;
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
                     for (Text t: QuestionPromptController.getTexts()){
-                        texts.add(t);
-                        chat_area.getChildren().add(t);
+                        if (!texts.contains(t)){
+                            texts.add(t);
+                            chat_area.getChildren().add(t);
+                        }
                     }
 
                     chatAccess.send("`inVotingPrompt");
@@ -160,39 +156,40 @@ public class VotingPromptController implements Observer{
                     isVotingPromptLoadedFromQuestionPrompt.set(false);
                     vote_option_one.setDisable(false);
                     vote_option_two.setDisable(false);
+                    System.out.println(votingPromptCount + " " +numPlayers);
                     //chatAccess.send("`allPlayersSubmitted");
                     if (votingPromptCount <= numPlayers){
                         if (inVotingPrompt){
-                            chatAccess.send("`inVotingResults");
                             submittedPlayerSize = 1;
                             inVotingPrompt = false;
                             submit_button.setDisable(false);
                             voting_vbox.setVisible(false);
                             results_vbox.setVisible(true);
                             allPlayersSubmitted.set(false);
+                            votingPromptCount++;
+                            chatAccess.send("`inVotingResults");
                         }else{
-                            chatAccess.send("`inVotingPrompt");
                             submittedPlayerSize = 1;
                             inVotingPrompt = true;
-                            votingPromptCount++;
                             submit_button.setDisable(false);
                             vote_option_one.setSelected(false);
                             vote_option_two.setSelected(false);
                             voting_vbox.setVisible(true);
                             results_vbox.setVisible(false);
                             allPlayersSubmitted.set(false);
+                            chatAccess.send("`inVotingPrompt");
                         }
                     }else{
-                        try {
-                            Parent questionPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
-                            Scene questionPrompt = new Scene(questionPromptParent);
-                            myStage.setScene(questionPrompt);
-                            myStage.show();
-                            myStage.requestFocus();
-                            QuestionPromptController.setIsQuestionPromptLoadedToTrue();
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
+                            try {
+                                Parent questionPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
+                                Scene questionPrompt = new Scene(questionPromptParent);
+                                myStage.setScene(questionPrompt);
+                                myStage.show();
+                                myStage.requestFocus();
+                                QuestionPromptController.setIsQuestionPromptLoadedFromVotingPromptToTrue();
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
                     }
                 }
                 //allPlayersSubmitted.set(false);

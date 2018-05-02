@@ -4,7 +4,6 @@ import csc380Project.server.*;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.control.ScrollPane;
-import com.jfoenix.controls.JFXScrollPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.paint.Color;
@@ -171,7 +170,7 @@ public class WaitingLobbyController implements Observer {
                     myStage.setScene(homePage);
                     myStage.show();
                     myStage.requestFocus();
-                    QuestionPromptController.setIsQuestionPromptLoadedToTrue();
+                    QuestionPromptController.setIsQuestionPromptLoadedFromWaitingLobbyToTrue();
                 }
             }
         });

@@ -25,7 +25,6 @@ import java.io.IOException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
-import com.jfoenix.controls.JFXScrollPane;
 
 public class QuestionPromptController implements Observer{
 
@@ -49,7 +48,8 @@ public class QuestionPromptController implements Observer{
 
     private static ChatAccess chatAccess;
     private static String port;
-    private static BooleanProperty isQuestionPromptLoaded = new SimpleBooleanProperty(false);
+    private static BooleanProperty isQuestionPromptLoadedFromWaitingLobby = new SimpleBooleanProperty(false);
+    private static BooleanProperty isQuestionPromptLoadedFromVotingPrompt = new SimpleBooleanProperty(false);
     private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
     private static ArrayList<Text> texts = new ArrayList<>();
@@ -68,8 +68,13 @@ public class QuestionPromptController implements Observer{
        myStage = stage;
     }
 
-    public static void setIsQuestionPromptLoadedToTrue(){
-        isQuestionPromptLoaded.set(true);
+
+    public static void setIsQuestionPromptLoadedFromWaitingLobbyToTrue(){
+        isQuestionPromptLoadedFromWaitingLobby.set(true);
+    }
+
+    public static void setIsQuestionPromptLoadedFromVotingPromptToTrue(){
+        isQuestionPromptLoadedFromVotingPrompt.set(true);
     }
 
     public static ChatAccess getChatAccess() {
@@ -90,7 +95,7 @@ public class QuestionPromptController implements Observer{
         chat_scroll_pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
         //JFXScrollPane.smoothScrolling(chat_scroll_pane);
-        isQuestionPromptLoaded.addListener(new ChangeListener<Boolean>() {
+        isQuestionPromptLoadedFromWaitingLobby.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
@@ -111,7 +116,34 @@ public class QuestionPromptController implements Observer{
 
                     chatAccess.send("`inQuestionPrompt");
                 }
-                //isQuestionPromptLoaded.set(false);
+                //isQuestionPromptLoadedFromWaitingLobby.set(false);
+            }
+        });
+
+        isQuestionPromptLoadedFromVotingPrompt.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    isHost = WaitingLobbyController.getIsHost();
+                    if (isHost){
+                        maxPlayers = WaitingLobbyController.getMaxPlayers();
+                        numRounds = WaitingLobbyController.getNumRounds();
+                    }
+
+                    chatAccess = VotingPromptController.getChatAccess();
+                    chatAccess.deleteObservers();
+                    chatAccess.addObserver(current);
+                    
+                    for (Text t: VotingPromptController.getTexts()){
+                        if (!texts.contains(t)){
+                            texts.add(t);
+                            chat_area.getChildren().add(t);
+                        }
+                    }
+
+                    chatAccess.send("`inQuestionPrompt");
+                }
+                //isQuestionPromptLoadedFromVotingPrompt.set(false);
             }
         });
 
@@ -122,7 +154,8 @@ public class QuestionPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    isQuestionPromptLoaded.set(false);
+                    isQuestionPromptLoadedFromWaitingLobby.set(false);
+                    isQuestionPromptLoadedFromVotingPrompt.set(false);
                     chatAccess.send("`allPlayersSubmitted");
                     if (questionNumber == 0){
                         questionNumber = 1;
