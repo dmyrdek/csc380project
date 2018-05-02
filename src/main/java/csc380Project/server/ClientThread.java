@@ -227,14 +227,14 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
+            votingPromptQuestionNumber++;
             this.inVotingPrompt = true;
             this.getVotes = true;
-            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber]);
+            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
             this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber])[0]);
+                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]);
             this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber])[1]);
-            votingPromptQuestionNumber++;
+                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]);
           } else if (line.substring(1).equals("inVotingResults")) {
             inVotingResults = true;
 
