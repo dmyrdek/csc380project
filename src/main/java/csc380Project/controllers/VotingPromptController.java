@@ -190,6 +190,7 @@ public class VotingPromptController implements Observer{
                                 myStage.show();
                                 myStage.requestFocus();
                                 QuestionPromptController.setIsQuestionPromptLoadedFromVotingPromptToTrue();
+                                allPlayersSubmitted.set(false);
                             }catch(Exception e){
                                 e.printStackTrace();
                             }
