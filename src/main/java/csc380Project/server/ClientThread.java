@@ -51,7 +51,6 @@ public class ClientThread extends Thread {
   private int votingResultQuestionNumber = 0;
   private boolean notTwoInQuestionPromptsInARow = true;
 
-
   public String getUserName() {
     return name;
   }
@@ -104,13 +103,13 @@ public class ClientThread extends Thread {
           if (this == this.threads[0]) {
             this.isHost = true;
           }
-          if (isHost){
+          if (isHost) {
             String str2 = is.readLine();
-            if(str2.startsWith("%")){
+            if (str2.startsWith("%")) {
               System.out.println(str2.substring(1));
               roundsNum = Integer.parseInt(str2.substring(1));
             }
-          }else{
+          } else {
             roundsNum = threads[0].roundsNum;
           }
         }
@@ -227,15 +226,16 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
-            if(notTwoInQuestionPromptsInARow){
+            if (notTwoInQuestionPromptsInARow) {
               votingPromptQuestionNumber++;
               this.inVotingPrompt = true;
               this.getVotes = true;
-              this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
+              this.os
+                  .println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1]);
               this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
-                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]);
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[0]);
               this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
-                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]);
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[1]);
               notTwoInQuestionPromptsInARow = false;
             }
           } else if (line.substring(1).equals("inVotingResults")) {
@@ -263,27 +263,28 @@ public class ClientThread extends Thread {
                     threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])
                 + "\"");
 
-            for (int i = 0; i < maxClientsCount; i++){
+            for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null && threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
-                threads[0].myGame.getAllAnswersForQuestion(
-                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
-                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
-                  this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][0]);
-                }
+                  threads[0].myGame.getAllAnswersForQuestion(
+                      threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))) {
+                threads[i].totalVotes[votingResultQuestionNumber][0] = clientVoteOne;
+                this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][0]);
+              }
             }
 
-            for (int i = 0; i < maxClientsCount; i++){
+            for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null && threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
-                threads[0].myGame.getAllAnswersForQuestion(
-                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
-                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
-                  this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][1]);
-                }
+                  threads[0].myGame.getAllAnswersForQuestion(
+                      threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))) {
+                    threads[i].totalVotes[votingResultQuestionNumber][0] = clientVoteTwo;
+                this.os.println("%Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][1]);
+              }
             }
 
             this.clientVoteOne = 0;
             this.clientVoteTwo = 0;
-
 
             //this.os.println("}Total votes: " + clientVoteOne);
 
@@ -306,8 +307,8 @@ public class ClientThread extends Thread {
             for (int i = 0; i < maxClientsCount; i++) {
               if (threads[i] != null && threads[0].myGame != null
                   && threads[0].myGame.getInGamePlayers().get(i) != null) {
-                threads[i].os.println("%" + threads[0].myGame.getNumOfRounds()*roundsNum);
-                
+                threads[i].os.println("%" + threads[0].myGame.getNumOfRounds() * roundsNum);
+
                 threads[i].os.println("{" + threads[0].myGame.getInGamePlayers().get(i)
                     .getQuestionsToAnswerForRound(currentround).get(questionNumber));
               }
@@ -326,15 +327,13 @@ public class ClientThread extends Thread {
 
                     threads[0].myGame.voteForAnswer(
                         threads[0].myGame.getAllAnswersForQuestion(
-                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0],
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[0],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1]);
 
-                    threads[i].os
-                        .println(
-                            "1 vote for \""
-                                + threads[0].myGame.getAllAnswersForQuestion(
-                                    threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]
-                                + "\"");
+                    threads[i].os.println("1 vote for \""
+                        + threads[0].myGame.getAllAnswersForQuestion(
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[0]
+                        + "\"");
 
                     threads[i].os.println("`submitted");
                   }
@@ -346,30 +345,15 @@ public class ClientThread extends Thread {
 
                     threads[0].myGame.voteForAnswer(
                         threads[0].myGame.getAllAnswersForQuestion(
-                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1],
-                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[1],
+                        threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1]);
 
-                    threads[i].os
-                        .println(
-                            "1 vote for \""
-                                + threads[0].myGame.getAllAnswersForQuestion(
-                                    threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]
-                                + "\"");
+                    threads[i].os.println("1 vote for \""
+                        + threads[0].myGame.getAllAnswersForQuestion(
+                            threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber - 1])[1]
+                        + "\"");
 
                     threads[i].os.println("`submitted");
-                  }
-                }
-              }
-              for (int i = 0; i < maxClientsCount; i++){
-                if (threads[i] == this){
-                  if (this.clientVoteOne != 0){
-                    if (totalVotes[votingPromptQuestionNumber-1][0] == null){
-                      totalVotes[votingPromptQuestionNumber-1][0] = this.clientVoteOne;
-                    }
-                  } else if (this.clientVoteTwo != 0) {
-                    if (totalVotes[votingPromptQuestionNumber-1][1] == null){
-                      totalVotes[votingPromptQuestionNumber-1][1] = this.clientVoteTwo;
-                    }
                   }
                 }
               }
@@ -392,7 +376,8 @@ public class ClientThread extends Thread {
                             .get(1));
                   }*/
                   threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][questionNumber],
-                        threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(questionNumber));
+                      threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround)
+                          .get(questionNumber));
                 }
               }
               this.allPlayersSubmitted = false;
