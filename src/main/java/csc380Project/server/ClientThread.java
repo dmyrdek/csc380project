@@ -50,6 +50,7 @@ public class ClientThread extends Thread {
   private int inVotingLobbyCounter = 0;
   private int votingPromptQuestionNumber = 0;
   private int votingResultQuestionNumber = 0;
+  private boolean notTwoInQuestionPromptsInARow = true;
 
 
   public String getUserName() {
@@ -227,14 +228,17 @@ public class ClientThread extends Thread {
               this.questionNumber = 0;
             }
           } else if (line.substring(1).equals("inVotingPrompt")) {
-            votingPromptQuestionNumber++;
-            this.inVotingPrompt = true;
-            this.getVotes = true;
-            this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
-            this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]);
-            this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
-                threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]);
+            if(notTwoInQuestionPromptsInARow){
+              votingPromptQuestionNumber++;
+              this.inVotingPrompt = true;
+              this.getVotes = true;
+              this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1]);
+              this.os.println("}" + threads[0].myGame.getAllAnswersForQuestion(
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[0]);
+              this.os.println("%" + threads[0].myGame.getAllAnswersForQuestion(
+                  threads[0].myGame.getGameQuestions().getQuestions()[votingPromptQuestionNumber-1])[1]);
+              notTwoInQuestionPromptsInARow = false;
+            }
           } else if (line.substring(1).equals("inVotingResults")) {
             inVotingResults = true;
 
@@ -250,14 +254,14 @@ public class ClientThread extends Thread {
                 + threads[0].myGame.whoAnsweredQuestion(
                     threads[0].myGame.getAllAnswersForQuestion(
                         threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
-                    threads[0].myGame.getGameQuestions().getQuestions()[0])
+                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])
                 + "\"");
 
             this.os.println("%" + "By: \""
                 + threads[0].myGame.whoAnsweredQuestion(
                     threads[0].myGame.getAllAnswersForQuestion(
                         threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
-                    threads[0].myGame.getGameQuestions().getQuestions()[0])
+                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])
                 + "\"");
 
             this.os.println("}Total votes: " + clientVoteOne);
@@ -265,6 +269,7 @@ public class ClientThread extends Thread {
             this.os.println("%Total votes: " + clientVoteTwo);
 
             votingResultQuestionNumber++;
+            notTwoInQuestionPromptsInARow = true;
           }
         }
 
