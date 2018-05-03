@@ -162,7 +162,7 @@ public class Player implements Comparable {
     public String displayForLeaderBoard(){
 
         int size = this.name.length();
-        final int maxSize = 45;
+        final int maxSize = 40;
         String ret = this.name;
 
         for (int i = 0; i< maxSize-size; i++){
