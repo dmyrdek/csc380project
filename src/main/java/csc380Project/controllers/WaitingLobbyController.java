@@ -73,25 +73,25 @@ public class WaitingLobbyController implements Observer {
     private static int numberOfLivePlayers = 1;
 
     public static void setStage(Stage stage) {
-       myStage = stage;
+        myStage = stage;
     }
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
     }
 
-    public static int getMaxPlayers(){
+    public static int getMaxPlayers() {
         return maxPlayers;
     }
 
-    public static int getNumRounds(){
+    public static int getNumRounds() {
         return numRounds;
     }
 
-    public static boolean getIsHost(){
+    public static boolean getIsHost() {
         return isHost;
     }
-    
+
     /**
      * @return the numberOfLivePlayers
      */
@@ -103,17 +103,15 @@ public class WaitingLobbyController implements Observer {
     public void initialize() throws IOException {
         QuestionPromptController.setStage(myStage);
 
-        if (JoinGameController.getPortNumber() != ""){
+        if (JoinGameController.getPortNumber() != "") {
             port = JoinGameController.getPortNumber();
-        }
-        else if (CreateLobbyController.getPortNumber() != ""){
+        } else if (CreateLobbyController.getPortNumber() != "") {
             isHost = true;
             port = CreateLobbyController.getPortNumber();
             maxPlayers = CreateLobbyController.getMaxPlayers();
             numRounds = CreateLobbyController.getNumRounds();
         }
         server = "tcp://0.tcp.ngrok.io";
-
 
         chatAccess = new ChatAccess();
         chatAccess.addObserver(this);
@@ -129,13 +127,11 @@ public class WaitingLobbyController implements Observer {
 
         names.add(0, "Port Number: " + port);
 
-
-        if (name.equals("")){
-            if (!JoinGameController.getUsername().equals("")){
+        if (name.equals("")) {
+            if (!JoinGameController.getUsername().equals("")) {
                 name = JoinGameController.getUsername();
                 chatAccess.send("}" + name);
-            }
-            else if (!CreateLobbyController.getUsername().equals("")){
+            } else if (!CreateLobbyController.getUsername().equals("")) {
                 name = CreateLobbyController.getUsername();
                 chatAccess.send("}" + name);
             }
@@ -147,7 +143,7 @@ public class WaitingLobbyController implements Observer {
         chat_scroll_pane.vvalueProperty().bind((chat_area.heightProperty()));
         //JFXScrollPane.smoothScrolling(chat_scroll_pane);
 
-        if(isHost){
+        if (isHost) {
             chatAccess.send("%" + numRounds);
         }
 
@@ -159,7 +155,7 @@ public class WaitingLobbyController implements Observer {
             appStage.show();
             appStage.requestFocus();
         }
-*/
+        */
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
         Scene homePage = new Scene(homePageParent);
         allPlayersReady.addListener(new ChangeListener<Boolean>() {
@@ -184,10 +180,8 @@ public class WaitingLobbyController implements Observer {
             }
         });*/
 
-
         //String[] arguments = new String[] {port};
         //new GameClient().main(arguments);
-
 
         //countDownTime = startTime;
         //ready_button.setText(countDownTime.toString() + " - Ready Up");
@@ -198,7 +192,7 @@ public class WaitingLobbyController implements Observer {
                    public void run() {
                         countDownTime--;
                         //ready_button.setText(countDownTime.toString() + " - Ready Up");
-
+        
                         if (countDownTime < 0)
                             timer.cancel();
                    }
@@ -206,7 +200,6 @@ public class WaitingLobbyController implements Observer {
             }
             }, 1000, 1000);*/
     }
-
 
     public void backToCreateLobby(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("CreateLobby.fxml"));
@@ -216,9 +209,10 @@ public class WaitingLobbyController implements Observer {
         appStage.show();
     }
 
-    public void sendMessage(ActionEvent event){
+    public void sendMessage(ActionEvent event) {
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`")){
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}")
+                && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`")) {
             chatAccess.send(str);
             message_field.selectAll();
             message_field.requestFocus();
@@ -226,44 +220,43 @@ public class WaitingLobbyController implements Observer {
         }
     }
 
-    public void readyUp(ActionEvent event){
+    public void readyUp(ActionEvent event) {
         ready_button.setDisable(true);
         readyStatus = "Ready!";
         chatAccess.send("`ready");
     }
 
-
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
-        Platform.runLater(new Runnable(){
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
-                if (finalArg.toString().startsWith("}")){
+                if (finalArg.toString().startsWith("}")) {
                     numberOfLivePlayers++;
                     names.add(finalArg.toString().substring(1));
-                }else if(finalArg.toString().startsWith("|")){
+                } else if (finalArg.toString().startsWith("|")) {
                     ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
-                }else if (finalArg.toString().startsWith("~")){
-                    Text text = new Text(finalArg.toString().substring(1)+"\n");
+                } else if (finalArg.toString().startsWith("~")) {
+                    Text text = new Text(finalArg.toString().substring(1) + "\n");
                     text.setFill(Color.SKYBLUE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
-                }else if(finalArg.toString().startsWith("`")){
+                } else if (finalArg.toString().startsWith("`")) {
                     String str = finalArg.toString().substring(1);
-                    if (str.equals("ready")){
+                    if (str.equals("ready")) {
                         readyPlayerSize++;
-                        if (readyPlayerSize == names.size()){
+                        if (readyPlayerSize == names.size()) {
                             allPlayersReady.set(true);
                         }
                     }
-                }else{
+                } else {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                     String name;
-                    if (finalArg.toString().startsWith("<")){
-                        
+                    if (finalArg.toString().startsWith("<")) {
+
                     }
-                    Text text = new Text(finalArg.toString()+"\n");
+                    Text text = new Text(finalArg.toString() + "\n");
                     text.setFill(Color.WHITE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
@@ -272,7 +265,7 @@ public class WaitingLobbyController implements Observer {
         });
     }
 
-    public static ArrayList<Text> getTexts(){
+    public static ArrayList<Text> getTexts() {
         return texts;
     }
 }

@@ -28,7 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
-public class VotingPromptController implements Observer{
+public class VotingPromptController implements Observer {
 
     @FXML
     Pane main_pane;
@@ -87,7 +87,6 @@ public class VotingPromptController implements Observer{
     @FXML
     ScrollPane chat_scroll_pane;
 
-
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static BooleanProperty isVotingPromptLoadedFromQuestionPrompt = new SimpleBooleanProperty(false);
@@ -108,7 +107,6 @@ public class VotingPromptController implements Observer{
     public static void setStage(Stage stage) {
         myStage = stage;
     }
-
 
     @FXML
     public void initialize() {
@@ -133,9 +131,9 @@ public class VotingPromptController implements Observer{
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
-                    
-                    for (Text t: QuestionPromptController.getTexts()){
-                        if (!texts.contains(t)){
+
+                    for (Text t : QuestionPromptController.getTexts()) {
+                        if (!texts.contains(t)) {
                             texts.add(t);
                             chat_area.getChildren().add(t);
                         }
@@ -156,8 +154,8 @@ public class VotingPromptController implements Observer{
                     vote_option_two.setDisable(false);
                     System.out.println(votingPromptCount + " " + numPlayers);
                     //chatAccess.send("`allPlayersSubmitted");
-                    if (votingPromptCount < numPlayers){
-                        if (inVotingPrompt){
+                    if (votingPromptCount < numPlayers) {
+                        if (inVotingPrompt) {
                             submittedPlayerSize = 1;
                             inVotingPrompt = false;
                             submit_button.setDisable(false);
@@ -166,7 +164,7 @@ public class VotingPromptController implements Observer{
                             allPlayersSubmitted.set(false);
                             votingPromptCount++;
                             chatAccess.send("`inVotingResults");
-                        }else{
+                        } else {
                             submittedPlayerSize = 1;
                             inVotingPrompt = true;
                             answerOneCounter = 0;
@@ -179,19 +177,20 @@ public class VotingPromptController implements Observer{
                             allPlayersSubmitted.set(false);
                             chatAccess.send("`inVotingPrompt");
                         }
-                    }else{
-                            try {
-                                inVotingPrompt = true;
-                                Parent leaderBoardParent = FXMLLoader.load(getClass().getClassLoader().getResource("LeaderBoard.fxml"));
-                                Scene LeaderBoardScene = new Scene(leaderBoardParent);
-                                myStage.setScene(LeaderBoardScene);
-                                myStage.show();
-                                myStage.requestFocus();
-                                LeaderBoardController.setIsLeaderBoardLoadedToTrue();
-                                allPlayersSubmitted.set(false);
-                            }catch(Exception e){
-                                e.printStackTrace();
-                            }
+                    } else {
+                        try {
+                            inVotingPrompt = true;
+                            Parent leaderBoardParent = FXMLLoader
+                                    .load(getClass().getClassLoader().getResource("LeaderBoard.fxml"));
+                            Scene LeaderBoardScene = new Scene(leaderBoardParent);
+                            myStage.setScene(LeaderBoardScene);
+                            myStage.show();
+                            myStage.requestFocus();
+                            LeaderBoardController.setIsLeaderBoardLoadedToTrue();
+                            allPlayersSubmitted.set(false);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 //allPlayersSubmitted.set(false);
@@ -199,145 +198,145 @@ public class VotingPromptController implements Observer{
         });
     }
 
-    public static void setIsVotingPromptLoadedFromQuestionPromptToTrue(){
+    public static void setIsVotingPromptLoadedFromQuestionPromptToTrue() {
         isVotingPromptLoadedFromQuestionPrompt.setValue(true);
     }
 
-    public void sendMessage(ActionEvent event){
+    public void sendMessage(ActionEvent event) {
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}")
+                && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
             chatAccess.send(str);
         message_field.selectAll();
         message_field.requestFocus();
         message_field.setText("");
     }
 
-    public void voteOptionOne(ActionEvent event){
-        if (vote_option_two.isSelected()){
+    public void voteOptionOne(ActionEvent event) {
+        if (vote_option_two.isSelected()) {
             vote_option_two.setSelected(false);
         }
         vote_option_one.setSelected(true);
         voteOption = "1";
     }
 
-    public void voteOptionTwo(ActionEvent event){
-        if (vote_option_one.isSelected()){
+    public void voteOptionTwo(ActionEvent event) {
+        if (vote_option_one.isSelected()) {
             vote_option_one.setSelected(false);
         }
         vote_option_two.setSelected(true);
         voteOption = "2";
     }
 
-    public void submitVote(ActionEvent event){
+    public void submitVote(ActionEvent event) {
         submit_button.setDisable(true);
-        if (inVotingPrompt){
+        if (inVotingPrompt) {
             chatAccess.send("}" + voteOption);
-        } else{
+        } else {
             chatAccess.send("`submitted");
         }
     }
 
-
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
-        Platform.runLater(new Runnable(){
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
-                if (inVotingPrompt){
-                    if (finalArg.toString().startsWith("}")){
-                        if (finalArg.toString().charAt(1) == '~'){
+                if (inVotingPrompt) {
+                    if (finalArg.toString().startsWith("}")) {
+                        if (finalArg.toString().charAt(1) == '~') {
                             voting_answer_prompt_one.selectAll();
                             voting_answer_prompt_one.setText(finalArg.toString().substring(2));
                             vote_option_one.setDisable(true);
-                        }else {
+                        } else {
                             voting_answer_prompt_one.selectAll();
                             voting_answer_prompt_one.setText(finalArg.toString().substring(1));
                         }
-                    }else if (finalArg.toString().startsWith("%")){
-                        if (finalArg.toString().charAt(1) == '~'){
+                    } else if (finalArg.toString().startsWith("%")) {
+                        if (finalArg.toString().charAt(1) == '~') {
                             voting_answer_prompt_two.selectAll();
                             voting_answer_prompt_two.setText(finalArg.toString().substring(2));
                             vote_option_two.setDisable(true);
-                        }else {
+                        } else {
                             voting_answer_prompt_two.selectAll();
                             voting_answer_prompt_two.setText(finalArg.toString().substring(1));
                         }
-                    }else if(finalArg.toString().startsWith("|")){
-                        if (finalArg.toString().substring(1).equals("1")){
+                    } else if (finalArg.toString().startsWith("|")) {
+                        if (finalArg.toString().substring(1).equals("1")) {
                             allPlayersSubmitted.set(true);
                         }
                         submit_button.setText(finalArg.toString().substring(1) + " - " + "Submit");
-                    }else if (finalArg.toString().startsWith("~")){
-                        Text text = new Text(finalArg.toString().substring(1)+"\n");
+                    } else if (finalArg.toString().startsWith("~")) {
+                        Text text = new Text(finalArg.toString().substring(1) + "\n");
                         text.setFill(Color.SKYBLUE);
                         texts.add(text);
                         chat_area.getChildren().add(text);
-                    }else if(finalArg.toString().startsWith("`")){
+                    } else if (finalArg.toString().startsWith("`")) {
                         String str = finalArg.toString().substring(1);
-                        if (str.equals("submitted")){
+                        if (str.equals("submitted")) {
                             submittedPlayerSize++;
-                            if (submittedPlayerSize == WaitingLobbyController.names.size()){
+                            if (submittedPlayerSize == WaitingLobbyController.names.size()) {
                                 allPlayersSubmitted.set(true);
                             }
                         }
-                    }else if(finalArg.toString().startsWith("{")){
+                    } else if (finalArg.toString().startsWith("{")) {
                         voting_question_prompt.selectAll();
                         voting_question_prompt.setText(finalArg.toString().substring(1));
-                    }else{
+                    } else {
                         //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                        Text text = new Text(finalArg.toString()+"\n");
+                        Text text = new Text(finalArg.toString() + "\n");
                         text.setFill(Color.WHITE);
                         texts.add(text);
                         chat_area.getChildren().add(text);
                     }
-                }else {
-                    if (finalArg.toString().startsWith("}")){
-                        if (answerOneCounter == 0){
+                } else {
+                    if (finalArg.toString().startsWith("}")) {
+                        if (answerOneCounter == 0) {
                             results_answer_prompt_one.selectAll();
                             results_answer_prompt_one.setText(finalArg.toString().substring(1));
                             answerOneCounter++;
-                        } else if (answerOneCounter == 1){
+                        } else if (answerOneCounter == 1) {
                             voting_results_one_name.setText(finalArg.toString().substring(1));
                             answerOneCounter++;
-                        } else{
+                        } else {
                             voting_results_one_votes.setText(finalArg.toString().substring(1));
                         }
-                    }else if (finalArg.toString().startsWith("%")){
-                        if (answerTwoCounter == 0){
+                    } else if (finalArg.toString().startsWith("%")) {
+                        if (answerTwoCounter == 0) {
                             results_answer_prompt_two.selectAll();
                             results_answer_prompt_two.setText(finalArg.toString().substring(1));
                             answerTwoCounter++;
-                        } else if (answerTwoCounter == 1){
+                        } else if (answerTwoCounter == 1) {
                             voting_results_two_name.setText(finalArg.toString().substring(1));
                             answerTwoCounter++;
                         } else {
                             voting_results_two_votes.setText(finalArg.toString().substring(1));
                         }
-                    }else if(finalArg.toString().startsWith("|")){
-                        if (finalArg.toString().substring(1).equals("1")){
+                    } else if (finalArg.toString().startsWith("|")) {
+                        if (finalArg.toString().substring(1).equals("1")) {
                             allPlayersSubmitted.set(true);
                         }
                         submit_button.setText(finalArg.toString().substring(1) + " - " + "Ready");
-                    }else if (finalArg.toString().startsWith("~")){
-                        Text text = new Text(finalArg.toString().substring(1)+"\n");
+                    } else if (finalArg.toString().startsWith("~")) {
+                        Text text = new Text(finalArg.toString().substring(1) + "\n");
                         text.setFill(Color.SKYBLUE);
                         texts.add(text);
                         chat_area.getChildren().add(text);
-                    }else if(finalArg.toString().startsWith("`")){
+                    } else if (finalArg.toString().startsWith("`")) {
                         String str = finalArg.toString().substring(1);
-                        if (str.equals("submitted")){
+                        if (str.equals("submitted")) {
                             submittedPlayerSize++;
-                            if (submittedPlayerSize == WaitingLobbyController.names.size()){
+                            if (submittedPlayerSize == WaitingLobbyController.names.size()) {
                                 allPlayersSubmitted.set(true);
                             }
                         }
-                    }else if(finalArg.toString().startsWith("{")){
+                    } else if (finalArg.toString().startsWith("{")) {
                         results_question_prompt.selectAll();
                         results_question_prompt.setText(finalArg.toString().substring(1));
-                    }else{
+                    } else {
                         //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                        Text text = new Text(finalArg.toString()+"\n");
+                        Text text = new Text(finalArg.toString() + "\n");
                         text.setFill(Color.WHITE);
                         texts.add(text);
                         chat_area.getChildren().add(text);
@@ -347,7 +346,7 @@ public class VotingPromptController implements Observer{
         });
     }
 
-    public static ArrayList<Text> getTexts(){
+    public static ArrayList<Text> getTexts() {
         return texts;
     }
 }

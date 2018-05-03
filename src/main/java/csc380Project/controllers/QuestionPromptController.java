@@ -26,7 +26,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
 
-public class QuestionPromptController implements Observer{
+public class QuestionPromptController implements Observer {
 
     @FXML
     JFXTextArea question_prompt;
@@ -65,15 +65,14 @@ public class QuestionPromptController implements Observer{
     private static boolean isHost = false;
 
     public static void setStage(Stage stage) {
-       myStage = stage;
+        myStage = stage;
     }
 
-
-    public static void setIsQuestionPromptLoadedFromWaitingLobbyToTrue(){
+    public static void setIsQuestionPromptLoadedFromWaitingLobbyToTrue() {
         isQuestionPromptLoadedFromWaitingLobby.setValue(true);
     }
 
-    public static void setIsQuestionPromptLoadedFromLeaderBoardToTrue(){
+    public static void setIsQuestionPromptLoadedFromLeaderBoardToTrue() {
         isQuestionPromptLoadedFromLeaderBoard.setValue(true);
     }
 
@@ -100,7 +99,7 @@ public class QuestionPromptController implements Observer{
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
                     isHost = WaitingLobbyController.getIsHost();
-                    if (isHost){
+                    if (isHost) {
                         maxPlayers = WaitingLobbyController.getMaxPlayers();
                         numRounds = WaitingLobbyController.getNumRounds();
                     }
@@ -108,8 +107,8 @@ public class QuestionPromptController implements Observer{
                     chatAccess = WaitingLobbyController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
-                    
-                    for (Text t: WaitingLobbyController.getTexts()){
+
+                    for (Text t : WaitingLobbyController.getTexts()) {
                         texts.add(t);
                         chat_area.getChildren().add(t);
                     }
@@ -125,7 +124,7 @@ public class QuestionPromptController implements Observer{
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
                     isHost = WaitingLobbyController.getIsHost();
-                    if (isHost){
+                    if (isHost) {
                         maxPlayers = WaitingLobbyController.getMaxPlayers();
                         numRounds = WaitingLobbyController.getNumRounds();
                     }
@@ -133,8 +132,8 @@ public class QuestionPromptController implements Observer{
                     chatAccess = LeaderBoardController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
-                    
-                    for (Text t: LeaderBoardController.getTexts()){
+
+                    for (Text t : LeaderBoardController.getTexts()) {
                         texts.add(t);
                         chat_area.getChildren().add(t);
                     }
@@ -155,7 +154,7 @@ public class QuestionPromptController implements Observer{
                     isQuestionPromptLoadedFromWaitingLobby.setValue(false);
                     isQuestionPromptLoadedFromLeaderBoard.setValue(false);
                     chatAccess.send("`allPlayersSubmitted");
-                    if (questionNumber == 0){
+                    if (questionNumber == 0) {
                         questionNumber = 1;
                         chatAccess.send("`inQuestionPrompt");
                         submit_button.setDisable(false);
@@ -164,7 +163,7 @@ public class QuestionPromptController implements Observer{
                         //myStage.show();
                         //myStage.requestFocus();
                         //QuestionPromptControllerTwo.setIsQuestionPromptLoadedToTrue();
-                    } else if (questionNumber == 1){
+                    } else if (questionNumber == 1) {
                         questionNumber = 0;
                         myStage.setScene(homePage);
                         myStage.show();
@@ -180,9 +179,9 @@ public class QuestionPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    if (questionNumber == 0){
+                    if (questionNumber == 0) {
                         questionNumber++;
-                        
+
                     }
                 }
             }
@@ -190,13 +189,13 @@ public class QuestionPromptController implements Observer{
     }
 
     @FXML
-    public void getAnswer(KeyEvent event){
+    public void getAnswer(KeyEvent event) {
         questionAnswer = answer_prompt.getText();
         System.out.println(questionAnswer);
         //chatAccess.send("~" + questionAnswer);
     }
 
-    public void submit(ActionEvent event){
+    public void submit(ActionEvent event) {
         submit_button.setDisable(true);
         //submit_button = "Submitted!";
         chatAccess.send("`submitted");
@@ -205,9 +204,10 @@ public class QuestionPromptController implements Observer{
         answer_prompt.setText("");
     }
 
-    public void sendMessage(ActionEvent event){
+    public void sendMessage(ActionEvent event) {
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}")
+                && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
             chatAccess.send(str);
         message_field.selectAll();
         message_field.requestFocus();
@@ -216,42 +216,42 @@ public class QuestionPromptController implements Observer{
 
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
-        Platform.runLater(new Runnable(){
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
-                if (finalArg.toString().startsWith("}")){
+                if (finalArg.toString().startsWith("}")) {
                     //names.add(finalArg.toString().substring(1));
-                }else if(finalArg.toString().startsWith("|")){
-                    if (finalArg.toString().substring(1).equals("1")){
+                } else if (finalArg.toString().startsWith("|")) {
+                    if (finalArg.toString().substring(1).equals("1")) {
                         allPlayersSubmitted.set(true);
                     }
                     submit_button.setText(finalArg.toString().substring(1) + " - " + "Submit");
-                }else if (finalArg.toString().startsWith("~")){
-                    Text text = new Text(finalArg.toString().substring(1)+"\n");
+                } else if (finalArg.toString().startsWith("~")) {
+                    Text text = new Text(finalArg.toString().substring(1) + "\n");
                     text.setFill(Color.SKYBLUE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
-                }else if(finalArg.toString().startsWith("`")){
+                } else if (finalArg.toString().startsWith("`")) {
                     String str = finalArg.toString().substring(1);
-                    if (str.equals("submitted")){
+                    if (str.equals("submitted")) {
                         submittedPlayerSize++;
-                        if (submittedPlayerSize == WaitingLobbyController.names.size()){
+                        if (submittedPlayerSize == WaitingLobbyController.names.size()) {
                             allPlayersSubmitted.set(true);
                             submittedPlayerSize = 1;
                         }
                     }
-                }else if(finalArg.toString().startsWith("{")){
+                } else if (finalArg.toString().startsWith("{")) {
                     question_prompt.selectAll();
                     question_prompt.setText(finalArg.toString().substring(1));
-                }else if(finalArg.toString().startsWith("%")){
+                } else if (finalArg.toString().startsWith("%")) {
                     numRounds = Integer.parseInt(finalArg.toString().substring(1));
                     numOfTotalQuestions = numRounds * 2;
                 }
-                
-                else{
+
+                else {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                    Text text = new Text(finalArg.toString()+"\n");
+                    Text text = new Text(finalArg.toString() + "\n");
                     text.setFill(Color.WHITE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
@@ -260,7 +260,7 @@ public class QuestionPromptController implements Observer{
         });
     }
 
-    public static ArrayList<Text> getTexts(){
+    public static ArrayList<Text> getTexts() {
         return texts;
     }
 }

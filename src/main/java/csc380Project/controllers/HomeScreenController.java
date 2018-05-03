@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class HomeScreenController{
+public class HomeScreenController {
 
     @FXML
     Hyperlink github_link;
@@ -31,7 +31,7 @@ public class HomeScreenController{
 
     }
 
-    public void joinGameButtonPress(ActionEvent event) throws IOException{
+    public void joinGameButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("JoinGame.fxml"));
         Scene createLobbyScene = new Scene(homePageParent);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -40,7 +40,7 @@ public class HomeScreenController{
         appStage.requestFocus();
     }
 
-    public void howToPlayButtonPress(ActionEvent event) throws IOException{
+    public void howToPlayButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HowToPlay.fxml"));
         Scene createLobbyScene = new Scene(homePageParent);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -49,13 +49,10 @@ public class HomeScreenController{
         appStage.requestFocus();
     }
 
-    public void quitGameButtonPress(ActionEvent event){
+    public void quitGameButtonPress(ActionEvent event) {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.close();
     }
-
-
-
 
     public void createGameLaunchServer(ActionEvent event) {
         try {
@@ -70,7 +67,6 @@ public class HomeScreenController{
             appStage.show();
             appStage.requestFocus();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,18 +74,17 @@ public class HomeScreenController{
 
     @FXML
     public void initialize() {
-        github_link.setOnAction(t ->{
-                try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/dmyrdek/csc380project"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (URISyntaxException e1) {
-                    e1.printStackTrace();
-                }
+        github_link.setOnAction(t -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/dmyrdek/csc380project"));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (URISyntaxException e1) {
+                e1.printStackTrace();
             }
-        );
+        });
 
-        ngrok_link.setOnAction(t ->{
+        ngrok_link.setOnAction(t -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://ngrok.com/"));
             } catch (IOException e2) {
@@ -97,7 +92,6 @@ public class HomeScreenController{
             } catch (URISyntaxException e2) {
                 e2.printStackTrace();
             }
-        }
-    );
+        });
     }
 }

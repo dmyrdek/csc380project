@@ -55,7 +55,6 @@ public class LeaderBoardController implements Observer {
         myStage = stage;
     }
 
-
     public static void setIsLeaderBoardLoadedToTrue() {
         isLeaderBoardLoaded.setValue(true);
     }
@@ -76,9 +75,9 @@ public class LeaderBoardController implements Observer {
                     chatAccess = VotingPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
-                    
-                    for (Text t: VotingPromptController.getTexts()){
-                        if (!texts.contains(t)){
+
+                    for (Text t : VotingPromptController.getTexts()) {
+                        if (!texts.contains(t)) {
                             texts.add(t);
                             chat_area.getChildren().add(t);
                         }
@@ -95,6 +94,7 @@ public class LeaderBoardController implements Observer {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    isLeaderBoardLoaded.setValue(false);
                     myStage.setScene(homePage);
                     myStage.show();
                     myStage.requestFocus();
@@ -104,14 +104,15 @@ public class LeaderBoardController implements Observer {
         });
     }
 
-    public void readyUp(ActionEvent event){
+    public void readyUp(ActionEvent event) {
         submit_button.setDisable(true);
         chatAccess.send("`submitted");
     }
 
-    public void sendMessage(ActionEvent event){
+    public void sendMessage(ActionEvent event) {
         String str = message_field.getText();
-        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}") && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
+        if (str != null && str.trim().length() > 0 && !str.startsWith("{") && !str.startsWith("}")
+                && !str.startsWith("|") && !str.startsWith("~") && !str.startsWith("`"))
             chatAccess.send(str);
         message_field.selectAll();
         message_field.requestFocus();
@@ -120,38 +121,38 @@ public class LeaderBoardController implements Observer {
 
     public void update(Observable o, Object arg) {
         final Object finalArg = arg;
-        Platform.runLater(new Runnable(){
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 //If income message starts with a "}" then it is a name, add it to the list
-                if (finalArg.toString().startsWith("}")){
+                if (finalArg.toString().startsWith("}")) {
                     //names.add(finalArg.toString().substring(1));
-                }else if(finalArg.toString().startsWith("|")){
-                    if (finalArg.toString().substring(1).equals("1")){
+                } else if (finalArg.toString().startsWith("|")) {
+                    if (finalArg.toString().substring(1).equals("1")) {
                         allPlayersReady.set(true);
                     }
                     submit_button.setText(finalArg.toString().substring(1) + " - " + "Ready");
-                }else if (finalArg.toString().startsWith("~")){
-                    Text text = new Text(finalArg.toString().substring(1)+"\n");
+                } else if (finalArg.toString().startsWith("~")) {
+                    Text text = new Text(finalArg.toString().substring(1) + "\n");
                     text.setFill(Color.SKYBLUE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
-                }else if(finalArg.toString().startsWith("`")){
+                } else if (finalArg.toString().startsWith("`")) {
                     String str = finalArg.toString().substring(1);
-                    if (str.equals("submitted")){
+                    if (str.equals("submitted")) {
                         submittedPlayerSize++;
-                        if (submittedPlayerSize == WaitingLobbyController.names.size()){
+                        if (submittedPlayerSize == WaitingLobbyController.names.size()) {
                             allPlayersReady.set(true);
                             submittedPlayerSize = 1;
                         }
                     }
-                }else if (finalArg.toString().startsWith("{")){
+                } else if (finalArg.toString().startsWith("{")) {
                     leaderboardList.add(finalArg.toString().substring(1));
                 }
-                
-                else{
+
+                else {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                    Text text = new Text(finalArg.toString()+"\n");
+                    Text text = new Text(finalArg.toString() + "\n");
                     text.setFill(Color.WHITE);
                     texts.add(text);
                     chat_area.getChildren().add(text);
@@ -160,7 +161,7 @@ public class LeaderBoardController implements Observer {
         });
     }
 
-    public static ArrayList<Text> getTexts(){
+    public static ArrayList<Text> getTexts() {
         return texts;
     }
 }

@@ -25,7 +25,7 @@ public class CreateLobbyController {
 
     @FXML
     Label port_error;
-    
+
     @FXML
     Label username_error;
 
@@ -34,7 +34,6 @@ public class CreateLobbyController {
 
     @FXML
     JFXSlider num_rounds;
-    
 
     private static String portNumber = "";
     private static String username = "";
@@ -42,28 +41,28 @@ public class CreateLobbyController {
     private static int numRounds = 10;
 
     @FXML
-    public void submitPortNumber(KeyEvent event){
+    public void submitPortNumber(KeyEvent event) {
         portNumber = port_number_field.getText();
     }
 
     @FXML
-    public void submitUsername(KeyEvent event){
+    public void submitUsername(KeyEvent event) {
         username = username_field.getText();
     }
 
-    public static String getPortNumber(){
+    public static String getPortNumber() {
         return portNumber;
     }
 
-    public static String getUsername(){
+    public static String getUsername() {
         return username;
     }
 
-    public static int getMaxPlayers(){
+    public static int getMaxPlayers() {
         return maxPlayers;
     }
 
-    public static int getNumRounds(){
+    public static int getNumRounds() {
         return numRounds;
     }
 
@@ -83,36 +82,35 @@ public class CreateLobbyController {
         //String[] arguments = new String[] {};
         //new SyncClients().main(arguments);
 
-
-        if (!portNumber.equals("") && !username.equals("")){
-            if (isInteger(portNumber)){
+        if (!portNumber.equals("") && !username.equals("")) {
+            if (isInteger(portNumber)) {
                 new StartGameSever().start();
-                
+
                 Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
                 Scene homePage = new Scene(homePageParent);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(homePage);
 
-                Platform.runLater(
-                    () -> {
+                Platform.runLater(() -> {
                     appStage.show();
                     appStage.requestFocus();
-                }
-                );
+                });
             }
         } else {
-            if (portNumber.equals("") || !isInteger(portNumber)){
+            if (portNumber.equals("") || !isInteger(portNumber)) {
                 port_error.setVisible(true);
             } else {
                 port_error.setVisible(false);
             }
-            if (username.equals("")){
-                username_error.setVisible(true);;
-            } else{
-                username_error.setVisible(false);;
+            if (username.equals("")) {
+                username_error.setVisible(true);
+                ;
+            } else {
+                username_error.setVisible(false);
+                ;
             }
         }
-    
+
     }
 
     @FXML
@@ -126,8 +124,8 @@ public class CreateLobbyController {
         //numberOfRounds.setVisibleRowCount(10);
     }
 
-    private class StartGameSever extends Thread{
-        public void run(){
+    private class StartGameSever extends Thread {
+        public void run() {
             maxPlayers = (int) Math.round(max_players.getValue());
             numRounds = (int) Math.round(num_rounds.getValue());
             String[] arguments = new String[] {};
@@ -136,19 +134,23 @@ public class CreateLobbyController {
     }
 
     public static boolean isInteger(String s) {
-        return isInteger(s,10);
+        return isInteger(s, 10);
     }
-    
+
     public static boolean isInteger(String s, int radix) {
-        if(s.isEmpty()) return false;
-        for(int i = 0; i < s.length(); i++) {
-            if(i == 0 && s.charAt(i) == '-') {
-                if(s.length() == 1) return false;
-                else continue;
+        if (s.isEmpty())
+            return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (i == 0 && s.charAt(i) == '-') {
+                if (s.length() == 1)
+                    return false;
+                else
+                    continue;
             }
-            if(Character.digit(s.charAt(i),radix) < 0) return false;
+            if (Character.digit(s.charAt(i), radix) < 0)
+                return false;
         }
         return true;
     }
-    
+
 }

@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
-public class JoinGameController{
+public class JoinGameController {
     @FXML
     JFXTextField port_number_field;
 
@@ -21,34 +21,34 @@ public class JoinGameController{
 
     @FXML
     Label port_error;
-    
+
     @FXML
     Label username_error;
-    
+
     private static String portNumber = "";
     private static String username = "";
 
     @FXML
-    public void submitPortNumber(KeyEvent event){
+    public void submitPortNumber(KeyEvent event) {
         portNumber = port_number_field.getText();
     }
 
     @FXML
-    public void submitUsername(KeyEvent event){
+    public void submitUsername(KeyEvent event) {
         username = username_field.getText();
     }
 
-    public static String getPortNumber(){
+    public static String getPortNumber() {
         return portNumber;
     }
 
-    public static String getUsername(){
+    public static String getUsername() {
         return username;
     }
 
-    public void joinGameButtonPress(ActionEvent event) throws IOException{
-        if (!portNumber.equals("") && !username.equals("")){
-            if (isInteger(portNumber)){
+    public void joinGameButtonPress(ActionEvent event) throws IOException {
+        if (!portNumber.equals("") && !username.equals("")) {
+            if (isInteger(portNumber)) {
                 Parent page = FXMLLoader.load(getClass().getClassLoader().getResource("WaitingLobby.fxml"));
                 Scene waitingLobbyScene = new Scene(page);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -57,15 +57,17 @@ public class JoinGameController{
                 appStage.requestFocus();
             }
         } else {
-            if (portNumber.equals("") || !isInteger(portNumber)){
+            if (portNumber.equals("") || !isInteger(portNumber)) {
                 port_error.setVisible(true);
             } else {
                 port_error.setVisible(false);
             }
-            if (username.equals("")){
-                username_error.setVisible(true);;
-            } else{
-                username_error.setVisible(false);;
+            if (username.equals("")) {
+                username_error.setVisible(true);
+                ;
+            } else {
+                username_error.setVisible(false);
+                ;
             }
         }
     }
@@ -80,19 +82,23 @@ public class JoinGameController{
     }
 
     public static boolean isInteger(String s) {
-        return isInteger(s,10);
+        return isInteger(s, 10);
     }
-    
+
     public static boolean isInteger(String s, int radix) {
-        if(s.isEmpty()) return false;
-        for(int i = 0; i < s.length(); i++) {
-            if(i == 0 && s.charAt(i) == '-') {
-                if(s.length() == 1) return false;
-                else continue;
+        if (s.isEmpty())
+            return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (i == 0 && s.charAt(i) == '-') {
+                if (s.length() == 1)
+                    return false;
+                else
+                    continue;
             }
-            if(Character.digit(s.charAt(i),radix) < 0) return false;
+            if (Character.digit(s.charAt(i), radix) < 0)
+                return false;
         }
         return true;
     }
-    
+
 }
