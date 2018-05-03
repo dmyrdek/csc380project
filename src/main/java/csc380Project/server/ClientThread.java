@@ -278,7 +278,7 @@ public class ClientThread extends Thread {
                   threads[0].myGame.getAllAnswersForQuestion(
                       threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
                   threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))) {
-                    threads[i].totalVotes[votingResultQuestionNumber][0] = clientVoteTwo;
+                    threads[i].totalVotes[votingResultQuestionNumber][1] = clientVoteTwo;
                 this.os.println("%Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][1]);
               }
             }
