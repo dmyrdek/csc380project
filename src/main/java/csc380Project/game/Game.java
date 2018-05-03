@@ -153,7 +153,7 @@ public class Game {
 
 
     public String funnyResponse(String name) {
-        int a = (int) Math.floor(Math.random() * 5);
+        int a = (int) Math.floor(Math.random() * 7);
 
         if (a == 0) {
             return "~That's awkward... Looks like " + name + " doesn't know how to type on their computer";
@@ -164,6 +164,12 @@ public class Game {
         } else if (a == 3) {
             return "~Looks like " + name + "'s mom was yelling at them for playing video games past their " +
                     java.time.LocalTime.now().format(DateTimeFormatter.ofPattern("hh:00")) + " curfew. They didn't submit an answer";
+        } else if (a == 4){
+            return "~" + name + " is out mowing their driveway. They didn't answer the question";
+        } else if (a == 5) {
+            return "~" + name + " is out painting their grass green. They didn't answer the question";
+        } else if (a ==6) {
+            return "~" + name + " fell off their chair and died of laughter. They didn't answer the question";
         } else {
             return "~" + name + " didn't submit an answer this round. You should probably make fun of them";
         }
