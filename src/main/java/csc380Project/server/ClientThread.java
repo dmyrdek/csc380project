@@ -264,7 +264,7 @@ public class ClientThread extends Thread {
                 + "\"");
 
             for (int i = 0; i < maxClientsCount; i++){
-              if (threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
+              if (threads[i] != null && threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
                 threads[0].myGame.getAllAnswersForQuestion(
                     threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
                 threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
@@ -273,13 +273,16 @@ public class ClientThread extends Thread {
             }
 
             for (int i = 0; i < maxClientsCount; i++){
-              if (threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
+              if (threads[i] != null && threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
                 threads[0].myGame.getAllAnswersForQuestion(
                     threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
                 threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
                   this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][1]);
                 }
             }
+
+            this.clientVoteOne = 0;
+            this.clientVoteTwo = 0;
 
 
             //this.os.println("}Total votes: " + clientVoteOne);
