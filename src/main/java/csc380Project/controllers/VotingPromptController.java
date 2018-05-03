@@ -130,6 +130,7 @@ public class VotingPromptController implements Observer{
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
                     numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
+                    numPlayers = numPlayers - 1;
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
