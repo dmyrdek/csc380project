@@ -142,12 +142,12 @@ public class VotingPromptController implements Observer{
                         }
                     }
 
-                    chatAccess.send("`inVotingPrompt");
+                    //chatAccess.send("`inVotingPrompt");
                 }
                 //isVotingPromptLoadedFromQuestionPrompt.set(false);
             }
         });
-
+        chatAccess.send("`inVotingPrompt");
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
