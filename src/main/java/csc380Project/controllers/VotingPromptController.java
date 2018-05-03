@@ -113,8 +113,6 @@ public class VotingPromptController implements Observer{
     @FXML
     public void initialize() {
 
-        numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
-
         voting_question_prompt.setMouseTransparent(true);
         results_question_prompt.setMouseTransparent(true);
 
@@ -131,7 +129,7 @@ public class VotingPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    boolean firstSend = true;
+                    numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
@@ -156,9 +154,9 @@ public class VotingPromptController implements Observer{
                     isVotingPromptLoadedFromQuestionPrompt.setValue(false);
                     vote_option_one.setDisable(false);
                     vote_option_two.setDisable(false);
-                    System.out.println(votingPromptCount + " " +numPlayers);
+                    System.out.println(votingPromptCount + " " + numPlayers);
                     //chatAccess.send("`allPlayersSubmitted");
-                    if (votingPromptCount <= numPlayers){
+                    if (votingPromptCount < numPlayers){
                         if (inVotingPrompt){
                             submittedPlayerSize = 1;
                             inVotingPrompt = false;
