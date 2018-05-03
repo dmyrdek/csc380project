@@ -3,6 +3,8 @@ package csc380Project.game;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class Player implements Comparable {
 
@@ -158,14 +160,21 @@ public class Player implements Comparable {
         return questionsForRound;
     }
 
+
+
+
     //displays strings properly formatted for displaying in leaderboard
     public String displayForLeaderBoard(){
 
-        int size = this.name.length();
-        final int maxSize = 40;
+        Font font = new Font("System", Font.PLAIN, 18);
+        FontMetrics fm = new FontMetrics(font){
+        };
+        Rectangle2D bounds = fm.getStringBounds(this.name, null);
+        int width = (int) bounds.getWidth();
+        final int maxSize = 100;
         String ret = this.name;
 
-        for (int i = 0; i< maxSize-size; i++){
+        for (int i = 0; i< maxSize-width; i++){
             ret = ret + " ";
         }
 

@@ -31,7 +31,7 @@ public class Main extends Application {
         players.add(new Player("cedric"));
         players.add(new Player("doug"));
         players.add(new Player("brian"));
-        players.add(new Player("dylan"));
+        players.add(new Player("dylan0000"));
 
         Game g = new Game(4, players);
         ArrayList<String> p1q = g.getInGamePlayers().get(0).getQuestionsToAnswerForRound(3);
