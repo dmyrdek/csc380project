@@ -74,7 +74,7 @@
       </Label>
       <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="523.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@VotingScene.png" />
+            <Image url="@Voting.png" />
          </image>
       </ImageView>
    </children>
