@@ -46,7 +46,7 @@ public class QuestionPackTest {
     @Test
     public void addAllQuestionsTest(){
         QuestionPack q = new QuestionPack().addAllQuestions();
-        assertEquals(q.getQArrayList().size(), 345);
+        assertEquals(q.getQArrayList().size(), 362);
     }
 
 

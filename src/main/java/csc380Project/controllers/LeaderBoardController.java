@@ -46,6 +46,8 @@ public class LeaderBoardController implements Observer {
     private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
     public ObservableList leaderboardList = FXCollections.observableArrayList();
     private int submittedPlayerSize = 1;
+    private int numPlayers;
+    private int playersInList = 0;
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -63,6 +65,7 @@ public class LeaderBoardController implements Observer {
     public void initialize() throws IOException {
         // add names to the list, and sort them
         //game = ClientThread
+        numPlayers = WaitingLobbyController.getNumberOfLivePlayers();
 
         LeaderBoardController current = this;
 
@@ -147,7 +150,10 @@ public class LeaderBoardController implements Observer {
                         }
                     }
                 } else if (finalArg.toString().startsWith("{")) {
-                    leaderboardList.add(finalArg.toString().substring(1));
+                    if (playersInList < numPlayers){
+                        leaderboardList.add(playersInList,finalArg.toString().substring(1));
+                        playersInList++;
+                    }
                 }
 
                 else {
