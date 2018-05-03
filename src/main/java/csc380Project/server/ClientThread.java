@@ -22,8 +22,7 @@ public class ClientThread extends Thread {
   private int roundsNum = 16;
   private String name = "";
   private QuestionPack qp = new QuestionPack().addAllQuestions();
-  private boolean[][] myVotes = new boolean[roundsNum][2];
-  private int[][] totalVotes = new int[roundsNum][2];
+  private Integer[][] totalVotes = new Integer[roundsNum][2];
   private Player player;
   private final int numOfPlayers = 16; //allways test for the max number of players
   private boolean isHost = false;
@@ -264,9 +263,28 @@ public class ClientThread extends Thread {
                     threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])
                 + "\"");
 
-            this.os.println("}Total votes: " + clientVoteOne);
+            for (int i = 0; i < maxClientsCount; i++){
+              if (threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
+                threads[0].myGame.getAllAnswersForQuestion(
+                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[0],
+                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
+                  this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][0]);
+                }
+            }
 
-            this.os.println("%Total votes: " + clientVoteTwo);
+            for (int i = 0; i < maxClientsCount; i++){
+              if (threads[i].name.equals(threads[0].myGame.whoAnsweredQuestion(
+                threads[0].myGame.getAllAnswersForQuestion(
+                    threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber])[1],
+                threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]))){
+                  this.os.println("}Total votes: " + threads[i].totalVotes[votingResultQuestionNumber][1]);
+                }
+            }
+
+
+            //this.os.println("}Total votes: " + clientVoteOne);
+
+            //this.os.println("%Total votes: " + clientVoteTwo);
 
             votingResultQuestionNumber++;
             notTwoInQuestionPromptsInARow = true;
@@ -336,6 +354,19 @@ public class ClientThread extends Thread {
                                 + "\"");
 
                     threads[i].os.println("`submitted");
+                  }
+                }
+              }
+              for (int i = 0; i < maxClientsCount; i++){
+                if (threads[i] == this){
+                  if (this.clientVoteOne != 0){
+                    if (totalVotes[votingPromptQuestionNumber-1][0] == null){
+                      totalVotes[votingPromptQuestionNumber-1][0] = this.clientVoteOne;
+                    }
+                  } else if (this.clientVoteTwo != 0) {
+                    if (totalVotes[votingPromptQuestionNumber-1][1] == null){
+                      totalVotes[votingPromptQuestionNumber-1][1] = this.clientVoteTwo;
+                    }
                   }
                 }
               }
