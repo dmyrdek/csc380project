@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.VotingPromptFromQuestionController">
+<Pane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.VotingPromptController">
    <children>
       <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
          <effect>
@@ -61,26 +61,70 @@
             </ImageView>
          </children>
       </Pane>
-      <VBox alignment="CENTER" layoutX="18.0" layoutY="87.0" prefHeight="400.0" prefWidth="548.0" style="-fx-spacing: 30;">
+      <VBox fx:id="voting_vbox" alignment="CENTER" layoutX="18.0" layoutY="87.0" prefHeight="400.0" prefWidth="548.0" style="-fx-spacing: 30;">
          <children>
             <Label text="Question" textFill="#ffffffcb">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <JFXTextArea fx:id="question_prompt" editable="false" focusColor="#405aa800" prefHeight="149.0" prefWidth="548.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+            <JFXTextArea fx:id="voting_question_prompt" editable="false" focusColor="#405aa800" prefHeight="149.0" prefWidth="548.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
             <HBox alignment="CENTER" style="-fx-spacing: 50;">
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="voting_answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton fx:id="vote_option_one" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionOne" textFill="WHITE" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <JFXTextArea fx:id="answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+                        <JFXTextArea fx:id="voting_answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
                         <JFXToggleButton fx:id="vote_option_two" contentDisplay="GRAPHIC_ONLY" onAction="#voteOptionTwo" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="results_vbox" alignment="CENTER" layoutX="18.0" layoutY="87.0" prefHeight="400.0" prefWidth="548.0" style="-fx-spacing: 30;" visible="false">
+         <children>
+            <Label text="Question" textFill="#ffffffcb">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <JFXTextArea fx:id="results_question_prompt" editable="false" focusColor="#405aa800" prefHeight="149.0" prefWidth="548.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+            <HBox alignment="CENTER" style="-fx-spacing: 50;">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <JFXTextArea fx:id="results_answer_prompt_one" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+                        <Label fx:id="voting_results_one_name" opacity="0.95" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_one_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <JFXTextArea fx:id="results_answer_prompt_two" editable="false" focusColor="#405aa800" prefHeight="125.0" prefWidth="498.0" text=" " unFocusColor="#4d4d4d00" wrapText="true" />
+                        <Label fx:id="voting_results_two_name" opacity="0.95" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="voting_results_two_votes" opacity="0.8" text=" " textFill="#ffffffcb">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
