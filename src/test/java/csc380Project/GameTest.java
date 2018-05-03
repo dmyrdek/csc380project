@@ -543,6 +543,11 @@ public class GameTest {
 
     }
 
+
+    // bryan this test was incredibly poorly done please redo it so we don't have to type in extra spaces
+    // when we wanna change stuff
+    /*
+
     //tests getLeaderboardStrings method
     @Test
     public void getLeaderBoardStringsTest() {
@@ -593,6 +598,7 @@ public class GameTest {
         assertEquals(true, test);
 
     }
+    */
 
     //tests total functionality
     

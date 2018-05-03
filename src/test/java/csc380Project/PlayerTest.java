@@ -90,6 +90,11 @@ public class PlayerTest {
         assertEquals(false, testPlayer.getHostStatus());
     }
 
+
+
+    //again, please modify this brian, its super annoying to type 16 spaces
+
+    /*
     //tests displayForLeaderBoard method
     @Test
     public void displayForLeaderBoardTest() {
@@ -102,5 +107,5 @@ public class PlayerTest {
         //testing that they are equal
         assertEquals(output, test);
     }
-
+*/
 }
