@@ -70,11 +70,11 @@ public class QuestionPromptController implements Observer{
 
 
     public static void setIsQuestionPromptLoadedFromWaitingLobbyToTrue(){
-        isQuestionPromptLoadedFromWaitingLobby.set(true);
+        isQuestionPromptLoadedFromWaitingLobby.setValue(true);
     }
 
     public static void setIsQuestionPromptLoadedFromVotingPromptToTrue(){
-        isQuestionPromptLoadedFromVotingPrompt.set(true);
+        isQuestionPromptLoadedFromVotingPrompt.setValue(true);
     }
 
     public static ChatAccess getChatAccess() {
@@ -135,9 +135,7 @@ public class QuestionPromptController implements Observer{
                     chatAccess.addObserver(current);
                     
                     for (Text t: VotingPromptController.getTexts()){
-                        if (!texts.contains(t)){
-                            texts.add(t);
-                        }
+                        texts.add(t);
                         chat_area.getChildren().add(t);
                     }
 
@@ -154,8 +152,8 @@ public class QuestionPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    isQuestionPromptLoadedFromWaitingLobby.set(false);
-                    isQuestionPromptLoadedFromVotingPrompt.set(false);
+                    isQuestionPromptLoadedFromWaitingLobby.setValue(false);
+                    isQuestionPromptLoadedFromVotingPrompt.setValue(false);
                     chatAccess.send("`allPlayersSubmitted");
                     if (questionNumber == 0){
                         questionNumber = 1;

@@ -145,7 +145,7 @@ public class VotingPromptController implements Observer{
                     chatAccess.send("`inVotingPrompt");
 
                 }
-                isVotingPromptLoadedFromQuestionPrompt.set(false);
+                //isVotingPromptLoadedFromQuestionPrompt.set(false);
             }
         });
 
@@ -153,7 +153,7 @@ public class VotingPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    //isVotingPromptLoadedFromQuestionPrompt.set(false);
+                    isVotingPromptLoadedFromQuestionPrompt.setValue(false);
                     vote_option_one.setDisable(false);
                     vote_option_two.setDisable(false);
                     System.out.println(votingPromptCount + " " +numPlayers);
@@ -202,7 +202,7 @@ public class VotingPromptController implements Observer{
     }
 
     public static void setIsVotingPromptLoadedFromQuestionPromptToTrue(){
-        isVotingPromptLoadedFromQuestionPrompt.set(true);
+        isVotingPromptLoadedFromQuestionPrompt.setValue(true);
     }
 
     public void sendMessage(ActionEvent event){
