@@ -131,6 +131,7 @@ public class VotingPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    boolean firstSend = true;
                     chatAccess = QuestionPromptController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
@@ -141,13 +142,14 @@ public class VotingPromptController implements Observer{
                             chat_area.getChildren().add(t);
                         }
                     }
-
-                    //chatAccess.send("`inVotingPrompt");
+                    if (firstSend){
+                        chatAccess.send("`inVotingPrompt");
+                        firstSend = false;
+                    }
                 }
                 //isVotingPromptLoadedFromQuestionPrompt.set(false);
             }
         });
-        chatAccess.send("`inVotingPrompt");
 
         allPlayersSubmitted.addListener(new ChangeListener<Boolean>() {
             @Override
