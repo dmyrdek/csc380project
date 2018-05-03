@@ -107,7 +107,7 @@ public class VotingPromptController implements Observer{
 
     public static void setStage(Stage stage) {
         myStage = stage;
-     }
+    }
 
 
     @FXML
@@ -116,8 +116,7 @@ public class VotingPromptController implements Observer{
         voting_question_prompt.setMouseTransparent(true);
         results_question_prompt.setMouseTransparent(true);
 
-        //VotingResultsFromQuestionController.setStage(myStage);
-
+        LeaderBoardController.setStage(myStage);
 
         VotingPromptController current = this;
 
@@ -183,12 +182,12 @@ public class VotingPromptController implements Observer{
                     }else{
                             try {
                                 inVotingPrompt = true;
-                                Parent questionPromptParent = FXMLLoader.load(getClass().getClassLoader().getResource("QuestionPrompt.fxml"));
-                                Scene questionPrompt = new Scene(questionPromptParent);
-                                myStage.setScene(questionPrompt);
+                                Parent leaderBoardParent = FXMLLoader.load(getClass().getClassLoader().getResource("LeaderBoard.fxml"));
+                                Scene LeaderBoardScene = new Scene(leaderBoardParent);
+                                myStage.setScene(LeaderBoardScene);
                                 myStage.show();
                                 myStage.requestFocus();
-                                QuestionPromptController.setIsQuestionPromptLoadedFromVotingPromptToTrue();
+                                LeaderBoardController.setIsLeaderBoardLoadedToTrue();
                                 allPlayersSubmitted.set(false);
                             }catch(Exception e){
                                 e.printStackTrace();

@@ -292,6 +292,10 @@ public class ClientThread extends Thread {
 
             votingResultQuestionNumber++;
             notTwoInQuestionPromptsInARow = true;
+          } else if (line.substring(1).equals("inLeaderboard")){
+            for (String s : threads[0].myGame.getLeaderBoardStrings()){
+              this.os.println("{" + s);
+            }
           }
         }
 

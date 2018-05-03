@@ -49,7 +49,7 @@ public class QuestionPromptController implements Observer{
     private static ChatAccess chatAccess;
     private static String port;
     private static BooleanProperty isQuestionPromptLoadedFromWaitingLobby = new SimpleBooleanProperty(false);
-    private static BooleanProperty isQuestionPromptLoadedFromVotingPrompt = new SimpleBooleanProperty(false);
+    private static BooleanProperty isQuestionPromptLoadedFromLeaderBoard = new SimpleBooleanProperty(false);
     private BooleanProperty allPlayersSubmitted = new SimpleBooleanProperty(false);
     private static BooleanProperty changeScene = new SimpleBooleanProperty(false);
     private static ArrayList<Text> texts = new ArrayList<>();
@@ -73,8 +73,8 @@ public class QuestionPromptController implements Observer{
         isQuestionPromptLoadedFromWaitingLobby.setValue(true);
     }
 
-    public static void setIsQuestionPromptLoadedFromVotingPromptToTrue(){
-        isQuestionPromptLoadedFromVotingPrompt.setValue(true);
+    public static void setIsQuestionPromptLoadedFromLeaderBoardToTrue(){
+        isQuestionPromptLoadedFromLeaderBoard.setValue(true);
     }
 
     public static ChatAccess getChatAccess() {
@@ -120,7 +120,7 @@ public class QuestionPromptController implements Observer{
             }
         });
 
-        isQuestionPromptLoadedFromVotingPrompt.addListener(new ChangeListener<Boolean>() {
+        isQuestionPromptLoadedFromLeaderBoard.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
@@ -130,11 +130,11 @@ public class QuestionPromptController implements Observer{
                         numRounds = WaitingLobbyController.getNumRounds();
                     }
 
-                    chatAccess = VotingPromptController.getChatAccess();
+                    chatAccess = LeaderBoardController.getChatAccess();
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
                     
-                    for (Text t: VotingPromptController.getTexts()){
+                    for (Text t: LeaderBoardController.getTexts()){
                         texts.add(t);
                         chat_area.getChildren().add(t);
                     }
@@ -153,7 +153,7 @@ public class QuestionPromptController implements Observer{
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
                     isQuestionPromptLoadedFromWaitingLobby.setValue(false);
-                    isQuestionPromptLoadedFromVotingPrompt.setValue(false);
+                    isQuestionPromptLoadedFromLeaderBoard.setValue(false);
                     chatAccess.send("`allPlayersSubmitted");
                     if (questionNumber == 0){
                         questionNumber = 1;
