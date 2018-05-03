@@ -21,6 +21,8 @@ public class HomeScreenController {
     @FXML
     Hyperlink ngrok_link;
 
+    
+
     public void createGameButtonPress(ActionEvent event) throws IOException {
         Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("CreateLobby.fxml"));
         Scene createLobbyScene = new Scene(homePageParent);
@@ -74,6 +76,8 @@ public class HomeScreenController {
 
     @FXML
     public void initialize() {
+
+
         github_link.setOnAction(t -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://github.com/dmyrdek/csc380project"));

@@ -98,6 +98,7 @@ public class QuestionPromptController implements Observer {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    chat_area.getChildren().remove(0, chat_area.getChildren().size());
                     isHost = WaitingLobbyController.getIsHost();
                     if (isHost) {
                         maxPlayers = WaitingLobbyController.getMaxPlayers();
@@ -109,9 +110,11 @@ public class QuestionPromptController implements Observer {
                     chatAccess.addObserver(current);
 
                     for (Text t : WaitingLobbyController.getTexts()) {
-                        texts.add(t);
-                        chat_area.getChildren().add(t);
+                        if (!texts.contains(t)){
+                            texts.add(t);
+                        }
                     }
+                    chat_area.getChildren().addAll(texts);
 
                     chatAccess.send("`inQuestionPrompt");
                 }
@@ -123,6 +126,7 @@ public class QuestionPromptController implements Observer {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    chat_area.getChildren().remove(0, chat_area.getChildren().size());
                     isHost = WaitingLobbyController.getIsHost();
                     if (isHost) {
                         maxPlayers = WaitingLobbyController.getMaxPlayers();
@@ -134,9 +138,11 @@ public class QuestionPromptController implements Observer {
                     chatAccess.addObserver(current);
 
                     for (Text t : LeaderBoardController.getTexts()) {
-                        texts.add(t);
-                        chat_area.getChildren().add(t);
+                        if (!texts.contains(t)){
+                            texts.add(t);
+                        }
                     }
+                    chat_area.getChildren().addAll(texts);
 
                     chatAccess.send("`inQuestionPrompt");
                 }

@@ -47,7 +47,7 @@ public class LeaderBoardController implements Observer {
     public ObservableList leaderboardList = FXCollections.observableArrayList();
     private int submittedPlayerSize = 1;
     private int numPlayers;
-    private int playersInList = 0;
+    private int playersInList = 1;
 
     public static ChatAccess getChatAccess() {
         return chatAccess;
@@ -82,9 +82,11 @@ public class LeaderBoardController implements Observer {
                     leaderboardList.clear();
 
                     for (Text t : VotingPromptController.getTexts()) {
-                        texts.add(t);
-                        chat_area.getChildren().add(t);
+                        if (!texts.contains(t)){
+                            texts.add(t);
+                        }
                     }
+                    chat_area.getChildren().addAll(texts);
                     chatAccess.send("`inLeaderboard");
                 }
             }

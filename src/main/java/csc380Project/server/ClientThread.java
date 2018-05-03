@@ -50,6 +50,7 @@ public class ClientThread extends Thread {
   private int votingPromptQuestionNumber = 0;
   private int votingResultQuestionNumber = 0;
   private boolean notTwoInQuestionPromptsInARow = true;
+  private boolean inLeaderBoard = false;
 
   public String getUserName() {
     return name;
@@ -139,6 +140,9 @@ public class ClientThread extends Thread {
               } else if (inVotingResults) {
                 countDownTime = inVotingResultsTime;
                 inVotingResults = false;
+              } else if (inLeaderBoard){
+                countDownTime = inVotingResultsTime;
+                inLeaderBoard = false;
               }
               countDownTime--;
               for (int i = 0; i < maxClientsCount; i++) {
@@ -294,6 +298,7 @@ public class ClientThread extends Thread {
             notTwoInQuestionPromptsInARow = true;
           } else if (line.substring(1).equals("inLeaderboard")){
             for (String s : threads[0].myGame.getLeaderBoardStrings()){
+              inLeaderBoard = true;
               this.os.println("{" + s);
             }
           }

@@ -133,11 +133,11 @@ public class VotingPromptController implements Observer {
                     chatAccess.addObserver(current);
 
                     for (Text t : QuestionPromptController.getTexts()) {
-                        if (!texts.contains(t)) {
+                        if (!texts.contains(t)){
                             texts.add(t);
-                            chat_area.getChildren().add(t);
                         }
                     }
+                    chat_area.getChildren().addAll(texts);
                     chatAccess.send("`inVotingPrompt");
 
                 }
