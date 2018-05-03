@@ -169,7 +169,8 @@ public class Player implements Comparable {
             ret = ret + " ";
         }
 
-        return ret + this.getNumVotesReceived();
+        // the /2 is super weird and hacky but testing it out
+        return ret + this.getNumVotesReceived()/2;
 
     }
 
