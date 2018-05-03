@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.HowToPlayController">
+   <children>
+      <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="38.48" radius="16.619999999999997" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="37.27" radius="16.317500000000003" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="41.49" radius="23.47" width="54.39" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#howToPlayButtonPress" prefHeight="40.0" prefWidth="100.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
+               </effect>
+               <font>
+                  <Font name="SofiaProLight" size="13.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="430.0" layoutY="14.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="754.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
+         </effect>
+      </Pane>
+      <Label contentDisplay="CENTER" layoutX="345.0" layoutY="86.0" prefHeight="73.0" prefWidth="210.0" stylesheets="@main.css" text="How to Chat" textAlignment="CENTER" textFill="WHITE" underline="true">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="40.0" layoutY="196.0" prefHeight="261.0" prefWidth="460.0" stylesheets="@main.css" text="Once you're in the waiting lobby (and for &#10;the entire game), you can send messages&#10;to everyone in the lobby by typing in the &#10;chat box on the bottom left. Messages&#10;will show up in the box right above the &#10;text field&#10;" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="199.0" fitWidth="368.0" layoutX="500.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@GeneralChat.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
