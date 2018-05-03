@@ -142,12 +142,10 @@ public class VotingPromptController implements Observer{
                             chat_area.getChildren().add(t);
                         }
                     }
-                    if (firstSend){
-                        chatAccess.send("`inVotingPrompt");
-                        firstSend = false;
-                    }
+                    chatAccess.send("`inVotingPrompt");
+
                 }
-                //isVotingPromptLoadedFromQuestionPrompt.set(false);
+                isVotingPromptLoadedFromQuestionPrompt.set(false);
             }
         });
 
@@ -155,7 +153,7 @@ public class VotingPromptController implements Observer{
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    isVotingPromptLoadedFromQuestionPrompt.set(false);
+                    //isVotingPromptLoadedFromQuestionPrompt.set(false);
                     vote_option_one.setDisable(false);
                     vote_option_two.setDisable(false);
                     System.out.println(votingPromptCount + " " +numPlayers);
