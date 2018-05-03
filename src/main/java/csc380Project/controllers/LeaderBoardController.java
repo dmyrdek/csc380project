@@ -76,11 +76,11 @@ public class LeaderBoardController implements Observer {
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
 
+                    leaderboardList.clear();
+
                     for (Text t : VotingPromptController.getTexts()) {
-                        if (!texts.contains(t)) {
-                            texts.add(t);
-                            chat_area.getChildren().add(t);
-                        }
+                        texts.add(t);
+                        chat_area.getChildren().add(t);
                     }
                     chatAccess.send("`inLeaderboard");
                 }
