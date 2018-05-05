@@ -173,7 +173,7 @@ public class Player implements Comparable {
         int nameLength = (int)(font.getStringBounds(this.name, frc).getWidth());
 
         //total length of output
-        final int totalLength = 150;
+        final int totalLength = 250;
 
         //length of spaces needed
         int difference = totalLength - nameLength;
