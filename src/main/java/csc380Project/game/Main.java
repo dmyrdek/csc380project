@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.geometry.Insets;
 
+import java.awt.Font;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -94,7 +98,6 @@ public class Main extends Application {
 
 
         //////---------testing stuff-----------------------
-
 
 
 

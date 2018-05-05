@@ -159,18 +159,30 @@ public class Player implements Comparable {
     }
 
     //displays strings properly formatted for displaying in leaderboard
+    //System Font, Size 18, Regular (Not bold, italicized, etc.)
     public String displayForLeaderBoard(){
 
-        int size = this.name.length();
-        final int maxSize = 40;
-        String ret = this.name;
+        //get integer width of player name
+        AffineTransform affineTransform = new AffineTransform();
+        FontRenderContext frc = new FontRenderContext(affineTransform, true, true);
+        Font font = new Font("System", Font.PLAIN, 18);
+        int nameLength = (int)(font.getStringBounds(this.name, frc).getWidth());
 
-        for (int i = 0; i< maxSize-size; i++){
+        //total length of output
+        final int totalLength = 150;
+
+        //length of spaces needed
+        int difference = totalLength - nameLength;
+
+        //extend name with spaces to have matching lengths
+        String ret = this.name;
+        while(difference > 5){
             ret = ret + " ";
+            difference -= 9;
         }
 
         // the /2 is super weird and hacky but testing it out
-        return ret + this.getNumVotesReceived()/2;
+        return ret + this.getNumVotesReceived();
 
     }
 
