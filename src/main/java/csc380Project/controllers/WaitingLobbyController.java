@@ -72,7 +72,7 @@ public class WaitingLobbyController implements Observer {
     private static int numRounds;
     private static boolean isHost = false;
     private static int numberOfLivePlayers = 1;
-    public static ArrayList<PlayerColor> colors = new ArrayList<>();
+    private static ArrayList<PlayerColor> colors = new ArrayList<>();
 
     public static void setStage(Stage stage) {
         myStage = stage;
@@ -282,5 +282,9 @@ public class WaitingLobbyController implements Observer {
 
     public static ArrayList<Text> getTexts() {
         return texts;
+    }
+
+    public static ArrayList<PlayerColor> getColors(){
+        return colors;
     }
 }
