@@ -257,19 +257,22 @@ public class WaitingLobbyController implements Observer {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
                     int index = finalArg.toString().indexOf(">");
                     String name = finalArg.toString().substring(1, index);
-                    if (finalArg.toString().startsWith("<")) {//<name> message
+                    if (finalArg.toString().startsWith("<")) {
 
                     }
-                    Text text = new Text(finalArg.toString() + "\n");
+                    Text textName = new Text(name);
+                    Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
                     Color nameColor = Color.WHITE;
                     for(PlayerColor pc : colors){
                         if(pc.getName().equals(name)){
                             nameColor = pc.getColor();
                         }
                     }
-                    text.setFill(nameColor);
-                    texts.add(text);
-                    chat_area.getChildren().add(text);
+                    textName.setFill(nameColor);
+                    textMessage.setFill(Color.WHITE);
+                    texts.add(textName);
+                    texts.add(textMessage);
+                    chat_area.getChildren().addAll(textName, textMessage);
                 }
             }
         });
