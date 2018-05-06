@@ -37,14 +37,19 @@ public class LeaderBoardController implements Observer {
     JFXButton submit_button;
 
     @FXML
-    ListView leaderboard;
+    ListView leaderboard_names;
+
+    @FXML
+    ListView leaderboard_score;
+
 
     private static ChatAccess chatAccess;
     private static ArrayList<Text> texts = new ArrayList<>();
     private static Stage myStage;
     private static BooleanProperty isLeaderBoardLoaded = new SimpleBooleanProperty(false);
     private BooleanProperty allPlayersReady = new SimpleBooleanProperty(false);
-    public ObservableList leaderboardList = FXCollections.observableArrayList();
+    public ObservableList leaderboardNamesList = FXCollections.observableArrayList();
+    public ObservableList leaderboardScoresList = FXCollections.observableArrayList();
     private int submittedPlayerSize = 1;
     private int numPlayers;
     private int playersInList = 0;
@@ -69,7 +74,8 @@ public class LeaderBoardController implements Observer {
 
         LeaderBoardController current = this;
 
-        leaderboard.setItems(leaderboardList);
+        leaderboard_names.setItems(leaderboardNamesList);
+        leaderboard_score.setItems(leaderboardScoresList);
 
         isLeaderBoardLoaded.addListener(new ChangeListener<Boolean>() {
             @Override
@@ -79,7 +85,7 @@ public class LeaderBoardController implements Observer {
                     chatAccess.deleteObservers();
                     chatAccess.addObserver(current);
 
-                    leaderboardList.clear();
+                    leaderboardNamesList.clear();
 
                     for (Text t : VotingPromptController.getTexts()) {
                         if (!texts.contains(t)){
@@ -153,7 +159,10 @@ public class LeaderBoardController implements Observer {
                     }
                 } else if (finalArg.toString().startsWith("{")) {
                     if (playersInList < numPlayers-1){
-                        leaderboardList.add(playersInList,finalArg.toString().substring(1));
+                        String a = finalArg.toString().substring(1);
+                        String [] stuff = a.split("]");
+                        leaderboardNamesList.add(playersInList,stuff[0]);
+                        leaderboardScoresList.add(playersInList, stuff[1]);
                         playersInList++;
                     }
                 }
