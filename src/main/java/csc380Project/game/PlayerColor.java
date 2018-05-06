@@ -1,16 +1,25 @@
 package csc380Project.game;
 
 import javafx.scene.paint.Color;
+import java.util.Random;
 
 public class PlayerColor {
 
     private String name;
+    private Random rand;
     private Color colorForPlayer;
-
+    private Color[] colorList;
 
     public PlayerColor(String n) {
         name = n;
-        colorForPlayer = Color.color(Math.random(), Math.random(), Math.random());
+        rand = new Random();
+        colorForPlayer = Color.BLACK;
+        colorList = new Color[] {Color.GOLD, Color.GREEN, Color.LIME, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.SILVER, Color.TEAL, Color.VIOLET, Color.YELLOW, Color.TURQUOISE, Color.SLATEGREY, Color.OLIVE, Color.MINTCREAM};
+    }
+
+    public void setColor() {
+        int x = rand.nextInt(15);
+        colorForPlayer = colorList[x];
     }
 
     public Color getColor() {

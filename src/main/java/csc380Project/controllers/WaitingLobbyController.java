@@ -237,7 +237,9 @@ public class WaitingLobbyController implements Observer {
                 if (finalArg.toString().startsWith("}")) {
                     numberOfLivePlayers++;
                     names.add(finalArg.toString().substring(1));
-                    colors.add(new PlayerColor(finalArg.toString().substring(1)));
+                    PlayerColor playerColor = new PlayerColor(finalArg.toString().substring(1));
+                    playerColor.setColor();
+                    colors.add(playerColor);
                 } else if (finalArg.toString().startsWith("|")) {
                     ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
                 } else if (finalArg.toString().startsWith("~")) {
