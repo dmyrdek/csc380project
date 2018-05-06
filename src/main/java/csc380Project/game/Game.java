@@ -273,7 +273,7 @@ public class Game {
         ArrayList<Player> players = this.inGamePlayers;
         Collections.sort(players);
         for (Player p: players){
-            playerLeaderBoard.add(p.displayForLeaderBoard());
+            playerLeaderBoard.add(p.displayForLeaderBoard(this.inGamePlayers.size()));
         }
         return playerLeaderBoard;
     }
