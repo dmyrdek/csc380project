@@ -14,11 +14,11 @@ public class PlayerColor {
         name = n;
         rand = new Random();
         colorForPlayer = Color.BLACK;
-        colorList = new Color[] {Color.GOLD, Color.GREEN, Color.LIME, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.SILVER, Color.TEAL, Color.VIOLET, Color.YELLOW, Color.TURQUOISE, Color.SLATEGREY, Color.OLIVE, Color.MINTCREAM};
+        colorList = new Color[] {Color.GREEN, Color.LIME, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.SILVER, Color.TEAL, Color.VIOLET, Color.YELLOW, Color.TURQUOISE, Color.SLATEGREY, Color.OLIVE, Color.MINTCREAM};
     }
 
     public void setColor() {
-        int x = rand.nextInt(15);
+        int x = rand.nextInt(14);
         colorForPlayer = colorList[x];
     }
 
