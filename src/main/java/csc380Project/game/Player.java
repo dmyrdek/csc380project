@@ -164,7 +164,7 @@ public class Player implements Comparable {
 
     //displays strings properly formatted for displaying in leaderboard
     //System Font, Size 18, Regular (Not bold, italicized, etc.)
-    public String displayForLeaderBoard(){
+    public String displayForLeaderBoard(int numPlayers){
 
         //get integer width of player name
         AffineTransform affineTransform = new AffineTransform();
@@ -173,7 +173,7 @@ public class Player implements Comparable {
         int currentLength = (int)(font.getStringBounds(this.name, frc).getWidth());
 
         //total length of output
-        final int totalLength = 545;
+        final int totalLength = 200;
 
         //extend name with spaces to have matching lengths
         String ret = this.name;
@@ -183,7 +183,7 @@ public class Player implements Comparable {
         }
 
         // the /2 is super weird and hacky but testing it out
-        return ret + this.getNumVotesReceived();
+        return ret + this.getNumVotesReceived()/numPlayers;
 
     }
 

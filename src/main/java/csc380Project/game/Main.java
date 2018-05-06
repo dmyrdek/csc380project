@@ -84,9 +84,7 @@ public class Main extends Application {
 
         Player p1 = new Player("Player1");
         Player p2 = new Player("P2");
-
-        System.out.println(p1.displayForLeaderBoard());
-        System.out.println(p2.displayForLeaderBoard());
+        
     }
 
     @Override

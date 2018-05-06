@@ -1,6 +1,7 @@
 package csc380Project.controllers;
 
 import csc380Project.server.*;
+import csc380Project.game.*;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.control.ScrollPane;
@@ -71,6 +72,7 @@ public class WaitingLobbyController implements Observer {
     private static int numRounds;
     private static boolean isHost = false;
     private static int numberOfLivePlayers = 1;
+    private static ArrayList<PlayerColor> colors = new ArrayList<>();
 
     public static void setStage(Stage stage) {
         myStage = stage;
@@ -235,6 +237,9 @@ public class WaitingLobbyController implements Observer {
                 if (finalArg.toString().startsWith("}")) {
                     numberOfLivePlayers++;
                     names.add(finalArg.toString().substring(1));
+                    PlayerColor playerColor = new PlayerColor(finalArg.toString().substring(1));
+                    playerColor.setColor();
+                    colors.add(playerColor);
                 } else if (finalArg.toString().startsWith("|")) {
                     ready_button.setText(finalArg.toString().substring(1) + " - " + readyStatus);
                 } else if (finalArg.toString().startsWith("~")) {
@@ -252,14 +257,24 @@ public class WaitingLobbyController implements Observer {
                     }
                 } else {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                    String name;
+                    int index = finalArg.toString().indexOf(">");
+                    String name = finalArg.toString().substring(1, index);
                     if (finalArg.toString().startsWith("<")) {
 
                     }
-                    Text text = new Text(finalArg.toString() + "\n");
-                    text.setFill(Color.WHITE);
-                    texts.add(text);
-                    chat_area.getChildren().add(text);
+                    Text textName = new Text(name);
+                    Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
+                    Color nameColor = Color.WHITE;
+                    for(PlayerColor pc : colors){
+                        if(pc.getName().equals(name)){
+                            nameColor = pc.getColor();
+                        }
+                    }
+                    textName.setFill(nameColor);
+                    textMessage.setFill(Color.WHITE);
+                    texts.add(textName);
+                    texts.add(textMessage);
+                    chat_area.getChildren().addAll(textName, textMessage);
                 }
             }
         });
