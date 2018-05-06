@@ -3,6 +3,7 @@ package csc380Project.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import csc380Project.server.ChatAccess;
+import csc380Project.controllers.*;
 import csc380Project.game.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -178,7 +179,7 @@ public class LeaderBoardController implements Observer {
                     Text textName = new Text(name);
                     Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
                     Color nameColor = Color.GOLD;
-                    for(PlayerColor pc : colors){
+                    for(PlayerColor pc : WaitingLobbyController.colors){
                         if(pc.getName().equals(name)){
                             nameColor = pc.getColor();
                         }

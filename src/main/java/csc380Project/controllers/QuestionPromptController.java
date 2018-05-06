@@ -3,6 +3,7 @@ package csc380Project.controllers;
 import java.util.ArrayList;
 import csc380Project.server.*;
 import csc380Project.game.*;
+import csc380Project.controllers.*;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -266,7 +267,7 @@ public class QuestionPromptController implements Observer {
                     Text textName = new Text(name);
                     Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
                     Color nameColor = Color.GOLD;
-                    for(PlayerColor pc : colors){
+                    for(PlayerColor pc : WaitingLobbyController.colors){
                         if(pc.getName().equals(name)){
                             nameColor = pc.getColor();
                         }
