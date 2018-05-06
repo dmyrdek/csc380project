@@ -51,6 +51,15 @@ public class HomeScreenController {
         appStage.requestFocus();
     }
 
+    public void packMangerButtonPress(ActionEvent event) throws IOException {
+        Parent packSelectorParent = FXMLLoader.load(getClass().getClassLoader().getResource("PackSelector.fxml"));
+        Scene packSelectorScene = new Scene(packSelectorParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(packSelectorScene);
+        appStage.show();
+        appStage.requestFocus();
+    }
+
     public void quitGameButtonPress(ActionEvent event) {
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.close();

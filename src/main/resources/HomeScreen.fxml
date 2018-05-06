@@ -73,7 +73,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="create_game_button1" buttonType="RAISED" disable="true" onAction="#createGameButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Pack Manager" textFill="WHITE">
+            <JFXButton fx:id="pack_manager_button" buttonType="RAISED" onAction="#packMangerButtonPress" prefHeight="53.0" prefWidth="200.0" ripplerFill="#0e284d" style="-fx-background-color: #67809F;" text="Pack Manager" textFill="WHITE">
                <effect>
                   <DropShadow color="#141414" spread="0.03" />
                </effect>

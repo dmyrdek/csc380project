@@ -164,3 +164,7 @@
 .scroll-pane .corner {
     -fx-background-insets: 0;
 }
+
+.jfx-combo-box {
+    -fx-font-size: 16px;
+}

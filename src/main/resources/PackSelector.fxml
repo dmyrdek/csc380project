@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #222635;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="csc380Project.controllers.PackSelectorController">
+   <children>
+      <Pane layoutX="-5.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="38.48" radius="16.619999999999997" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane layoutX="901.0" layoutY="62.0" mouseTransparent="true" prefHeight="437.0" prefWidth="5.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="37.27" radius="16.317500000000003" width="30.0" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="ONE_PASS_BOX" color="#00000080" height="41.49" radius="23.47" width="54.39" />
+         </effect>
+      </Pane>
+      <Pane prefHeight="75.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <children>
+            <JFXButton fx:id="back_button" buttonType="RAISED" layoutX="26.0" layoutY="18.0" onAction="#backButtonPress" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #CA300A;" text="Back" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" height="30.0" radius="17.0" spread="0.16" width="40.0" />
+               </effect>
+               <font>
+                  <Font name="SofiaProLight" size="13.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="next_game_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" onAction="#nextButtonPress" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Next" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#141414" radius="14.75" spread="0.03" width="40.0" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" />
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="48.0" fitWidth="41.0" layoutX="430.0" layoutY="14.0">
+               <image>
+                  <Image url="@small_logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <VBox layoutX="300.0" layoutY="166.0" style="-fx-spacing: 100;">
+         <children>
+            <JFXTextField fx:id="new_pack_field" focusColor="#0ac7ca" labelFloat="true" onKeyReleased="#getCreatePackName" prefHeight="50.0" prefWidth="300.0" promptText="Create a new pack..." unFocusColor="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="existing_pack_combo_box" focusColor="#0ac7ca" onAction="#selectPack" prefHeight="50.0" prefWidth="300.0" promptText="Edit an existing pack" stylesheets="@main.css" unFocusColor="WHITE" visibleRowCount="4" />
+         </children>
+      </VBox>
+      <Pane layoutY="500.0" prefHeight="7.0" prefWidth="900.0" style="-fx-background-color: #282d3f;">
+         <effect>
+            <Shadow blurType="GAUSSIAN" color="#00000080" height="51.17" radius="18.5425" width="25.0" />
+         </effect>
+      </Pane>
+      <Label fx:id="port_error" layoutX="311.0" layoutY="217.0" text="Please enter a port number before continuing" textFill="#ca300a" visible="false" />
+      <Label fx:id="username_error" layoutX="319.0" layoutY="357.0" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
+   </children>
+</Pane>
