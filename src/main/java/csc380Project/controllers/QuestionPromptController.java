@@ -2,6 +2,7 @@ package csc380Project.controllers;
 
 import java.util.ArrayList;
 import csc380Project.server.*;
+import csc380Project.game.*;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;

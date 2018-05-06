@@ -3,6 +3,7 @@ package csc380Project.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import csc380Project.server.ChatAccess;
+import csc380Project.game.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
