@@ -11,6 +11,7 @@
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -66,11 +67,20 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <ListView fx:id="leaderboard" editable="true" layoutX="13.0" layoutY="87.0" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css">
-               <effect>
-                  <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
-               </effect>
-            </ListView>
+            <HBox>
+               <children>
+                  <ListView fx:id="leaderboard_names" editable="true" prefHeight="361.0" prefWidth="930.0" style="-fx-padding: 1px;" stylesheets="@main.css">
+                     <effect>
+                        <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
+                     </effect>
+                  </ListView>
+                  <ListView fx:id="leaderboard_score" editable="true" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css">
+                     <effect>
+                        <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
+                     </effect>
+                  </ListView>
+               </children>
+            </HBox>
          </children>
       </VBox>
       <VBox layoutX="579.0" layoutY="85.0" style="-fx-spacing: 8;">
