@@ -264,7 +264,7 @@ public class WaitingLobbyController implements Observer {
                     }
                     Text textName = new Text(name);
                     Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
-                    Color nameColor = Color.WHITE;
+                    Color nameColor = Color.BLACK;
                     for(PlayerColor pc : colors){
                         if(pc.getName().equals(name)){
                             nameColor = pc.getColor();
