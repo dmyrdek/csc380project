@@ -170,19 +170,16 @@ public class Player implements Comparable {
         AffineTransform affineTransform = new AffineTransform();
         FontRenderContext frc = new FontRenderContext(affineTransform, true, true);
         Font font = new Font("System", Font.PLAIN, 18);
-        int nameLength = (int)(font.getStringBounds(this.name, frc).getWidth());
+        int currentLength = (int)(font.getStringBounds(this.name, frc).getWidth());
 
         //total length of output
-        final int totalLength = 250;
-
-        //length of spaces needed
-        int difference = totalLength - nameLength;
+        final int totalLength = 545;
 
         //extend name with spaces to have matching lengths
         String ret = this.name;
-        while(difference > 5){
+        while(totalLength > currentLength){
             ret = ret + " ";
-            difference -= 9;
+            currentLength = (int)(font.getStringBounds(ret, frc).getWidth());
         }
 
         // the /2 is super weird and hacky but testing it out

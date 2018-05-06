@@ -81,12 +81,35 @@ public class Main extends Application {
 
         testGame.giveQuestionstoPlayers();
         System.out.println("\n \nsuccessfully gave all players their questions for the game\n\n");
+<<<<<<< HEAD
+=======
+
+
+
+        //////---------testing stuff-----------------------
+
+
 
         Player p1 = new Player("Player1");
         Player p2 = new Player("P2");
 
         System.out.println(p1.displayForLeaderBoard());
         System.out.println(p2.displayForLeaderBoard());
+
+
+
+
+
+
+
+
+
+
+        ////-------------end test----------------------------
+
+
+
+>>>>>>> aae14a818fe3e4800f50926c2a3f31523ab254ab
     }
 
     @Override
