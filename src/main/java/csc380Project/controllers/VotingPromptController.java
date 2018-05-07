@@ -240,7 +240,7 @@ public class VotingPromptController implements Observer {
         if (inVotingPrompt) {
             chatAccess.send("}" + voteOption);
         } else {
-            chatAccess.send("`submitted");
+            chatAccess.send("`ready");
         }
     }
 
@@ -281,7 +281,7 @@ public class VotingPromptController implements Observer {
                         chat_area.getChildren().add(text);
                     } else if (finalArg.toString().startsWith("`")) {
                         String str = finalArg.toString().substring(1);
-                        if (str.equals("submitted")) {
+                        if (str.equals("ready")) {
                             submittedPlayerSize++;
                             if (submittedPlayerSize == WaitingLobbyController.names.size()) {
                                 allPlayersSubmitted.set(true);

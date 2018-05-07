@@ -371,7 +371,7 @@ public class ClientThread extends Thread {
           }
         }
 
-        synchronized (this) {
+        synchronized(this){
           if (line.startsWith("~")) {
             this.answers[currentround][questionNumber] = line.substring(1);
             if (this.submittedAnswer) {
@@ -390,7 +390,7 @@ public class ClientThread extends Thread {
                           .get(questionNumber));
                 }
               }
-              //this.submittedAnswer = false;
+              this.submittedAnswer = false;
               this.allPlayersSubmitted = false;
             }
           }
