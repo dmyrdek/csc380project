@@ -147,6 +147,7 @@
     -fx-shape: "M214 0l0 428l-214 -214l214 -214z";
 }
 
+
 .scroll-pane {
     -fx-background-color:transparent;
     -fx-background-insets: 0;
@@ -163,6 +164,10 @@
 
 .scroll-pane .corner {
     -fx-background-insets: 0;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #27374B;
 }
 
 .jfx-combo-box {

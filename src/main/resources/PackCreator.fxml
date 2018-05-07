@@ -48,7 +48,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="next_game_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Save" textFill="WHITE">
+            <JFXButton fx:id="save_button" buttonType="RAISED" contentDisplay="RIGHT" layoutX="757.0" layoutY="18.0" onAction="#saveQuestionPack" prefHeight="40.0" prefWidth="120.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Save" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -75,15 +75,15 @@
       <Label fx:id="username_error" layoutX="319.0" layoutY="357.0" text="Please enter a username before continuing" textFill="#ca300a" visible="false" />
       <HBox layoutX="11.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="880.0" style="-fx-spacing: 15;">
          <children>
-            <ListView fx:id="player_list" editable="true" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css">
+            <ListView fx:id="questions_list" editable="true" onMouseClicked="#selectQuestion" prefHeight="399.0" prefWidth="557.0" style="-fx-padding: 1px;" stylesheets="@main.css">
                <effect>
                   <DropShadow color="#0000007f" height="37.5" radius="18.875" width="40.0" />
                </effect>
             </ListView>
             <VBox alignment="CENTER" style="-fx-spacing: 20;">
                <children>
-                  <JFXTextArea fx:id="answer_prompt" focusColor="#0ac7c9" onKeyReleased="#getAnswer" prefHeight="330.0" prefWidth="306.0" promptText="Type your question here.." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
-                  <JFXButton fx:id="next_game_button1" buttonType="RAISED" contentDisplay="RIGHT" prefHeight="40.0" prefWidth="156.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Submit" textFill="WHITE">
+                  <JFXTextArea fx:id="question_editor" focusColor="#0ac7c9" prefHeight="330.0" prefWidth="306.0" promptText="Type your question here.." stylesheets="@main.css" unFocusColor="#4059a9" wrapText="true" />
+                  <JFXButton fx:id="submit_question" buttonType="RAISED" contentDisplay="RIGHT" onAction="#submitQuestion" prefHeight="40.0" prefWidth="156.0" ripplerFill="#0e284d" style="-fx-background-color: #0AC7C9;" text="Submit" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

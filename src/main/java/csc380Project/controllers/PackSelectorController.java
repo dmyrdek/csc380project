@@ -71,14 +71,14 @@ public class PackSelectorController {
     public void nextButtonPress(ActionEvent event) throws IOException{
         if (!existing_pack_combo_box.getSelectionModel().isEmpty()){
             existingPackName = (String) existing_pack_combo_box.getSelectionModel().getSelectedItem();
-            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HomeScreen.fxml"));
+            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("PackCreator.fxml"));
             Scene homePage = new Scene(homePageParent);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(homePage);
             appStage.show();
             appStage.requestFocus();
         } else if (!createPackName.equals("")){
-            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("HomeScreen.fxml"));
+            Parent homePageParent = FXMLLoader.load(getClass().getClassLoader().getResource("PackCreator.fxml"));
             Scene homePage = new Scene(homePageParent);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(homePage);
