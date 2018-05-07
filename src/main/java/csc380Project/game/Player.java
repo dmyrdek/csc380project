@@ -183,7 +183,8 @@ public class Player implements Comparable {
         }
 
         // the /2 is super weird and hacky but testing it out
-        return ret + this.getNumVotesReceived()/numPlayers;
+        //return ret + this.getNumVotesReceived()/numPlayers;
+        return this.name + " ]" + this.getNumVotesReceived()/numPlayers;
 
     }
 
