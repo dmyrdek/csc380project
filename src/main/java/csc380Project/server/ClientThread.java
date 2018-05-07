@@ -244,6 +244,7 @@ public class ClientThread extends Thread {
             }
           } else if (line.substring(1).equals("inVotingResults")) {
             inVotingResults = true;
+            getVotes = false;
 
             this.os.println("{" + threads[0].myGame.getGameQuestions().getQuestions()[votingResultQuestionNumber]);
 
@@ -370,7 +371,7 @@ public class ClientThread extends Thread {
           }
         }
 
-        synchronized (this) {
+        synchronized(this){
           if (line.startsWith("~")) {
             this.answers[currentround][questionNumber] = line.substring(1);
             if (this.submittedAnswer) {
@@ -389,6 +390,7 @@ public class ClientThread extends Thread {
                           .get(questionNumber));
                 }
               }
+              this.submittedAnswer = false;
               this.allPlayersSubmitted = false;
             }
           }
@@ -414,7 +416,7 @@ public class ClientThread extends Thread {
                      * Echo this message to let the client know the private
                      * message was sent.
                      */
-                    this.os.println(">" + name + "> " + words[1]);
+                    this.os.println("<" + name + "> " + words[1]);
                     /*I am one step close to the edge...and I'm about to*/break;
                   }
                 }
