@@ -373,8 +373,8 @@ public class ClientThread extends Thread {
 
         synchronized(this){
           if (line.startsWith("~")) {
-            String answerName = line.substring(line.charAt('~'), line.charAt('-'));
-            this.answers[currentround][questionNumber] = line.substring(line.charAt('-'));
+            String answerName = line.substring(1, line.indexOf('-'));
+            this.answers[currentround][questionNumber] = line.substring(line.indexOf('-')+1);
             if (this.submittedAnswer) {
               for (int i = 0; i < threads[0].playerList.size(); i++) {
                 if (threads[0].myGame.getInGamePlayers().get(i).getName().equals(answerName)) {
