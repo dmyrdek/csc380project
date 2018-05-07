@@ -16,6 +16,7 @@ public class Player implements Comparable {
     private boolean isHost;
     private int roundNum;
     public ArrayList<Player> playersInGame;
+    private int score;
 
     private String[] questionsToAnswer;
     private String[] answersToQuestions;
@@ -26,6 +27,7 @@ public class Player implements Comparable {
         playerNumber=-1;
         isHost = false;
         roundNum = 0;
+        score = 0;
 
         answersToQuestions = new String [400]; //max at total questions (344)
         questionsToAnswer = new String[400];
@@ -123,7 +125,11 @@ public class Player implements Comparable {
         return null;
     }
 
-    public boolean updateScore(String answer){
+    public void updateScore(Score points){
+        score = score + points;
+
+
+
         for (Player p : playersInGame) {
             if(p != null) {
                 for (String a : p.getAnswers()) {
@@ -188,5 +194,8 @@ public class Player implements Comparable {
 
     }
 
+    public int getScore() {
+        return score;
+    }
 
 }

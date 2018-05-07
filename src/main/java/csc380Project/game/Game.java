@@ -237,6 +237,7 @@ public class Game {
                 if (p.getAnswerAtIndex(i) != null){
                     if (p.getAnswerAtIndex(i).equals(answer) && p.getQuestionAtIndex(i).equals(question)){
                         p.increaseVotesReceived();
+                        p.updateScore(1000/)
                         return p.getNumVotesReceived();
                     }
                 }
