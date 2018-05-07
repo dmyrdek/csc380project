@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.ListView;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Observer;
 import java.util.ArrayList;
@@ -26,6 +28,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 
 public class LeaderBoardController implements Observer {
 

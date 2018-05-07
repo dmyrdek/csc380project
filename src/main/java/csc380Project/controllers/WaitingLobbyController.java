@@ -2,6 +2,8 @@ package csc380Project.controllers;
 
 import csc380Project.server.*;
 import csc380Project.game.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.control.ScrollPane;
@@ -31,6 +33,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class WaitingLobbyController implements Observer {
 

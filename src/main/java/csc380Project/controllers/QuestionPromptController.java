@@ -1,5 +1,6 @@
 package csc380Project.controllers;
 
+import java.io.File;
 import java.util.ArrayList;
 import csc380Project.server.*;
 import csc380Project.game.*;
@@ -27,6 +28,10 @@ import java.io.IOException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ScrollPane;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class QuestionPromptController implements Observer {
 

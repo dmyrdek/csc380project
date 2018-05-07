@@ -1,5 +1,6 @@
 package csc380Project.controllers;
 
+import java.io.File;
 import java.util.ArrayList;
 import csc380Project.server.*;
 import csc380Project.game.*;
@@ -29,6 +30,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class VotingPromptController implements Observer {
 

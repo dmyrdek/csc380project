@@ -125,11 +125,7 @@ public class Player implements Comparable {
         return null;
     }
 
-    public void updateScore(Score points){
-        score = score + points;
-
-
-
+    public boolean updateScore(String answer){
         for (Player p : playersInGame) {
             if(p != null) {
                 for (String a : p.getAnswers()) {
