@@ -204,7 +204,7 @@ public class LeaderBoardController implements Observer {
 
     public void playSound() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("D:/MusicPlayer/fml.mp3").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/sms-alert-1-daniel_simon.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
