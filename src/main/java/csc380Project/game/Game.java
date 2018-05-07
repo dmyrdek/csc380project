@@ -39,6 +39,16 @@ public class Game {
         this.giveQuestionstoPlayers();
     }
 
+
+    public Game(int rounds, ArrayList<Player> players, String questionPackFile){
+        qp = new QuestionPack().addFromFile(questionPackFile);
+        inGamePlayers = players;
+        numRounds = rounds;
+        gameQuestions = this.setGameQuestions();
+        allSubmittedAnswers = new ArrayList<String>();
+        this.giveQuestionstoPlayers();
+    }
+
     public static int getMaxPlayers() {
         return maxPlayers;
     }
