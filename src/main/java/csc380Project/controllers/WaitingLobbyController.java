@@ -65,7 +65,7 @@ public class WaitingLobbyController implements Observer {
     private static String port;
     private String server;
     private static ChatAccess chatAccess;
-    private String name = "";
+    private static String name = "";
     public static final ObservableList names = FXCollections.observableArrayList();
     private static ArrayList<Text> texts = new ArrayList<>();
     private static String messageHistory = "";
@@ -98,6 +98,10 @@ public class WaitingLobbyController implements Observer {
 
     public static boolean getIsHost() {
         return isHost;
+    }
+
+    public static String getName(){
+        return name;
     }
 
     /**
