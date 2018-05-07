@@ -163,7 +163,7 @@ public class LeaderBoardController implements Observer {
                     if (playersInList < numPlayers-1){
                         String a = finalArg.toString().substring(1);
                         String [] stuff = a.split("]");
-                        leaderboardNamesList.add(playersInList,stuff[0]);
+                        leaderboardNamesList.add(playersInList, stuff[0]);
                         leaderboardScoresList.add(playersInList, stuff[1]);
                         playersInList++;
                     }
@@ -179,7 +179,7 @@ public class LeaderBoardController implements Observer {
                     Text textName = new Text(name);
                     Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
                     Color nameColor = Color.GOLD;
-                    for(PlayerColor pc : WaitingLobbyController.colors){
+                    for(PlayerColor pc : WaitingLobbyController.getColors()){
                         if(pc.getName().equals(name)){
                             nameColor = pc.getColor();
                         }
