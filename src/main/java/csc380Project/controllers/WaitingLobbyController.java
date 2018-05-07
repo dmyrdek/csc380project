@@ -263,25 +263,30 @@ public class WaitingLobbyController implements Observer {
                     }
                 } else {
                     //Message history will store all chat history in a String we will locally cache to be read inbetween scenes to keep chat saved.
-                    int index = finalArg.toString().indexOf(">");
-                    String name = finalArg.toString().substring(1, index);
                     if (finalArg.toString().startsWith("<")) {
-
-                    }
-                    Text textName = new Text(name);
-                    Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
-                    Color nameColor = Color.GOLD;
-                    for(PlayerColor pc : colors){
-                        if(pc.getName().equals(name)){
-                            nameColor = pc.getColor();
+                        int index = finalArg.toString().indexOf(">");
+                        String name = finalArg.toString().substring(1, index);
+                        Text textName = new Text(name);
+                        Text textMessage = new Text(": " + finalArg.toString().substring(index + 1) + "\n");
+                        Color nameColor = Color.GOLD;
+                        for (PlayerColor pc : WaitingLobbyController.getColors()) {
+                            if (pc.getName().equals(name)) {
+                                nameColor = pc.getColor();
+                            }
                         }
+                        textName.setFill(nameColor);
+                        textMessage.setFill(Color.WHITE);
+                        texts.add(textName);
+                        texts.add(textMessage);
+                        chat_area.getChildren().addAll(textName, textMessage);
+                        playSound();
                     }
-                    textName.setFill(nameColor);
-                    textMessage.setFill(Color.WHITE);
-                    texts.add(textName);
-                    texts.add(textMessage);
-                    chat_area.getChildren().addAll(textName, textMessage);
-                    playSound();
+                    else{
+                        Text text = new Text(finalArg.toString());
+                        text.setFill(Color.WHITE);
+                        texts.add(text);
+                        chat_area.getChildren().add(text);
+                    }
                 }
             }
         });
