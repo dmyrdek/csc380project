@@ -70,6 +70,7 @@ public class QuestionPromptController implements Observer {
     private static int currentNumOfRounds = 0;
     private static int currentNumOfQuestions = 0;
     private static boolean isHost = false;
+    private String name;
 
     public static void setStage(Stage stage) {
         myStage = stage;
@@ -91,6 +92,8 @@ public class QuestionPromptController implements Observer {
     public void initialize() throws IOException {
         currentNumOfQuestions++;
         currentNumOfRounds++;
+
+        name = WaitingLobbyController.getName();
 
         VotingPromptController.setStage(myStage);
 
@@ -212,7 +215,7 @@ public class QuestionPromptController implements Observer {
         submit_button.setDisable(true);
         //submit_button = "Submitted!";
         chatAccess.send("`submitted");
-        chatAccess.send("~" + questionAnswer);
+        chatAccess.send("~" + name + "-" + questionAnswer);
         answer_prompt.selectAll();
         answer_prompt.setText("");
     }

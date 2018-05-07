@@ -372,10 +372,11 @@ public class ClientThread extends Thread {
 
         synchronized (this) {
           if (line.startsWith("~")) {
-            this.answers[currentround][questionNumber] = line.substring(1);
+            String answerName = line.substring(1, line.indexOf('-'));
+            this.answers[currentround][questionNumber] = line.substring(line.indexOf('-')+1);
             if (this.submittedAnswer) {
-              for (int i = 0; i < maxClientsCount; i++) {
-                if (this == threads[i]) {
+              for (int i = 0; i < threads[0].playerList.size(); i++) {
+                if (threads[0].myGame.getInGamePlayers().get(i).getName().equals(answerName)) {
                   /*if (questionNumber == 1) {
                     threads[0].myGame.getInGamePlayers().get(i).addAnswer(this.answers[currentround][0],
                         threads[0].myGame.getInGamePlayers().get(i).getQuestionsToAnswerForRound(currentround).get(0));
