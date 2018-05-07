@@ -305,6 +305,7 @@ public class VotingPromptController implements Observer {
                         texts.add(textName);
                         texts.add(textMessage);
                         chat_area.getChildren().addAll(textName, textMessage);
+                        playSound();
                     }
                 } else {
                     if (finalArg.toString().startsWith("}")) {
@@ -370,10 +371,23 @@ public class VotingPromptController implements Observer {
                         texts.add(textName);
                         texts.add(textMessage);
                         chat_area.getChildren().addAll(textName, textMessage);
+                        playSound();
                     }
                 }
             }
         });
+    }
+
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("D:/MusicPlayer/fml.mp3").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
     public static ArrayList<Text> getTexts() {
