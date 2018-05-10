@@ -20,6 +20,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
+        
+        launch(args);
 
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player("cedric"));
@@ -45,8 +47,6 @@ public class Main extends Application {
         ArrayList<String> leaderBoardString = g.getLeaderBoardStrings();
 
         System.out.println();
-
-        launch(args);
 
         Scanner kb = new Scanner(System.in);
 
